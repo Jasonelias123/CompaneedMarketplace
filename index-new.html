@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Companeeds - Connect Companies with AI Developers</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Companeeds - AI Talent Platform</title>
+    <link rel="stylesheet" href="styles.css?v=20250623">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="homepage">
+<body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <span class="brand-name">Companeeds</span>
+                <a href="#" class="logo">Companeeds</a>
             </div>
-            <div class="nav-links">
+            <div class="nav-menu">
                 <a href="login.html" class="nav-link">Sign In</a>
-                <a href="admin.html" class="nav-link admin-link">Admin</a>
             </div>
         </div>
     </nav>
@@ -25,13 +26,12 @@
     <section class="hero-section">
         <div class="hero-container">
             <div class="hero-content">
+                <div class="hero-brand">Companeeds</div>
                 <h1 class="hero-title">
-                    Connect Companies with 
-                    <span class="gradient-text">AI Developers</span>
+                    <span class="gradient-text">AI talent</span> for your company
                 </h1>
                 <p class="hero-description">
-                    The premier platform for AI project collaboration. Companies post projects, 
-                    developers showcase skills, and innovation happens.
+                    AI is reshaping every industry - fast. At Companeeds we connect you with trusted AI experts so your business doesn't just keep up, it leads the way.
                 </p>
                 <div class="hero-cta">
                     <button class="cta-button primary" onclick="scrollToRoles()">
@@ -87,7 +87,7 @@
                         <h3>For Companies</h3>
                     </div>
                     <div class="role-content">
-                        <p>Post AI projects and find talented developers to bring your ideas to life.</p>
+                        <p>Post your AI projects and connect with expert developers who can bring your vision to life.</p>
                         <ul class="role-features">
                             <li>Post unlimited projects</li>
                             <li>Review developer proposals</li>
@@ -95,7 +95,7 @@
                         </ul>
                     </div>
                     <div class="role-footer">
-                        <button class="role-button company-button">
+                        <button class="role-button company-button" onclick="event.stopPropagation(); goToRole('company')">
                             Get Started as Company
                         </button>
                     </div>
@@ -120,7 +120,7 @@
                         </ul>
                     </div>
                     <div class="role-footer">
-                        <button class="role-button developer-button">
+                        <button class="role-button developer-button" onclick="event.stopPropagation(); goToRole('developer')">
                             Get Started as Developer
                         </button>
                     </div>
@@ -134,39 +134,30 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span class="brand-name">Companeeds</span>
-                    <p>Connecting the future of AI development</p>
+                    <h3>Companeeds</h3>
+                    <p>Connecting AI talent with innovative companies</p>
                 </div>
                 <div class="footer-links">
-                    <a href="login.html">Sign In</a>
+                    <a href="login.html" id="signInLink">Sign In</a>
                     <a href="admin.html">Admin Panel</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="env-config.js"></script>
     <script>
         function goToRole(role) {
+            console.log('Role selected:', role);
             sessionStorage.setItem('selectedRole', role);
             window.location.href = 'signup.html';
         }
 
         function scrollToRoles() {
+            console.log('Scrolling to roles section');
             document.getElementById('roles').scrollIntoView({ 
                 behavior: 'smooth' 
             });
         }
-
-        // Add scroll effects
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
     </script>
 </body>
 </html>

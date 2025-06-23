@@ -103,10 +103,13 @@ The application uses Firebase Firestore with the following collections:
 - `messages`: Communication threads between users
 - `adminProjects`: Administrative logging and moderation
 
-## Changelog
+## Recent Changes
 
-Changelog:
-- June 23, 2025. Initial setup
+- **June 23, 2025**: Fixed application submission system with proper Firebase imports
+- **June 23, 2025**: Created projects-new.html and projects-fixed.js to resolve caching issues
+- **June 23, 2025**: Fixed homepage navigation buttons for role selection
+- **June 23, 2025**: Added logout functionality to both dashboard and projects pages
+- **June 23, 2025**: Updated authentication redirects to use new projects page
 
 ## User Preferences
 
