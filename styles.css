@@ -945,7 +945,7 @@ body.homepage {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-hero);
+    background: white;
     position: relative;
     overflow: hidden;
 }
@@ -977,8 +977,16 @@ body.homepage {
 
 .hero-content {
     text-align: center;
-    color: white;
+    color: var(--gray-900);
     animation: fadeInUp 1s ease-out;
+}
+
+.hero-brand {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gray-600);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
 }
 
 @keyframes fadeInUp {
@@ -1020,9 +1028,8 @@ body.homepage {
 }
 
 .cta-button {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: var(--gradient-primary);
+    border: none;
     color: white;
     padding: 1rem 2rem;
     border-radius: 50px;
@@ -1037,9 +1044,9 @@ body.homepage {
 }
 
 .cta-button:hover {
-    background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
     box-shadow: var(--shadow-xl);
+    opacity: 0.9;
 }
 
 .arrow {
