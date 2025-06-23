@@ -9,16 +9,17 @@ import {
     where 
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-// Ensure user is authenticated and is a developer
-if (!requireAuth()) {
-    throw new Error('Authentication required');
-}
-
 let currentProject = null;
 
 // Initialize projects page when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initializeProjects();
+    // Wait for auth state before initializing
+    setTimeout(() => {
+        if (!requireAuth()) {
+            return;
+        }
+        initializeProjects();
+    }, 1000);
 });
 
 function initializeProjects() {
@@ -40,10 +41,9 @@ async function loadAllProjects() {
     projectsList.innerHTML = '<div class="loading">Loading projects...</div>';
     
     try {
-        // Query all active projects
+        // Query all projects (simplified to avoid index requirements)
         const q = query(
             collection(db, 'projects'),
-            where('status', '==', 'active'),
             orderBy('createdAt', 'desc')
         );
         
@@ -64,6 +64,12 @@ async function loadAllProjects() {
         querySnapshot.forEach((doc) => {
             const project = doc.data();
             const projectId = doc.id;
+            
+            // Filter out inactive projects (client-side filtering)
+            if (project.status && project.status !== 'active') {
+                return;
+            }
+            
             const createdDate = new Date(project.createdAt).toLocaleDateString();
             
             // Truncate description for preview
@@ -95,9 +101,21 @@ async function loadAllProjects() {
         
     } catch (error) {
         console.error('Error loading projects:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        
+        let errorMessage = 'Failed to load projects. Please refresh the page to try again.';
+        
+        if (error.code === 'permission-denied') {
+            errorMessage = 'Access denied. Please make sure you are logged in as a developer.';
+        } else if (error.code === 'unavailable') {
+            errorMessage = 'Database temporarily unavailable. Please try again in a moment.';
+        }
+        
         projectsList.innerHTML = `
             <div class="error-message">
-                Failed to load projects. Please refresh the page to try again.
+                ${errorMessage}
+                <br><small>Error: ${error.message}</small>
             </div>
         `;
     }
