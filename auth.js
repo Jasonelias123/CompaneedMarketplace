@@ -44,8 +44,7 @@ onAuthStateChanged(auth, async (user) => {
         const currentPage = window.location.pathname.split('/').pop();
         
         // Only redirect to login if on protected pages and not during signup
-        if ((currentPage === 'dashboard.html' || currentPage === 'projects.html') && 
-            !sessionStorage.getItem('signingUp')) {
+        if ((currentPage === 'dashboard.html' || currentPage === 'projects.html')) {
             window.location.href = 'login.html';
         }
     }

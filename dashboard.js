@@ -72,7 +72,7 @@ async function handleProjectSubmission(event) {
         companyId: user.uid,
         companyEmail: user.email,
         createdAt: new Date().toISOString(),
-        status: 'active'
+        status: 'pending'
     };
     
     const successDiv = document.getElementById('project-success');
@@ -156,9 +156,15 @@ async function loadUserProjects() {
             const project = doc.data();
             const createdDate = new Date(project.createdAt).toLocaleDateString();
             
+            const statusClass = project.status || 'pending';
+            const statusText = project.status === 'active' ? 'APPROVED' : (project.status || 'PENDING').toUpperCase();
+            
             projectsHTML += `
                 <div class="project-item">
-                    <h4>${escapeHtml(project.title)}</h4>
+                    <div class="project-header">
+                        <h4>${escapeHtml(project.title)}</h4>
+                        <span class="project-status status-${statusClass}">${statusText}</span>
+                    </div>
                     <p>${escapeHtml(project.description)}</p>
                     <div class="project-info">
                         <span><strong>Budget:</strong> ${escapeHtml(project.budget)}</span>

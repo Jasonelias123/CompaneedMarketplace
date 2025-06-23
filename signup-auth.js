@@ -55,24 +55,28 @@ export async function handleSignup(event) {
         });
         console.log('User role saved successfully');
         
-        // Clear the signup flag before redirect
-        sessionStorage.removeItem('signingUp');
-        
         // Hide loading
         loadingDiv.style.display = 'none';
         
-        // Force immediate redirect
+        // Set a flag to prevent auth listener interference
+        sessionStorage.setItem('redirecting', 'true');
+        
+        // Force immediate redirect with timeout to prevent interference
         console.log('=== EXECUTING IMMEDIATE REDIRECT ===');
         console.log('Role:', role);
-        if (role === 'company') {
-            console.log('Redirecting to dashboard.html');
-            window.location.replace('dashboard.html');
-        } else if (role === 'developer') {
-            console.log('Redirecting to projects.html');
-            window.location.replace('projects.html');
-        } else {
-            console.error('Unknown role:', role);
-        }
+        
+        setTimeout(() => {
+            if (role === 'company') {
+                console.log('Redirecting to dashboard.html');
+                window.location.href = 'dashboard.html';
+            } else if (role === 'developer') {
+                console.log('Redirecting to projects.html');
+                window.location.href = 'projects.html';
+            } else {
+                console.error('Unknown role:', role);
+            }
+            sessionStorage.removeItem('redirecting');
+        }, 200);
         
     } catch (error) {
         console.error('=== SIGNUP ERROR ===');

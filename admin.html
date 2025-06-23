@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Companeeds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds Admin</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="dashboard-content">
+                <div class="dashboard-nav">
+                    <button id="pendingProjectsBtn" class="nav-btn active">Pending Projects</button>
+                    <button id="approvedProjectsBtn" class="nav-btn">Approved Projects</button>
+                    <button id="rejectedProjectsBtn" class="nav-btn">Rejected Projects</button>
+                </div>
+
+                <div id="pendingProjectsSection" class="dashboard-section">
+                    <h2>Pending Project Approvals</h2>
+                    <div id="pendingProjectsList" class="projects-list">
+                        <div class="loading">Loading pending projects...</div>
+                    </div>
+                </div>
+
+                <div id="approvedProjectsSection" class="dashboard-section" style="display: none;">
+                    <h2>Approved Projects</h2>
+                    <div id="approvedProjectsList" class="projects-list">
+                        <div class="loading">Loading approved projects...</div>
+                    </div>
+                </div>
+
+                <div id="rejectedProjectsSection" class="dashboard-section" style="display: none;">
+                    <h2>Rejected Projects</h2>
+                    <div id="rejectedProjectsList" class="projects-list">
+                        <div class="loading">Loading rejected projects...</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
