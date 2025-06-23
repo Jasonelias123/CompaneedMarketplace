@@ -1,7 +1,7 @@
 // Standalone login functionality - no global auth state interference
 import { auth, db } from './firebase-config.js';
 import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Handle login form submission
 async function handleLoginForm(event) {
@@ -60,8 +60,39 @@ async function handleLoginForm(event) {
             }
         } else {
             console.error('User document not found in Firestore for UID:', user.uid);
-            showLoginError('User profile not found. Please contact support.');
-            loadingDiv.style.display = 'none';
+            console.log('Creating missing user document...');
+            
+            // Create a default user document - ask user to select role
+            const selectedRole = prompt('Your account needs to be updated. Please select your role:\n\nType "company" for Company\nType "developer" for Developer');
+            
+            if (selectedRole === 'company' || selectedRole === 'developer') {
+                try {
+                    // Create the user document
+                    await setDoc(doc(db, 'users', user.uid), {
+                        email: user.email,
+                        role: selectedRole,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    });
+                    
+                    console.log('User document created with role:', selectedRole);
+                    
+                    // Redirect based on role
+                    loadingDiv.style.display = 'none';
+                    if (selectedRole === 'company') {
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        window.location.href = 'projects.html';
+                    }
+                } catch (docError) {
+                    console.error('Error creating user document:', docError);
+                    showLoginError('Failed to update user profile. Please contact support.');
+                    loadingDiv.style.display = 'none';
+                }
+            } else {
+                showLoginError('Invalid role selected. Please contact support.');
+                loadingDiv.style.display = 'none';
+            }
         }
         
     } catch (error) {
