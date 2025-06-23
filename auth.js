@@ -15,41 +15,41 @@ import {
 let currentUser = null;
 let userRole = null;
 
-// Initialize auth state listener - skip on signup page
-const currentPage = window.location.pathname.split('/').pop();
-if (currentPage !== 'signup.html') {
-    onAuthStateChanged(auth, async (user) => {
-        currentUser = user;
-        
-        if (user) {
-            // Get user role from Firestore
-            try {
-                const userDoc = await getDoc(doc(db, 'users', user.uid));
-                if (userDoc.exists()) {
-                    userRole = userDoc.data().role;
-                }
-                
-                // Only redirect from login page
-                if (currentPage === 'login.html') {
-                    redirectToUserDashboard();
-                }
-                
-                // Update UI with user info
-                updateUIWithUser(user);
-            } catch (error) {
-                console.error('Error getting user role:', error);
+// Initialize auth state listener
+onAuthStateChanged(auth, async (user) => {
+    currentUser = user;
+    
+    if (user) {
+        // Get user role from Firestore
+        try {
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (userDoc.exists()) {
+                userRole = userDoc.data().role;
             }
-        } else {
-            // User is signed out
-            userRole = null;
             
-            // Redirect to login if on protected pages
-            if (currentPage === 'dashboard.html' || currentPage === 'projects.html') {
-                window.location.href = 'login.html';
+            // Update UI with user info
+            updateUIWithUser(user);
+            
+            // Only handle redirects on login page
+            const currentPage = window.location.pathname.split('/').pop();
+            if (currentPage === 'login.html') {
+                redirectToUserDashboard();
             }
+        } catch (error) {
+            console.error('Error getting user role:', error);
         }
-    });
-}
+    } else {
+        // User is signed out
+        userRole = null;
+        const currentPage = window.location.pathname.split('/').pop();
+        
+        // Only redirect to login if on protected pages and not during signup
+        if ((currentPage === 'dashboard.html' || currentPage === 'projects.html') && 
+            !sessionStorage.getItem('signingUp')) {
+            window.location.href = 'login.html';
+        }
+    }
+});
 
 // Update UI with user information
 function updateUIWithUser(user) {

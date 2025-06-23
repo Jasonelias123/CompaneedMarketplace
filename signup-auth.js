@@ -37,6 +37,9 @@ export async function handleSignup(event) {
     loadingDiv.style.display = 'block';
     
     try {
+        // Set flag to prevent auth listener interference
+        sessionStorage.setItem('signingUp', 'true');
+        
         console.log('Creating user account with email:', email);
         // Create user account
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -51,6 +54,9 @@ export async function handleSignup(event) {
             createdAt: new Date().toISOString()
         });
         console.log('User role saved successfully');
+        
+        // Clear the signup flag before redirect
+        sessionStorage.removeItem('signingUp');
         
         // Hide loading
         loadingDiv.style.display = 'none';
