@@ -95,16 +95,20 @@ export async function handleSignup(event) {
     loadingDiv.style.display = 'block';
     
     try {
+        console.log('Creating user account with email:', email);
         // Create user account
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        console.log('User account created successfully:', user.uid);
         
         // Save user role to Firestore
+        console.log('Saving user role to Firestore:', role);
         await setDoc(doc(db, 'users', user.uid), {
             email: user.email,
             role: role,
             createdAt: new Date().toISOString()
         });
+        console.log('User role saved successfully');
         
         userRole = role;
         
@@ -113,6 +117,9 @@ export async function handleSignup(event) {
         
     } catch (error) {
         console.error('Signup error:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        
         let errorMessage = 'Failed to create account. Please try again.';
         
         if (error.code === 'auth/email-already-in-use') {
@@ -121,6 +128,12 @@ export async function handleSignup(event) {
             errorMessage = 'Password is too weak. Please use at least 6 characters.';
         } else if (error.code === 'auth/invalid-email') {
             errorMessage = 'Please enter a valid email address.';
+        } else if (error.code === 'auth/invalid-api-key') {
+            errorMessage = 'Firebase configuration error. Please check your setup.';
+        } else if (error.code === 'auth/network-request-failed') {
+            errorMessage = 'Network error. Please check your internet connection.';
+        } else {
+            errorMessage = `Error: ${error.message}`;
         }
         
         showError(errorMessage);

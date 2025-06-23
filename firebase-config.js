@@ -13,11 +13,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+console.log('Initializing Firebase with config:', firebaseConfig);
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase services
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+console.log('Firebase initialized successfully');
 
 // Export the app instance
 export default app;
