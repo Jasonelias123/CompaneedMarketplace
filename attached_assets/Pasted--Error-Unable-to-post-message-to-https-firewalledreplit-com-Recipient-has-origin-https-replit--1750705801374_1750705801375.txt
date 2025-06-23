@@ -1,0 +1,208 @@
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Resource blocked by content blocker
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] XMLHttpRequest cannot load https://stats.g.doubleclick.net/j/collect?t=dc&aip=1&_r=3&v=1&_v=j101&tid=UA-25629695-1&cid=1714653676.1750645152&jid=979098417&gjid=1116058457&_gid=392597130.1750645152&_u=SCCAgEAjQAAAAGgCIAD~&z=1239095010 due to access control checks.
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] Resource blocked by content blocker
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] XMLHttpRequest cannot load https://stats.g.doubleclick.net/j/collect?t=dc&aip=1&_r=3&v=1&_v=j101&tid=UA-25629695-1&cid=1714653676.1750645152&jid=359085473&gjid=1174360209&_gid=392597130.1750645152&_u=SCCAgEAjQAAAAGgCIAD~&z=2072891566 due to access control checks.
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] Error while parsing the 'sandbox' attribute: 'allow-downloads', 'allow-downloads-without-user-activation', 'allow-presentation', 'allow-orientation-lock' are invalid sandbox flags.
+	_ (framework-a818883e88d690fb.js:1:44639)
+	(anonymous function) (framework-a818883e88d690fb.js:1:143779)
+	uD (framework-a818883e88d690fb.js:1:147442)
+	uI (framework-a818883e88d690fb.js:1:140392)
+	uM (framework-a818883e88d690fb.js:1:140202)
+	uS (framework-a818883e88d690fb.js:1:135275)
+	uS
+	C (framework-a818883e88d690fb.js:1:206185)
+	z (framework-a818883e88d690fb.js:1:206715)
+[Error] Error while parsing the 'sandbox' attribute: 'allow-downloads', 'allow-downloads-without-user-activation', 'allow-presentation', 'allow-orientation-lock' are invalid sandbox flags. (workspace_iframe.html, line 32)
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Error while parsing the 'sandbox' attribute: 'allow-downloads', 'allow-downloads-without-user-activation', 'allow-presentation', 'allow-orientation-lock' are invalid sandbox flags. (workspace_iframe.html, line 32)
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] WebSocket connection to 'wss://replit.com/graphql_subscriptions' failed: The operation couldn’t be completed. Socket is not connected
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Fetch API cannot load https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel?gsessionid=VvCLlcsC3swjLH53jueMfxsmlh04CH4VAeZp-T7XHjw&VER=8&database=projects%2Fcompanies-mvp%2Fdatabases%2F(default)&RID=rpc&SID=XlhDBvwKOZ3CN1SlSWSyxg&AID=2&CI=0&TYPE=xmlhttp&zx=mv5o2bowx4dw&t=1 due to access control checks.
+	(anonymous function) (firebase-firestore.js:1:33582)
+	(anonymous function) (firebase-firestore.js:1:49976)
+	ic (firebase-firestore.js:1:21188)
+	Md (firebase-firestore.js:1:40273)
+	(anonymous function) (firebase-firestore.js:1:51844)
+	ub (firebase-firestore.js:1:17037)
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Error submitting application: – ReferenceError: Can't find variable: doc
+ReferenceError: Can't find variable: doc
+	(anonymous function) (projects.js:193)
+	asyncFunctionResume
+[Error] Error submitting application: – ReferenceError: Can't find variable: doc
+ReferenceError: Can't find variable: doc
+	(anonymous function) (projects.js:193)
+	asyncFunctionResume
+[Error] Failed to load resource: the server responded with a status of 404 (Not Found) (3eb2826cf27139d5.css.map, line 0)
