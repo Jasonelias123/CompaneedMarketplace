@@ -30,9 +30,10 @@ onAuthStateChanged(auth, async (user) => {
             // Update UI with user info
             updateUIWithUser(user);
             
-            // Only handle redirects on login page
+            // Only handle redirects on login page after successful login (not for already logged in users)
             const currentPage = window.location.pathname.split('/').pop();
-            if (currentPage === 'login.html') {
+            if (currentPage === 'login.html' && sessionStorage.getItem('justLoggedIn')) {
+                sessionStorage.removeItem('justLoggedIn');
                 redirectToUserDashboard();
             }
         } catch (error) {
@@ -194,6 +195,9 @@ export async function handleLogin(event) {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (userDoc.exists()) {
             userRole = userDoc.data().role;
+            
+            // Set flag for auth state listener
+            sessionStorage.setItem('justLoggedIn', 'true');
             
             // Hide loading before redirect
             loadingDiv.style.display = 'none';

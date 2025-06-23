@@ -137,7 +137,7 @@
                     <p>Connecting the future of AI development</p>
                 </div>
                 <div class="footer-links">
-                    <a href="login.html">Sign In</a>
+                    <a href="login.html" id="signInLink">Sign In</a>
                     <a href="admin.html">Admin Panel</a>
                 </div>
             </div>
@@ -145,7 +145,13 @@
     </footer>
 
     <script src="env-config.js"></script>
-    <script>
+    <script type="module">
+        import { auth } from './firebase-config.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+        import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js';
+
+        const db = getFirestore();
+
         function goToRole(role) {
             sessionStorage.setItem('selectedRole', role);
             window.location.href = 'signup.html';
@@ -166,6 +172,39 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // Handle sign in link click
+        document.getElementById('signInLink').addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            // Check if user is already logged in
+            if (auth.currentUser) {
+                try {
+                    const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
+                    if (userDoc.exists()) {
+                        const userRole = userDoc.data().role;
+                        if (userRole === 'company') {
+                            window.location.href = 'dashboard.html';
+                        } else if (userRole === 'developer') {
+                            window.location.href = 'projects.html';
+                        } else {
+                            window.location.href = 'login.html';
+                        }
+                    } else {
+                        window.location.href = 'login.html';
+                    }
+                } catch (error) {
+                    console.error('Error checking user role:', error);
+                    window.location.href = 'login.html';
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Make functions global for onclick handlers
+        window.goToRole = goToRole;
+        window.scrollToRoles = scrollToRoles;
     </script>
 </body>
 </html>
