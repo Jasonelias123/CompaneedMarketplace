@@ -76,24 +76,39 @@ function initializeDashboard() {
 // Handle project submission
 async function handleProjectSubmission(event) {
     event.preventDefault();
+    console.log('Form submission started');
     
     const user = getCurrentUser();
-    if (!user) return;
+    if (!user) {
+        console.error('No user found');
+        return;
+    }
     
     const formData = new FormData(event.target);
+    console.log('Form data collected');
+    
+    // Parse skills from comma-separated string
+    const skillsInput = formData.get('skills') || '';
+    const skills = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill.length > 0);
+    
     const projectData = {
         title: formData.get('title').trim(),
         description: formData.get('description').trim(),
         category: formData.get('category'),
+        skills: skills,
         budget: parseInt(formData.get('budget')),
         deadline: formData.get('deadline'),
         ndaRequired: formData.get('ndaRequired') === 'on',
         companyId: user.uid,
         companyEmail: user.email,
+        companyName: user.email.split('@')[0], // Use email prefix as company name
         projectStatus: 'Open',
         createdAt: new Date().toISOString(),
-        status: 'pending'
+        status: 'open',
+        applications: []
     };
+    
+    console.log('Project data prepared:', projectData);
     
     const successDiv = document.getElementById('project-success');
     const errorDiv = document.getElementById('project-error');
@@ -120,6 +135,9 @@ async function handleProjectSubmission(event) {
     if (!projectData.deadline) {
         validationErrors.push('Project deadline is required');
     }
+    if (!skills || skills.length === 0) {
+        validationErrors.push('At least one skill is required');
+    }
     
     // Validate deadline is in the future
     const selectedDate = new Date(projectData.deadline);
@@ -131,13 +149,17 @@ async function handleProjectSubmission(event) {
     }
     
     if (validationErrors.length > 0) {
+        console.log('Validation errors:', validationErrors);
         showProjectError(validationErrors.join(', '));
         return;
     }
     
+    console.log('Validation passed, submitting to Firebase...');
+    
     try {
         // Add project to main collection
         const docRef = await addDoc(collection(db, 'projects'), projectData);
+        console.log('Project added with ID:', docRef.id);
         console.log('Project created with ID:', docRef.id);
         
         // Add to admin logging collection for moderation
