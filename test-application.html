@@ -93,10 +93,23 @@
         async function loadTestProjects() {
             console.log('Loading projects for testing...');
             try {
+                // First try to get all projects without filtering
+                console.log('Step 1: Getting all projects...');
+                const allProjectsQuery = query(collection(db, 'projects'));
+                const allSnapshot = await getDocs(allProjectsQuery);
+                
+                console.log('Total projects in database:', allSnapshot.size);
+                
+                // Log all projects for debugging
+                allSnapshot.forEach((doc) => {
+                    console.log('Project found:', doc.id, doc.data());
+                });
+                
+                // Now try the filtered query
+                console.log('Step 2: Getting open projects...');
                 const projectsQuery = query(
                     collection(db, 'projects'),
-                    where('status', '==', 'open'),
-                    orderBy('createdAt', 'desc')
+                    where('status', '==', 'open')
                 );
                 
                 const querySnapshot = await getDocs(projectsQuery);
@@ -109,14 +122,15 @@
                     });
                 });
                 
-                console.log('Loaded projects:', availableProjects.length);
+                console.log('Loaded open projects:', availableProjects.length);
                 
                 document.getElementById('projectStatus').innerHTML = `
                     <h4>Projects Status: ✅ LOADED</h4>
-                    <p>Found ${availableProjects.length} open projects</p>
+                    <p>Total projects in database: ${allSnapshot.size}</p>
+                    <p>Open projects found: ${availableProjects.length}</p>
                     ${availableProjects.length > 0 ? 
                         `<p>Test project: ${availableProjects[0].title}</p>` : 
-                        '<p>No projects available for testing</p>'
+                        '<p>No open projects available for testing</p>'
                     }
                 `;
                 
@@ -125,6 +139,7 @@
                 document.getElementById('projectStatus').innerHTML = `
                     <h4>Projects Status: ❌ ERROR</h4>
                     <p>Error: ${error.message}</p>
+                    <p>Code: ${error.code || 'Unknown'}</p>
                 `;
             }
         }
