@@ -1,0 +1,342 @@
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Fetch API cannot load https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=ZamtAuHRWy3ZQm59gCkorZyvpWjIcoHl0f7gvtNJ-HY&VER=8&database=projects%2Fcompanies-mvp%2Fdatabases%2F(default)&RID=rpc&SID=CXnQzdtb8i-rycQwMfQlIA&AID=6&CI=0&TYPE=xmlhttp&zx=4fo1xd1wp9d1&t=1 due to access control checks.
+	(anonymous function)
+	(anonymous function)
+	ic
+	Md
+	(anonymous function)
+	ub
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Failed to load resource: the server responded with a status of 400 (Bad Request) (accounts:signInWithPassword, line 0)
+[Error] Login error:
+	(anonymous function)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Fetch API cannot load https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=fecBMRfoz3VA1_vDqwrY_amqmUvD8L-JkvjnHommHSQ&VER=8&database=projects%2Fcompanies-mvp%2Fdatabases%2F(default)&RID=rpc&SID=NI5ruvzpW7DnqlOoUf7W8w&AID=7&CI=0&TYPE=xmlhttp&zx=quoljz1ak073&t=1 due to access control checks.
+	(anonymous function)
+	(anonymous function)
+	ic
+	Md
+	(anonymous function)
+	ub
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Failed to load resource: the server responded with a status of 404 (Not Found) (3eb2826cf27139d5.css.map, line 0)
+[Error] Resource blocked by content blocker
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] XMLHttpRequest cannot load https://stats.g.doubleclick.net/j/collect?t=dc&aip=1&_r=3&v=1&_v=j101&tid=UA-25629695-1&cid=1714653676.1750645152&jid=1922187696&gjid=1353795816&_gid=392597130.1750645152&_u=SCCAgEAjQAAAAGgCIAD~&z=1309100516 due to access control checks.
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:43)
+	postLocation (workspace_iframe.html:118)
+	onIframeLoad (workspace_iframe.html:132)
+	(anonymous function)
+	promiseReactionJob
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:44)
+	postLocation (workspace_iframe.html:118)
+	onIframeLoad (workspace_iframe.html:132)
+	(anonymous function)
+	promiseReactionJob
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:45)
+	postLocation (workspace_iframe.html:118)
+	onIframeLoad (workspace_iframe.html:132)
+	(anonymous function)
+	promiseReactionJob
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:46)
+	postLocation (workspace_iframe.html:118)
+	onIframeLoad (workspace_iframe.html:132)
+	(anonymous function)
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:43)
+	(anonymous function) (workspace_iframe.html:98)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:44)
+	(anonymous function) (workspace_iframe.html:98)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:45)
+	(anonymous function) (workspace_iframe.html:98)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:46)
+	(anonymous function) (workspace_iframe.html:98)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:43)
+	(anonymous function) (workspace_iframe.html:62)
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:44)
+	(anonymous function) (workspace_iframe.html:62)
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:45)
+	(anonymous function) (workspace_iframe.html:62)
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:46)
+	(anonymous function) (workspace_iframe.html:62)
+[Error] WebSocket connection to 'wss://eval.spock.platform.replit.com/wsv2/v2.public.Q2dZSWxlTGx3Z1lTQmdpMC91WENCaUlGYzNCdlkyc3dBRHFEQWdva016QmtOVEkwT1dZdFlUYzJPQzAwTlRReUxXRTROall0TXpJeU9EWTJOelEwTnpZd0VnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaFJEYjIxd1lXNWxaV1JOWVhKclpYUndiR0ZqWlNvTWFtRnpiMjVsWjNWemRHRm1RbEVLR0hKbGNHeHBkQzF5WlhCc0xXSnNiMk5yY3kxemNHOWpheElXY21Wd2JHbDBMWEpsY0d3dGJXVjBZUzF6Y0c5amF4b2RjbVZ3YkdsMExXMWhjbWRoY21sdVpTMWliRzlqYTNNdGMzQnZZMnRLQndpVjJwQVNFQUZRQUZvUGFXNTBaVzUwWDJKMWMybHVaWE56V2hKdmJtSnZZWEprYVc1blgycHZZbDlsYm1kYUZHOXVZbTloY21ScGJtZGZjbTlzWlY5bGVHVmplQUJTSXdnQkVJQ0FnSUFnR1FBQUFBQUFBQkJBSVFBQUFBQUFBQkJBS0lDQWdJRElBVEFDWUFOcUV3aVYycEFTRWd4cVlYTnZibVZuZFhOMFlXYUNBUUlxQUpvQkNnb0lNQzR3TGpFME5ER2dBUUU9mvFLQqNWXqVkAbs7FjnDe4-e5HLy22O6ceu3efFPKJOfbs3V8ryB492UOpf7BtPMyW0SrCtbUTBKWmi0bF3UDA.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: The operation couldn’t be completed. Socket is not connected
+[Error] Fetch API cannot load https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=p6zp_oDgu3crDRTwDX-iljTr3eMcnfJi0CDXAF6mqYA&VER=8&database=projects%2Fcompanies-mvp%2Fdatabases%2F(default)&RID=rpc&SID=DfKBS_4_oz0v59T4lo61Ew&AID=6&CI=0&TYPE=xmlhttp&zx=tyrv8q6elnc2&t=1 due to access control checks.
+	(anonymous function) (firebase-firestore.js:1:33582)
+	(anonymous function) (firebase-firestore.js:1:49976)
+	ic (firebase-firestore.js:1:21188)
+	Md (firebase-firestore.js:1:40273)
+	(anonymous function) (firebase-firestore.js:1:51844)
+	ub (firebase-firestore.js:1:17037)
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:43)
+	postLocation (workspace_iframe.html:118)
+	onIframeLoad (workspace_iframe.html:132)
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:44)
+	postLocation (workspace_iframe.html:118)
+	onIframeLoad (workspace_iframe.html:132)
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:45)
+	postLocation (workspace_iframe.html:118)
+	onIframeLoad (workspace_iframe.html:132)
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:46)
+	postLocation (workspace_iframe.html:118)
+	onIframeLoad (workspace_iframe.html:132)
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:43)
+	(anonymous function) (workspace_iframe.html:98)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:44)
+	(anonymous function) (workspace_iframe.html:98)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:45)
+	(anonymous function) (workspace_iframe.html:98)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:46)
+	(anonymous function) (workspace_iframe.html:98)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:43)
+	(anonymous function) (workspace_iframe.html:62)
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:44)
+	(anonymous function) (workspace_iframe.html:62)
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:45)
+	(anonymous function) (workspace_iframe.html:62)
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+	postMessage
+	postMessageToWorkspace (workspace_iframe.html:46)
+	(anonymous function) (workspace_iframe.html:62)
+[Error] WebSocket connection to 'wss://eval.spock.platform.replit.com/wsv2/v2.public.Q2dZSTVPVGx3Z1lTQmdpRGdlYkNCaUlGYzNCdlkyc3dBRHFEQWdva016QmtOVEkwT1dZdFlUYzJPQzAwTlRReUxXRTROall0TXpJeU9EWTJOelEwTnpZd0VnTnVhWGdhRjNKbGNHeHBkQzF5WlhCc0xXWnBiR1Z6TFhOd2IyTnJJaFJEYjIxd1lXNWxaV1JOWVhKclpYUndiR0ZqWlNvTWFtRnpiMjVsWjNWemRHRm1RbEVLR0hKbGNHeHBkQzF5WlhCc0xXSnNiMk5yY3kxemNHOWpheElXY21Wd2JHbDBMWEpsY0d3dGJXVjBZUzF6Y0c5amF4b2RjbVZ3YkdsMExXMWhjbWRoY21sdVpTMWliRzlqYTNNdGMzQnZZMnRLQndpVjJwQVNFQUZRQUZvUGFXNTBaVzUwWDJKMWMybHVaWE56V2hKdmJtSnZZWEprYVc1blgycHZZbDlsYm1kYUZHOXVZbTloY21ScGJtZGZjbTlzWlY5bGVHVmplQUJTSXdnQkVJQ0FnSUFnR1FBQUFBQUFBQkJBSVFBQUFBQUFBQkJBS0lDQWdJRElBVEFDWUFOcUV3aVYycEFTRWd4cVlYTnZibVZuZFhOMFlXYUNBUUlxQUpvQkNnb0lNQzR3TGpFME5ER2dBUUU9QS_bDTeBXhvBKNX8P9dv68ult-M4oQuAx9CWaSKYJMzLmEa8YaMg-5kpHl4tKD7ZhkcPaNMGnNcQenwpek4SAg.Q2dad2NtOWtPak1pQ25KbGNHeHBkQzVqYjIwPQ' failed: The operation couldn’t be completed. Socket is not connected
