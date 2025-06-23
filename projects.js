@@ -106,8 +106,8 @@ window.openProjectModal = function(projectId, projectData) {
     // Populate modal with project details
     document.getElementById('modalTitle').textContent = projectData.title;
     document.getElementById('modalDescription').textContent = projectData.description;
-    document.getElementById('modalBudget').textContent = projectData.budget;
-    document.getElementById('modalTimeline').textContent = projectData.timeline;
+    document.getElementById('modalBudget').textContent = `$${projectData.budget?.toLocaleString() || 'Not specified'}`;
+    document.getElementById('modalTimeline').textContent = projectData.deadline ? new Date(projectData.deadline).toLocaleDateString() : 'Not specified';
     // Display project category
     document.getElementById('modalCategory').textContent = projectData.category || 'General';
     
@@ -234,10 +234,10 @@ function displayProjects(projects) {
                 <p class="project-description preview">${escapeHtml(truncatedDescription)}</p>
                 <div class="project-meta">
                     <div class="meta-item">
-                        <strong>Budget:</strong> <span>${escapeHtml(project.budget)}</span>
+                        <strong>Budget:</strong> <span>$${project.budget?.toLocaleString() || 'Not specified'}</span>
                     </div>
                     <div class="meta-item">
-                        <strong>Timeline:</strong> <span>${escapeHtml(project.timeline)}</span>
+                        <strong>Deadline:</strong> <span>${project.deadline ? new Date(project.deadline).toLocaleDateString() : 'Not specified'}</span>
                     </div>
                 </div>
                 <div class="project-actions">

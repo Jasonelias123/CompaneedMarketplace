@@ -80,9 +80,8 @@ async function handleProjectSubmission(event) {
         title: formData.get('title').trim(),
         description: formData.get('description').trim(),
         category: formData.get('category'),
-        budget: formData.get('budget'),
-        timeline: formData.get('timeline'),
-        contactEmail: formData.get('contactEmail').trim(),
+        budget: parseInt(formData.get('budget')),
+        deadline: formData.get('deadline'),
         ndaRequired: formData.get('ndaRequired') === 'on',
         companyId: user.uid,
         companyEmail: user.email,
@@ -110,25 +109,24 @@ async function handleProjectSubmission(event) {
     if (!projectData.category) {
         validationErrors.push('Project category is required');
     }
-    if (!projectData.budget) {
-        validationErrors.push('Budget range is required');
+    if (!projectData.budget || projectData.budget <= 0) {
+        validationErrors.push('Valid budget amount is required');
     }
-    if (!projectData.timeline) {
-        validationErrors.push('Timeline is required');
+    if (!projectData.deadline) {
+        validationErrors.push('Project deadline is required');
     }
-    if (!projectData.contactEmail.trim()) {
-        validationErrors.push('Contact email is required');
+    
+    // Validate deadline is in the future
+    const selectedDate = new Date(projectData.deadline);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    if (selectedDate < today) {
+        validationErrors.push('Project deadline must be in the future');
     }
     
     if (validationErrors.length > 0) {
         showProjectError(validationErrors.join(', '));
-        return;
-    }
-    
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(projectData.contactEmail)) {
-        showProjectError('Please enter a valid contact email address.');
         return;
     }
     

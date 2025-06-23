@@ -144,14 +144,14 @@ async function loadProjectsByStatus(status) {
                     <div class="project-meta">
                         <div class="meta-row">
                             <span><strong>Company:</strong> ${escapeHtml(project.companyEmail)}</span>
-                            <span><strong>Budget:</strong> ${escapeHtml(project.budget)}</span>
+                            <span><strong>Budget:</strong> $${project.budget?.toLocaleString() || 'Not specified'}</span>
                         </div>
                         <div class="meta-row">
-                            <span><strong>Timeline:</strong> ${escapeHtml(project.timeline)}</span>
+                            <span><strong>Deadline:</strong> ${project.deadline ? new Date(project.deadline).toLocaleDateString() : 'Not specified'}</span>
                             <span><strong>Posted:</strong> ${createdDate}</span>
                         </div>
                         <div class="meta-row">
-                            <span><strong>Contact:</strong> ${escapeHtml(project.contactEmail)}</span>
+                            <span><strong>Company Email:</strong> ${escapeHtml(project.companyEmail)}</span>
                             ${project.ndaRequired ? '<span class="nda-badge">NDA Required</span>' : ''}
                         </div>
                     </div>
