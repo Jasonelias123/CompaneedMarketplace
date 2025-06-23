@@ -111,8 +111,10 @@ export async function handleSignup(event) {
         console.log('User role saved successfully');
         
         userRole = role;
+        console.log('Setting userRole to:', userRole);
         
         // Redirect to appropriate dashboard
+        console.log('Calling redirectToUserDashboard with role:', userRole);
         redirectToUserDashboard();
         
     } catch (error) {
@@ -198,10 +200,17 @@ async function handleLogout() {
 
 // Redirect to appropriate dashboard based on user role
 function redirectToUserDashboard() {
+    console.log('redirectToUserDashboard called with userRole:', userRole);
     if (userRole === 'company') {
+        console.log('Redirecting to dashboard.html');
         window.location.href = 'dashboard.html';
     } else if (userRole === 'developer') {
+        console.log('Redirecting to projects.html');
         window.location.href = 'projects.html';
+    } else {
+        console.error('Unknown user role:', userRole);
+        console.log('Redirecting to index.html as fallback');
+        window.location.href = 'index.html';
     }
 }
 
