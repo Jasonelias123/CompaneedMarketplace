@@ -6,7 +6,9 @@ import {
     query, 
     where, 
     orderBy, 
-    getDocs 
+    getDocs,
+    doc,
+    updateDoc
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Initialize dashboard when DOM is loaded
@@ -23,24 +25,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function setupNavigation() {
     const postProjectBtn = document.getElementById('postProjectBtn');
+    const myProjectsBtn = document.getElementById('myProjectsBtn');
     const viewBidsBtn = document.getElementById('viewBidsBtn');
     const postProjectSection = document.getElementById('postProjectSection');
+    const myProjectsSection = document.getElementById('myProjectsSection');
     const viewBidsSection = document.getElementById('viewBidsSection');
 
     postProjectBtn.addEventListener('click', () => {
-        postProjectBtn.classList.add('active');
-        viewBidsBtn.classList.remove('active');
-        postProjectSection.style.display = 'block';
-        viewBidsSection.style.display = 'none';
+        setActiveTab(postProjectBtn, postProjectSection);
+    });
+
+    myProjectsBtn.addEventListener('click', () => {
+        setActiveTab(myProjectsBtn, myProjectsSection);
+        loadUserProjects();
     });
 
     viewBidsBtn.addEventListener('click', () => {
-        viewBidsBtn.classList.add('active');
-        postProjectBtn.classList.remove('active');
-        postProjectSection.style.display = 'none';
-        viewBidsSection.style.display = 'block';
-        loadProjectBids();
+        setActiveTab(viewBidsBtn, viewBidsSection);
+        loadProjectApplications();
     });
+}
+
+function setActiveTab(activeBtn, activeSection) {
+    // Remove active class from all buttons
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    // Hide all sections
+    document.querySelectorAll('.dashboard-section').forEach(section => section.style.display = 'none');
+    
+    // Set active button and show section
+    activeBtn.classList.add('active');
+    activeSection.style.display = 'block';
 }
 
 function initializeDashboard() {
@@ -65,12 +79,14 @@ async function handleProjectSubmission(event) {
     const projectData = {
         title: formData.get('title').trim(),
         description: formData.get('description').trim(),
+        category: formData.get('category'),
         budget: formData.get('budget'),
         timeline: formData.get('timeline'),
         contactEmail: formData.get('contactEmail').trim(),
         ndaRequired: formData.get('ndaRequired') === 'on',
         companyId: user.uid,
         companyEmail: user.email,
+        projectStatus: 'Open',
         createdAt: new Date().toISOString(),
         status: 'pending'
     };
@@ -82,9 +98,30 @@ async function handleProjectSubmission(event) {
     successDiv.style.display = 'none';
     errorDiv.style.display = 'none';
     
-    // Validate required fields
-    if (!projectData.title || !projectData.description || !projectData.budget || !projectData.timeline || !projectData.contactEmail) {
-        showProjectError('Please fill in all required fields.');
+    // Enhanced form validation
+    const validationErrors = [];
+    
+    if (!projectData.title.trim()) {
+        validationErrors.push('Project title is required');
+    }
+    if (!projectData.description.trim()) {
+        validationErrors.push('Project description is required');
+    }
+    if (!projectData.category) {
+        validationErrors.push('Project category is required');
+    }
+    if (!projectData.budget) {
+        validationErrors.push('Budget range is required');
+    }
+    if (!projectData.timeline) {
+        validationErrors.push('Timeline is required');
+    }
+    if (!projectData.contactEmail.trim()) {
+        validationErrors.push('Contact email is required');
+    }
+    
+    if (validationErrors.length > 0) {
+        showProjectError(validationErrors.join(', '));
         return;
     }
     
@@ -96,18 +133,23 @@ async function handleProjectSubmission(event) {
     }
     
     try {
-        // Add project to Firestore
+        // Add project to main collection
         const docRef = await addDoc(collection(db, 'projects'), projectData);
         console.log('Project created with ID:', docRef.id);
+        
+        // Add to admin logging collection for moderation
+        await addDoc(collection(db, 'adminProjectLogs'), {
+            ...projectData,
+            originalProjectId: docRef.id,
+            action: 'project_submitted',
+            timestamp: Date.now()
+        });
         
         // Show success message
         successDiv.style.display = 'block';
         
         // Reset form
         event.target.reset();
-        
-        // Reload projects list
-        loadUserProjects();
         
         // Hide success message after 5 seconds
         setTimeout(() => {
@@ -202,11 +244,14 @@ function showProjectError(message) {
     }
 }
 
-async function loadProjectBids() {
+// Load project applications (secure - no contact info exposed)
+async function loadProjectApplications() {
     const bidsList = document.getElementById('bidsList');
     const user = getCurrentUser();
     
     if (!user) return;
+    
+    bidsList.innerHTML = '<div class="loading">Loading applications...</div>';
     
     try {
         // Get all projects by this company
@@ -219,68 +264,88 @@ async function loadProjectBids() {
         const projectsSnapshot = await getDocs(projectsQuery);
         
         if (projectsSnapshot.empty) {
-            bidsList.innerHTML = '<div class="no-data">No projects posted yet. Post a project to start receiving bids.</div>';
+            bidsList.innerHTML = '<div class="no-data">No projects posted yet. Post a project to start receiving applications.</div>';
             return;
         }
         
-        let allBids = [];
+        let allApplications = [];
         
-        // For each project, get its bids
+        // For each project, get its applications from subcollection
         for (const projectDoc of projectsSnapshot.docs) {
             const projectData = projectDoc.data();
+            const projectRef = doc(db, 'projects', projectDoc.id);
+            const applicationsRef = collection(projectRef, 'applications');
             
-            const bidsQuery = query(
-                collection(db, 'bids'),
-                where('projectId', '==', projectDoc.id),
-                orderBy('createdAt', 'desc')
+            const applicationsQuery = query(
+                applicationsRef,
+                orderBy('timestamp', 'desc')
             );
             
-            const bidsSnapshot = await getDocs(bidsQuery);
+            const applicationsSnapshot = await getDocs(applicationsQuery);
             
-            bidsSnapshot.forEach(bidDoc => {
-                allBids.push({
-                    id: bidDoc.id,
-                    ...bidDoc.data(),
+            applicationsSnapshot.forEach(appDoc => {
+                allApplications.push({
+                    id: appDoc.id,
+                    projectId: projectDoc.id,
+                    ...appDoc.data(),
                     projectTitle: projectData.title
                 });
             });
         }
         
-        if (allBids.length === 0) {
-            bidsList.innerHTML = '<div class="no-data">No bids received yet. Your projects will start receiving bids from developers soon.</div>';
+        if (allApplications.length === 0) {
+            bidsList.innerHTML = '<div class="no-data">No applications received yet. Your projects will start receiving applications from developers soon.</div>';
             return;
         }
         
-        // Display bids
-        bidsList.innerHTML = allBids.map(bid => `
-            <div class="bid-card">
-                <div class="bid-header">
-                    <h3>${escapeHtml(bid.projectTitle)}</h3>
-                    <span class="bid-date">${new Date(bid.createdAt).toLocaleDateString()}</span>
+        // Display applications (no contact info exposed)
+        bidsList.innerHTML = allApplications.map(app => `
+            <div class="application-card">
+                <div class="application-header">
+                    <h3>${escapeHtml(app.projectTitle)}</h3>
+                    <span class="application-date">${new Date(app.createdAt).toLocaleDateString()}</span>
                 </div>
-                <div class="bid-content">
-                    <p><strong>Developer:</strong> ${escapeHtml(bid.developerEmail)}</p>
-                    <p><strong>Message:</strong> ${escapeHtml(bid.message)}</p>
-                    <div class="bid-actions">
-                        <button class="btn btn-primary" onclick="contactDeveloper('${bid.developerEmail}', '${escapeHtml(bid.projectTitle)}')">
-                            Contact Developer
-                        </button>
+                <div class="application-content">
+                    <p><strong>Developer:</strong> ${escapeHtml(app.developerName)}</p>
+                    <p><strong>Application Message:</strong></p>
+                    <div class="application-message">${escapeHtml(app.message)}</div>
+                    <div class="application-actions">
+                        <select class="application-status-select" onchange="updateApplicationStatus('${app.projectId}', '${app.id}', this.value)">
+                            <option value="pending" ${app.status === 'pending' ? 'selected' : ''}>Pending Review</option>
+                            <option value="reviewed" ${app.status === 'reviewed' ? 'selected' : ''}>Reviewed</option>
+                            <option value="accepted" ${app.status === 'accepted' ? 'selected' : ''}>Accepted</option>
+                            <option value="declined" ${app.status === 'declined' ? 'selected' : ''}>Declined</option>
+                        </select>
                     </div>
                 </div>
             </div>
         `).join('');
         
     } catch (error) {
-        console.error('Error loading bids:', error);
-        bidsList.innerHTML = '<div class="error">Error loading bids. Please try again.</div>';
+        console.error('Error loading applications:', error);
+        bidsList.innerHTML = '<div class="error">Error loading applications. Please try again.</div>';
     }
 }
 
-function contactDeveloper(email, projectTitle) {
-    const subject = encodeURIComponent(`Re: ${projectTitle} - Project Inquiry`);
-    const body = encodeURIComponent(`Hi,\n\nI saw your interest in my project "${projectTitle}" and would like to discuss it further.\n\nBest regards`);
-    window.open(`mailto:${email}?subject=${subject}&body=${body}`);
+// Update application status (secure in-platform communication)
+window.updateApplicationStatus = async function(projectId, applicationId, newStatus) {
+    try {
+        const projectRef = doc(db, 'projects', projectId);
+        const applicationRef = doc(collection(projectRef, 'applications'), applicationId);
+        
+        await updateDoc(applicationRef, {
+            status: newStatus,
+            updatedAt: new Date().toISOString()
+        });
+        
+        console.log('Application status updated successfully');
+    } catch (error) {
+        console.error('Error updating application status:', error);
+        alert('Failed to update application status. Please try again.');
+    }
 }
+
+
 
 // Utility function to escape HTML
 function escapeHtml(text) {

@@ -10,6 +10,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 let currentProject = null;
+let allProjects = []; // Store all projects for filtering
 
 // Initialize projects page when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -26,10 +27,10 @@ function initializeProjects() {
     // Load all projects
     loadAllProjects();
     
-    // Set up interest form
-    const interestForm = document.getElementById('interestForm');
-    if (interestForm) {
-        interestForm.addEventListener('submit', handleInterestSubmission);
+    // Set up application form
+    const applicationForm = document.getElementById('applicationForm');
+    if (applicationForm) {
+        applicationForm.addEventListener('submit', handleApplicationSubmission);
     }
 }
 
@@ -59,45 +60,22 @@ async function loadAllProjects() {
             return;
         }
         
-        // Build projects HTML
-        let projectsHTML = '';
+        // Store all projects for filtering
+        allProjects = [];
         querySnapshot.forEach((doc) => {
             const project = doc.data();
             const projectId = doc.id;
             
-            // Filter out inactive projects (client-side filtering)
-            if (project.status && project.status !== 'active') {
+            // Filter out inactive/unapproved projects
+            if (project.status && project.status !== 'approved') {
                 return;
             }
             
-            const createdDate = new Date(project.createdAt).toLocaleDateString();
-            
-            // Truncate description for preview
-            const truncatedDescription = project.description.length > 120 
-                ? project.description.substring(0, 120) + '...' 
-                : project.description;
-            
-            projectsHTML += `
-                <div class="project-card" onclick="openProjectModal('${projectId}', ${JSON.stringify(project).replace(/"/g, '&quot;')})">
-                    <h3 class="project-title">${escapeHtml(project.title)}</h3>
-                    <p class="project-description preview">${escapeHtml(truncatedDescription)}</p>
-                    <div class="project-meta">
-                        <div class="meta-item">
-                            <strong>Budget:</strong> <span>${escapeHtml(project.budget)}</span>
-                        </div>
-                        <div class="meta-item">
-                            <strong>Timeline:</strong> <span>${escapeHtml(project.timeline)}</span>
-                        </div>
-                    </div>
-                    <div class="project-actions">
-                        <span class="project-date">Posted ${createdDate}</span>
-                        <strong style="color: var(--primary-blue);">View Details →</strong>
-                    </div>
-                </div>
-            `;
+            allProjects.push({ id: projectId, ...project });
         });
         
-        projectsList.innerHTML = projectsHTML;
+        // Display projects
+        displayProjects(allProjects);
         
     } catch (error) {
         console.error('Error loading projects:', error);
@@ -130,10 +108,11 @@ window.openProjectModal = function(projectId, projectData) {
     document.getElementById('modalDescription').textContent = projectData.description;
     document.getElementById('modalBudget').textContent = projectData.budget;
     document.getElementById('modalTimeline').textContent = projectData.timeline;
-    document.getElementById('modalContact').textContent = projectData.contactEmail;
+    // Display project category
+    document.getElementById('modalCategory').textContent = projectData.category || 'General';
     
-    // Reset interest form
-    document.getElementById('interestForm').reset();
+    // Reset application form
+    document.getElementById('applicationForm').reset();
     
     // Show modal
     document.getElementById('projectModal').style.display = 'block';
@@ -150,59 +129,54 @@ window.closeSuccessModal = function() {
     document.getElementById('successModal').style.display = 'none';
 }
 
-// Handle interest submission
-async function handleInterestSubmission(event) {
+// Handle application form submission
+async function handleApplicationSubmission(event) {
     event.preventDefault();
     
     if (!currentProject) return;
     
     const user = getCurrentUser();
-    if (!user) return;
-    
-    const formData = new FormData(event.target);
-    const interestData = {
-        projectId: currentProject.id,
-        projectTitle: currentProject.title,
-        companyId: currentProject.companyId,
-        companyEmail: currentProject.companyEmail,
-        developerId: user.uid,
-        developerName: formData.get('developerName').trim(),
-        developerEmail: formData.get('developerEmail').trim(),
-        message: formData.get('message').trim(),
-        submittedAt: new Date().toISOString(),
-        status: 'pending'
-    };
-    
-    // Validate required fields
-    if (!interestData.developerName || !interestData.developerEmail) {
-        alert('Please fill in all required fields.');
+    if (!user) {
+        alert('Please log in to submit an application.');
         return;
     }
     
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(interestData.developerEmail)) {
-        alert('Please enter a valid email address.');
+    const formData = new FormData(event.target);
+    const applicationData = {
+        projectId: currentProject.id,
+        projectTitle: currentProject.title,
+        developerUid: user.uid,
+        developerName: user.displayName || user.email.split('@')[0],
+        message: formData.get('applicationMessage').trim(),
+        status: 'pending',
+        createdAt: new Date().toISOString(),
+        timestamp: Date.now()
+    };
+    
+    // Validate required fields
+    if (!applicationData.message) {
+        alert('Please describe why you are interested in this project.');
         return;
     }
     
     try {
-        // Check if user already submitted interest for this project
-        const existingInterestQuery = query(
-            collection(db, 'interests'),
-            where('projectId', '==', currentProject.id),
-            where('developerId', '==', user.uid)
+        // Check if user already applied to this project
+        const projectRef = doc(db, 'projects', currentProject.id);
+        const applicationsRef = collection(projectRef, 'applications');
+        const existingAppQuery = query(
+            applicationsRef,
+            where('developerUid', '==', user.uid)
         );
         
-        const existingInterests = await getDocs(existingInterestQuery);
+        const existingApps = await getDocs(existingAppQuery);
         
-        if (!existingInterests.empty) {
-            alert('You have already submitted interest for this project.');
+        if (!existingApps.empty) {
+            alert('You have already applied to this project.');
             return;
         }
         
-        // Add interest to Firestore
-        await addDoc(collection(db, 'interests'), interestData);
+        // Save application to project subcollection
+        await addDoc(applicationsRef, applicationData);
         
         // Close project modal
         closeModal();
@@ -211,8 +185,8 @@ async function handleInterestSubmission(event) {
         document.getElementById('successModal').style.display = 'block';
         
     } catch (error) {
-        console.error('Error submitting interest:', error);
-        alert('Failed to submit interest. Please try again.');
+        console.error('Error submitting application:', error);
+        alert('Failed to submit application. Please try again.');
     }
 }
 
@@ -226,6 +200,81 @@ window.onclick = function(event) {
     } else if (event.target === successModal) {
         closeSuccessModal();
     }
+}
+
+// Display projects with filtering support
+function displayProjects(projects) {
+    const projectsList = document.getElementById('projectsList');
+    
+    if (projects.length === 0) {
+        projectsList.innerHTML = `
+            <div class="empty-state">
+                <h3>No projects match your criteria</h3>
+                <p>Try adjusting your filters or check back soon for new opportunities!</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let projectsHTML = '';
+    projects.forEach((project) => {
+        const createdDate = new Date(project.createdAt).toLocaleDateString();
+        
+        // Truncate description for preview
+        const truncatedDescription = project.description.length > 120 
+            ? project.description.substring(0, 120) + '...' 
+            : project.description;
+        
+        projectsHTML += `
+            <div class="project-card" onclick="openProjectModal('${project.id}', ${JSON.stringify(project).replace(/"/g, '&quot;')})">
+                <div class="project-header">
+                    <h3 class="project-title">${escapeHtml(project.title)}</h3>
+                    <span class="project-category">${escapeHtml(project.category || 'General')}</span>
+                </div>
+                <p class="project-description preview">${escapeHtml(truncatedDescription)}</p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <strong>Budget:</strong> <span>${escapeHtml(project.budget)}</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Timeline:</strong> <span>${escapeHtml(project.timeline)}</span>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <span class="project-date">Posted ${createdDate}</span>
+                    <strong style="color: var(--primary-blue);">View Details →</strong>
+                </div>
+            </div>
+        `;
+    });
+    
+    projectsList.innerHTML = projectsHTML;
+}
+
+// Filter projects by category and search term
+window.filterProjects = function() {
+    const categoryFilter = document.getElementById('categoryFilter').value;
+    const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
+    
+    let filteredProjects = allProjects;
+    
+    // Filter by category
+    if (categoryFilter) {
+        filteredProjects = filteredProjects.filter(project => 
+            project.category === categoryFilter
+        );
+    }
+    
+    // Filter by search term
+    if (searchFilter) {
+        filteredProjects = filteredProjects.filter(project => 
+            project.title.toLowerCase().includes(searchFilter) ||
+            project.description.toLowerCase().includes(searchFilter) ||
+            (project.category && project.category.toLowerCase().includes(searchFilter))
+        );
+    }
+    
+    displayProjects(filteredProjects);
 }
 
 // Utility function to escape HTML

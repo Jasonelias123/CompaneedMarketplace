@@ -1,0 +1,54 @@
+Please read this carefully before doing anything, and only build what’s actually missing. Do not break or overwrite anything already working.
+
+⚠️ Important Instructions:
+	•	✅ Check if login/signup/auth already exists — do not duplicate Firebase Auth if it’s already set up.
+	•	✅ Only implement the following features if they’re truly not present in the project.
+	•	❌ Do not expose any contact info (email, phone, etc.) of companies to developers or vice versa.
+	•	✅ Any interaction must happen within the platform only (Firebase, in-app dashboards, etc.).
+
+⸻
+
+🔧 Improvements to Add (Only if Missing):
+
+1. Developer Application System
+	•	Add an “Apply to Project” or “Submit Proposal” button inside the project modal.
+	•	Logged-in devs can submit a short message and optionally upload a pitch deck (PDF or image).
+	•	Save this data in Firebase under a subcollection of the project.
+	•	Each application should include: developer UID, name, message, pitch deck link (if uploaded), and timestamp.
+
+2. “My Projects” Dashboard for Companies
+	•	Show project posters a view of all their posted projects.
+	•	Let them view applications only for their own projects.
+	•	Optionally allow them to mark projects as Open / In Progress / Filled / Closed.
+	•	Do not show dev emails or contact info, just their submitted message and attached pitch deck if present.
+
+3. Developer Portfolios
+	•	Let developers create/edit their profile page (bio, skills, project types, LinkedIn/GitHub links — but hide contact info).
+	•	Allow companies to view dev profiles after they’ve applied to a project, but still hide all contact details.
+
+4. Project Categorization
+	•	Add categories/tags to projects (e.g. Web Dev, Mobile App, AI Agent, Automation, etc.).
+	•	Let users filter or search by category on the “Browse Projects” page.
+
+5. Notifications (Internal Only)
+	•	Notify companies (inside Firebase or via UI alert) when a developer applies to one of their projects.
+	•	Notify developers if their application is marked “Reviewed” or “Accepted” (optional).
+
+6. Project Form Validation
+	•	Add basic frontend validation for the project post form (e.g., required fields: title, budget, description).
+	•	Show a visible error message if saving to Firebase fails.
+
+7. Mobile UX Fixes
+	•	Fix the modal overflow on mobile devices.
+	•	Improve layout: use placeholders instead of fixed labels, and make the description box auto-expandable.
+
+8. Admin Logging
+	•	In the background, save all projects to a hidden adminProjects collection in Firebase for moderation.
+	•	Optional: add a simple reCAPTCHA to the “Post Project” form to prevent spam.
+
+⸻
+
+✅ Make all changes while preserving existing working features and styling.
+✅ You may stub or scaffold future dashboard features, but they should not be visible unless logged in.
+
+Let me know if anything is unclear. This MVP needs to be robust, secure, and locked down before going live.

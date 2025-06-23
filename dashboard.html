@@ -22,7 +22,8 @@
             <div class="dashboard-content">
                 <div class="dashboard-nav">
                     <button id="postProjectBtn" class="nav-btn active">Post a Project</button>
-                    <button id="viewBidsBtn" class="nav-btn">View Bids</button>
+                    <button id="myProjectsBtn" class="nav-btn">My Projects</button>
+                    <button id="viewBidsBtn" class="nav-btn">Applications</button>
                 </div>
 
                 <div id="postProjectSection" class="dashboard-section">
@@ -31,13 +32,31 @@
                     <form id="projectForm" class="project-form">
                         <div class="form-group">
                             <label for="title">Project Title</label>
-                            <input type="text" id="title" name="title" required maxlength="100">
+                            <input type="text" id="title" name="title" required maxlength="100" placeholder="e.g., AI Chatbot for Customer Support">
+                            <div class="form-error">Project title is required</div>
                         </div>
 
                         <div class="form-group">
                             <label for="description">Project Description</label>
                             <textarea id="description" name="description" required rows="5" maxlength="1000"></textarea>
                             <small class="form-hint">Describe your AI project requirements in detail</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Project Category</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select project category</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Mobile App">Mobile App</option>
+                                <option value="AI Agent">AI Agent</option>
+                                <option value="Automation">Automation</option>
+                                <option value="Data Analysis">Data Analysis</option>
+                                <option value="Machine Learning">Machine Learning</option>
+                                <option value="Computer Vision">Computer Vision</option>
+                                <option value="Natural Language Processing">Natural Language Processing</option>
+                                <option value="Chatbot">Chatbot</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
 
                         <div class="form-row">
@@ -86,13 +105,14 @@
                     <div id="project-error" class="error-message" style="display: none;"></div>
                 </div>
 
-                <div class="dashboard-section">
-                    <h2>Your Posted Projects</h2>
-                    <p class="section-description">Track your project status and view developer interest</p>
-                    <div id="projectsList" class="projects-list">
+                </div>
+
+                <div id="myProjectsSection" class="dashboard-section" style="display: none;">
+                    <h2>My Projects</h2>
+                    <p class="section-description">Manage your posted projects and update their status</p>
+                    <div id="myProjectsList" class="projects-list">
                         <div class="loading">Loading your projects...</div>
                     </div>
-                </div>
                 </div>
 
                 <div id="viewBidsSection" class="dashboard-section" style="display: none;">

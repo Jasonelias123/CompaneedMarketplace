@@ -22,6 +22,23 @@
             <div class="projects-header">
                 <h2>Available AI Projects</h2>
                 <p>Discover exciting opportunities and connect with companies looking for AI talent</p>
+                
+                <div class="projects-filters">
+                    <select id="categoryFilter" onchange="filterProjects()">
+                        <option value="">All Categories</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Mobile App">Mobile App</option>
+                        <option value="AI Agent">AI Agent</option>
+                        <option value="Automation">Automation</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Computer Vision">Computer Vision</option>
+                        <option value="Natural Language Processing">Natural Language Processing</option>
+                        <option value="Chatbot">Chatbot</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="text" id="searchFilter" placeholder="Search projects..." onkeyup="filterProjects()">
+                </div>
             </div>
 
             <div id="projectsList" class="projects-grid">
@@ -50,30 +67,26 @@
                             <strong>Timeline:</strong> <span id="modalTimeline"></span>
                         </div>
                         <div class="meta-item">
-                            <strong>Contact:</strong> <span id="modalContact"></span>
+                            <strong>Category:</strong> <span id="modalCategory"></span>
                         </div>
                     </div>
                 </div>
 
-                <div class="interest-form">
-                    <h4>Express Interest</h4>
-                    <form id="interestForm">
+                <div class="application-form">
+                    <h4>Submit Application</h4>
+                    <form id="applicationForm">
                         <div class="form-group">
-                            <label for="developerName">Your Name</label>
-                            <input type="text" id="developerName" name="developerName" required>
+                            <label for="applicationMessage">Why are you interested in this project?</label>
+                            <textarea id="applicationMessage" name="applicationMessage" rows="4" placeholder="Describe your experience and approach for this project..." required></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label for="developerEmail">Your Email</label>
-                            <input type="email" id="developerEmail" name="developerEmail" required>
+                            <label for="pitchDeck">Pitch Deck or Portfolio (Optional)</label>
+                            <input type="file" id="pitchDeck" name="pitchDeck" accept=".pdf,.png,.jpg,.jpeg">
+                            <small class="form-hint">Upload a PDF or image showcasing your relevant work</small>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="message">Message (Optional)</label>
-                            <textarea id="message" name="message" rows="3" placeholder="Tell the company why you're interested in this project..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Submit Interest</button>
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
                     </form>
                 </div>
             </div>
