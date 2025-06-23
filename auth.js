@@ -30,14 +30,11 @@ onAuthStateChanged(auth, async (user) => {
             // Redirect based on current page and role
             const currentPage = window.location.pathname.split('/').pop();
             
-            // Only redirect from login page, not signup (to allow new signups)
+            // Only redirect from login page
             if (currentPage === 'login.html') {
                 redirectToUserDashboard();
-            } else if (currentPage === 'dashboard.html' && userRole !== 'company') {
-                window.location.href = 'projects.html';
-            } else if (currentPage === 'projects.html' && userRole !== 'developer') {
-                window.location.href = 'dashboard.html';
             }
+            // Don't auto-redirect on dashboard/projects pages to prevent loops
             
             // Update UI with user info
             updateUIWithUser(user);

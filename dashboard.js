@@ -9,14 +9,15 @@ import {
     getDocs 
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-// Ensure user is authenticated and is a company
-if (!requireAuth()) {
-    throw new Error('Authentication required');
-}
-
 // Initialize dashboard when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initializeDashboard();
+    // Wait for auth state before initializing
+    setTimeout(() => {
+        if (!requireAuth()) {
+            return;
+        }
+        initializeDashboard();
+    }, 1000);
 });
 
 function initializeDashboard() {
