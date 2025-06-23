@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Sample Data - Companeeds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <main class="auth-main">
+            <div class="auth-card">
+                <h2>Add Sample Projects</h2>
+                <button id="addSampleData" class="btn btn-primary">Add Sample Projects</button>
+                <div id="results" class="test-results"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module">
+        import { db } from './firebase-config.js';
+        import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const sampleProjects = [
+            {
+                title: "E-commerce Mobile App Development",
+                description: "Looking for an experienced React Native developer to build a cross-platform mobile app for our fashion e-commerce business. The app should include user authentication, product catalog, shopping cart, payment integration, and order tracking.",
+                skills: ["React Native", "JavaScript", "Firebase", "Stripe API", "Mobile Development"],
+                budget: 15000,
+                deadline: "2025-08-15",
+                companyName: "Fashion Forward Inc",
+                companyEmail: "demo@companeeds.com",
+                status: "open",
+                createdAt: new Date().toISOString(),
+                applications: []
+            },
+            {
+                title: "AI-Powered Customer Support Chatbot",
+                description: "We need an AI developer to create an intelligent chatbot for our customer support system. The chatbot should handle common inquiries, integrate with our existing CRM, and escalate complex issues to human agents.",
+                skills: ["Python", "OpenAI API", "Natural Language Processing", "REST APIs", "Machine Learning"],
+                budget: 12000,
+                deadline: "2025-07-30",
+                companyName: "TechSupport Solutions",
+                companyEmail: "demo@companeeds.com",
+                status: "open",
+                createdAt: new Date().toISOString(),
+                applications: []
+            },
+            {
+                title: "Blockchain DeFi Platform Development",
+                description: "Seeking a blockchain developer to build a decentralized finance platform with yield farming capabilities. Must have experience with Solidity, Web3, and DeFi protocols.",
+                skills: ["Solidity", "Web3.js", "Ethereum", "Smart Contracts", "DeFi"],
+                budget: 25000,
+                deadline: "2025-09-01",
+                companyName: "CryptoFinance Ltd",
+                companyEmail: "demo@companeeds.com",
+                status: "open",
+                createdAt: new Date().toISOString(),
+                applications: []
+            },
+            {
+                title: "Data Analytics Dashboard",
+                description: "Need a full-stack developer to create an interactive dashboard for business intelligence. The dashboard should visualize sales data, customer metrics, and generate automated reports.",
+                skills: ["React", "Node.js", "D3.js", "PostgreSQL", "Data Visualization"],
+                budget: 8000,
+                deadline: "2025-07-15",
+                companyName: "Analytics Pro",
+                companyEmail: "demo@companeeds.com",
+                status: "open",
+                createdAt: new Date().toISOString(),
+                applications: []
+            },
+            {
+                title: "DevOps Infrastructure Automation",
+                description: "Looking for a DevOps engineer to automate our deployment pipeline and set up monitoring for our microservices architecture. Experience with Kubernetes and AWS required.",
+                skills: ["DevOps", "Kubernetes", "AWS", "Docker", "CI/CD", "Terraform"],
+                budget: 18000,
+                deadline: "2025-08-30",
+                companyName: "CloudTech Systems",
+                companyEmail: "demo@companeeds.com",
+                status: "open",
+                createdAt: new Date().toISOString(),
+                applications: []
+            }
+        ];
+
+        document.getElementById('addSampleData').addEventListener('click', async () => {
+            const results = document.getElementById('results');
+            results.innerHTML = '<div>Adding sample projects...</div>';
+
+            try {
+                for (const project of sampleProjects) {
+                    await addDoc(collection(db, 'projects'), project);
+                    const div = document.createElement('div');
+                    div.textContent = `✓ Added: ${project.title}`;
+                    div.style.color = '#155724';
+                    div.style.margin = '5px 0';
+                    results.appendChild(div);
+                }
+
+                const success = document.createElement('div');
+                success.textContent = '✓ All sample projects added successfully!';
+                success.style.color = '#155724';
+                success.style.fontWeight = 'bold';
+                success.style.marginTop = '10px';
+                results.appendChild(success);
+
+            } catch (error) {
+                console.error('Error adding sample data:', error);
+                const errorDiv = document.createElement('div');
+                errorDiv.textContent = `✗ Error: ${error.message}`;
+                errorDiv.style.color = '#721c24';
+                results.appendChild(errorDiv);
+            }
+        });
+    </script>
+</body>
+</html>
