@@ -225,8 +225,11 @@ export async function handleLogin(event) {
 
 // Handle logout
 export async function handleLogout() {
+    console.log('Logout function called');
     try {
+        console.log('Attempting to sign out user');
         await signOut(auth);
+        console.log('Sign out successful, redirecting to index.html');
         window.location.href = 'index.html';
     } catch (error) {
         console.error('Logout error:', error);

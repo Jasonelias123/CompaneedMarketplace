@@ -14,7 +14,7 @@
                 <div class="header-actions">
                     <a href="messages.html" class="btn btn-outline">Messages</a>
                     <span id="userEmail" class="user-email"></span>
-                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()">Logout</button>
                 </div>
             </div>
         </header>
@@ -119,5 +119,9 @@
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="dashboard.js"></script>
+    <script type="module">
+        import { handleLogout } from './auth.js';
+        window.handleLogoutClick = handleLogout;
+    </script>
 </body>
 </html>

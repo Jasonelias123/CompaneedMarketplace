@@ -71,8 +71,12 @@ function initializeDashboard() {
     
     // Set up logout button
     const logoutBtn = document.getElementById('logoutBtn');
+    console.log('Looking for logout button:', logoutBtn);
     if (logoutBtn) {
+        console.log('Logout button found, adding event listener');
         logoutBtn.addEventListener('click', handleLogout);
+    } else {
+        console.error('Logout button not found in DOM');
     }
     
     // Load existing projects

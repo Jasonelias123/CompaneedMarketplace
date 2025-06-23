@@ -37,8 +37,12 @@ function initializeProjects() {
     
     // Set up logout button
     const logoutBtn = document.getElementById('logoutBtn');
+    console.log('Projects page - Looking for logout button:', logoutBtn);
     if (logoutBtn) {
+        console.log('Projects page - Logout button found, adding event listener');
         logoutBtn.addEventListener('click', handleLogout);
+    } else {
+        console.error('Projects page - Logout button not found in DOM');
     }
     
     // Load all projects
