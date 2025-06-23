@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Companeeds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="nav-links">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Messages</h1>
+                <p class="page-description">Secure communication with project partners</p>
+            </div>
+
+            <div class="messages-container">
+                <!-- Conversations List -->
+                <div class="conversations-sidebar">
+                    <div class="conversations-header">
+                        <h3>Conversations</h3>
+                        <div class="conversation-filter">
+                            <select id="filterStatus">
+                                <option value="">All Projects</option>
+                                <option value="active">Active</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="conversationsList" class="conversations-list">
+                        <div class="loading">Loading conversations...</div>
+                    </div>
+                </div>
+
+                <!-- Chat Area -->
+                <div class="chat-area">
+                    <div id="noChatSelected" class="no-chat-selected">
+                        <div class="no-chat-content">
+                            <h3>Select a Conversation</h3>
+                            <p>Choose a project conversation from the left to start messaging</p>
+                        </div>
+                    </div>
+
+                    <div id="chatContainer" class="chat-container" style="display: none;">
+                        <div class="chat-header">
+                            <div class="chat-info">
+                                <h3 id="chatTitle"></h3>
+                                <p id="chatSubtitle"></p>
+                            </div>
+                            <div class="chat-actions">
+                                <button id="reportBtn" class="btn btn-warning btn-small">Report Issue</button>
+                            </div>
+                        </div>
+
+                        <div id="messagesContainer" class="messages-container-chat">
+                            <div class="loading">Loading messages...</div>
+                        </div>
+
+                        <div class="message-input-container">
+                            <form id="messageForm" class="message-form">
+                                <div class="message-input-wrapper">
+                                    <textarea id="messageInput" placeholder="Type your message..." rows="2" maxlength="1000" required></textarea>
+                                    <button type="submit" class="btn btn-primary btn-send">Send</button>
+                                </div>
+                                <div class="message-warning">
+                                    <small>⚠️ Sharing contact information (emails, phone numbers) is not allowed and will result in message filtering</small>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Report Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Report Issue</h3>
+                <button class="modal-close" onclick="closeReportModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label for="reportReason">Reason for Report</label>
+                        <select id="reportReason" name="reportReason" required>
+                            <option value="">Select reason</option>
+                            <option value="inappropriate_content">Inappropriate Content</option>
+                            <option value="contact_sharing">Sharing Contact Information</option>
+                            <option value="spam">Spam</option>
+                            <option value="harassment">Harassment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportDescription">Description</label>
+                        <textarea id="reportDescription" name="reportDescription" rows="4" placeholder="Describe the issue..." required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeReportModal()">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Submit Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="messages.js"></script>
+</body>
+</html>

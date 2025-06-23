@@ -15,7 +15,7 @@ import {
 let currentUser = null;
 let userRole = null;
 
-// Initialize auth state listener
+// Initialize auth state listener - simplified version without redirects
 onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     
@@ -30,17 +30,15 @@ onAuthStateChanged(auth, async (user) => {
             // Update UI with user info
             updateUIWithUser(user);
             
-            // Don't auto-redirect from login page - let users manually navigate
         } catch (error) {
             console.error('Error getting user role:', error);
         }
     } else {
         // User is signed out
         userRole = null;
+        // Only protect specific pages when user is signed out
         const currentPage = window.location.pathname.split('/').pop();
-        
-        // Only redirect to login if on protected pages and not during signup
-        if ((currentPage === 'dashboard.html' || currentPage === 'projects.html')) {
+        if (currentPage === 'dashboard.html' || currentPage === 'projects.html' || currentPage === 'admin.html' || currentPage === 'messages.html') {
             window.location.href = 'login.html';
         }
     }
