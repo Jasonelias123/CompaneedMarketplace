@@ -17,8 +17,31 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         initializeDashboard();
+        setupNavigation();
     }, 1000);
 });
+
+function setupNavigation() {
+    const postProjectBtn = document.getElementById('postProjectBtn');
+    const viewBidsBtn = document.getElementById('viewBidsBtn');
+    const postProjectSection = document.getElementById('postProjectSection');
+    const viewBidsSection = document.getElementById('viewBidsSection');
+
+    postProjectBtn.addEventListener('click', () => {
+        postProjectBtn.classList.add('active');
+        viewBidsBtn.classList.remove('active');
+        postProjectSection.style.display = 'block';
+        viewBidsSection.style.display = 'none';
+    });
+
+    viewBidsBtn.addEventListener('click', () => {
+        viewBidsBtn.classList.add('active');
+        postProjectBtn.classList.remove('active');
+        postProjectSection.style.display = 'none';
+        viewBidsSection.style.display = 'block';
+        loadProjectBids();
+    });
+}
 
 function initializeDashboard() {
     // Set up project form
@@ -45,6 +68,7 @@ async function handleProjectSubmission(event) {
         budget: formData.get('budget'),
         timeline: formData.get('timeline'),
         contactEmail: formData.get('contactEmail').trim(),
+        ndaRequired: formData.get('ndaRequired') === 'on',
         companyId: user.uid,
         companyEmail: user.email,
         createdAt: new Date().toISOString(),
@@ -140,6 +164,7 @@ async function loadUserProjects() {
                         <span><strong>Budget:</strong> ${escapeHtml(project.budget)}</span>
                         <span><strong>Timeline:</strong> ${escapeHtml(project.timeline)}</span>
                         <span><strong>Posted:</strong> ${createdDate}</span>
+                        ${project.ndaRequired ? '<span class="nda-badge">NDA Required</span>' : ''}
                     </div>
                 </div>
             `;
@@ -169,6 +194,86 @@ function showProjectError(message) {
             errorDiv.style.display = 'none';
         }, 5000);
     }
+}
+
+async function loadProjectBids() {
+    const bidsList = document.getElementById('bidsList');
+    const user = getCurrentUser();
+    
+    if (!user) return;
+    
+    try {
+        // Get all projects by this company
+        const projectsQuery = query(
+            collection(db, 'projects'),
+            where('companyId', '==', user.uid),
+            orderBy('createdAt', 'desc')
+        );
+        
+        const projectsSnapshot = await getDocs(projectsQuery);
+        
+        if (projectsSnapshot.empty) {
+            bidsList.innerHTML = '<div class="no-data">No projects posted yet. Post a project to start receiving bids.</div>';
+            return;
+        }
+        
+        let allBids = [];
+        
+        // For each project, get its bids
+        for (const projectDoc of projectsSnapshot.docs) {
+            const projectData = projectDoc.data();
+            
+            const bidsQuery = query(
+                collection(db, 'bids'),
+                where('projectId', '==', projectDoc.id),
+                orderBy('createdAt', 'desc')
+            );
+            
+            const bidsSnapshot = await getDocs(bidsQuery);
+            
+            bidsSnapshot.forEach(bidDoc => {
+                allBids.push({
+                    id: bidDoc.id,
+                    ...bidDoc.data(),
+                    projectTitle: projectData.title
+                });
+            });
+        }
+        
+        if (allBids.length === 0) {
+            bidsList.innerHTML = '<div class="no-data">No bids received yet. Your projects will start receiving bids from developers soon.</div>';
+            return;
+        }
+        
+        // Display bids
+        bidsList.innerHTML = allBids.map(bid => `
+            <div class="bid-card">
+                <div class="bid-header">
+                    <h3>${escapeHtml(bid.projectTitle)}</h3>
+                    <span class="bid-date">${new Date(bid.createdAt).toLocaleDateString()}</span>
+                </div>
+                <div class="bid-content">
+                    <p><strong>Developer:</strong> ${escapeHtml(bid.developerEmail)}</p>
+                    <p><strong>Message:</strong> ${escapeHtml(bid.message)}</p>
+                    <div class="bid-actions">
+                        <button class="btn btn-primary" onclick="contactDeveloper('${bid.developerEmail}', '${escapeHtml(bid.projectTitle)}')">
+                            Contact Developer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+    } catch (error) {
+        console.error('Error loading bids:', error);
+        bidsList.innerHTML = '<div class="error">Error loading bids. Please try again.</div>';
+    }
+}
+
+function contactDeveloper(email, projectTitle) {
+    const subject = encodeURIComponent(`Re: ${projectTitle} - Project Inquiry`);
+    const body = encodeURIComponent(`Hi,\n\nI saw your interest in my project "${projectTitle}" and would like to discuss it further.\n\nBest regards`);
+    window.open(`mailto:${email}?subject=${subject}&body=${body}`);
 }
 
 // Utility function to escape HTML

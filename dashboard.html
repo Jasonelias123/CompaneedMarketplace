@@ -20,7 +20,12 @@
 
         <main class="dashboard-main">
             <div class="dashboard-content">
-                <div class="dashboard-section">
+                <div class="dashboard-nav">
+                    <button id="postProjectBtn" class="nav-btn active">Post a Project</button>
+                    <button id="viewBidsBtn" class="nav-btn">View Bids</button>
+                </div>
+
+                <div id="postProjectSection" class="dashboard-section">
                     <h2>Post a New Project</h2>
                     <form id="projectForm" class="project-form">
                         <div class="form-group">
@@ -64,6 +69,13 @@
                             <input type="email" id="contactEmail" name="contactEmail" required>
                         </div>
 
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="ndaRequired" name="ndaRequired">
+                                <label for="ndaRequired">NDA (Non-Disclosure Agreement) required</label>
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Post Project</button>
                     </form>
 
@@ -77,6 +89,14 @@
                     <h2>Your Posted Projects</h2>
                     <div id="projectsList" class="projects-list">
                         <div class="loading">Loading your projects...</div>
+                    </div>
+                </div>
+                </div>
+
+                <div id="viewBidsSection" class="dashboard-section" style="display: none;">
+                    <h2>Project Bids</h2>
+                    <div id="bidsList" class="bids-list">
+                        <div class="loading">Loading bids...</div>
                     </div>
                 </div>
             </div>
