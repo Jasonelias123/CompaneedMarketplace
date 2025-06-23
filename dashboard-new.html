@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Dashboard - Companeeds</title>
-    <!-- Cache busting: 2025-06-23-15:35 -->
-    <link rel="stylesheet" href="styles.css?v=2025062315">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -40,7 +39,7 @@
 
                         <div class="form-group">
                             <label for="description">Project Description</label>
-                            <textarea id="description" name="description" required rows="5" maxlength="1000"></textarea>
+                            <textarea id="description" name="description" required rows="5" maxlength="1000" placeholder="Describe your AI project requirements in detail"></textarea>
                             <small class="form-hint">Describe your AI project requirements in detail</small>
                         </div>
 
@@ -64,15 +63,21 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="budget">Budget (USD)</label>
-                                <input type="number" id="budget" name="budget" required min="0" step="100" placeholder="Enter exact budget amount">
+                                <input type="number" id="budget" name="budget" required min="100" step="100" placeholder="e.g., 5000">
                                 <small class="form-hint">Enter the exact budget amount for this project</small>
                             </div>
 
                             <div class="form-group">
                                 <label for="deadline">Project Deadline</label>
-                                <input type="date" id="deadline" name="deadline" required>
+                                <input type="date" id="deadline" name="deadline" required min="2025-06-24">
                                 <small class="form-hint">Select the date you need this project completed by</small>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skills">Required Skills</label>
+                            <input type="text" id="skills" name="skills" required placeholder="e.g., Python, Machine Learning, OpenAI API">
+                            <small class="form-hint">List the key skills needed for this project (comma-separated)</small>
                         </div>
 
                         <div class="form-group">
@@ -89,8 +94,6 @@
                         Project submitted successfully! It will be reviewed by our team and published once approved.
                     </div>
                     <div id="project-error" class="error-message" style="display: none;"></div>
-                </div>
-
                 </div>
 
                 <div id="myProjectsSection" class="dashboard-section" style="display: none;">
@@ -112,9 +115,9 @@
         </main>
     </div>
 
-    <script src="env-config.js?v=2025062315"></script>
-    <script type="module" src="firebase-config.js?v=2025062315"></script>
-    <script type="module" src="auth.js?v=2025062315"></script>
-    <script type="module" src="dashboard.js?v=2025062315"></script>
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="dashboard.js"></script>
 </body>
 </html>

@@ -47,8 +47,8 @@ async function handleLoginForm(event) {
             // Redirect immediately based on role
             console.log('Redirecting user based on role...');
             if (userRole === 'company') {
-                console.log('Redirecting to dashboard.html');
-                window.location.href = 'dashboard.html';
+                console.log('Redirecting to dashboard-new.html');
+                window.location.href = 'dashboard-new.html';
             } else if (userRole === 'developer') {
                 console.log('Redirecting to projects.html');
                 window.location.href = 'projects.html';
@@ -80,7 +80,7 @@ async function handleLoginForm(event) {
                     // Redirect based on role
                     loadingDiv.style.display = 'none';
                     if (selectedRole === 'company') {
-                        window.location.href = 'dashboard.html';
+                        window.location.href = 'dashboard-new.html';
                     } else {
                         window.location.href = 'projects.html';
                     }
