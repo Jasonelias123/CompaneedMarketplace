@@ -30,12 +30,7 @@ onAuthStateChanged(auth, async (user) => {
             // Update UI with user info
             updateUIWithUser(user);
             
-            // Only handle redirects on login page after successful login (not for already logged in users)
-            const currentPage = window.location.pathname.split('/').pop();
-            if (currentPage === 'login.html' && sessionStorage.getItem('justLoggedIn')) {
-                sessionStorage.removeItem('justLoggedIn');
-                redirectToUserDashboard();
-            }
+            // Don't auto-redirect from login page - let users manually navigate
         } catch (error) {
             console.error('Error getting user role:', error);
         }
@@ -174,9 +169,13 @@ export async function handleSignup(event) {
 export async function handleLogin(event) {
     event.preventDefault();
     
+    console.log('Login form submitted');
+    
     const formData = new FormData(event.target);
     const email = formData.get('email');
     const password = formData.get('password');
+    
+    console.log('Login attempt for email:', email);
     
     const errorDiv = document.getElementById('error-message');
     const loadingDiv = document.getElementById('loading');
@@ -188,30 +187,37 @@ export async function handleLogin(event) {
     loadingDiv.style.display = 'block';
     
     try {
+        console.log('Attempting to sign in with Firebase...');
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        console.log('Firebase sign in successful, user:', user.uid);
         
         // Get user role and redirect immediately
+        console.log('Fetching user role from Firestore...');
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (userDoc.exists()) {
             userRole = userDoc.data().role;
-            
-            // Set flag for auth state listener
-            sessionStorage.setItem('justLoggedIn', 'true');
+            console.log('User role found:', userRole);
             
             // Hide loading before redirect
             loadingDiv.style.display = 'none';
             
             // Redirect immediately based on role
+            console.log('Redirecting user based on role...');
             if (userRole === 'company') {
+                console.log('Redirecting to dashboard.html');
                 window.location.href = 'dashboard.html';
             } else if (userRole === 'developer') {
+                console.log('Redirecting to projects.html');
                 window.location.href = 'projects.html';
             } else {
+                console.log('Unknown role, redirecting to index.html');
                 window.location.href = 'index.html';
             }
         } else {
+            console.error('User document not found in Firestore');
             showError('User profile not found. Please contact support.');
+            loadingDiv.style.display = 'none';
         }
         
     } catch (error) {
@@ -226,6 +232,8 @@ export async function handleLogin(event) {
             errorMessage = 'Please enter a valid email address.';
         } else if (error.code === 'auth/too-many-requests') {
             errorMessage = 'Too many failed attempts. Please try again later.';
+        } else if (error.code === 'auth/invalid-credential') {
+            errorMessage = 'Invalid email or password. Please check your credentials.';
         }
         
         showError(errorMessage);

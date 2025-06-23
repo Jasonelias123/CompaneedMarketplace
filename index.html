@@ -173,33 +173,10 @@
             }
         });
 
-        // Handle sign in link click
-        document.getElementById('signInLink').addEventListener('click', async (e) => {
+        // Handle sign in link click - always go to login page
+        document.getElementById('signInLink').addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // Check if user is already logged in
-            if (auth.currentUser) {
-                try {
-                    const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
-                    if (userDoc.exists()) {
-                        const userRole = userDoc.data().role;
-                        if (userRole === 'company') {
-                            window.location.href = 'dashboard.html';
-                        } else if (userRole === 'developer') {
-                            window.location.href = 'projects.html';
-                        } else {
-                            window.location.href = 'login.html';
-                        }
-                    } else {
-                        window.location.href = 'login.html';
-                    }
-                } catch (error) {
-                    console.error('Error checking user role:', error);
-                    window.location.href = 'login.html';
-                }
-            } else {
-                window.location.href = 'login.html';
-            }
+            window.location.href = 'login.html';
         });
 
         // Make functions global for onclick handlers
