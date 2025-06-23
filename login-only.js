@@ -33,8 +33,12 @@ async function handleLoginForm(event) {
         // Get user role and redirect immediately
         console.log('Fetching user role from Firestore...');
         const userDoc = await getDoc(doc(db, 'users', user.uid));
+        console.log('User document exists:', userDoc.exists());
+        
         if (userDoc.exists()) {
-            const userRole = userDoc.data().role;
+            const userData = userDoc.data();
+            const userRole = userData.role;
+            console.log('Full user data:', userData);
             console.log('User role found:', userRole);
             
             // Hide loading before redirect
@@ -49,11 +53,13 @@ async function handleLoginForm(event) {
                 console.log('Redirecting to projects.html');
                 window.location.href = 'projects.html';
             } else {
-                console.log('Unknown role, redirecting to index.html');
+                console.log('Unknown role:', userRole, 'redirecting to index.html');
+                // For debugging, let's see what's in the role field
+                alert(`Debug: User role is "${userRole}". Please check console for details.`);
                 window.location.href = 'index.html';
             }
         } else {
-            console.error('User document not found in Firestore');
+            console.error('User document not found in Firestore for UID:', user.uid);
             showLoginError('User profile not found. Please contact support.');
             loadingDiv.style.display = 'none';
         }
