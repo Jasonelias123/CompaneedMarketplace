@@ -129,15 +129,17 @@ export async function handleSignup(event) {
         userRole = role;
         console.log('Setting userRole to:', userRole);
         
-        // Redirect to appropriate dashboard immediately with the role
-        console.log('Calling redirectToUserDashboard with role:', userRole);
-        if (role === 'company') {
-            console.log('Redirecting to dashboard.html');
-            window.location.href = 'dashboard.html';
-        } else if (role === 'developer') {
-            console.log('Redirecting to projects.html');
-            window.location.href = 'projects.html';
-        }
+        // Add a small delay and force redirect
+        setTimeout(() => {
+            console.log('Forcing redirect with role:', role);
+            if (role === 'company') {
+                console.log('Redirecting to dashboard.html');
+                window.location.replace('dashboard.html');
+            } else if (role === 'developer') {
+                console.log('Redirecting to projects.html');
+                window.location.replace('projects.html');
+            }
+        }, 500);
         
     } catch (error) {
         console.error('Signup error:', error);
