@@ -187,8 +187,28 @@ export async function handleLogin(event) {
     loadingDiv.style.display = 'block';
     
     try {
-        await signInWithEmailAndPassword(auth, email, password);
-        // Redirect is handled by auth state listener
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Get user role and redirect immediately
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (userDoc.exists()) {
+            userRole = userDoc.data().role;
+            
+            // Hide loading before redirect
+            loadingDiv.style.display = 'none';
+            
+            // Redirect immediately based on role
+            if (userRole === 'company') {
+                window.location.href = 'dashboard.html';
+            } else if (userRole === 'developer') {
+                window.location.href = 'projects.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        } else {
+            showError('User profile not found. Please contact support.');
+        }
         
     } catch (error) {
         console.error('Login error:', error);
@@ -205,7 +225,6 @@ export async function handleLogin(event) {
         }
         
         showError(errorMessage);
-    } finally {
         loadingDiv.style.display = 'none';
     }
 }
