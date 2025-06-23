@@ -9,7 +9,9 @@ const firebaseConfig = {
     authDomain: `${window.VITE_FIREBASE_PROJECT_ID}.firebaseapp.com`,
     projectId: window.VITE_FIREBASE_PROJECT_ID, 
     storageBucket: `${window.VITE_FIREBASE_PROJECT_ID}.appspot.com`,
-    appId: window.VITE_FIREBASE_APP_ID
+    messagingSenderId: window.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: window.VITE_FIREBASE_APP_ID,
+    measurementId: window.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Validate Firebase configuration
