@@ -15,43 +15,41 @@ import {
 let currentUser = null;
 let userRole = null;
 
-// Initialize auth state listener
-onAuthStateChanged(auth, async (user) => {
-    currentUser = user;
-    
-    if (user) {
-        // Get user role from Firestore
-        try {
-            const userDoc = await getDoc(doc(db, 'users', user.uid));
-            if (userDoc.exists()) {
-                userRole = userDoc.data().role;
-            }
-            
-            // Redirect based on current page and role
-            const currentPage = window.location.pathname.split('/').pop();
-            
-            // Only redirect from login page
-            if (currentPage === 'login.html') {
-                redirectToUserDashboard();
-            }
-            // Don't auto-redirect on dashboard/projects pages to prevent loops
-            
-            // Update UI with user info
-            updateUIWithUser(user);
-        } catch (error) {
-            console.error('Error getting user role:', error);
-        }
-    } else {
-        // User is signed out
-        userRole = null;
-        const currentPage = window.location.pathname.split('/').pop();
+// Initialize auth state listener - skip on signup page
+const currentPage = window.location.pathname.split('/').pop();
+if (currentPage !== 'signup.html') {
+    onAuthStateChanged(auth, async (user) => {
+        currentUser = user;
         
-        // Redirect to login if on protected pages
-        if (currentPage === 'dashboard.html' || currentPage === 'projects.html') {
-            window.location.href = 'login.html';
+        if (user) {
+            // Get user role from Firestore
+            try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    userRole = userDoc.data().role;
+                }
+                
+                // Only redirect from login page
+                if (currentPage === 'login.html') {
+                    redirectToUserDashboard();
+                }
+                
+                // Update UI with user info
+                updateUIWithUser(user);
+            } catch (error) {
+                console.error('Error getting user role:', error);
+            }
+        } else {
+            // User is signed out
+            userRole = null;
+            
+            // Redirect to login if on protected pages
+            if (currentPage === 'dashboard.html' || currentPage === 'projects.html') {
+                window.location.href = 'login.html';
+            }
         }
-    }
-});
+    });
+}
 
 // Update UI with user information
 function updateUIWithUser(user) {
@@ -127,24 +125,21 @@ export async function handleSignup(event) {
         userRole = role;
         console.log('Setting userRole to:', userRole);
         
-        // Hide loading and show success message briefly
+        // Hide loading and redirect immediately
         loadingDiv.style.display = 'none';
         
-        // Add a small delay and force redirect
-        console.log('Preparing redirect with role:', role);
-        setTimeout(() => {
-            console.log('=== EXECUTING REDIRECT ===');
-            console.log('Role:', role);
-            if (role === 'company') {
-                console.log('Redirecting to dashboard.html');
-                window.location.href = 'dashboard.html';
-            } else if (role === 'developer') {
-                console.log('Redirecting to projects.html');
-                window.location.href = 'projects.html';
-            } else {
-                console.error('Unknown role:', role);
-            }
-        }, 100);
+        // Force immediate redirect without delay
+        console.log('=== EXECUTING IMMEDIATE REDIRECT ===');
+        console.log('Role:', role);
+        if (role === 'company') {
+            console.log('Redirecting to dashboard.html');
+            window.location.replace('dashboard.html');
+        } else if (role === 'developer') {
+            console.log('Redirecting to projects.html');
+            window.location.replace('projects.html');
+        } else {
+            console.error('Unknown role:', role);
+        }
         
     } catch (error) {
         console.error('Signup error:', error);

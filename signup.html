@@ -62,9 +62,9 @@
 
     <script src="env-config.js"></script>
     <script type="module" src="firebase-config.js"></script>
-    <script type="module" src="auth.js"></script>
+    <script type="module" src="signup-auth.js"></script>
     <script type="module">
-        import { handleSignup } from './auth.js';
+        import { handleSignup, handleLogout } from './signup-auth.js';
 
         // Set role from previous selection
         const selectedRole = sessionStorage.getItem('selectedRole');
@@ -74,6 +74,12 @@
         }
 
         document.getElementById('signupForm').addEventListener('submit', handleSignup);
+        
+        // Handle logout button if present
+        const logoutBtn = document.getElementById('logoutFromSignup');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', handleLogout);
+        }
     </script>
 </body>
 </html>
