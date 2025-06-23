@@ -140,61 +140,87 @@ window.closeSuccessModal = function() {
 // Handle application form submission
 async function handleApplicationSubmission(event) {
     event.preventDefault();
+    console.log('=== APPLICATION SUBMISSION STARTED ===');
     
-    if (!currentProject) return;
+    if (!currentProject) {
+        console.error('No current project selected');
+        alert('No project selected. Please try again.');
+        return;
+    }
+    
+    console.log('Current project:', currentProject);
     
     const user = getCurrentUser();
     if (!user) {
+        console.error('No user found');
         alert('Please log in to submit an application.');
         return;
     }
     
+    console.log('User found:', { uid: user.uid, email: user.email });
+    
     const formData = new FormData(event.target);
+    const message = formData.get('applicationMessage');
+    console.log('Form message:', message);
+    
+    if (!message || !message.trim()) {
+        alert('Please describe why you are interested in this project.');
+        return;
+    }
+    
     const applicationData = {
         projectId: currentProject.id,
         projectTitle: currentProject.title,
         developerUid: user.uid,
         developerName: user.displayName || user.email.split('@')[0],
-        message: formData.get('applicationMessage').trim(),
+        message: message.trim(),
         status: 'pending',
         createdAt: new Date().toISOString(),
         timestamp: Date.now()
     };
     
-    // Validate required fields
-    if (!applicationData.message) {
-        alert('Please describe why you are interested in this project.');
-        return;
-    }
+    console.log('Application data prepared:', applicationData);
     
     try {
-        // Check if user already applied to this project
+        console.log('Creating Firebase document reference...');
         const projectRef = doc(db, 'projects', currentProject.id);
+        console.log('Project reference created');
+        
+        console.log('Creating applications collection reference...');
         const applicationsRef = collection(projectRef, 'applications');
+        console.log('Applications collection reference created');
+        
+        console.log('Checking for existing applications...');
         const existingAppQuery = query(
             applicationsRef,
             where('developerUid', '==', user.uid)
         );
         
         const existingApps = await getDocs(existingAppQuery);
+        console.log('Existing applications check completed, found:', existingApps.size);
         
         if (!existingApps.empty) {
             alert('You have already applied to this project.');
             return;
         }
         
-        // Save application to project subcollection
-        await addDoc(applicationsRef, applicationData);
+        console.log('Adding application to Firebase...');
+        const docRef = await addDoc(applicationsRef, applicationData);
+        console.log('Application submitted successfully with ID:', docRef.id);
         
         // Close project modal
         closeModal();
         
-        // Show success modal
-        document.getElementById('successModal').style.display = 'block';
+        // Show success message
+        alert('Application submitted successfully!');
         
     } catch (error) {
-        console.error('Error submitting application:', error);
-        alert('Failed to submit application. Please try again.');
+        console.error('=== APPLICATION SUBMISSION ERROR ===');
+        console.error('Error object:', error);
+        console.error('Error message:', error.message);
+        console.error('Error code:', error.code);
+        console.error('Error stack:', error.stack);
+        alert(`Failed to submit application: ${error.message || 'Unknown error'}`);
     }
 }
 
