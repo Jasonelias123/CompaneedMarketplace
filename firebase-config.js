@@ -8,7 +8,7 @@ const firebaseConfig = {
     apiKey: window.VITE_FIREBASE_API_KEY,
     authDomain: `${window.VITE_FIREBASE_PROJECT_ID}.firebaseapp.com`,
     projectId: window.VITE_FIREBASE_PROJECT_ID, 
-    storageBucket: `${window.VITE_FIREBASE_PROJECT_ID}.appspot.com`,
+    storageBucket: `${window.VITE_FIREBASE_PROJECT_ID}.firebasestorage.app`,
     messagingSenderId: window.VITE_FIREBASE_MESSAGING_SENDER_ID,
     appId: window.VITE_FIREBASE_APP_ID,
     measurementId: window.VITE_FIREBASE_MEASUREMENT_ID
@@ -29,6 +29,8 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 console.log('Firebase initialized successfully');
+console.log('Auth instance:', auth);
+console.log('Firestore instance:', db);
 
 // Export the app instance
 export default app;
