@@ -224,7 +224,7 @@ export async function handleLogin(event) {
 }
 
 // Handle logout
-async function handleLogout() {
+export async function handleLogout() {
     try {
         await signOut(auth);
         window.location.href = 'index.html';

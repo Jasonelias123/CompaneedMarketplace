@@ -1,5 +1,5 @@
 import { auth, db } from './firebase-config.js';
-import { getCurrentUser, requireAuth } from './auth.js';
+import { getCurrentUser, requireAuth, handleLogout } from './auth.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import { 
     collection, 
@@ -67,6 +67,12 @@ function initializeDashboard() {
     const projectForm = document.getElementById('projectForm');
     if (projectForm) {
         projectForm.addEventListener('submit', handleProjectSubmission);
+    }
+    
+    // Set up logout button
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
     }
     
     // Load existing projects
