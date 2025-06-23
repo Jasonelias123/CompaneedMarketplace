@@ -74,6 +74,25 @@
                         <textarea id="applicationMessage" name="applicationMessage" required rows="4" 
                                 placeholder="Describe your relevant experience and why you're a good fit for this project..."></textarea>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="pitchDeck">Pitch Deck (Optional)</label>
+                        <input type="file" id="pitchDeck" name="pitchDeck" 
+                               accept=".pdf,.ppt,.pptx,.key" 
+                               class="file-input">
+                        <small class="file-help">Upload your pitch deck (PDF, PowerPoint, or Keynote files only)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dataFile">Supporting Data (Optional)</label>
+                        <input type="file" id="dataFile" name="dataFile" 
+                               accept=".csv,.xlsx,.json" 
+                               class="file-input">
+                        <small class="file-help">Upload relevant data files (CSV, Excel, or JSON files only)</small>
+                    </div>
+                    
+                    <div class="upload-status" id="uploadStatus" style="display: none;"></div>
+                    
                     <button type="submit" class="btn btn-primary">Submit Application</button>
                 </form>
             </div>

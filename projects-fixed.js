@@ -67,6 +67,51 @@ function setupEventListeners() {
     if (closeSuccessBtn) {
         closeSuccessBtn.addEventListener('click', closeSuccessModal);
     }
+    
+    // File input previews
+    const pitchDeckInput = document.getElementById('pitchDeck');
+    const dataFileInput = document.getElementById('dataFile');
+    
+    if (pitchDeckInput) {
+        pitchDeckInput.addEventListener('change', function(e) {
+            showFilePreview(e.target, 'pitch-preview');
+        });
+    }
+    
+    if (dataFileInput) {
+        dataFileInput.addEventListener('change', function(e) {
+            showFilePreview(e.target, 'data-preview');
+        });
+    }
+}
+
+function showFilePreview(input, previewId) {
+    const file = input.files[0];
+    let existingPreview = document.getElementById(previewId);
+    
+    // Remove existing preview
+    if (existingPreview) {
+        existingPreview.remove();
+    }
+    
+    if (file) {
+        const preview = document.createElement('div');
+        preview.id = previewId;
+        preview.className = 'file-preview';
+        preview.innerHTML = `
+            📄 ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)
+            <button type="button" onclick="clearFile('${input.id}', '${previewId}')" style="margin-left: 10px; background: none; border: none; color: #ef4444; cursor: pointer;">✕</button>
+        `;
+        input.parentNode.appendChild(preview);
+    }
+}
+
+function clearFile(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    
+    if (input) input.value = '';
+    if (preview) preview.remove();
 }
 
 // Load all projects from Firebase
@@ -161,12 +206,50 @@ async function handleApplicationSubmission(event) {
     
     const formData = new FormData(event.target);
     const message = formData.get('applicationMessage');
+    const pitchDeckFile = formData.get('pitchDeck');
+    const dataFile = formData.get('dataFile');
+    
     console.log('Form message:', message);
+    console.log('Pitch deck file:', pitchDeckFile ? pitchDeckFile.name : 'None');
+    console.log('Data file:', dataFile ? dataFile.name : 'None');
     
     if (!message || !message.trim()) {
         alert('Please describe why you are interested in this project.');
         return;
     }
+    
+    // Validate file uploads
+    const maxFileSize = 10 * 1024 * 1024; // 10MB limit
+    const pitchDeckTypes = ['application/pdf', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
+    const dataFileTypes = ['text/csv', 'application/json', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+    
+    if (pitchDeckFile && pitchDeckFile.size > 0) {
+        if (pitchDeckFile.size > maxFileSize) {
+            alert('Pitch deck file must be smaller than 10MB');
+            return;
+        }
+        if (!pitchDeckTypes.includes(pitchDeckFile.type) && !pitchDeckFile.name.toLowerCase().endsWith('.key')) {
+            alert('Pitch deck must be a PDF, PowerPoint, or Keynote file');
+            return;
+        }
+    }
+    
+    if (dataFile && dataFile.size > 0) {
+        if (dataFile.size > maxFileSize) {
+            alert('Data file must be smaller than 10MB');
+            return;
+        }
+        if (!dataFileTypes.includes(dataFile.type)) {
+            alert('Data file must be CSV, JSON, or Excel format');
+            return;
+        }
+    }
+    
+    // Show upload status
+    const uploadStatus = document.getElementById('uploadStatus');
+    uploadStatus.style.display = 'block';
+    uploadStatus.className = 'upload-status uploading';
+    uploadStatus.innerHTML = 'Processing application...';
     
     const applicationData = {
         projectId: currentProject.id,
@@ -177,7 +260,21 @@ async function handleApplicationSubmission(event) {
         message: message.trim(),
         status: 'pending',
         createdAt: new Date().toISOString(),
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        attachments: {
+            pitchDeck: pitchDeckFile ? {
+                name: pitchDeckFile.name,
+                size: pitchDeckFile.size,
+                type: pitchDeckFile.type,
+                uploaded: true
+            } : null,
+            dataFile: dataFile ? {
+                name: dataFile.name,
+                size: dataFile.size,
+                type: dataFile.type,
+                uploaded: true
+            } : null
+        }
     };
     
     console.log('Application data prepared:', applicationData);
@@ -201,7 +298,8 @@ async function handleApplicationSubmission(event) {
         console.log('Existing applications check completed, found:', existingApps.size);
         
         if (!existingApps.empty) {
-            alert('You have already applied to this project.');
+            uploadStatus.className = 'upload-status error';
+            uploadStatus.innerHTML = 'You have already applied to this project.';
             return;
         }
         
@@ -209,14 +307,24 @@ async function handleApplicationSubmission(event) {
         const docRef = await addDoc(applicationsRef, applicationData);
         console.log('Application submitted successfully with ID:', docRef.id);
         
-        // Close project modal
-        closeModal();
+        // Show success status
+        uploadStatus.className = 'upload-status success';
+        uploadStatus.innerHTML = `
+            ✓ Application submitted successfully!<br>
+            ${pitchDeckFile ? `• Pitch deck: ${pitchDeckFile.name}<br>` : ''}
+            ${dataFile ? `• Data file: ${dataFile.name}<br>` : ''}
+            The company will review your application and contact you through the messaging system.
+        `;
+        
+        // Close project modal after delay
+        setTimeout(() => {
+            closeModal();
+            // Reset upload status
+            uploadStatus.style.display = 'none';
+        }, 3000);
         
         // Clear form
         event.target.reset();
-        
-        // Show success message
-        alert('Application submitted successfully! The company will review your application and contact you through the messaging system.');
         
     } catch (error) {
         console.error('=== APPLICATION SUBMISSION ERROR ===');
@@ -224,7 +332,14 @@ async function handleApplicationSubmission(event) {
         console.error('Error message:', error.message);
         console.error('Error code:', error.code);
         console.error('Error stack:', error.stack);
-        alert(`Failed to submit application: ${error.message || 'Unknown error'}`);
+        
+        // Show error status
+        uploadStatus.className = 'upload-status error';
+        uploadStatus.innerHTML = `
+            ✗ Failed to submit application<br>
+            Error: ${error.message || 'Unknown error'}<br>
+            Please try again or contact support if the problem persists.
+        `;
     }
 }
 
@@ -314,3 +429,4 @@ function escapeHtml(text) {
 window.showProjectDetails = showProjectDetails;
 window.closeModal = closeModal;
 window.closeSuccessModal = closeSuccessModal;
+window.clearFile = clearFile;

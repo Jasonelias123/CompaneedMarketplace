@@ -105,6 +105,12 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **June 23, 2025**: Added file upload functionality for developer applications
+  - Pitch deck uploads (PDF, PowerPoint, Keynote)
+  - Supporting data files (CSV, Excel, JSON)  
+  - File validation and size limits (10MB max)
+  - Visual file previews with remove functionality
+  - Enhanced status messages for upload progress
 - **June 23, 2025**: Fixed application submission system with proper Firebase imports
 - **June 23, 2025**: Created projects-new.html and projects-fixed.js to resolve caching issues
 - **June 23, 2025**: Fixed homepage navigation buttons for role selection
