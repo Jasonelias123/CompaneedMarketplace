@@ -1,0 +1,127 @@
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Failed to load resource: the server responded with a status of 400 (Bad Request) (accounts:signInWithPassword, line 0)
+[Error] Login error:
+	(anonymous function)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Failed to load resource: the server responded with a status of 400 (Bad Request) (accounts:signInWithPassword, line 0)
+[Error] Login error:
+	(anonymous function)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Failed to load resource: the server responded with a status of 400 (Bad Request) (accounts:signInWithPassword, line 0)
+[Error] Login error:
+	(anonymous function)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Failed to load resource: the server responded with a status of 400 (Bad Request) (accounts:signInWithPassword, line 0)
+[Error] Login error:
+	(anonymous function)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Failed to load resource: the server responded with a status of 400 (Bad Request) (accounts:signInWithPassword, line 0)
+[Error] Login error:
+	(anonymous function)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Failed to load resource: the server responded with a status of 400 (Bad Request) (accounts:signInWithPassword, line 0)
+[Error] Login error:
+	(anonymous function)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Fetch API cannot load https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel?gsessionid=EUE8RYG3QCeuHlSLfqEi9BxEFStQY8enH5qcv0QRNuU&VER=8&database=projects%2Fcompanies-mvp%2Fdatabases%2F(default)&RID=rpc&SID=YyZhQ9q2XOHg7bi6zkKJoA&AID=2&CI=0&TYPE=xmlhttp&zx=lptbpk2t794e&t=1 due to access control checks.
+	(anonymous function) (firebase-firestore.js:1:33582)
+	(anonymous function) (firebase-firestore.js:1:49976)
+	ic (firebase-firestore.js:1:21188)
+	Md (firebase-firestore.js:1:40273)
+	(anonymous function) (firebase-firestore.js:1:51844)
+	ub (firebase-firestore.js:1:17037)
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Error submitting application: – ReferenceError: Can't find variable: doc
+ReferenceError: Can't find variable: doc
+	(anonymous function) (projects.js:193)
+	asyncFunctionResume
+[Error] Failed to load resource: the server responded with a status of 404 (Not Found) (3eb2826cf27139d5.css.map, line 0)

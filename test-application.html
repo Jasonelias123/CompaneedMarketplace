@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Application Submission - Companeeds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="test-container">
+                <h2>Test Application Submission</h2>
+                <div id="authStatus" class="status-box"></div>
+                <div id="projectStatus" class="status-box"></div>
+                
+                <form id="testApplicationForm" class="test-form">
+                    <h3>Submit Test Application</h3>
+                    <div class="form-group">
+                        <label for="testMessage">Application Message:</label>
+                        <textarea id="testMessage" name="testMessage" rows="4" 
+                                placeholder="I am interested in this AI project because..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Test Application</button>
+                </form>
+                
+                <div id="testResults" class="results-box"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { getCurrentUser, handleLogout } from './auth.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { 
+            collection, 
+            addDoc, 
+            doc,
+            getDocs,
+            query,
+            where,
+            orderBy
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        // Make logout function global
+        window.handleLogoutClick = handleLogout;
+
+        // Track current user and projects
+        let currentUser = null;
+        let availableProjects = [];
+
+        // Initialize when DOM loads
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('=== TEST APPLICATION PAGE LOADED ===');
+            
+            // Set up auth state listener
+            const unsubscribe = onAuthStateChanged(auth, async (user) => {
+                if (!user) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
+                currentUser = user;
+                document.getElementById('userEmail').textContent = user.email;
+                document.getElementById('authStatus').innerHTML = `
+                    <h4>Authentication Status: ✅ LOGGED IN</h4>
+                    <p>User: ${user.email}</p>
+                    <p>UID: ${user.uid}</p>
+                `;
+                
+                // Load projects for testing
+                await loadTestProjects();
+                
+                unsubscribe();
+            });
+
+            // Set up form submission
+            document.getElementById('testApplicationForm').addEventListener('submit', handleTestSubmission);
+        });
+
+        async function loadTestProjects() {
+            console.log('Loading projects for testing...');
+            try {
+                const projectsQuery = query(
+                    collection(db, 'projects'),
+                    where('status', '==', 'open'),
+                    orderBy('createdAt', 'desc')
+                );
+                
+                const querySnapshot = await getDocs(projectsQuery);
+                availableProjects = [];
+                
+                querySnapshot.forEach((doc) => {
+                    availableProjects.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                console.log('Loaded projects:', availableProjects.length);
+                
+                document.getElementById('projectStatus').innerHTML = `
+                    <h4>Projects Status: ✅ LOADED</h4>
+                    <p>Found ${availableProjects.length} open projects</p>
+                    ${availableProjects.length > 0 ? 
+                        `<p>Test project: ${availableProjects[0].title}</p>` : 
+                        '<p>No projects available for testing</p>'
+                    }
+                `;
+                
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                document.getElementById('projectStatus').innerHTML = `
+                    <h4>Projects Status: ❌ ERROR</h4>
+                    <p>Error: ${error.message}</p>
+                `;
+            }
+        }
+
+        async function handleTestSubmission(event) {
+            event.preventDefault();
+            console.log('=== TEST APPLICATION SUBMISSION STARTED ===');
+            
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '<h4>Processing...</h4>';
+            
+            if (availableProjects.length === 0) {
+                resultsDiv.innerHTML = `
+                    <h4>❌ NO PROJECTS AVAILABLE</h4>
+                    <p>Cannot test application submission without projects</p>
+                `;
+                return;
+            }
+            
+            const testProject = availableProjects[0];
+            const message = document.getElementById('testMessage').value.trim();
+            
+            if (!message) {
+                resultsDiv.innerHTML = `
+                    <h4>❌ VALIDATION ERROR</h4>
+                    <p>Please enter an application message</p>
+                `;
+                return;
+            }
+            
+            const applicationData = {
+                projectId: testProject.id,
+                projectTitle: testProject.title,
+                developerUid: currentUser.uid,
+                developerName: currentUser.displayName || currentUser.email.split('@')[0],
+                developerEmail: currentUser.email,
+                message: message,
+                status: 'pending',
+                createdAt: new Date().toISOString(),
+                timestamp: Date.now(),
+                testSubmission: true
+            };
+            
+            console.log('Test application data:', applicationData);
+            
+            try {
+                console.log('Step 1: Creating project reference...');
+                const projectRef = doc(db, 'projects', testProject.id);
+                console.log('✅ Project reference created');
+                
+                console.log('Step 2: Creating applications collection reference...');
+                const applicationsRef = collection(projectRef, 'applications');
+                console.log('✅ Applications collection reference created');
+                
+                console.log('Step 3: Checking for existing applications...');
+                const existingQuery = query(
+                    applicationsRef,
+                    where('developerUid', '==', currentUser.uid)
+                );
+                
+                const existingApps = await getDocs(existingQuery);
+                console.log('✅ Existing applications check completed:', existingApps.size);
+                
+                if (!existingApps.empty) {
+                    resultsDiv.innerHTML = `
+                        <h4>ℹ️ ALREADY APPLIED</h4>
+                        <p>You have already applied to this project</p>
+                        <p>Found ${existingApps.size} existing applications</p>
+                    `;
+                    return;
+                }
+                
+                console.log('Step 4: Submitting application to Firebase...');
+                const docRef = await addDoc(applicationsRef, applicationData);
+                console.log('✅ Application submitted successfully with ID:', docRef.id);
+                
+                resultsDiv.innerHTML = `
+                    <h4>✅ SUCCESS</h4>
+                    <p>Application submitted successfully!</p>
+                    <p>Document ID: ${docRef.id}</p>
+                    <p>Project: ${testProject.title}</p>
+                    <p>Message: "${message}"</p>
+                `;
+                
+                // Clear form
+                document.getElementById('testMessage').value = '';
+                
+            } catch (error) {
+                console.error('=== APPLICATION SUBMISSION ERROR ===');
+                console.error('Error details:', error);
+                resultsDiv.innerHTML = `
+                    <h4>❌ SUBMISSION FAILED</h4>
+                    <p>Error: ${error.message}</p>
+                    <p>Code: ${error.code || 'Unknown'}</p>
+                    <pre>${error.stack || 'No stack trace'}</pre>
+                `;
+            }
+        }
+    </script>
+
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .status-box, .results-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            background: #f9f9f9;
+        }
+        
+        .test-form {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+    </style>
+</body>
+</html>
