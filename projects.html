@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Projects - Companeeds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="projects-main">
+            <div class="projects-header">
+                <h2>Available AI Projects</h2>
+                <p>Discover exciting opportunities and connect with companies looking for AI talent</p>
+            </div>
+
+            <div id="projectsList" class="projects-grid">
+                <div class="loading">Loading projects...</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="project-details">
+                    <p><strong>Description:</strong></p>
+                    <div id="modalDescription" class="project-description"></div>
+                    
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <strong>Budget:</strong> <span id="modalBudget"></span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Timeline:</strong> <span id="modalTimeline"></span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Contact:</strong> <span id="modalContact"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interest-form">
+                    <h4>Express Interest</h4>
+                    <form id="interestForm">
+                        <div class="form-group">
+                            <label for="developerName">Your Name</label>
+                            <input type="text" id="developerName" name="developerName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="developerEmail">Your Email</label>
+                            <input type="email" id="developerEmail" name="developerEmail" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message (Optional)</label>
+                            <textarea id="message" name="message" rows="3" placeholder="Tell the company why you're interested in this project..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Submit Interest</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">✓</div>
+            <h3>Interest Submitted Successfully!</h3>
+            <p>Thank you for your interest. The company will review your submission and get back to you if there's a match.</p>
+            <button class="btn btn-primary" onclick="closeSuccessModal()">Continue Browsing</button>
+        </div>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="projects.js"></script>
+</body>
+</html>

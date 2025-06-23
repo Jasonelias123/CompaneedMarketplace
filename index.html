@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companeeds - Connect Companies with AI Developers</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Companeeds</h1>
+                <p class="hero-subtitle">The premier marketplace connecting companies with talented AI developers</p>
+                <p class="hero-description">Find the perfect AI talent for your next project or discover exciting opportunities as a developer</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="role-selection">
+                <h2>Choose Your Path</h2>
+                <div class="role-cards">
+                    <div class="role-card company-card">
+                        <div class="role-icon">🏢</div>
+                        <h3>I'm a Company</h3>
+                        <p>Post projects and find talented AI developers to bring your vision to life</p>
+                        <button class="btn btn-primary" onclick="goToRole('company')">Get Started as Company</button>
+                    </div>
+                    
+                    <div class="role-card developer-card">
+                        <div class="role-icon">👨‍💻</div>
+                        <h3>I'm a Developer</h3>
+                        <p>Browse exciting AI projects and connect with companies looking for your skills</p>
+                        <button class="btn btn-secondary" onclick="goToRole('developer')">Get Started as Developer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="existing-user">
+                <p>Already have an account? <a href="login.html" class="link">Sign in here</a></p>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script>
+        function goToRole(role) {
+            sessionStorage.setItem('selectedRole', role);
+            window.location.href = 'signup.html';
+        }
+    </script>
+</body>
+</html>
