@@ -11,7 +11,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 // Admin email - only this user can access admin functions
-const ADMIN_EMAIL = 'admin@companeeds.com';
+const ADMIN_EMAIL = 'jasonegustaf@gmail.com';
 
 // Initialize admin panel when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
