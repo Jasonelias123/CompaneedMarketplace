@@ -1,5 +1,6 @@
 import { auth, db } from './firebase-config.js';
 import { getCurrentUser, requireAuth } from './auth.js';
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import { 
     collection, 
     addDoc, 
@@ -19,12 +20,17 @@ let messagesListener = null;
 
 // Initialize messages page
 document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(() => {
-        if (!requireAuth()) {
+    // Check authentication for this page specifically
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = 'login.html';
             return;
         }
+        
+        // User is authenticated, initialize messages
         initializeMessages();
-    }, 1000);
+        unsubscribe(); // Stop listening after initial check
+    });
 });
 
 function initializeMessages() {

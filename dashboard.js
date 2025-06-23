@@ -1,5 +1,6 @@
 import { auth, db } from './firebase-config.js';
 import { getCurrentUser, requireAuth } from './auth.js';
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import { 
     collection, 
     addDoc, 
@@ -13,14 +14,18 @@ import {
 
 // Initialize dashboard when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Wait for auth state before initializing
-    setTimeout(() => {
-        if (!requireAuth()) {
+    // Check authentication for this page specifically
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = 'login.html';
             return;
         }
+        
+        // User is authenticated, initialize dashboard
         initializeDashboard();
         setupNavigation();
-    }, 1000);
+        unsubscribe(); // Stop listening after initial check
+    });
 });
 
 function setupNavigation() {

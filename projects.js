@@ -1,5 +1,6 @@
 import { auth, db } from './firebase-config.js';
 import { getCurrentUser, requireAuth } from './auth.js';
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import { 
     collection, 
     addDoc, 
@@ -14,13 +15,17 @@ let allProjects = []; // Store all projects for filtering
 
 // Initialize projects page when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Wait for auth state before initializing
-    setTimeout(() => {
-        if (!requireAuth()) {
+    // Check authentication for this page specifically
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = 'login.html';
             return;
         }
+        
+        // User is authenticated, initialize projects
         initializeProjects();
-    }, 1000);
+        unsubscribe(); // Stop listening after initial check
+    });
 });
 
 function initializeProjects() {
