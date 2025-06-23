@@ -30,7 +30,8 @@ onAuthStateChanged(auth, async (user) => {
             // Redirect based on current page and role
             const currentPage = window.location.pathname.split('/').pop();
             
-            if (currentPage === 'login.html' || currentPage === 'signup.html') {
+            // Only redirect from login page, not signup (to allow new signups)
+            if (currentPage === 'login.html') {
                 redirectToUserDashboard();
             } else if (currentPage === 'dashboard.html' && userRole !== 'company') {
                 window.location.href = 'projects.html';
@@ -60,12 +61,27 @@ function updateUIWithUser(user) {
     const userEmailElement = document.getElementById('userEmail');
     const logoutBtn = document.getElementById('logoutBtn');
     
+    // Handle signup page logout
+    const currentUserEmail = document.getElementById('currentUserEmail');
+    const loggedInUser = document.getElementById('loggedInUser');
+    const logoutFromSignup = document.getElementById('logoutFromSignup');
+    
     if (userEmailElement) {
         userEmailElement.textContent = user.email;
     }
     
     if (logoutBtn) {
         logoutBtn.addEventListener('click', handleLogout);
+    }
+    
+    // Show logout option on signup page if user is logged in
+    if (currentUserEmail && loggedInUser) {
+        currentUserEmail.textContent = `Logged in as: ${user.email}`;
+        loggedInUser.style.display = 'block';
+    }
+    
+    if (logoutFromSignup) {
+        logoutFromSignup.addEventListener('click', handleLogout);
     }
 }
 
