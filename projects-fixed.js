@@ -206,15 +206,22 @@ async function handleApplicationSubmission(event) {
     
     const formData = new FormData(event.target);
     const message = formData.get('applicationMessage');
+    const proposedPrice = formData.get('proposedPrice');
     const pitchDeckFile = formData.get('pitchDeck');
     const dataFile = formData.get('dataFile');
     
     console.log('Form message:', message);
+    console.log('Proposed price:', proposedPrice);
     console.log('Pitch deck file:', pitchDeckFile ? pitchDeckFile.name : 'None');
     console.log('Data file:', dataFile ? dataFile.name : 'None');
     
     if (!message || !message.trim()) {
         alert('Please describe why you are interested in this project.');
+        return;
+    }
+    
+    if (!proposedPrice || isNaN(proposedPrice) || parseInt(proposedPrice) <= 0) {
+        alert('Please enter a valid proposed price.');
         return;
     }
     
@@ -258,6 +265,7 @@ async function handleApplicationSubmission(event) {
         developerName: user.displayName || user.email.split('@')[0],
         developerEmail: user.email,
         message: message.trim(),
+        proposedPrice: parseInt(proposedPrice),
         status: 'pending',
         createdAt: new Date().toISOString(),
         timestamp: Date.now(),

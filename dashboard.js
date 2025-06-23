@@ -323,7 +323,8 @@ async function loadProjectApplications() {
                     id: appDoc.id,
                     projectId: projectDoc.id,
                     ...appDoc.data(),
-                    projectTitle: projectData.title
+                    projectTitle: projectData.title,
+                    projectBudget: projectData.budget
                 });
             });
         }
@@ -333,8 +334,47 @@ async function loadProjectApplications() {
             return;
         }
         
-        // Display applications (no contact info exposed)
-        bidsList.innerHTML = allApplications.map(app => `
+        // Group applications by project to calculate averages
+        const applicationsByProject = {};
+        allApplications.forEach(app => {
+            if (!applicationsByProject[app.projectId]) {
+                applicationsByProject[app.projectId] = {
+                    applications: [],
+                    projectTitle: app.projectTitle,
+                    projectBudget: app.projectBudget
+                };
+            }
+            applicationsByProject[app.projectId].applications.push(app);
+        });
+
+        // Display applications with budget analytics
+        const applicationsHTML = allApplications.map(app => {
+            const projectApps = applicationsByProject[app.projectId].applications;
+            const proposedPrices = projectApps.filter(a => a.proposedPrice).map(a => a.proposedPrice);
+            const averageProposed = proposedPrices.length > 0 
+                ? Math.round(proposedPrices.reduce((sum, price) => sum + price, 0) / proposedPrices.length)
+                : null;
+            
+            const budgetInfo = app.projectBudget && app.proposedPrice ? `
+                <div class="budget-analytics">
+                    <div class="budget-row">
+                        <span class="budget-label">Budget posted:</span>
+                        <span class="budget-value">$${app.projectBudget.toLocaleString()}</span>
+                    </div>
+                    ${averageProposed ? `
+                        <div class="budget-row">
+                            <span class="budget-label">Average proposed so far:</span>
+                            <span class="budget-value ${averageProposed < app.projectBudget ? 'under-budget' : 'over-budget'}">$${averageProposed.toLocaleString()}</span>
+                        </div>
+                    ` : ''}
+                    <div class="budget-row">
+                        <span class="budget-label">This proposal:</span>
+                        <span class="budget-value ${app.proposedPrice < app.projectBudget ? 'under-budget' : 'over-budget'}">$${app.proposedPrice.toLocaleString()}</span>
+                    </div>
+                </div>
+            ` : '';
+
+            return `
             <div class="application-card">
                 <div class="application-header">
                     <h3>${escapeHtml(app.projectTitle)}</h3>
@@ -342,8 +382,18 @@ async function loadProjectApplications() {
                 </div>
                 <div class="application-content">
                     <p><strong>Developer:</strong> ${escapeHtml(app.developerName)}</p>
+                    ${budgetInfo}
                     <p><strong>Application Message:</strong></p>
                     <div class="application-message">${escapeHtml(app.message)}</div>
+                    ${app.attachments && (app.attachments.pitchDeck || app.attachments.dataFile) ? `
+                        <div class="attachments-section">
+                            <p><strong>Attachments:</strong></p>
+                            <div class="attachment-list">
+                                ${app.attachments.pitchDeck ? `<span class="attachment-item">📄 ${app.attachments.pitchDeck.name}</span>` : ''}
+                                ${app.attachments.dataFile ? `<span class="attachment-item">📊 ${app.attachments.dataFile.name}</span>` : ''}
+                            </div>
+                        </div>
+                    ` : ''}
                     <div class="application-actions">
                         <select class="application-status-select" onchange="updateApplicationStatus('${app.projectId}', '${app.id}', this.value)">
                             <option value="pending" ${app.status === 'pending' ? 'selected' : ''}>Pending Review</option>
@@ -354,7 +404,10 @@ async function loadProjectApplications() {
                     </div>
                 </div>
             </div>
-        `).join('');
+            `;
+        }).join('');
+        
+        bidsList.innerHTML = applicationsHTML;
         
     } catch (error) {
         console.error('Error loading applications:', error);

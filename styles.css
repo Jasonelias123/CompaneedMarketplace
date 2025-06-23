@@ -513,6 +513,112 @@ h4 {
     font-size: 0.875rem;
     color: var(--gray-700);
 }
+
+/* Price Input Styles */
+.price-input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--gray-300);
+    border-radius: 0.375rem;
+    background-color: var(--white);
+    transition: border-color 0.2s ease;
+}
+
+.price-input-group:focus-within {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.price-symbol {
+    padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+    color: var(--gray-500);
+    font-weight: 500;
+    background-color: var(--gray-50);
+    border-right: 1px solid var(--gray-300);
+}
+
+.price-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--gray-800);
+}
+
+.price-input::placeholder {
+    color: var(--gray-400);
+}
+
+.price-help {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--gray-500);
+}
+
+/* Budget Analytics Styles */
+.budget-analytics {
+    background-color: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.budget-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.budget-row:last-child {
+    margin-bottom: 0;
+}
+
+.budget-label {
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.budget-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.budget-value.under-budget {
+    color: var(--success-green);
+}
+
+.budget-value.over-budget {
+    color: var(--primary-purple);
+}
+
+/* Attachments Styles */
+.attachments-section {
+    background-color: var(--gray-50);
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    margin: 0.75rem 0;
+}
+
+.attachment-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.attachment-item {
+    background-color: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-700);
+}
 }
 
 .error {

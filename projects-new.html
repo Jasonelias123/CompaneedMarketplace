@@ -76,6 +76,16 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="proposedPrice">Your proposed price (can be higher or lower than posted budget):</label>
+                        <div class="price-input-group">
+                            <span class="price-symbol">$</span>
+                            <input type="number" id="proposedPrice" name="proposedPrice" required 
+                                   min="1" step="1" placeholder="2500" class="price-input">
+                        </div>
+                        <small class="price-help">Enter your proposed project price in USD</small>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="pitchDeck">Pitch Deck (Optional)</label>
                         <input type="file" id="pitchDeck" name="pitchDeck" 
                                accept=".pdf,.ppt,.pptx,.key" 

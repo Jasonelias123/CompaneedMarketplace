@@ -105,6 +105,12 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **June 23, 2025**: Added proposed pricing feature with budget analytics
+  - Required price input field in developer application forms
+  - Budget comparison showing posted budget vs proposed prices
+  - Average pricing analytics across all applications per project
+  - Color-coded pricing indicators (under/over budget)
+  - Enhanced company dashboard with pricing insights
 - **June 23, 2025**: Added file upload functionality for developer applications
   - Pitch deck uploads (PDF, PowerPoint, Keynote)
   - Supporting data files (CSV, Excel, JSON)  
