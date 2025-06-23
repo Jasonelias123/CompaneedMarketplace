@@ -77,8 +77,7 @@ async function loadAllProjects() {
     try {
         const projectsQuery = query(
             collection(db, 'projects'),
-            where('status', '==', 'open'),
-            orderBy('createdAt', 'desc')
+            where('status', '==', 'open')
         );
         
         const querySnapshot = await getDocs(projectsQuery);
