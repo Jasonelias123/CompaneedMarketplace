@@ -15,28 +15,16 @@ import {
 let currentUser = null;
 let userRole = null;
 
-// Initialize auth state listener - no automatic redirects
-onAuthStateChanged(auth, async (user) => {
+// Minimal auth state tracking - no automatic actions
+onAuthStateChanged(auth, (user) => {
     currentUser = user;
-    
     if (user) {
-        // Get user role from Firestore
-        try {
-            const userDoc = await getDoc(doc(db, 'users', user.uid));
-            if (userDoc.exists()) {
-                userRole = userDoc.data().role;
-            }
-            
-            // Update UI with user info only, no redirects
-            updateUIWithUser(user);
-            
-        } catch (error) {
-            console.error('Error getting user role:', error);
-        }
+        // Just track the user, no actions
+        console.log('User authenticated:', user.uid);
     } else {
-        // User is signed out
+        // User signed out
+        currentUser = null;
         userRole = null;
-        // No automatic redirects - let each page handle its own auth requirements
     }
 });
 
