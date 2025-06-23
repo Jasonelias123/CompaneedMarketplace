@@ -87,6 +87,7 @@ function updateUIWithUser(user) {
 
 // Handle signup
 export async function handleSignup(event) {
+    console.log('=== SIGNUP PROCESS STARTED ===');
     event.preventDefault();
     
     const formData = new FormData(event.target);
@@ -129,17 +130,24 @@ export async function handleSignup(event) {
         userRole = role;
         console.log('Setting userRole to:', userRole);
         
+        // Hide loading and show success message briefly
+        loadingDiv.style.display = 'none';
+        
         // Add a small delay and force redirect
+        console.log('Preparing redirect with role:', role);
         setTimeout(() => {
-            console.log('Forcing redirect with role:', role);
+            console.log('=== EXECUTING REDIRECT ===');
+            console.log('Role:', role);
             if (role === 'company') {
                 console.log('Redirecting to dashboard.html');
-                window.location.replace('dashboard.html');
+                window.location.href = 'dashboard.html';
             } else if (role === 'developer') {
                 console.log('Redirecting to projects.html');
-                window.location.replace('projects.html');
+                window.location.href = 'projects.html';
+            } else {
+                console.error('Unknown role:', role);
             }
-        }, 500);
+        }, 100);
         
     } catch (error) {
         console.error('Signup error:', error);
