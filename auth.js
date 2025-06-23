@@ -190,8 +190,8 @@ export async function handleLogin(event) {
                 console.log('Redirecting to dashboard.html');
                 window.location.href = 'dashboard.html';
             } else if (userRole === 'developer') {
-                console.log('Redirecting to projects.html');
-                window.location.href = 'projects.html';
+                console.log('Redirecting to projects-new.html');
+                window.location.href = 'projects-new.html';
             } else {
                 console.log('Unknown role, redirecting to index.html');
                 window.location.href = 'index.html';

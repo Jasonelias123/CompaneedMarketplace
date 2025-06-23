@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Projects - Companeeds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <a href="messages.html" class="btn btn-outline">Messages</a>
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="projects-container">
+                <div class="projects-header">
+                    <h2>Available AI Projects</h2>
+                    <p class="section-description">Browse exciting opportunities and apply to projects that match your expertise</p>
+                </div>
+
+                <div id="projectsList" class="projects-list">
+                    <div class="loading">Loading projects...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalProjectTitle">Project Title</h3>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <div class="project-details">
+                    <div class="detail-item">
+                        <strong>Category:</strong>
+                        <span id="modalProjectCategory">Category</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Budget:</strong>
+                        <span id="modalProjectBudget">Budget</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Deadline:</strong>
+                        <span id="modalProjectDeadline">Deadline</span>
+                    </div>
+                </div>
+                
+                <div class="project-skills-section">
+                    <strong>Required Skills:</strong>
+                    <div id="modalProjectSkills" class="skills-container"></div>
+                </div>
+                
+                <div class="project-description-section">
+                    <strong>Description:</strong>
+                    <p id="modalProjectDescription">Project description...</p>
+                </div>
+                
+                <form id="applicationForm" class="application-form">
+                    <h4>Apply for this Project</h4>
+                    <div class="form-group">
+                        <label for="applicationMessage">Why are you interested in this project?</label>
+                        <textarea id="applicationMessage" name="applicationMessage" required rows="4" 
+                                placeholder="Describe your relevant experience and why you're a good fit for this project..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">✓</div>
+            <h3>Interest Submitted Successfully!</h3>
+            <p>Thank you for your interest. The company will review your submission and get back to you if there's a match.</p>
+            <button class="btn btn-primary" onclick="closeSuccessModal()">Continue Browsing</button>
+        </div>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="projects-fixed.js"></script>
+</body>
+</html>
