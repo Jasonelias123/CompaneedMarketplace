@@ -71,7 +71,41 @@ function setActiveSection(activeBtn, activeSection) {
 }
 
 function initializeAdmin() {
+    loadAdminStatistics();
     loadProjectsByStatus('pending');
+}
+
+// Load admin statistics
+async function loadAdminStatistics() {
+    try {
+        const projectsRef = collection(db, 'projects');
+        const allProjects = await getDocs(projectsRef);
+        
+        let pendingCount = 0;
+        let approvedCount = 0;
+        let rejectedCount = 0;
+        
+        allProjects.forEach((doc) => {
+            const status = doc.data().status || 'pending';
+            switch(status) {
+                case 'pending':
+                    pendingCount++;
+                    break;
+                case 'approved':
+                    approvedCount++;
+                    break;
+                case 'rejected':
+                    rejectedCount++;
+                    break;
+            }
+        });
+        
+        document.getElementById('pendingCount').textContent = pendingCount;
+        document.getElementById('approvedCount').textContent = approvedCount;
+        document.getElementById('rejectedCount').textContent = rejectedCount;
+    } catch (error) {
+        console.error('Error loading statistics:', error);
+    }
 }
 
 async function loadProjectsByStatus(status) {
