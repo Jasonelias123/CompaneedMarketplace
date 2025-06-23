@@ -129,9 +129,11 @@ export async function handleSignup(event) {
         } else if (error.code === 'auth/invalid-email') {
             errorMessage = 'Please enter a valid email address.';
         } else if (error.code === 'auth/invalid-api-key') {
-            errorMessage = 'Firebase configuration error. Please check your setup.';
+            errorMessage = 'Firebase project configuration issue. Please verify that Authentication is enabled in your Firebase console and that the API key is correct.';
         } else if (error.code === 'auth/network-request-failed') {
             errorMessage = 'Network error. Please check your internet connection.';
+        } else if (error.code === 'auth/project-not-found') {
+            errorMessage = 'Firebase project not found. Please check your project ID.';
         } else {
             errorMessage = `Error: ${error.message}`;
         }

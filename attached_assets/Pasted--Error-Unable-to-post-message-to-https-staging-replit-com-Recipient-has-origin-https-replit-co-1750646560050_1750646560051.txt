@@ -1,0 +1,265 @@
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] ReferenceError: Can't find variable: process
+	Global Code (env-config.js:2)
+[Error] FirebaseError: Firebase: Error (auth/invalid-api-key).
+	_assert (firebase-auth.js:1:28960)
+	(anonymous function) (firebase-auth.js:1:144128)
+	getOrInitializeService (firebase-app.js:977)
+	initialize (firebase-app.js:921)
+	getAuth (firebase-auth.js:1:143279)
+	Module Code (firebase-config.js:19)
+	evaluate
+	moduleEvaluation
+	(anonymous function)
+	promiseReactionJob
+[Error] ReferenceError: Cannot access uninitialized variable.
+	Module Code (auth.js:19)
+	evaluate
+	moduleEvaluation
+	(anonymous function)
+	promiseReactionJob
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Signup error:
+	(anonymous function) (auth.js:115)
+	asyncFunctionResume
+[Error] Signup error:
+	(anonymous function) (auth.js:115)
+	asyncFunctionResume
+[Error] Signup error:
+	(anonymous function) (auth.js:115)
+	asyncFunctionResume
+[Error] Signup error:
+	(anonymous function) (auth.js:115)
+	asyncFunctionResume
+[Error] Signup error:
+	(anonymous function) (auth.js:115)
+	asyncFunctionResume
+[Error] Signup error:
+	(anonymous function) (auth.js:115)
+	asyncFunctionResume
+[Error] Resource blocked by content blocker
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] XMLHttpRequest cannot load https://stats.g.doubleclick.net/j/collect?t=dc&aip=1&_r=3&v=1&_v=j101&tid=UA-25629695-1&cid=1714653676.1750645152&jid=236323970&gjid=1211145402&_gid=392597130.1750645152&_u=SCCAgEAjQAAAAGgCIAD~&z=522945295 due to access control checks.
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] Signup error:
+	(anonymous function) (auth.js:115)
+	asyncFunctionResume
+[Error] Error while parsing the 'sandbox' attribute: 'allow-downloads', 'allow-downloads-without-user-activation', 'allow-presentation', 'allow-orientation-lock' are invalid sandbox flags.
+	_ (framework-a818883e88d690fb.js:1:44639)
+	(anonymous function) (framework-a818883e88d690fb.js:1:143779)
+	uD (framework-a818883e88d690fb.js:1:147442)
+	uI (framework-a818883e88d690fb.js:1:140392)
+	uM (framework-a818883e88d690fb.js:1:140202)
+	uS (framework-a818883e88d690fb.js:1:135275)
+	uS
+	C (framework-a818883e88d690fb.js:1:206185)
+	z (framework-a818883e88d690fb.js:1:206715)
+[Error] Error while parsing the 'sandbox' attribute: 'allow-downloads', 'allow-downloads-without-user-activation', 'allow-presentation', 'allow-orientation-lock' are invalid sandbox flags. (workspace_iframe.html, line 32)
+[Error] ReferenceError: Can't find variable: process
+	Global Code (env-config.js:2)
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Resource blocked by content blocker
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] XMLHttpRequest cannot load https://stats.g.doubleclick.net/j/collect?t=dc&aip=1&_r=3&v=1&_v=j101&tid=UA-25629695-1&cid=1714653676.1750645152&jid=2096687555&gjid=34056678&_gid=392597130.1750645152&_u=SCCAgEAjQAAAAGgCIAD~&z=1875490893 due to access control checks.
+	(anonymous function) (_app-6b0089c83b1309ba.js:11:183635)
+	wd (analytics.js:36)
+	pe (analytics.js:35)
+	(anonymous function) (analytics.js:73:822)
+	(anonymous function) (analytics.js:38:468)
+	(anonymous function) (analytics.js:77:273)
+	(anonymous function) (analytics.js:57)
+	(anonymous function) (analytics.js:93:367)
+	(anonymous function) (analytics.js:92:180)
+	N (analytics.js:94:136)
+	(anonymous function) (google-analytics.dynamic.js.gz:1:7878)
+	(anonymous function) (commons.59560acdd69ed701c941.js.gz:1:39287)
+	(anonymous function) (ajs-destination.bundle.8e6b895db75187c55313.js:1:6125)
+	(anonymous function) (sdk.min.js:1:33694)
+	s (sdk.min.js:1:32517)
+	promiseReactionJob
+[Error] Error while parsing the 'sandbox' attribute: 'allow-downloads', 'allow-downloads-without-user-activation', 'allow-presentation', 'allow-orientation-lock' are invalid sandbox flags.
+	_ (framework-a818883e88d690fb.js:1:44639)
+	(anonymous function) (framework-a818883e88d690fb.js:1:143779)
+	uD (framework-a818883e88d690fb.js:1:147442)
+	uI (framework-a818883e88d690fb.js:1:140392)
+	uM (framework-a818883e88d690fb.js:1:140202)
+	uS (framework-a818883e88d690fb.js:1:135275)
+	uS
+	C (framework-a818883e88d690fb.js:1:206185)
+	z (framework-a818883e88d690fb.js:1:206715)
+[Error] Error while parsing the 'sandbox' attribute: 'allow-downloads', 'allow-downloads-without-user-activation', 'allow-presentation', 'allow-orientation-lock' are invalid sandbox flags. (workspace_iframe.html, line 32)
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.replit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to https://staging.firewalledreplit.com. Recipient has origin https://replit.com.
+
+[Error] Unable to post message to http://localhost:3000. Recipient has origin https://replit.com.
+
+[Error] Failed to load resource: the server responded with a status of 400 () (accounts:signUp, line 0)
+[Error] Signup error: – FirebaseError: Firebase: Error (auth/email-already-in-use).
+FirebaseError: Firebase: Error (auth/email-already-in-use).
+	(anonymous function) (auth.js:119)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Error code: – "auth/email-already-in-use"
+	(anonymous function) (auth.js:120)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Error message: – "Firebase: Error (auth/email-already-in-use)."
+	(anonymous function) (auth.js:121)
+	asyncFunctionResume
+	(anonymous function)
+	promiseReactionJobWithoutPromise
+	promiseReactionJob
+[Error] Failed to load resource: the server responded with a status of 404 () (3eb2826cf27139d5.css.map, line 0)

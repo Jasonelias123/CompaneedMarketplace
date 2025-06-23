@@ -8,9 +8,15 @@ const firebaseConfig = {
     apiKey: window.VITE_FIREBASE_API_KEY,
     authDomain: `${window.VITE_FIREBASE_PROJECT_ID}.firebaseapp.com`,
     projectId: window.VITE_FIREBASE_PROJECT_ID, 
-    storageBucket: `${window.VITE_FIREBASE_PROJECT_ID}.firebasestorage.app`,
+    storageBucket: `${window.VITE_FIREBASE_PROJECT_ID}.appspot.com`,
     appId: window.VITE_FIREBASE_APP_ID
 };
+
+// Validate Firebase configuration
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId || !firebaseConfig.appId) {
+    console.error('Firebase configuration is incomplete:', firebaseConfig);
+    throw new Error('Firebase configuration is missing required values');
+}
 
 // Initialize Firebase
 console.log('Initializing Firebase with config:', firebaseConfig);
