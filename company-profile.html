@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile Setup - Companeeds AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="profile-main">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <h1>Complete Your Company Profile</h1>
+                    <p class="profile-subtitle">Build trust with developers by completing your company profile. Verified companies receive a "Verified Buyer" badge.</p>
+                </div>
+
+                <form id="companyProfileForm" class="profile-form">
+                    <div class="form-section">
+                        <h2>Company Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="companyName">Company Name <span class="required">*</span></label>
+                                <input type="text" id="companyName" name="companyName" required 
+                                       placeholder="Your company name">
+                            </div>
+                            <div class="form-group">
+                                <label for="companyWebsite">Company Website</label>
+                                <input type="url" id="companyWebsite" name="companyWebsite" 
+                                       placeholder="https://yourcompany.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="industry">Industry <span class="required">*</span></label>
+                            <select id="industry" name="industry" required>
+                                <option value="">Select your industry</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="E-commerce">E-commerce</option>
+                                <option value="Education">Education</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Real Estate">Real Estate</option>
+                                <option value="Media & Entertainment">Media & Entertainment</option>
+                                <option value="Non-profit">Non-profit</option>
+                                <option value="Consulting">Consulting</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="companySize">Company Size</label>
+                            <select id="companySize" name="companySize">
+                                <option value="">Select company size</option>
+                                <option value="1-10">1-10 employees</option>
+                                <option value="11-50">11-50 employees</option>
+                                <option value="51-200">51-200 employees</option>
+                                <option value="201-1000">201-1000 employees</option>
+                                <option value="1000+">1000+ employees</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="companyDescription">Company Description</label>
+                            <textarea id="companyDescription" name="companyDescription" rows="4" 
+                                      placeholder="Brief description of your company and what you do"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Experience & Preferences</h2>
+                        
+                        <div class="form-group">
+                            <label>Have you worked with freelancers or contractors before? <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="freelanceYes" name="freelanceExperience" value="yes" required>
+                                    <label for="freelanceYes">Yes, I have experience working with freelancers</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="freelanceNo" name="freelanceExperience" value="no" required>
+                                    <label for="freelanceNo">No, this would be my first time</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="preferredTimeline">What's your typical project timeline?</label>
+                                <select id="preferredTimeline" name="preferredTimeline">
+                                    <option value="">Select preferred timeline</option>
+                                    <option value="1-2 weeks">1-2 weeks</option>
+                                    <option value="3-4 weeks">3-4 weeks</option>
+                                    <option value="1-2 months">1-2 months</option>
+                                    <option value="3-6 months">3-6 months</option>
+                                    <option value="6+ months">6+ months</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budgetRange">Typical project budget range</label>
+                                <select id="budgetRange" name="budgetRange">
+                                    <option value="">Select budget range</option>
+                                    <option value="Under $1,000">Under $1,000</option>
+                                    <option value="$1,000 - $5,000">$1,000 - $5,000</option>
+                                    <option value="$5,000 - $15,000">$5,000 - $15,000</option>
+                                    <option value="$15,000 - $50,000">$15,000 - $50,000</option>
+                                    <option value="$50,000+">$50,000+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="communicationStyle">Preferred communication style</label>
+                            <select id="communicationStyle" name="communicationStyle">
+                                <option value="">Select communication preference</option>
+                                <option value="Daily updates">Daily updates</option>
+                                <option value="Weekly check-ins">Weekly check-ins</option>
+                                <option value="Milestone-based">Milestone-based updates</option>
+                                <option value="As needed">As needed communication</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">Save Company Profile</button>
+                        <button type="button" class="btn btn-outline" onclick="window.location.href='dashboard-new.html'">Skip for Now</button>
+                        <p class="submit-note">Complete your profile to earn the "Verified Buyer" badge and build trust with developers.</p>
+                    </div>
+                </form>
+
+                <!-- Upload Status -->
+                <div id="uploadStatus" class="upload-status" style="display: none;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { handleLogout } from './auth.js';
+        import { 
+            doc, 
+            setDoc, 
+            getDoc,
+            updateDoc 
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        let currentUser = null;
+
+        // Auth state monitoring
+        onAuthStateChanged(auth, async (user) => {
+            currentUser = user;
+            if (user) {
+                document.getElementById('userEmail').textContent = user.email;
+                
+                // Load existing profile data if available
+                await loadExistingProfile(user);
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Load existing company profile data
+        async function loadExistingProfile(user) {
+            try {
+                const companyRef = doc(db, 'companyProfiles', user.uid);
+                const companyDoc = await getDoc(companyRef);
+                
+                if (companyDoc.exists()) {
+                    const data = companyDoc.data();
+                    
+                    // Populate form fields
+                    Object.keys(data).forEach(key => {
+                        const element = document.getElementById(key);
+                        if (element) {
+                            if (element.type === 'radio') {
+                                const radioButton = document.querySelector(`input[name="${key}"][value="${data[key]}"]`);
+                                if (radioButton) radioButton.checked = true;
+                            } else {
+                                element.value = data[key];
+                            }
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+            }
+        }
+
+        // Logout functionality
+        window.handleLogoutClick = async function() {
+            try {
+                await handleLogout();
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        };
+
+        // Form submission
+        document.getElementById('companyProfileForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            if (!currentUser) {
+                alert('Please login first');
+                return;
+            }
+            
+            const uploadStatus = document.getElementById('uploadStatus');
+            uploadStatus.style.display = 'block';
+            uploadStatus.className = 'upload-status uploading';
+            uploadStatus.innerHTML = 'Saving your company profile...';
+            
+            try {
+                const formData = new FormData(event.target);
+                
+                // Validate URL if provided
+                const website = formData.get('companyWebsite');
+                if (website && !isValidURL(website)) {
+                    throw new Error('Please enter a valid website URL');
+                }
+                
+                const profileData = {
+                    companyName: formData.get('companyName'),
+                    companyWebsite: website || '',
+                    industry: formData.get('industry'),
+                    companySize: formData.get('companySize') || '',
+                    companyDescription: formData.get('companyDescription') || '',
+                    freelanceExperience: formData.get('freelanceExperience'),
+                    preferredTimeline: formData.get('preferredTimeline') || '',
+                    budgetRange: formData.get('budgetRange') || '',
+                    communicationStyle: formData.get('communicationStyle') || '',
+                    userId: currentUser.uid,
+                    userEmail: currentUser.email,
+                    updatedAt: new Date().toISOString(),
+                    timestamp: Date.now()
+                };
+                
+                // Check if profile is complete for verification
+                const isComplete = profileData.companyName && 
+                                 profileData.industry && 
+                                 profileData.freelanceExperience &&
+                                 profileData.companyWebsite;
+                
+                profileData.profileComplete = isComplete;
+                profileData.verificationStatus = isComplete ? 'pending_review' : 'incomplete';
+                
+                // Save to Firestore
+                await setDoc(doc(db, 'companyProfiles', currentUser.uid), profileData);
+                
+                // Update user record
+                await updateDoc(doc(db, 'users', currentUser.uid), {
+                    hasCompanyProfile: true,
+                    profileComplete: isComplete,
+                    verificationStatus: profileData.verificationStatus
+                });
+                
+                uploadStatus.className = 'upload-status success';
+                uploadStatus.innerHTML = isComplete ? 
+                    'Profile saved! Your verification is under review for the Verified Buyer badge.' :
+                    'Profile saved! Complete all required fields to qualify for verification.';
+                
+                // Redirect after delay
+                setTimeout(() => {
+                    window.location.href = 'dashboard-new.html';
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Profile save error:', error);
+                uploadStatus.className = 'upload-status error';
+                uploadStatus.innerHTML = `
+                    ✗ Failed to save profile<br>
+                    Error: ${error.message}<br>
+                    Please try again.
+                `;
+            }
+        });
+
+        // URL validation helper
+        function isValidURL(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

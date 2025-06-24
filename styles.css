@@ -1168,6 +1168,232 @@ h4 {
         gap: 1rem;
     }
 }
+
+/* Tech Stack Selector Styles */
+.tech-stack-selector {
+    margin-bottom: 1rem;
+}
+
+.tech-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    min-height: 2rem;
+    padding: 0.5rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 0.375rem;
+    background-color: var(--gray-50);
+}
+
+.tech-tag {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tech-tag-remove {
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.tech-tag-remove:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tech-stack-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+}
+
+/* Company Profile Styles */
+.profile-main {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+    padding: 2rem 0;
+}
+
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.profile-header {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+    color: var(--white);
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.profile-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.profile-subtitle {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.profile-form {
+    padding: 3rem 2rem;
+}
+
+/* Verified Badge Styles */
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.verified-badge::before {
+    content: '✓';
+    font-weight: bold;
+}
+
+.pending-verification {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.pending-verification::before {
+    content: '⏳';
+}
+
+/* Milestone Payment Styles */
+.milestone-section {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    display: none;
+}
+
+.milestone-section.active {
+    display: block;
+}
+
+.milestone-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: flex-end;
+}
+
+.milestone-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Terms Modal Styles */
+.terms-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.terms-modal.active {
+    display: flex;
+}
+
+.terms-content {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.terms-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--gray-500);
+}
+
+.terms-close:hover {
+    color: var(--gray-700);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .profile-main {
+        padding: 1rem;
+    }
+    
+    .profile-container {
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .profile-header {
+        padding: 2rem 1rem;
+    }
+    
+    .profile-header h1 {
+        font-size: 2rem;
+    }
+    
+    .profile-form {
+        padding: 2rem 1rem;
+    }
+    
+    .tech-tags-container {
+        min-height: 3rem;
+    }
+    
+    .milestone-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
 }
 
 .error {

@@ -116,8 +116,8 @@ export async function handleSignup(event) {
         console.log('=== EXECUTING IMMEDIATE REDIRECT ===');
         console.log('Role:', role);
         if (role === 'company') {
-            console.log('Redirecting to dashboard.html');
-            window.location.replace('dashboard.html');
+            console.log('Redirecting to dashboard-new.html');
+            window.location.replace('dashboard-new.html');
         } else if (role === 'developer') {
             console.log('Redirecting to projects.html (legacy developer signup)');
             window.location.replace('projects.html');

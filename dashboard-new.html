@@ -75,15 +75,134 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="skills">Required Skills</label>
-                            <input type="text" id="skills" name="skills" required placeholder="e.g., Python, Machine Learning, OpenAI API">
-                            <small class="form-hint">List the key skills needed for this project (comma-separated)</small>
+                            <label for="techStack">Required Tech Stack</label>
+                            <div class="tech-stack-selector">
+                                <div class="tech-tags-container" id="selectedTechStack"></div>
+                                <select id="techStackSelect" class="tech-stack-select">
+                                    <option value="">Add technology...</option>
+                                    <optgroup label="Frontend">
+                                        <option value="React">React</option>
+                                        <option value="Vue.js">Vue.js</option>
+                                        <option value="Angular">Angular</option>
+                                        <option value="Next.js">Next.js</option>
+                                        <option value="JavaScript">JavaScript</option>
+                                        <option value="TypeScript">TypeScript</option>
+                                        <option value="HTML/CSS">HTML/CSS</option>
+                                    </optgroup>
+                                    <optgroup label="Backend">
+                                        <option value="Python">Python</option>
+                                        <option value="Node.js">Node.js</option>
+                                        <option value="Java">Java</option>
+                                        <option value="C#">C#</option>
+                                        <option value="PHP">PHP</option>
+                                        <option value="Ruby">Ruby</option>
+                                        <option value="Go">Go</option>
+                                    </optgroup>
+                                    <optgroup label="AI/ML">
+                                        <option value="TensorFlow">TensorFlow</option>
+                                        <option value="PyTorch">PyTorch</option>
+                                        <option value="OpenAI API">OpenAI API</option>
+                                        <option value="LangChain">LangChain</option>
+                                        <option value="Hugging Face">Hugging Face</option>
+                                        <option value="Scikit-learn">Scikit-learn</option>
+                                    </optgroup>
+                                    <optgroup label="Database">
+                                        <option value="PostgreSQL">PostgreSQL</option>
+                                        <option value="MySQL">MySQL</option>
+                                        <option value="MongoDB">MongoDB</option>
+                                        <option value="Redis">Redis</option>
+                                        <option value="Firebase">Firebase</option>
+                                    </optgroup>
+                                    <optgroup label="Cloud/DevOps">
+                                        <option value="AWS">AWS</option>
+                                        <option value="Google Cloud">Google Cloud</option>
+                                        <option value="Azure">Azure</option>
+                                        <option value="Docker">Docker</option>
+                                        <option value="Kubernetes">Kubernetes</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <input type="hidden" id="skills" name="skills">
+                            <small class="form-hint">Select the technologies required for this project</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timeline">Ideal Timeline</label>
+                                <select id="timeline" name="timeline" required>
+                                    <option value="">Select timeline</option>
+                                    <option value="1-2 weeks">1-2 weeks</option>
+                                    <option value="3-4 weeks">3-4 weeks</option>
+                                    <option value="1-2 months">1-2 months</option>
+                                    <option value="3-6 months">3-6 months</option>
+                                    <option value="6+ months">6+ months</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="urgency">Project Urgency</label>
+                                <select id="urgency" name="urgency" required>
+                                    <option value="">Select urgency</option>
+                                    <option value="Low">Low - Flexible timing</option>
+                                    <option value="Medium">Medium - Moderate urgency</option>
+                                    <option value="High">High - Need started soon</option>
+                                    <option value="Urgent">Urgent - Need started immediately</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <div class="checkbox-group">
                                 <input type="checkbox" id="ndaRequired" name="ndaRequired">
                                 <label for="ndaRequired">NDA (Non-Disclosure Agreement) required</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="enableMilestones" name="enableMilestones">
+                                <label for="enableMilestones">Enable milestone payments (split payment into phases)</label>
+                            </div>
+                        </div>
+
+                        <div id="milestoneSection" class="milestone-section">
+                            <h4>Milestone Planning</h4>
+                            <div class="milestone-item">
+                                <div class="form-group">
+                                    <label>Milestone 1 Description</label>
+                                    <input type="text" name="milestone1_desc" placeholder="e.g., Initial setup and planning">
+                                </div>
+                                <div class="form-group">
+                                    <label>Payment %</label>
+                                    <input type="number" name="milestone1_percent" min="1" max="100" placeholder="30">
+                                </div>
+                            </div>
+                            <div class="milestone-item">
+                                <div class="form-group">
+                                    <label>Milestone 2 Description</label>
+                                    <input type="text" name="milestone2_desc" placeholder="e.g., Development phase">
+                                </div>
+                                <div class="form-group">
+                                    <label>Payment %</label>
+                                    <input type="number" name="milestone2_percent" min="1" max="100" placeholder="50">
+                                </div>
+                            </div>
+                            <div class="milestone-item">
+                                <div class="form-group">
+                                    <label>Final Milestone Description</label>
+                                    <input type="text" name="milestone3_desc" placeholder="e.g., Testing and delivery">
+                                </div>
+                                <div class="form-group">
+                                    <label>Payment %</label>
+                                    <input type="number" name="milestone3_percent" min="1" max="100" placeholder="20">
+                                </div>
+                            </div>
+                            <small class="form-hint">Total percentage should equal 100%</small>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                <label for="agreeTerms">I agree to the <a href="#" onclick="showTermsModal()">Terms of Use</a> and understand that Companeeds AI is not liable for disputes <span class="required">*</span></label>
                             </div>
                         </div>
 
@@ -118,7 +237,7 @@
     <script src="env-config.js"></script>
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="auth.js"></script>
-    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="enhanced-dashboard.js"></script>
     <script type="module">
         import { handleLogout } from './auth.js';
         window.handleLogoutClick = handleLogout;
