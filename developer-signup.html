@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Signup - Companeeds AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="developer-signup-main">
+            <div class="developer-signup-container">
+                <div class="signup-header">
+                    <h1>Join as a Developer</h1>
+                    <p class="signup-subtitle">Create your developer account to access our vetting process. Only top-tier software professionals are accepted on Companeeds AI.</p>
+                </div>
+
+                <form id="developerAccountForm" class="developer-signup-form">
+                    <div class="form-section">
+                        <h2>Create Your Developer Account</h2>
+                        
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" required 
+                                   placeholder="Your full professional name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required 
+                                   placeholder="your.email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password <span class="required">*</span></label>
+                            <input type="password" id="password" name="password" required 
+                                   minlength="6" placeholder="Create a secure password">
+                            <small class="form-hint">Minimum 6 characters</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required 
+                                   minlength="6" placeholder="Confirm your password">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                <label for="agreeTerms">I agree to the terms of service and understand that my application will be reviewed for approval <span class="required">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">Create Account & Continue to Application</button>
+                        <p class="submit-note">After creating your account, you'll complete a detailed application form including video submission.</p>
+                    </div>
+                </form>
+
+                <!-- Upload Status -->
+                <div id="uploadStatus" class="upload-status" style="display: none;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        // Form validation
+        function validatePasswords() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPassword').setCustomValidity('Passwords do not match');
+                return false;
+            } else {
+                document.getElementById('confirmPassword').setCustomValidity('');
+                return true;
+            }
+        }
+
+        // Password confirmation validation
+        document.getElementById('confirmPassword').addEventListener('input', validatePasswords);
+        document.getElementById('password').addEventListener('input', validatePasswords);
+
+        // Form submission
+        document.getElementById('developerAccountForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const uploadStatus = document.getElementById('uploadStatus');
+            uploadStatus.style.display = 'block';
+            uploadStatus.className = 'upload-status uploading';
+            uploadStatus.innerHTML = 'Creating your developer account...';
+            
+            try {
+                const formData = new FormData(event.target);
+                const fullName = formData.get('fullName').trim();
+                const email = formData.get('email').trim().toLowerCase();
+                const password = formData.get('password');
+                
+                // Validate passwords match
+                if (!validatePasswords()) {
+                    throw new Error('Passwords do not match');
+                }
+                
+                // Create Firebase account
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Update display name
+                await updateProfile(user, {
+                    displayName: fullName
+                });
+                
+                // Create user profile in Firestore
+                await setDoc(doc(db, 'users', user.uid), {
+                    email: email,
+                    displayName: fullName,
+                    role: 'developer',
+                    accountType: 'pending_application', // Special status for developers who haven't completed application
+                    createdAt: new Date().toISOString(),
+                    timestamp: Date.now()
+                });
+                
+                uploadStatus.className = 'upload-status success';
+                uploadStatus.innerHTML = 'Account created successfully! Redirecting to application form...';
+                
+                // Redirect to intake form after short delay
+                setTimeout(() => {
+                    window.location.href = 'join-developer.html';
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Account creation error:', error);
+                uploadStatus.className = 'upload-status error';
+                uploadStatus.innerHTML = `
+                    ✗ Failed to create account<br>
+                    Error: ${error.message}<br>
+                    Please try again.
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

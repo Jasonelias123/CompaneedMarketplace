@@ -12,8 +12,8 @@
             <div class="header-content">
                 <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
                 <div class="header-actions">
-                    <a href="login.html" class="btn btn-outline">Login</a>
-                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()" style="display: none;">Logout</button>
                 </div>
             </div>
         </header>
@@ -21,8 +21,8 @@
         <main class="developer-signup-main">
             <div class="developer-signup-container">
                 <div class="signup-header">
-                    <h1>Join as a Developer</h1>
-                    <p class="signup-subtitle">Apply to become a vetted developer on Companeeds AI. We only accept top-tier software professionals who can deliver exceptional AI and automation solutions.</p>
+                    <h1>Developer Application Form</h1>
+                    <p class="signup-subtitle">Complete your detailed application to become a vetted developer on Companeeds AI. Please provide comprehensive information about your experience and expertise.</p>
                 </div>
 
                 <form id="developerSignupForm" class="developer-signup-form">

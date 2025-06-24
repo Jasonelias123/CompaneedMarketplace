@@ -1,7 +1,11 @@
-import { db } from './firebase-config.js';
+import { auth, db } from './firebase-config.js';
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { handleLogout } from './auth.js';
 import { 
     collection, 
     addDoc,
+    doc,
+    updateDoc,
     serverTimestamp 
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
@@ -36,9 +40,39 @@ function validateVideoFile(file) {
     return { valid: true };
 }
 
+// Auth state monitoring
+let currentUser = null;
+
+onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    if (user) {
+        document.getElementById('userEmail').textContent = user.email;
+        document.getElementById('logoutBtn').style.display = 'block';
+    } else {
+        // Redirect to signup if not authenticated
+        window.location.href = 'developer-signup.html';
+    }
+});
+
+// Logout functionality
+window.handleLogoutClick = async function() {
+    try {
+        await handleLogout();
+        window.location.href = 'index.html';
+    } catch (error) {
+        console.error('Logout error:', error);
+    }
+};
+
 // Form submission handler
 document.getElementById('developerSignupForm').addEventListener('submit', async (event) => {
     event.preventDefault();
+    
+    if (!currentUser) {
+        alert('Please login first');
+        window.location.href = 'developer-signup.html';
+        return;
+    }
     
     const uploadStatus = document.getElementById('uploadStatus');
     uploadStatus.style.display = 'block';
@@ -79,9 +113,13 @@ document.getElementById('developerSignupForm').addEventListener('submit', async 
         
         // Prepare application data
         const applicationData = {
+            // User account info
+            userId: currentUser.uid,
+            userEmail: currentUser.email,
+            
             // Basic Info
             fullName: formData.get('fullName').trim(),
-            email: email.trim().toLowerCase(),
+            email: currentUser.email, // Use authenticated email
             location: formData.get('location').trim(),
             linkedinProfile: linkedinProfile ? linkedinProfile.trim() : null,
             githubProfile: githubProfile ? githubProfile.trim() : null,
@@ -123,6 +161,13 @@ document.getElementById('developerSignupForm').addEventListener('submit', async 
         // Save to Firebase
         const docRef = await addDoc(collection(db, 'developerApplications'), applicationData);
         console.log('Application submitted with ID:', docRef.id);
+        
+        // Update user profile to mark application as submitted
+        await updateDoc(doc(db, 'users', currentUser.uid), {
+            accountType: 'application_submitted',
+            applicationId: docRef.id,
+            applicationSubmittedAt: new Date().toISOString()
+        });
         
         // Also log for admin notification
         await addDoc(collection(db, 'adminNotifications'), {
