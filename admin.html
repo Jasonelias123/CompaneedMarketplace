@@ -39,6 +39,7 @@
                     <button id="pendingProjectsBtn" class="nav-btn active">Pending Projects</button>
                     <button id="approvedProjectsBtn" class="nav-btn">Approved Projects</button>
                     <button id="rejectedProjectsBtn" class="nav-btn">Rejected Projects</button>
+                    <button id="developerApplicationsBtn" class="nav-btn">Developer Applications</button>
                 </div>
 
                 <div id="pendingProjectsSection" class="dashboard-section">
@@ -59,6 +60,27 @@
                     <h2>Rejected Projects</h2>
                     <div id="rejectedProjectsList" class="projects-list">
                         <div class="loading">Loading rejected projects...</div>
+                    </div>
+                </div>
+
+                <div id="developerApplicationsSection" class="dashboard-section" style="display: none;">
+                    <h2>Developer Applications</h2>
+                    <div class="admin-stats" style="margin-bottom: 2rem;">
+                        <div class="stat-card">
+                            <div class="stat-number" id="pendingDevelopersCount">0</div>
+                            <div class="stat-label">Pending Review</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="approvedDevelopersCount">0</div>
+                            <div class="stat-label">Approved</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="rejectedDevelopersCount">0</div>
+                            <div class="stat-label">Rejected</div>
+                        </div>
+                    </div>
+                    <div id="developerApplicationsList" class="applications-list">
+                        <div class="loading">Loading developer applications...</div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join as a Developer - Companeeds AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="developer-signup-main">
+            <div class="developer-signup-container">
+                <div class="signup-header">
+                    <h1>Join as a Developer</h1>
+                    <p class="signup-subtitle">Apply to become a vetted developer on Companeeds AI. We only accept top-tier software professionals who can deliver exceptional AI and automation solutions.</p>
+                </div>
+
+                <form id="developerSignupForm" class="developer-signup-form">
+                    <!-- Section 1: Basic Info -->
+                    <div class="form-section">
+                        <h2>1. Basic Information</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name <span class="required">*</span></label>
+                                <input type="text" id="fullName" name="fullName" required 
+                                       placeholder="Your full professional name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required 
+                                       placeholder="your.email@example.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location & Time Zone <span class="required">*</span></label>
+                            <input type="text" id="location" name="location" required 
+                                   placeholder="e.g., San Francisco, CA (PST) or Remote, EST">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="linkedinProfile">LinkedIn Profile</label>
+                                <input type="url" id="linkedinProfile" name="linkedinProfile" 
+                                       placeholder="https://linkedin.com/in/yourprofile">
+                            </div>
+                            <div class="form-group">
+                                <label for="githubProfile">GitHub Profile</label>
+                                <input type="url" id="githubProfile" name="githubProfile" 
+                                       placeholder="https://github.com/yourusername">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="portfolioWebsite">Portfolio Website or Project Links</label>
+                            <textarea id="portfolioWebsite" name="portfolioWebsite" rows="2" 
+                                      placeholder="Share links to your portfolio, personal website, or key projects"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Skills & Experience -->
+                    <div class="form-section">
+                        <h2>2. Skills & Experience</h2>
+                        
+                        <div class="form-group">
+                            <label for="techStack">List your primary tech stack and years of experience with each <span class="required">*</span></label>
+                            <textarea id="techStack" name="techStack" rows="4" required
+                                      placeholder="e.g., Python (5 years), React/Node.js (4 years), PostgreSQL (3 years), AWS (2 years)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pastProjects">Describe your 3 best past projects with links, and your role in each <span class="required">*</span></label>
+                            <textarea id="pastProjects" name="pastProjects" rows="6" required
+                                      placeholder="Project 1: [Description, your role, technologies used, link if available]&#10;Project 2: [Description, your role, technologies used, link if available]&#10;Project 3: [Description, your role, technologies used, link if available]"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="challengingProblem">Describe the most challenging technical problem you've solved and how you solved it <span class="required">*</span></label>
+                            <textarea id="challengingProblem" name="challengingProblem" rows="5" required
+                                      placeholder="Describe a complex technical challenge, your approach to solving it, and the outcome"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="availability">What is your availability and typical turnaround time? <span class="required">*</span></label>
+                                <input type="text" id="availability" name="availability" required
+                                       placeholder="e.g., Full-time, 40 hrs/week, 2-3 day turnaround">
+                            </div>
+                            <div class="form-group">
+                                <label for="hourlyRate">What is your preferred hourly rate or project minimum? <span class="required">*</span></label>
+                                <input type="text" id="hourlyRate" name="hourlyRate" required
+                                       placeholder="e.g., $75/hour or $2000 project minimum">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: AI & Automation Skills -->
+                    <div class="form-section">
+                        <h2>3. AI & Automation Skills</h2>
+                        
+                        <div class="form-group">
+                            <label for="aiExperience">Have you worked with AI tools (OpenAI API, LangChain, Pinecone, etc.)? If yes, explain which and how you used them. <span class="required">*</span></label>
+                            <textarea id="aiExperience" name="aiExperience" rows="5" required
+                                      placeholder="Describe your experience with AI/ML tools, frameworks, APIs, and specific projects where you used them"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Professional Conduct -->
+                    <div class="form-section">
+                        <h2>4. Professional Conduct</h2>
+                        
+                        <div class="form-group">
+                            <label for="projectFailures">Have you ever failed to deliver a project you were paid for? If yes, explain honestly. <span class="required">*</span></label>
+                            <textarea id="projectFailures" name="projectFailures" rows="4" required
+                                      placeholder="Please be honest. If no, write 'No'. If yes, explain the circumstances and what you learned."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Are you available for a short live technical interview or paid test project? <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="interviewYes" name="availableInterview" value="yes" required>
+                                    <label for="interviewYes">Yes</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="interviewNo" name="availableInterview" value="no" required>
+                                    <label for="interviewNo">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 5: Video Submission -->
+                    <div class="form-section">
+                        <h2>5. Video Submission (Optional)</h2>
+                        
+                        <div class="form-group">
+                            <label for="videoSubmission">Upload a short video introducing yourself and explaining why we should approve you as a developer on Companeeds AI</label>
+                            <input type="file" id="videoSubmission" name="videoSubmission" 
+                                   accept="video/*,.mp4,.mov,.avi,.wmv">
+                            <small class="form-hint">Maximum file size: 50MB. Recommended length: 2-3 minutes.</small>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">Submit Application</button>
+                        <p class="submit-note">By submitting this application, you agree to our vetting process and understand that approval is not guaranteed.</p>
+                    </div>
+                </form>
+
+                <!-- Success Message -->
+                <div id="successMessage" class="success-modal" style="display: none;">
+                    <div class="success-content">
+                        <h3>Application Submitted Successfully!</h3>
+                        <p>Thanks for applying! Our team will review your submission and contact you shortly if you meet the standards for Companeeds AI.</p>
+                        <p>We typically respond within 3-5 business days.</p>
+                        <button onclick="closeSuccessMessage()" class="btn btn-primary">Close</button>
+                    </div>
+                </div>
+
+                <!-- Upload Status -->
+                <div id="uploadStatus" class="upload-status" style="display: none;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="developer-signup.js"></script>
+</body>
+</html>

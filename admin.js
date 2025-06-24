@@ -38,10 +38,12 @@ function setupNavigation() {
     const pendingBtn = document.getElementById('pendingProjectsBtn');
     const approvedBtn = document.getElementById('approvedProjectsBtn');
     const rejectedBtn = document.getElementById('rejectedProjectsBtn');
+    const developersBtn = document.getElementById('developerApplicationsBtn');
     
     const pendingSection = document.getElementById('pendingProjectsSection');
     const approvedSection = document.getElementById('approvedProjectsSection');
     const rejectedSection = document.getElementById('rejectedProjectsSection');
+    const developersSection = document.getElementById('developerApplicationsSection');
 
     pendingBtn.addEventListener('click', () => {
         setActiveSection(pendingBtn, pendingSection);
@@ -56,6 +58,11 @@ function setupNavigation() {
     rejectedBtn.addEventListener('click', () => {
         setActiveSection(rejectedBtn, rejectedSection);
         loadProjectsByStatus('rejected');
+    });
+
+    developersBtn.addEventListener('click', () => {
+        setActiveSection(developersBtn, developersSection);
+        loadDeveloperApplications();
     });
 }
 

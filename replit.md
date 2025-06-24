@@ -105,6 +105,13 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **June 24, 2025**: Added comprehensive developer signup form with vetting system
+  - Multi-section application form with basic info, skills, AI experience, and professional conduct
+  - URL validation for LinkedIn, GitHub, and portfolio links
+  - Video submission support (optional) with 50MB file size limit
+  - Admin dashboard integration for reviewing developer applications
+  - Automatic status tracking (pending, approved, rejected)
+  - Email notifications to admin when new applications are submitted
 - **June 23, 2025**: Added proposed pricing feature with budget analytics
   - Required price input field in developer application forms
   - Budget comparison showing posted budget vs proposed prices
