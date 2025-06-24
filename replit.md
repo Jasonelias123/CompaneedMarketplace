@@ -105,10 +105,15 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **June 24, 2025**: Added developer pending approval page and improved signup flow
+  - Created two-step developer signup: account creation then detailed application
+  - Built pending approval page where developers can browse projects but not apply
+  - Added automatic status checking and redirects based on approval status
+  - Video submission now required (not optional) for all developer applications
+  - Improved authentication flow to prevent routing issues
 - **June 24, 2025**: Added comprehensive developer signup form with vetting system
   - Multi-section application form with basic info, skills, AI experience, and professional conduct
   - URL validation for LinkedIn, GitHub, and portfolio links
-  - Video submission support (optional) with 50MB file size limit
   - Admin dashboard integration for reviewing developer applications
   - Automatic status tracking (pending, approved, rejected)
   - Email notifications to admin when new applications are submitted

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Under Review - Companeeds AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="pending-main">
+            <div class="pending-container">
+                <div class="status-banner">
+                    <div class="status-icon">⏳</div>
+                    <h1>Application Under Review</h1>
+                    <p>Thanks for applying to become a developer on Companeeds AI! Our team is reviewing your application and will contact you within 3-5 business days.</p>
+                </div>
+
+                <div class="preview-section">
+                    <h2>Browse Available Projects</h2>
+                    <p class="preview-subtitle">While you wait, explore the types of AI projects companies are posting on our platform. Once approved, you'll be able to submit proposals for these opportunities.</p>
+                    
+                    <div class="projects-grid" id="projectsGrid">
+                        <div class="loading">Loading available projects...</div>
+                    </div>
+
+                    <div class="approval-notice">
+                        <div class="notice-content">
+                            <h3>🔒 Application Required</h3>
+                            <p>To submit proposals and contact companies, you need to be approved as a vetted developer. We'll email you once your application is reviewed.</p>
+                            <div class="notice-actions">
+                                <span class="status-text">Status: <strong>Under Review</strong></span>
+                                <button class="btn btn-outline" onclick="refreshStatus()">Check Status</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { handleLogout } from './auth.js';
+        import { 
+            collection, 
+            query, 
+            where, 
+            orderBy, 
+            limit,
+            getDocs,
+            doc,
+            getDoc
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        let currentUser = null;
+
+        // Auth state monitoring
+        onAuthStateChanged(auth, async (user) => {
+            currentUser = user;
+            if (user) {
+                document.getElementById('userEmail').textContent = user.email;
+                
+                // Check user status
+                await checkUserStatus(user);
+                
+                // Load projects
+                loadAvailableProjects();
+            } else {
+                window.location.href = 'developer-signup.html';
+            }
+        });
+
+        // Check if user is still pending or has been approved/rejected
+        async function checkUserStatus(user) {
+            try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                const userData = userDoc.data();
+                
+                if (userData && userData.accountType === 'application_submitted') {
+                    // Still pending - stay on this page
+                    return;
+                } else if (userData && userData.accountType === 'approved') {
+                    // Approved - redirect to projects
+                    window.location.href = 'projects-new.html';
+                } else if (userData && userData.accountType === 'rejected') {
+                    // Rejected - show rejection message
+                    showRejectionMessage();
+                } else {
+                    // No application found - redirect to application form
+                    window.location.href = 'join-developer.html';
+                }
+            } catch (error) {
+                console.error('Error checking user status:', error);
+            }
+        }
+
+        // Show rejection message
+        function showRejectionMessage() {
+            const statusBanner = document.querySelector('.status-banner');
+            statusBanner.innerHTML = `
+                <div class="status-icon">❌</div>
+                <h1>Application Not Approved</h1>
+                <p>Unfortunately, your application was not approved at this time. You're welcome to improve your qualifications and reapply in the future.</p>
+                <a href="index.html" class="btn btn-primary">Return to Home</a>
+            `;
+            statusBanner.style.background = '#fef2f2';
+            statusBanner.style.borderColor = '#fca5a5';
+        }
+
+        // Load available projects for preview
+        async function loadAvailableProjects() {
+            const projectsGrid = document.getElementById('projectsGrid');
+            
+            try {
+                // Get approved projects
+                const projectsQuery = query(
+                    collection(db, 'projects'),
+                    where('status', '==', 'approved'),
+                    orderBy('timestamp', 'desc'),
+                    limit(6)
+                );
+                
+                const snapshot = await getDocs(projectsQuery);
+                
+                if (snapshot.empty) {
+                    projectsGrid.innerHTML = '<div class="no-projects">No projects available at the moment.</div>';
+                    return;
+                }
+                
+                const projectsHTML = snapshot.docs.map(doc => {
+                    const project = doc.data();
+                    const timeAgo = getTimeAgo(project.createdAt);
+                    
+                    return `
+                        <div class="project-card preview-card">
+                            <div class="project-header">
+                                <h3>${escapeHtml(project.title)}</h3>
+                                <div class="project-meta">
+                                    <span class="project-budget">$${project.budget?.toLocaleString() || 'Budget TBD'}</span>
+                                    <span class="project-time">${timeAgo}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-content">
+                                <p class="project-description">${escapeHtml(project.description?.substring(0, 150) || '')}...</p>
+                                
+                                <div class="project-details">
+                                    <div class="project-category">
+                                        <span class="category-tag">${escapeHtml(project.category || 'AI Development')}</span>
+                                    </div>
+                                    
+                                    ${project.skills && project.skills.length > 0 ? `
+                                        <div class="project-skills">
+                                            ${project.skills.slice(0, 3).map(skill => 
+                                                `<span class="skill-tag">${escapeHtml(skill)}</span>`
+                                            ).join('')}
+                                            ${project.skills.length > 3 ? `<span class="skill-more">+${project.skills.length - 3} more</span>` : ''}
+                                        </div>
+                                    ` : ''}
+                                    
+                                    <div class="project-timeline">
+                                        <span class="timeline-label">Deadline:</span>
+                                        <span class="timeline-date">${new Date(project.deadline).toLocaleDateString()}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-footer">
+                                <div class="project-company">
+                                    <span class="company-name">${escapeHtml(project.companyName || 'Company')}</span>
+                                </div>
+                                <button class="btn btn-outline" disabled title="Approval required to submit proposals">
+                                    🔒 Approval Required
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                projectsGrid.innerHTML = projectsHTML;
+                
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                projectsGrid.innerHTML = '<div class="error">Error loading projects. Please try again later.</div>';
+            }
+        }
+
+        // Refresh user status
+        window.refreshStatus = async function() {
+            if (currentUser) {
+                await checkUserStatus(currentUser);
+            }
+        };
+
+        // Logout functionality
+        window.handleLogoutClick = async function() {
+            try {
+                await handleLogout();
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        };
+
+        // Helper functions
+        function getTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - date) / 1000);
+            
+            if (diffInSeconds < 3600) {
+                const minutes = Math.floor(diffInSeconds / 60);
+                return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+            } else if (diffInSeconds < 86400) {
+                const hours = Math.floor(diffInSeconds / 3600);
+                return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+            } else {
+                const days = Math.floor(diffInSeconds / 86400);
+                return `${days} day${days !== 1 ? 's' : ''} ago`;
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+    </script>
+</body>
+</html>

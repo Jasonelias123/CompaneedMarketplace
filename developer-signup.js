@@ -181,9 +181,14 @@ document.getElementById('developerSignupForm').addEventListener('submit', async 
             read: false
         });
         
-        // Show success message
-        uploadStatus.style.display = 'none';
-        showSuccessMessage();
+        // Show success message and redirect
+        uploadStatus.className = 'upload-status success';
+        uploadStatus.innerHTML = 'Application submitted successfully! Redirecting to your developer dashboard...';
+        
+        // Redirect to pending page after delay
+        setTimeout(() => {
+            window.location.href = 'developer-pending.html';
+        }, 3000);
         
         // Reset form
         event.target.reset();
