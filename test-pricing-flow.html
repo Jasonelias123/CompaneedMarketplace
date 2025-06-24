@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Pricing Flow - Companeeds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="test-container">
+                <h2>Test Complete Pricing & File Upload Flow</h2>
+                <div id="authStatus" class="status-box"></div>
+                
+                <div class="test-section">
+                    <h3>Step 1: Create Test Project with Budget</h3>
+                    <form id="testProjectForm" class="test-form">
+                        <div class="form-group">
+                            <label for="projectTitle">Project Title:</label>
+                            <input type="text" id="projectTitle" name="projectTitle" 
+                                   value="AI Chatbot Development" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectBudget">Budget:</label>
+                            <input type="number" id="projectBudget" name="projectBudget" 
+                                   value="3000" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectDescription">Description:</label>
+                            <textarea id="projectDescription" name="projectDescription" rows="3" required>
+Build an AI-powered customer service chatbot with natural language processing capabilities. Must integrate with existing CRM system and handle complex customer inquiries.
+                            </textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Test Project</button>
+                    </form>
+                    <div id="projectResults" class="results-box"></div>
+                </div>
+
+                <div class="test-section">
+                    <h3>Step 2: Submit Application with Pricing & Files</h3>
+                    <form id="testApplicationForm" class="test-form">
+                        <div class="form-group">
+                            <label for="applicationMessage">Application Message:</label>
+                            <textarea id="applicationMessage" name="applicationMessage" rows="4" required>
+I have 5+ years of experience building AI chatbots using NLP frameworks like spaCy and transformers. I've successfully integrated chatbots with Salesforce and HubSpot CRM systems. My approach includes sentiment analysis and intent recognition for superior customer experience.
+                            </textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="proposedPrice">Your proposed price:</label>
+                            <div class="price-input-group">
+                                <span class="price-symbol">$</span>
+                                <input type="number" id="proposedPrice" name="proposedPrice" 
+                                       value="2800" min="1" step="1" required class="price-input">
+                            </div>
+                            <small class="price-help">Enter your proposed project price in USD</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pitchDeck">Pitch Deck (optional):</label>
+                            <input type="file" id="pitchDeck" name="pitchDeck" 
+                                   accept=".pdf,.ppt,.pptx,.key">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataFile">Supporting Data (optional):</label>
+                            <input type="file" id="dataFile" name="dataFile" 
+                                   accept=".csv,.json,.xlsx,.xls">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </form>
+                    <div id="applicationResults" class="results-box"></div>
+                </div>
+
+                <div class="test-section">
+                    <h3>Step 3: Submit Second Application (Different Price)</h3>
+                    <form id="testApplication2Form" class="test-form">
+                        <div class="form-group">
+                            <label for="applicationMessage2">Application Message:</label>
+                            <textarea id="applicationMessage2" name="applicationMessage2" rows="4" required>
+As a senior AI engineer with expertise in conversational AI, I can deliver a robust chatbot solution using state-of-the-art transformer models. I specialize in enterprise integrations and have a proven track record with Fortune 500 companies.
+                            </textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="proposedPrice2">Your proposed price:</label>
+                            <div class="price-input-group">
+                                <span class="price-symbol">$</span>
+                                <input type="number" id="proposedPrice2" name="proposedPrice2" 
+                                       value="3200" min="1" step="1" required class="price-input">
+                            </div>
+                            <small class="price-help">This proposal is above budget to test analytics</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Second Application</button>
+                    </form>
+                    <div id="application2Results" class="results-box"></div>
+                </div>
+
+                <div class="test-section">
+                    <h3>Step 4: View Budget Analytics</h3>
+                    <button id="viewAnalyticsBtn" class="btn btn-secondary">Load Budget Analytics</button>
+                    <div id="analyticsResults" class="results-box"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { getCurrentUser, handleLogout } from './auth.js';
+        import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { 
+            collection, 
+            addDoc, 
+            doc,
+            getDocs,
+            query,
+            where,
+            orderBy 
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        let currentProjectId = null;
+        let currentUser = null;
+
+        // Auth state monitoring
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            const authStatus = document.getElementById('authStatus');
+            if (user) {
+                authStatus.innerHTML = `✓ Authenticated as: ${user.email}`;
+                authStatus.className = 'status-box success';
+                document.getElementById('userEmail').textContent = user.email;
+            } else {
+                authStatus.innerHTML = '✗ Not authenticated - please login first';
+                authStatus.className = 'status-box error';
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Logout functionality
+        window.handleLogoutClick = async function() {
+            try {
+                await handleLogout();
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        };
+
+        // Step 1: Create test project
+        document.getElementById('testProjectForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resultsDiv = document.getElementById('projectResults');
+            
+            if (!currentUser) {
+                resultsDiv.innerHTML = '✗ Please login first';
+                resultsDiv.className = 'results-box error';
+                return;
+            }
+
+            const formData = new FormData(e.target);
+            const projectData = {
+                title: formData.get('projectTitle'),
+                description: formData.get('projectDescription'),
+                budget: parseInt(formData.get('projectBudget')),
+                companyId: currentUser.uid,
+                companyEmail: currentUser.email,
+                companyName: currentUser.displayName || currentUser.email.split('@')[0],
+                category: 'AI Development',
+                skills: ['Python', 'Machine Learning', 'NLP'],
+                deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                status: 'approved',
+                createdAt: new Date().toISOString(),
+                timestamp: Date.now(),
+                ndaRequired: false
+            };
+
+            try {
+                resultsDiv.innerHTML = 'Creating test project...';
+                resultsDiv.className = 'results-box info';
+
+                const docRef = await addDoc(collection(db, 'projects'), projectData);
+                currentProjectId = docRef.id;
+                
+                resultsDiv.innerHTML = `✓ Test project created successfully!<br>Project ID: ${docRef.id}<br>Budget: $${projectData.budget.toLocaleString()}`;
+                resultsDiv.className = 'results-box success';
+            } catch (error) {
+                console.error('Error creating project:', error);
+                resultsDiv.innerHTML = `✗ Error creating project: ${error.message}`;
+                resultsDiv.className = 'results-box error';
+            }
+        });
+
+        // Step 2: Submit first application
+        document.getElementById('testApplicationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resultsDiv = document.getElementById('applicationResults');
+            
+            if (!currentProjectId) {
+                resultsDiv.innerHTML = '✗ Please create a test project first';
+                resultsDiv.className = 'results-box error';
+                return;
+            }
+
+            const formData = new FormData(e.target);
+            const applicationData = {
+                projectId: currentProjectId,
+                projectTitle: 'AI Chatbot Development',
+                developerUid: currentUser.uid,
+                developerName: currentUser.displayName || 'Test Developer 1',
+                developerEmail: currentUser.email,
+                message: formData.get('applicationMessage'),
+                proposedPrice: parseInt(formData.get('proposedPrice')),
+                status: 'pending',
+                createdAt: new Date().toISOString(),
+                timestamp: Date.now(),
+                attachments: {
+                    pitchDeck: null,
+                    dataFile: null
+                }
+            };
+
+            try {
+                resultsDiv.innerHTML = 'Submitting application...';
+                resultsDiv.className = 'results-box info';
+
+                const projectRef = doc(db, 'projects', currentProjectId);
+                const applicationsRef = collection(projectRef, 'applications');
+                const docRef = await addDoc(applicationsRef, applicationData);
+                
+                resultsDiv.innerHTML = `✓ First application submitted!<br>Application ID: ${docRef.id}<br>Proposed Price: $${applicationData.proposedPrice.toLocaleString()}`;
+                resultsDiv.className = 'results-box success';
+            } catch (error) {
+                console.error('Error submitting application:', error);
+                resultsDiv.innerHTML = `✗ Error submitting application: ${error.message}`;
+                resultsDiv.className = 'results-box error';
+            }
+        });
+
+        // Step 3: Submit second application
+        document.getElementById('testApplication2Form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resultsDiv = document.getElementById('application2Results');
+            
+            if (!currentProjectId) {
+                resultsDiv.innerHTML = '✗ Please create a test project first';
+                resultsDiv.className = 'results-box error';
+                return;
+            }
+
+            const formData = new FormData(e.target);
+            const applicationData = {
+                projectId: currentProjectId,
+                projectTitle: 'AI Chatbot Development',
+                developerUid: currentUser.uid + '_alt',
+                developerName: 'Test Developer 2',
+                developerEmail: 'dev2@example.com',
+                message: formData.get('applicationMessage2'),
+                proposedPrice: parseInt(formData.get('proposedPrice2')),
+                status: 'pending',
+                createdAt: new Date().toISOString(),
+                timestamp: Date.now(),
+                attachments: {
+                    pitchDeck: null,
+                    dataFile: null
+                }
+            };
+
+            try {
+                resultsDiv.innerHTML = 'Submitting second application...';
+                resultsDiv.className = 'results-box info';
+
+                const projectRef = doc(db, 'projects', currentProjectId);
+                const applicationsRef = collection(projectRef, 'applications');
+                const docRef = await addDoc(applicationsRef, applicationData);
+                
+                resultsDiv.innerHTML = `✓ Second application submitted!<br>Application ID: ${docRef.id}<br>Proposed Price: $${applicationData.proposedPrice.toLocaleString()}`;
+                resultsDiv.className = 'results-box success';
+            } catch (error) {
+                console.error('Error submitting second application:', error);
+                resultsDiv.innerHTML = `✗ Error submitting application: ${error.message}`;
+                resultsDiv.className = 'results-box error';
+            }
+        });
+
+        // Step 4: View budget analytics
+        document.getElementById('viewAnalyticsBtn').addEventListener('click', async () => {
+            const resultsDiv = document.getElementById('analyticsResults');
+            
+            if (!currentProjectId) {
+                resultsDiv.innerHTML = '✗ Please create a test project first';
+                resultsDiv.className = 'results-box error';
+                return;
+            }
+
+            try {
+                resultsDiv.innerHTML = 'Loading budget analytics...';
+                resultsDiv.className = 'results-box info';
+
+                // Get project data
+                const projectRef = doc(db, 'projects', currentProjectId);
+                const applicationsRef = collection(projectRef, 'applications');
+                
+                const applicationsSnapshot = await getDocs(applicationsRef);
+                const applications = [];
+                
+                applicationsSnapshot.forEach(doc => {
+                    applications.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+
+                if (applications.length === 0) {
+                    resultsDiv.innerHTML = '✗ No applications found';
+                    resultsDiv.className = 'results-box error';
+                    return;
+                }
+
+                // Calculate analytics
+                const proposedPrices = applications.filter(app => app.proposedPrice).map(app => app.proposedPrice);
+                const averageProposed = proposedPrices.length > 0 
+                    ? Math.round(proposedPrices.reduce((sum, price) => sum + price, 0) / proposedPrices.length)
+                    : 0;
+                
+                const projectBudget = 3000; // From test project
+
+                let analyticsHTML = `
+                    <div class="budget-analytics">
+                        <h4>Budget Analytics for AI Chatbot Development</h4>
+                        <div class="budget-row">
+                            <span class="budget-label">Budget posted:</span>
+                            <span class="budget-value">$${projectBudget.toLocaleString()}</span>
+                        </div>
+                        <div class="budget-row">
+                            <span class="budget-label">Average proposed so far:</span>
+                            <span class="budget-value ${averageProposed < projectBudget ? 'under-budget' : 'over-budget'}">$${averageProposed.toLocaleString()}</span>
+                        </div>
+                        <div class="budget-row">
+                            <span class="budget-label">Total applications:</span>
+                            <span class="budget-value">${applications.length}</span>
+                        </div>
+                    </div>
+                    
+                    <h4>Individual Applications:</h4>
+                `;
+
+                applications.forEach((app, index) => {
+                    analyticsHTML += `
+                        <div class="application-card" style="margin-bottom: 1rem;">
+                            <div class="application-content">
+                                <p><strong>Developer:</strong> ${app.developerName}</p>
+                                <div class="budget-row">
+                                    <span class="budget-label">Proposed price:</span>
+                                    <span class="budget-value ${app.proposedPrice < projectBudget ? 'under-budget' : 'over-budget'}">$${app.proposedPrice.toLocaleString()}</span>
+                                </div>
+                                <p><strong>Message:</strong> ${app.message.substring(0, 100)}...</p>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                resultsDiv.innerHTML = analyticsHTML;
+                resultsDiv.className = 'results-box success';
+
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+                resultsDiv.innerHTML = `✗ Error loading analytics: ${error.message}`;
+                resultsDiv.className = 'results-box error';
+            }
+        });
+    </script>
+
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .test-section {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .test-form {
+            margin-bottom: 1rem;
+        }
+
+        .status-box, .results-box {
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.875rem;
+        }
+
+        .status-box.success, .results-box.success {
+            background-color: #dcfce7;
+            border: 1px solid #16a34a;
+            color: #166534;
+        }
+
+        .status-box.error, .results-box.error {
+            background-color: #fef2f2;
+            border: 1px solid #dc2626;
+            color: #991b1b;
+        }
+
+        .status-box.info, .results-box.info {
+            background-color: #dbeafe;
+            border: 1px solid #2563eb;
+            color: #1e40af;
+        }
+    </style>
+</body>
+</html>
