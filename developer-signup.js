@@ -22,8 +22,6 @@ function validateEmail(email) {
 }
 
 function validateVideoFile(file) {
-    if (!file) return true; // Optional
-    
     const maxSize = 50 * 1024 * 1024; // 50MB
     const allowedTypes = ['video/mp4', 'video/mov', 'video/avi', 'video/wmv', 'video/quicktime'];
     
@@ -68,13 +66,15 @@ document.getElementById('developerSignupForm').addEventListener('submit', async 
             throw new Error('Please enter a valid GitHub URL');
         }
         
-        // Video file validation
+        // Video file validation (required)
         const videoFile = formData.get('videoSubmission');
-        if (videoFile && videoFile.size > 0) {
-            const videoValidation = validateVideoFile(videoFile);
-            if (!videoValidation.valid) {
-                throw new Error(videoValidation.message);
-            }
+        if (!videoFile || videoFile.size === 0) {
+            throw new Error('Video submission is required');
+        }
+        
+        const videoValidation = validateVideoFile(videoFile);
+        if (!videoValidation.valid) {
+            throw new Error(videoValidation.message);
         }
         
         // Prepare application data
@@ -102,12 +102,12 @@ document.getElementById('developerSignupForm').addEventListener('submit', async 
             availableInterview: formData.get('availableInterview'),
             
             // Video submission metadata
-            videoSubmission: videoFile && videoFile.size > 0 ? {
+            videoSubmission: {
                 name: videoFile.name,
                 size: videoFile.size,
                 type: videoFile.type,
                 uploaded: true
-            } : null,
+            },
             
             // Application metadata
             status: 'pending_review',
@@ -210,6 +210,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 this.setCustomValidity('');
             }
+        } else {
+            this.setCustomValidity('Video submission is required');
         }
     });
     
