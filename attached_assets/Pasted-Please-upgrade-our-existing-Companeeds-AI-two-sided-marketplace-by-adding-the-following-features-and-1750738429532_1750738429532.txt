@@ -1,0 +1,68 @@
+Please upgrade our existing Companeeds AI two-sided marketplace by adding the following features and improvements. The goal is to create a premium, trusted platform for connecting companies with elite software/AI developers.
+🔐 1. Client (Company) Project Poster Vetting
+Add optional company intake form fields:
+Company Name
+Company Website
+Industry
+Have you worked with freelancers before? (yes/no)
+What’s your ideal timeline? (dropdown)
+What’s your expected project budget?
+Optional “Verified Buyer” badge shown on company profiles if all fields are complete and admin-approved.
+🔎 2. Smart Matching Logic
+When a company posts a project, tag it with tech stack keywords (e.g., Python, React, OpenAI).
+When a dev signs up, store their tech stack and experience.
+Recommend matching developers to companies (and vice versa) based on stack, availability, and budget fit.
+⭐ 3. Ratings and Reviews System
+After each project is marked complete, trigger a two-way review form:
+1–5 star rating
+Text feedback
+Criteria: Communication, Delivery Quality, On-Time, Professionalism
+Store and show average rating + recent reviews on both dev and company profiles.
+💬 4. Messaging System
+Add a secure message/chat interface between devs and companies once a proposal is submitted.
+Features:
+Real-time or async messages
+Notifications for unread messages
+Admin moderation ability (optional)
+💰 5. Escrow & Milestone Planning (Phase 2-Ready)
+Add checkbox to each project: “Enable milestone payments”
+Show companies an option to split payment (e.g., 50% upfront, 50% upon delivery).
+Placeholder functionality for escrow: simulate fund locking + release flow.
+📄 6. Legal & Terms Layer
+Add checkbox before posting a project or proposal:
+“I agree to the Terms of Use and understand that Companeeds AI is not liable for disputes.”
+Add downloadable NDA and IP agreement templates linked in both user dashboards.
+Admin control panel should allow updating the ToS and agreements easily.
+📧 7. Onboarding Emails / Auto-Education
+For developers:
+After signup, send email: “How to craft winning proposals on Companeeds AI”
+For companies:
+After posting, send email: “How to choose the right developer for your project”
+Include value-building educational material and links to support/FAQ.
+🧭 8. Developer Filter + Search (UX Upgrade)
+On the “Browse Developers” page:
+Filters: Tech Stack (multi-select), Location, Experience Level, Rating
+On the “Browse Projects” page:
+Filters: Tech Stack Required, Budget Range, Posted Date, Urgency
+📱 9. Mobile Optimization
+Ensure all dashboards, forms, and modals are fully mobile-responsive.
+Especially test:
+Project posting flow
+Proposal submission
+Messaging/chat
+🛠️ 10. Admin Dashboard
+Add admin control panel with:
+View/manage all dev and company applications
+Approve/reject developers
+See flagged reviews or messages
+Track average project budgets and bids
+View platform analytics (e.g., # projects posted this week)
+🎖️ BONUS FEATURE: Companeeds PRO Badges
+Add a “Verified Elite Developer” badge for top devs (admin-assigned)
+Criteria could be: 5+ successful projects, 4.5+ average rating, or passing a tech screening
+Show badge on their profile and proposals
+🔁 Additional Notes:
+Store all new fields in the backend DB.
+Maintain existing project submission and proposal functionality.
+Make sure all new forms and filters are integrated into the frontend UI cleanly.
+Prioritize security and clean user experience.

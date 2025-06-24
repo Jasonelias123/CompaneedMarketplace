@@ -111,6 +111,12 @@ document.getElementById('developerSignupForm').addEventListener('submit', async 
             throw new Error(videoValidation.message);
         }
         
+        // Validate privacy policy checkbox
+        const agreePrivacyPolicy = formData.get('agreePrivacyPolicy');
+        if (!agreePrivacyPolicy) {
+            throw new Error('You must agree to the privacy policy regarding personal information sharing');
+        }
+        
         // Prepare application data
         const applicationData = {
             // User account info
