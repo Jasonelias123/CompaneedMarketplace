@@ -127,12 +127,11 @@
             const projectsGrid = document.getElementById('projectsGrid');
             
             try {
-                // Get approved projects
+                // Get all projects (since some might not have 'approved' status yet)
                 const projectsQuery = query(
                     collection(db, 'projects'),
-                    where('status', '==', 'approved'),
                     orderBy('timestamp', 'desc'),
-                    limit(6)
+                    limit(8)
                 );
                 
                 const snapshot = await getDocs(projectsQuery);
@@ -142,7 +141,19 @@
                     return;
                 }
                 
-                const projectsHTML = snapshot.docs.map(doc => {
+                // Filter for projects that are active/available
+                const availableProjects = snapshot.docs.filter(doc => {
+                    const project = doc.data();
+                    // Show projects that are approved, active, or don't have a status (legacy projects)
+                    return !project.status || project.status === 'approved' || project.status === 'active';
+                });
+                
+                if (availableProjects.length === 0) {
+                    projectsGrid.innerHTML = '<div class="no-projects">No projects available at the moment.</div>';
+                    return;
+                }
+                
+                const projectsHTML = availableProjects.map(doc => {
                     const project = doc.data();
                     const timeAgo = getTimeAgo(project.createdAt);
                     
@@ -196,7 +207,14 @@
                 
             } catch (error) {
                 console.error('Error loading projects:', error);
-                projectsGrid.innerHTML = '<div class="error">Error loading projects. Please try again later.</div>';
+                console.error('Error details:', error.message);
+                
+                // Show more specific error information for debugging
+                const errorMessage = error.code === 'permission-denied' 
+                    ? 'Unable to load projects. Database permissions may need to be configured.'
+                    : `Error loading projects: ${error.message}`;
+                    
+                projectsGrid.innerHTML = `<div class="error">${errorMessage}</div>`;
             }
         }
 
