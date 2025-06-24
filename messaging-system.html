@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Companeeds AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="messaging-main">
+            <div class="messaging-container">
+                <div class="messaging-sidebar">
+                    <div class="sidebar-header">
+                        <h2>Conversations</h2>
+                        <div class="conversation-filter">
+                            <select id="conversationFilter">
+                                <option value="all">All Conversations</option>
+                                <option value="unread">Unread Only</option>
+                                <option value="active">Active Projects</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="conversations-list" id="conversationsList">
+                        <div class="loading">Loading conversations...</div>
+                    </div>
+                </div>
+
+                <div class="messaging-content">
+                    <div class="conversation-header" id="conversationHeader" style="display: none;">
+                        <div class="conversation-info">
+                            <h3 id="conversationTitle"></h3>
+                            <div class="conversation-meta">
+                                <span id="conversationProject"></span>
+                                <span id="conversationStatus" class="status-badge"></span>
+                            </div>
+                        </div>
+                        <div class="conversation-actions">
+                            <button class="btn btn-outline btn-sm" onclick="showProjectDetails()">View Project</button>
+                            <button class="btn btn-outline btn-sm" onclick="reportConversation()">Report</button>
+                        </div>
+                    </div>
+
+                    <div class="messages-container" id="messagesContainer">
+                        <div class="no-conversation">
+                            <div class="no-conversation-content">
+                                <h3>Select a conversation</h3>
+                                <p>Choose a conversation from the sidebar to start messaging</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-input-container" id="messageInputContainer" style="display: none;">
+                        <form id="messageForm" class="message-form">
+                            <div class="message-input-group">
+                                <textarea id="messageInput" placeholder="Type your message..." rows="3" maxlength="2000"></textarea>
+                                <div class="message-actions">
+                                    <div class="message-info">
+                                        <span class="char-count" id="charCount">0/2000</span>
+                                        <span class="message-hint">No personal info sharing allowed</span>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-sm">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Filter Warning Modal -->
+            <div id="contentWarningModal" class="warning-modal" style="display: none;">
+                <div class="warning-content">
+                    <h3>⚠️ Content Policy Violation</h3>
+                    <p id="warningMessage"></p>
+                    <div class="warning-actions">
+                        <button onclick="closeWarningModal()" class="btn btn-outline">Edit Message</button>
+                        <button onclick="sendAnywayConfirm()" class="btn btn-secondary">Send Anyway</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Details Modal -->
+            <div id="projectModal" class="project-modal" style="display: none;">
+                <div class="project-modal-content">
+                    <div class="project-modal-header">
+                        <h3>Project Details</h3>
+                        <button onclick="closeProjectModal()" class="modal-close">×</button>
+                    </div>
+                    <div class="project-modal-body" id="projectModalBody">
+                        <!-- Project details will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="messaging-system.js"></script>
+</body>
+</html>

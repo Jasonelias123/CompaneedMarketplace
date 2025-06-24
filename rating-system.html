@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Review - Companeeds AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="review-main">
+            <div class="review-container">
+                <div class="review-header">
+                    <h1>Project Review</h1>
+                    <p class="review-subtitle">Please provide feedback on your experience with this project collaboration</p>
+                </div>
+
+                <div class="project-summary" id="projectSummary">
+                    <!-- Project details will be loaded here -->
+                </div>
+
+                <form id="reviewForm" class="review-form">
+                    <div class="form-section">
+                        <h2>Overall Rating</h2>
+                        <div class="rating-group">
+                            <label>How would you rate this collaboration overall?</label>
+                            <div class="star-rating" data-rating="overall">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" name="overallRating" id="overallRating" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Detailed Ratings</h2>
+                        
+                        <div class="rating-group">
+                            <label>Communication</label>
+                            <div class="star-rating" data-rating="communication">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" name="communicationRating" id="communicationRating" required>
+                            <small class="rating-hint">Responsiveness, clarity, and professionalism</small>
+                        </div>
+
+                        <div class="rating-group">
+                            <label>Delivery Quality</label>
+                            <div class="star-rating" data-rating="quality">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" name="qualityRating" id="qualityRating" required>
+                            <small class="rating-hint">Code quality, documentation, and completeness</small>
+                        </div>
+
+                        <div class="rating-group">
+                            <label>On-Time Delivery</label>
+                            <div class="star-rating" data-rating="timeliness">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" name="timelinessRating" id="timelinessRating" required>
+                            <small class="rating-hint">Meeting deadlines and schedule commitments</small>
+                        </div>
+
+                        <div class="rating-group">
+                            <label>Professionalism</label>
+                            <div class="star-rating" data-rating="professionalism">
+                                <span class="star" data-value="1">★</span>
+                                <span class="star" data-value="2">★</span>
+                                <span class="star" data-value="3">★</span>
+                                <span class="star" data-value="4">★</span>
+                                <span class="star" data-value="5">★</span>
+                            </div>
+                            <input type="hidden" name="professionalismRating" id="professionalismRating" required>
+                            <small class="rating-hint">Work ethic, reliability, and business conduct</small>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Written Feedback</h2>
+                        
+                        <div class="form-group">
+                            <label for="positiveFeedback">What went well? (Required)</label>
+                            <textarea id="positiveFeedback" name="positiveFeedback" rows="4" required
+                                      placeholder="Describe the positive aspects of this collaboration..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="improvementFeedback">What could be improved? (Optional)</label>
+                            <textarea id="improvementFeedback" name="improvementFeedback" rows="4"
+                                      placeholder="Constructive feedback for future improvements..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recommendationFeedback">Would you work with this person again?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="recommendYes" name="wouldRecommend" value="yes" required>
+                                    <label for="recommendYes">Yes, definitely</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="recommendMaybe" name="wouldRecommend" value="maybe" required>
+                                    <label for="recommendMaybe">Maybe, depends on the project</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="recommendNo" name="wouldRecommend" value="no" required>
+                                    <label for="recommendNo">No, not likely</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Privacy & Publication</h2>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="publicReview" name="publicReview">
+                                <label for="publicReview">Make this review public on the recipient's profile</label>
+                            </div>
+                            <small class="form-hint">Unchecked reviews are only visible to admins for platform improvement</small>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agreeToTerms" name="agreeToTerms" required>
+                                <label for="agreeToTerms">I agree this review is honest and based on my direct experience <span class="required">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">Submit Review</button>
+                        <button type="button" class="btn btn-outline" onclick="window.history.back()">Cancel</button>
+                        <p class="submit-note">Reviews help build trust in our community and improve the platform experience</p>
+                    </div>
+                </form>
+
+                <!-- Upload Status -->
+                <div id="uploadStatus" class="upload-status" style="display: none;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="rating-system.js"></script>
+</body>
+</html>
