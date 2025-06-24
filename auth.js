@@ -92,11 +92,18 @@ export async function handleSignup(event) {
         
         // Save user role to Firestore
         console.log('Saving user role to Firestore:', role);
-        await setDoc(doc(db, 'users', user.uid), {
+        const userDoc = {
             email: user.email,
             role: role,
             createdAt: new Date().toISOString()
-        });
+        };
+        
+        // For developers from the new signup flow, mark as pending application
+        if (role === 'developer') {
+            userDoc.accountType = 'pending_application';
+        }
+        
+        await setDoc(doc(db, 'users', user.uid), userDoc);
         console.log('User role saved successfully');
         
         userRole = role;
@@ -112,7 +119,7 @@ export async function handleSignup(event) {
             console.log('Redirecting to dashboard.html');
             window.location.replace('dashboard.html');
         } else if (role === 'developer') {
-            console.log('Redirecting to projects.html');
+            console.log('Redirecting to projects.html (legacy developer signup)');
             window.location.replace('projects.html');
         } else {
             console.error('Unknown role:', role);
