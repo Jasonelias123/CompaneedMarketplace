@@ -35,11 +35,12 @@ console.log('Firebase config loaded:', {{
         return super().do_GET()
     
     def end_headers(self):
-        # Add no-cache headers for HTML files
-        if self.path == '/' or self.path.endswith('.html'):
-            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+        # Add no-cache headers for HTML and CSS files
+        if self.path == '/' or self.path.endswith('.html') or self.path.endswith('.css'):
+            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0')
             self.send_header('Pragma', 'no-cache')
             self.send_header('Expires', '0')
+            self.send_header('Last-Modified', 'Wed, 25 Jun 2025 03:50:00 GMT')
         super().end_headers()
 
 PORT = 5000
