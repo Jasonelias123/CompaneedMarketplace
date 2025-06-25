@@ -7,7 +7,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <link rel="stylesheet" href="styles.css?v=20250625-03">
+    <link rel="stylesheet" href="styles.css?v=20250625-FINAL">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="homepage">
@@ -161,34 +161,9 @@
             });
         }
 
-        // DOM ready handler
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add scroll effects
-            window.addEventListener('scroll', () => {
-                const navbar = document.querySelector('.navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-
-            // Handle sign in link click
-            const signInLink = document.getElementById('signInLink');
-            if (signInLink) {
-                signInLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'login.html';
-                });
-            }
-
-            console.log('Index page loaded and ready');
-        });
-
         // Make functions globally accessible
         window.goToRole = goToRole;
         window.scrollToRoles = scrollToRoles;
     </script>
 </body>
 </html>
-
