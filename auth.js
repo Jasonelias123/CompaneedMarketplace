@@ -119,7 +119,7 @@ export async function handleSignup(event) {
             console.log('Redirecting to dashboard-new.html');
             window.location.replace('dashboard-new.html');
         } else if (role === 'developer') {
-            console.log('Redirecting to projects.html (legacy developer signup)');
+            console.log('Redirecting to projects.html (AI talent signup)');
             window.location.replace('projects.html');
         } else {
             console.error('Unknown role:', role);
