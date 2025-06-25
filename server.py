@@ -35,12 +35,16 @@ console.log('Firebase config loaded:', {{
         return super().do_GET()
     
     def end_headers(self):
-        # Add no-cache headers for HTML and CSS files
+        # Add aggressive no-cache headers for HTML and CSS files
         if self.path == '/' or self.path.endswith('.html') or self.path.endswith('.css'):
-            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0')
+            import time
+            current_time = time.strftime('%a, %d %b %Y %H:%M:%S GMT', time.gmtime())
+            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0, private')
             self.send_header('Pragma', 'no-cache')
             self.send_header('Expires', '0')
-            self.send_header('Last-Modified', 'Wed, 25 Jun 2025 03:50:00 GMT')
+            self.send_header('Last-Modified', current_time)
+            self.send_header('ETag', f'"{int(time.time())}"')
+            self.send_header('Vary', 'Cache-Control')
         super().end_headers()
 
 PORT = 5000
