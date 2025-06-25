@@ -117,34 +117,16 @@ document.getElementById('developerSignupForm').addEventListener('submit', async 
             throw new Error('You must agree to the privacy policy regarding personal information sharing');
         }
         
-        // Collect AI tools/stacks
-        const aiToolsStacks = [];
-        const aiToolsCheckboxes = document.querySelectorAll('input[name="aiToolsStacks"]:checked');
-        aiToolsCheckboxes.forEach(checkbox => {
-            aiToolsStacks.push(checkbox.value);
-        });
-        
-        // Add other AI tools if specified
-        const otherAiTools = formData.get('otherAiTools');
-        if (otherAiTools && otherAiTools.trim()) {
-            const otherTools = otherAiTools.split(',').map(tool => tool.trim()).filter(tool => tool);
-            aiToolsStacks.push(...otherTools);
-        }
-        
-        // Collect project types
-        const projectTypes = [];
-        const projectTypesCheckboxes = document.querySelectorAll('input[name="projectTypes"]:checked');
-        projectTypesCheckboxes.forEach(checkbox => {
-            projectTypes.push(checkbox.value);
+        // Collect work types
+        const workTypes = [];
+        const workTypeCheckboxes = document.querySelectorAll('input[name="workType"]:checked');
+        workTypeCheckboxes.forEach(checkbox => {
+            workTypes.push(checkbox.value);
         });
         
         // Validate required fields
-        if (aiToolsStacks.length === 0) {
-            throw new Error('Please select at least one AI tool or stack you specialize in');
-        }
-        
-        if (projectTypes.length === 0) {
-            throw new Error('Please select at least one type of AI project you prefer');
+        if (workTypes.length === 0) {
+            throw new Error('Please select at least one work type preference');
         }
         
         // Prepare application data

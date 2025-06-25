@@ -105,12 +105,14 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
-- **June 25, 2025**: Rebranded "Developer" to "AI Talent" throughout platform
+- **June 25, 2025**: Comprehensive AI Talent rebranding and intake form redesign
   - Updated all UI references from "Developer" to "AI Talent" or "AI Consultant"
-  - Enhanced AI talent intake form with specialized AI tools/stacks selection
-  - Added preferred project types (NLP, automation, computer vision, etc.)
-  - Improved form layout with checkbox grids for better UX
-  - Maintained all existing Firebase functionality and routing
+  - Created new streamlined AI talent intake form (ai-talent-intake.html) with updated messaging
+  - Form emphasizes "real solutions, not experiments" and "high-intent clients"
+  - Simplified form fields: Full Name, Email, Location, AI Tools/Stacks, Project Types, Bio, Portfolio, Work Preferences, Availability
+  - Removed complex checkbox grids in favor of textarea inputs for better user experience
+  - Updated routing to use new AI talent signup flow
+  - Maintained all existing Firebase functionality and video submission requirements
 - **June 24, 2025**: Major platform upgrade to premium marketplace features - Phase 2 Complete
   - ✓ Comprehensive company vetting system with intake forms and verification badges
   - ✓ Smart tech stack selector with organized categories for precise project matching

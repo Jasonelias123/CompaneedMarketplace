@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Talent Application - Companeeds AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><a href="index.html" class="logo-link">Companeeds</a></h1>
+                <div class="header-actions">
+                    <span id="userEmail" class="user-email"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" onclick="handleLogoutClick()" style="display: none;">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="developer-signup-main">
+            <div class="developer-signup-container">
+                <div class="form-header">
+                    <h1>Join Companeeds as AI Talent</h1>
+                    <p class="form-subtitle">Companeeds connects top-tier AI professionals with businesses ready to implement real solutions — not experiments.</p>
+                    <p class="form-intro">Apply now to join our curated network of AI talent. We match you with high-intent clients who are looking for experts like you to solve real-world problems using automation, LLMs, and advanced AI tools.</p>
+                </div>
+
+                <form id="aiTalentApplicationForm" class="developer-signup-form">
+                    <!-- Basic Information Section -->
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" required 
+                                   placeholder="Your full professional name">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required 
+                                       placeholder="your.email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location <span class="required">*</span></label>
+                                <input type="text" id="location" name="location" required 
+                                       placeholder="City, Country">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Expertise Section -->
+                    <div class="form-section">
+                        <h3>AI Expertise</h3>
+                        
+                        <div class="form-group">
+                            <label for="aiToolsStacks">AI Tools / Stacks You Specialize In <span class="required">*</span></label>
+                            <textarea id="aiToolsStacks" name="aiToolsStacks" required rows="3" 
+                                      placeholder="GPT-4, LangChain, Pinecone, Midjourney, Claude, Zapier, AutoGPT, RAG pipelines"></textarea>
+                            <small class="form-hint">List the AI tools, frameworks, and technologies you work with regularly</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="projectTypes">What types of projects do you prefer? <span class="required">*</span></label>
+                            <textarea id="projectTypes" name="projectTypes" required rows="3" 
+                                      placeholder="e.g., process automation, customer service bots, internal data agents, prompt engineering, AI training, etc."></textarea>
+                            <small class="form-hint">Describe the types of AI projects you enjoy working on most</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shortBio">Short Bio / About You <span class="required">*</span></label>
+                            <textarea id="shortBio" name="shortBio" required rows="4" 
+                                      placeholder="Describe your background, past results, or AI expertise in a few sentences."></textarea>
+                            <small class="form-hint">Help clients understand your experience and what makes you unique</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="portfolioURL">Link to Portfolio or LinkedIn <span class="required">*</span></label>
+                            <input type="url" id="portfolioURL" name="portfolioURL" required 
+                                   placeholder="https://yourwebsite.com or https://linkedin.com/in/you">
+                            <small class="form-hint">Your professional portfolio, website, or LinkedIn profile</small>
+                        </div>
+                    </div>
+
+                    <!-- Work Preferences Section -->
+                    <div class="form-section">
+                        <h3>Work Preferences</h3>
+                        
+                        <div class="form-group">
+                            <label for="workType">Are you open to full-time, part-time, or consulting gigs? <span class="required">*</span></label>
+                            <div class="checkbox-list">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="fullTime" name="workType" value="Full-time">
+                                    <label for="fullTime">Full-time positions</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="partTime" name="workType" value="Part-time">
+                                    <label for="partTime">Part-time work</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="consulting" name="workType" value="Consulting">
+                                    <label for="consulting">Consulting projects</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="freelance" name="workType" value="Freelance">
+                                    <label for="freelance">Freelance gigs</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="availability">How soon can you start? <span class="required">*</span></label>
+                            <select id="availability" name="availability" required>
+                                <option value="">Select availability</option>
+                                <option value="immediately">Immediately</option>
+                                <option value="1-2-weeks">1-2 weeks</option>
+                                <option value="1-month">1 month</option>
+                                <option value="2-3-months">2-3 months</option>
+                                <option value="flexible">Flexible timing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Materials Section -->
+                    <div class="form-section">
+                        <h3>Portfolio Materials</h3>
+                        
+                        <div class="form-group">
+                            <label for="pitchDeck">Upload Pitch Deck or Resume (Optional)</label>
+                            <input type="file" id="pitchDeck" name="pitchDeck" 
+                                   accept=".pdf,.ppt,.pptx,.key,.doc,.docx">
+                            <small class="form-hint">Upload your resume, pitch deck, or portfolio document (Max 10MB)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="videoSubmission">Video Introduction <span class="required">*</span></label>
+                            <input type="file" id="videoSubmission" name="videoSubmission" 
+                                   accept="video/*" required>
+                            <small class="form-hint">Upload a 2-3 minute video introducing yourself and your AI expertise (Max 50MB)</small>
+                        </div>
+                    </div>
+
+                    <!-- Professional Conduct Section -->
+                    <div class="form-section">
+                        <h3>Professional Standards</h3>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                <label for="agreeTerms">I agree to Companeeds terms of service and understand that my application will be reviewed for approval <span class="required">*</span></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agreePrivacyPolicy" name="agreePrivacyPolicy" required>
+                                <label for="agreePrivacyPolicy">I understand and agree that I will not share any personal information (social media links, emails, phone numbers, names, or any other personal details) with companies through this platform. Violation of this policy will result in immediate removal from Companeeds. <span class="required">*</span></label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">Submit AI Talent Application</button>
+                        <p class="submit-note">By submitting this application, you agree to our vetting process and privacy policies. Approval is not guaranteed.</p>
+                    </div>
+                </form>
+
+                <!-- Upload Status -->
+                <div id="uploadStatus" class="upload-status" style="display: none;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="env-config.js"></script>
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="ai-talent-signup.js"></script>
+</body>
+</html>
