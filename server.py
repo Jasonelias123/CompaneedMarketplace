@@ -33,6 +33,14 @@ console.log('Firebase config loaded:', {{
         
         # For all other requests, use the default handler
         return super().do_GET()
+    
+    def end_headers(self):
+        # Add no-cache headers for HTML files
+        if self.path == '/' or self.path.endswith('.html'):
+            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            self.send_header('Pragma', 'no-cache')
+            self.send_header('Expires', '0')
+        super().end_headers()
 
 PORT = 5000
 Handler = ConfigurableHTTPRequestHandler
