@@ -111,12 +111,18 @@
 
         // Form submission handler
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, looking for form...');
             const form = document.getElementById('developerAccountForm');
             
             if (!form) {
                 console.error('Developer account form not found');
+                // Try to find any form on the page
+                const allForms = document.querySelectorAll('form');
+                console.log('All forms found:', allForms);
                 return;
             }
+            
+            console.log('Form found, attaching event listener');
 
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
