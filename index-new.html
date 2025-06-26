@@ -184,13 +184,32 @@
                 <h2>Ready to Transform Your Business with AI?</h2>
                 <p>Join hundreds of companies already scaling with our AI experts</p>
                 <div class="cta-buttons">
-                    <a href="company-intake.html" class="cta-button primary large">
-                        Get Matched Now
-                        <span class="arrow">→</span>
-                    </a>
-                    <a href="ai-talent-signup.html" class="btn-outline large">
-                        Join as AI Talent
-                    </a>
+                    <div class="role-card company-role" onclick="goToRole('company')" style="cursor: pointer; margin-bottom: 1rem; padding: 2rem; border: 2px solid var(--primary-color); border-radius: var(--radius-xl); background: white;">
+                        <div class="role-header">
+                            <div class="role-icon" style="font-size: 3rem; margin-bottom: 1rem;">🏢</div>
+                            <h3 style="color: var(--text-primary); margin-bottom: 1rem;">For Companies</h3>
+                        </div>
+                        <div class="role-content">
+                            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Get matched with vetted AI experts to transform your business</p>
+                            <button class="cta-button primary large" onclick="event.stopPropagation(); goToRole('company')" style="width: 100%;">
+                                Get Matched Now
+                                <span class="arrow">→</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card developer-role" onclick="goToRole('developer')" style="cursor: pointer; padding: 2rem; border: 2px solid var(--accent-color); border-radius: var(--radius-xl); background: white;">
+                        <div class="role-header">
+                            <div class="role-icon" style="font-size: 3rem; margin-bottom: 1rem;">🤖</div>
+                            <h3 style="color: var(--text-primary); margin-bottom: 1rem;">For AI Consultants</h3>
+                        </div>
+                        <div class="role-content">
+                            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Join our network of elite AI professionals</p>
+                            <button class="btn-outline large" onclick="event.stopPropagation(); goToRole('developer')" style="width: 100%;">
+                                Apply as AI Consultant
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -241,6 +260,26 @@
                 }
             });
         });
+
+        // Role selection functions
+        window.goToRole = function(role) {
+            if (role === 'company') {
+                window.location.href = 'company-intake.html';
+            } else if (role === 'developer') {
+                window.location.href = 'ai-talent-signup.html';
+            }
+        };
+
+        // Scroll to roles section
+        window.scrollToRoles = function() {
+            const rolesSection = document.querySelector('.cta-section');
+            if (rolesSection) {
+                rolesSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        };
 
         // Mobile menu toggle
         const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

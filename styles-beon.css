@@ -532,8 +532,29 @@ body {
 .cta-buttons {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
     flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.role-card {
+    flex: 1;
+    min-width: 300px;
+    transition: all 0.3s ease;
+}
+
+.role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.role-card.company-role:hover {
+    border-color: var(--primary-dark);
+}
+
+.role-card.developer-role:hover {
+    border-color: var(--accent-color);
 }
 
 .cta-section .cta-button {
