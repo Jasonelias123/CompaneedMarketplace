@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Intake - Companeeds</title>
+    <meta name="description" content="Tell us about your business and we'll match you with the perfect AI expert">
+    
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <link rel="stylesheet" href="styles-beon.css?v=toptal-for-ai">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="fixed-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index-new.html" style="color: inherit; text-decoration: none;">Companeeds</a>
+            </div>
+            <div class="nav-links">
+                <a href="index-new.html#companies" class="nav-link">Companies</a>
+                <a href="ai-talent-signup.html" class="nav-link">AI Talent</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Company Intake Form -->
+    <section class="intake-section">
+        <div class="container">
+            <div class="intake-container">
+                <div class="intake-header">
+                    <h1>Let Us Match You With an AI Expert</h1>
+                    <p>Tell us about your business and goals, and we'll connect you with the perfect AI consultant in 48 hours.</p>
+                </div>
+                
+                <div class="intake-form-wrapper">
+                    <form id="companyIntakeForm" class="intake-form">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="companyName">Company Name *</label>
+                                <input type="text" id="companyName" name="companyName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactName">Your Name *</label>
+                                <input type="text" id="contactName" name="contactName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="industry">Industry *</label>
+                                <select id="industry" name="industry" required>
+                                    <option value="">Select your industry</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="retail">Retail</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="education">Education</option>
+                                    <option value="real-estate">Real Estate</option>
+                                    <option value="consulting">Consulting</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="companySize">Company Size *</label>
+                                <select id="companySize" name="companySize" required>
+                                    <option value="">Select company size</option>
+                                    <option value="1-10">1-10 employees</option>
+                                    <option value="11-50">11-50 employees</option>
+                                    <option value="51-200">51-200 employees</option>
+                                    <option value="201-1000">201-1000 employees</option>
+                                    <option value="1000+">1000+ employees</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="aiGoals">What result would you like to achieve with AI? *</label>
+                                <textarea id="aiGoals" name="aiGoals" rows="4" placeholder="Describe the specific outcomes you're hoping to achieve with AI implementation..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="businessAreas">Which areas of your business would benefit most from AI? *</label>
+                                <textarea id="businessAreas" name="businessAreas" rows="3" placeholder="e.g., sales, operations, customer support, marketing, data analysis..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="timeline">Project Timeline *</label>
+                                <select id="timeline" name="timeline" required>
+                                    <option value="">Select timeline</option>
+                                    <option value="asap">ASAP (within 2 weeks)</option>
+                                    <option value="1-month">Within 1 month</option>
+                                    <option value="2-3-months">2-3 months</option>
+                                    <option value="3-6-months">3-6 months</option>
+                                    <option value="6-months+">6+ months</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="budget">Estimated Budget *</label>
+                                <select id="budget" name="budget" required>
+                                    <option value="">Select budget range</option>
+                                    <option value="under-10k">Under $10,000</option>
+                                    <option value="10k-25k">$10,000 - $25,000</option>
+                                    <option value="25k-50k">$25,000 - $50,000</option>
+                                    <option value="50k-100k">$50,000 - $100,000</option>
+                                    <option value="100k+">$100,000+</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="additionalInfo">Additional Information</label>
+                                <textarea id="additionalInfo" name="additionalInfo" rows="3" placeholder="Any specific requirements, technologies, or constraints we should know about?"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-footer">
+                            <div class="beta-disclaimer">
+                                <p><strong>During our Beta, matching is free. After launch, Companeeds will be $75/month.</strong></p>
+                                <p>We'll only match you with proven experts who can deliver real results.</p>
+                            </div>
+                            
+                            <button type="submit" class="submit-button">
+                                Get Matched with AI Experts
+                                <span class="arrow">→</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="loading-spinner"></div>
+            <h3>Submitting Your Request...</h3>
+            <p>We're processing your information and finding the perfect AI experts for your business.</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <h3>Request Submitted Successfully!</h3>
+            <p>We're reviewing your request and will match you with 1–3 AI consultants within 48 hours.</p>
+            <p>You'll receive an email shortly with next steps.</p>
+            <button onclick="closeModal()" class="modal-button">Got It</button>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="error-icon">⚠️</div>
+            <h3>Submission Error</h3>
+            <p id="errorMessage">Something went wrong. Please try again.</p>
+            <button onclick="closeModal()" class="modal-button">Try Again</button>
+        </div>
+    </div>
+
+    <!-- Firebase Configuration -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBjkVS1ByMXjLnF_vZt69g0WQ2FbSQKMpM",
+            authDomain: "companeeds-mvp.firebaseapp.com", 
+            projectId: "companeeds-mvp",
+            storageBucket: "companeeds-mvp.appspot.com",
+            messagingSenderId: "590032996269",
+            appId: "1:590032996269:web:123456789abcdef"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Form submission handler
+        document.getElementById('companyIntakeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const loadingModal = document.getElementById('loadingModal');
+            const successModal = document.getElementById('successModal');
+            const errorModal = document.getElementById('errorModal');
+            
+            // Show loading modal
+            loadingModal.style.display = 'flex';
+            
+            try {
+                const formData = new FormData(e.target);
+                const data = {
+                    companyName: formData.get('companyName'),
+                    contactName: formData.get('contactName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    industry: formData.get('industry'),
+                    companySize: formData.get('companySize'),
+                    aiGoals: formData.get('aiGoals'),
+                    businessAreas: formData.get('businessAreas'),
+                    timeline: formData.get('timeline'),
+                    budget: formData.get('budget'),
+                    additionalInfo: formData.get('additionalInfo'),
+                    submittedAt: serverTimestamp(),
+                    status: 'pending'
+                };
+
+                // Submit to Firestore
+                await addDoc(collection(db, 'companyIntakes'), data);
+                
+                // Hide loading and show success
+                loadingModal.style.display = 'none';
+                successModal.style.display = 'flex';
+                
+                // Reset form
+                e.target.reset();
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                
+                // Hide loading and show error
+                loadingModal.style.display = 'none';
+                document.getElementById('errorMessage').textContent = 'Failed to submit your request. Please try again.';
+                errorModal.style.display = 'flex';
+            }
+        });
+
+        // Modal close function
+        window.closeModal = function() {
+            document.getElementById('loadingModal').style.display = 'none';
+            document.getElementById('successModal').style.display = 'none';
+            document.getElementById('errorModal').style.display = 'none';
+        };
+    </script>
+
+    <style>
+        /* Intake Form Styles */
+        .intake-section {
+            padding: 120px 0 80px;
+            background: var(--surface-color);
+            min-height: 100vh;
+        }
+
+        .intake-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intake-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .intake-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .intake-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .intake-form-wrapper {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-footer {
+            text-align: center;
+        }
+
+        .beta-disclaimer {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+        }
+
+        .beta-disclaimer p {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .beta-disclaimer p:first-child {
+            color: var(--primary-color);
+        }
+
+        .submit-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.25rem 2.5rem;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        .submit-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-2xl);
+            text-align: center;
+            max-width: 500px;
+            margin: 1rem;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        .success-icon,
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-icon {
+            color: var(--success-color);
+        }
+
+        .error-icon {
+            color: var(--error-color);
+        }
+
+        .modal-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intake-form-wrapper {
+                padding: 2rem;
+            }
+            
+            .intake-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</body>
+</html>

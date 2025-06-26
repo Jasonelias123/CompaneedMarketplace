@@ -105,6 +105,14 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **June 26, 2025**: Complete UI transformation to "Toptal for AI" positioning with Beon.tech-inspired design
+  - Created new index-new.html with side-by-side hero layout, clean white background, and modern typography
+  - Redesigned 3-step value proposition: "Tell Us About Your Business", "Get Matched", "See Results"
+  - Built comprehensive company-intake.html form with AI-focused questions and Firebase integration
+  - Added thank-you.html with Beon.tech-style confirmation flow and next steps
+  - New styles-beon.css with Inter font, purple/violet accents, clean grid layouts, and smooth animations
+  - Updated messaging to emphasize "Companeeds = Toptal for AI" with 48-hour matching promise
+  - Added fixed navigation with "Get Matched" CTA and beta pricing disclosure ($75/month after launch)
 - **June 25, 2025**: Comprehensive AI Talent rebranding and intake form redesign
   - Updated all UI references from "Developer" to "AI Talent" or "AI Consultant"
   - Created new streamlined AI talent intake form (ai-talent-intake.html) with updated messaging

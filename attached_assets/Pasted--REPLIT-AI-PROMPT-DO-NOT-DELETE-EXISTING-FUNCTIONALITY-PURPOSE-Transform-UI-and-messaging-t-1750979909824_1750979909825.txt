@@ -1,0 +1,69 @@
+// REPLIT AI PROMPT — DO NOT DELETE EXISTING FUNCTIONALITY
+
+// PURPOSE: Transform UI and messaging to reflect "Companeeds = Toptal for AI" positioning, using layout like https://meet.beon.tech/talent-platform
+
+// DO NOT REMOVE:
+// - Firebase logic
+// - Form submission functionality
+// - Existing page routing
+// - Developer browsing or pitch deck uploads
+
+// MAKE THESE CHANGES:
+
+// ✅ HOMEPAGE
+
+// Replace the current hero section with a Beon.tech-style design (side-by-side layout, clean white background, large text, CTA button)
+
+// - NEW HEADLINE: "Companeeds — AI talent for your company"
+// - NEW SUBHEADLINE: "AI is reshaping every industry — fast. At Companeeds, we connect you with trusted AI experts so your business doesn't just keep up, it leads."
+// - CTA BUTTON: "Get Matched Now" → links to /company-intake
+// - Use modern typography (Poppins or Inter), clean grid/card layout, responsive design
+// - Add fixed top navbar with: Logo + Links: "Companies", "AI Talent", "Login", and CTA button: "Get Matched"
+
+// ✅ VALUE PROP — 3-STEP BLOCK
+
+// Replace any existing 3-step "Post → Match → Result" flow with the following:
+
+// 1️⃣ Tell Us About Your Business
+// "We start by understanding what matters most to you — your industry, your challenges, and your biggest opportunities. Our team works closely with you to uncover where AI can create exponential efficiency, impact, and growth."
+
+// 2️⃣ Get Matched with a Trusted AI Expert
+// "In as little as 2 days, we connect you with a rigorously vetted expert who knows how to deliver results in your space. From expanding your sales pipeline, streamlining operations, automating workflows, or building a custom AI product — our experts help you unlock new levels of scale and growth fast."
+
+// 3️⃣ See Measurable Results — or You Don’t Pay
+// "We care about your results. If you’re not seeing real, meaningful outcomes — you don’t pay. Our model is built on trust, clarity, and delivering real value from day one."
+
+// Display these 3 blocks horizontally or vertically stacked with icons and animations (fadeIn or slideUp) similar to Beon.tech
+
+// ✅ COMPANY INTAKE PAGE (/company-intake)
+
+// - Keep Firebase form logic as-is
+// - Restyle the form to match Beon’s clean, centered card design
+// - Header: "Let Us Match You With an AI Expert"
+// - Add question: "What result would you like to achieve with AI?" (textarea)
+// - Change field: "Where would you like to implement AI?" → "Which areas of your business would benefit most from AI? (e.g., sales, ops, support)"
+// - Add disclaimer: “During our Beta, matching is free. After launch, Companeeds will be $75/month.”
+
+// ✅ AI TALENT INTAKE PAGE
+
+// - Change all references from "Developer" to "AI Talent" or "AI Consultant"
+// - Page title: "Join the Companeeds AI Network"
+// - Intro paragraph: "Apply to be matched with companies seeking AI integrations, automations, and custom solutions."
+// - Add fields if missing: Specializations, AI Tools You Use, Example Past Results
+// - Maintain Firebase functionality
+
+// ✅ THANK-YOU PAGE (/thank-you)
+
+// - Clean redesign to match Beon.tech confirmation UI
+// - Message: "Thanks for submitting! We're reviewing your request and will match you with 1–3 AI consultants within 48 hours."
+
+// ✅ STYLING
+
+// - Use white background, dark text, blue or violet accent, and Poppins or Inter font
+// - Apply consistent padding, spacing, shadows, and rounded corners
+// - Use subtle animations on scroll (fadeIn/slideUp)
+
+// ✅ FINAL REMINDER
+
+// DO NOT overwrite or delete any working code or features
+// ONLY update styles, layout, copy, and flow per above
