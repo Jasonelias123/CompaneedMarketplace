@@ -176,28 +176,44 @@
         </div>
     </div>
 
+    <!-- Load environment config first -->
+    <script src="env-config.js"></script>
+    
     <!-- Firebase Configuration -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-        // Firebase configuration
+        // Use environment variables from env-config.js
         const firebaseConfig = {
-            apiKey: "AIzaSyBjkVS1ByMXjLnF_vZt69g0WQ2FbSQKMpM",
-            authDomain: "companeeds-mvp.firebaseapp.com", 
-            projectId: "companeeds-mvp",
-            storageBucket: "companeeds-mvp.appspot.com",
-            messagingSenderId: "590032996269",
-            appId: "1:590032996269:web:123456789abcdef"
+            apiKey: window.VITE_FIREBASE_API_KEY,
+            authDomain: `${window.VITE_FIREBASE_PROJECT_ID}.firebaseapp.com`,
+            projectId: window.VITE_FIREBASE_PROJECT_ID,
+            storageBucket: `${window.VITE_FIREBASE_PROJECT_ID}.firebasestorage.app`,
+            messagingSenderId: window.VITE_FIREBASE_MESSAGING_SENDER_ID,
+            appId: window.VITE_FIREBASE_APP_ID
         };
+
+        console.log('Firebase config loaded:', firebaseConfig);
+
+        // Validate config
+        if (!firebaseConfig.apiKey || !firebaseConfig.projectId || !firebaseConfig.appId) {
+            console.error('Firebase configuration incomplete:', firebaseConfig);
+            alert('Firebase configuration error. Please check console.');
+            return;
+        }
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        
+        console.log('Firebase initialized successfully');
 
         // Form submission handler
         document.getElementById('companyIntakeForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            console.log('Form submission started');
             
             const loadingModal = document.getElementById('loadingModal');
             const successModal = document.getElementById('successModal');
@@ -205,6 +221,7 @@
             
             // Show loading modal
             loadingModal.style.display = 'flex';
+            console.log('Loading modal displayed');
             
             try {
                 const formData = new FormData(e.target);
@@ -224,22 +241,27 @@
                     status: 'pending'
                 };
 
+                console.log('Submitting data to Firestore:', data);
+
                 // Submit to Firestore
-                await addDoc(collection(db, 'companyIntakes'), data);
+                const docRef = await addDoc(collection(db, 'companyIntakes'), data);
+                console.log('Document written with ID: ', docRef.id);
                 
                 // Hide loading and show success
                 loadingModal.style.display = 'none';
                 successModal.style.display = 'flex';
+                console.log('Success modal displayed');
                 
                 // Reset form
                 e.target.reset();
                 
             } catch (error) {
                 console.error('Error submitting form:', error);
+                console.error('Error details:', error.message, error.code);
                 
                 // Hide loading and show error
                 loadingModal.style.display = 'none';
-                document.getElementById('errorMessage').textContent = 'Failed to submit your request. Please try again.';
+                document.getElementById('errorMessage').textContent = `Failed to submit your request: ${error.message}. Please try again.`;
                 errorModal.style.display = 'flex';
             }
         });
