@@ -200,7 +200,7 @@
         if (!firebaseConfig.apiKey || !firebaseConfig.projectId || !firebaseConfig.appId) {
             console.error('Firebase configuration incomplete:', firebaseConfig);
             alert('Firebase configuration error. Please check console.');
-            return;
+            throw new Error('Firebase configuration incomplete');
         }
 
         // Initialize Firebase
@@ -247,13 +247,12 @@
                 const docRef = await addDoc(collection(db, 'companyIntakes'), data);
                 console.log('Document written with ID: ', docRef.id);
                 
-                // Hide loading and show success
+                // Hide loading modal
                 loadingModal.style.display = 'none';
-                successModal.style.display = 'flex';
-                console.log('Success modal displayed');
+                console.log('Success - redirecting to thank you page');
                 
-                // Reset form
-                e.target.reset();
+                // Redirect to thank you page
+                window.location.href = 'thank-you.html';
                 
             } catch (error) {
                 console.error('Error submitting form:', error);
