@@ -24,13 +24,13 @@
         <main class="developer-signup-main">
             <div class="developer-signup-container">
                 <div class="signup-header">
-                    <h1>Join as AI Talent</h1>
-                    <p class="signup-subtitle">Create your AI talent account to access our vetting process. Only top-tier AI professionals are accepted on Companeeds AI.</p>
+                    <h1>Join as AI Consultant</h1>
+                    <p class="signup-subtitle">Create your AI consultant account to access our vetting process. Only top-tier AI professionals are accepted on Companeeds AI.</p>
                 </div>
 
                 <form id="developerAccountForm" class="developer-signup-form">
                     <div class="form-section">
-                        <h2>Create Your AI Talent Account</h2>
+                        <h2>Create Your AI Consultant Account</h2>
                         
                         <div class="form-group">
                             <label for="fullName">Full Name <span class="required">*</span></label>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="form-submit">
-                        <button type="submit" class="btn btn-primary btn-large">Create AI Talent Account & Continue</button>
+                        <button type="submit" class="btn btn-primary btn-large">Create AI Consultant Account & Continue</button>
                         <p class="submit-note">After creating your account, you'll complete a detailed application form including video submission.</p>
                     </div>
                 </form>
@@ -102,7 +102,7 @@
             appId: window.VITE_FIREBASE_APP_ID
         };
 
-        console.log('AI Talent Signup - Firebase config loaded:', firebaseConfig);
+        console.log('AI Consultant Signup - Firebase config loaded:', firebaseConfig);
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -120,7 +120,7 @@
 
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                console.log('AI talent signup form submitted');
+                console.log('AI consultant signup form submitted');
 
                 const formData = new FormData(e.target);
                 const fullName = formData.get('fullName');
@@ -160,7 +160,7 @@
 
                     console.log('User profile saved, redirecting to intake...');
                     
-                    // Redirect to AI talent intake page
+                    // Redirect to AI consultant intake page
                     window.location.href = 'ai-talent-intake.html';
                     
                 } catch (error) {
