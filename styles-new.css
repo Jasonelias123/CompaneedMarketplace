@@ -126,6 +126,15 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .arrow {
+    transform: translateX(4px);
+}
+
 .cta-button:hover {
     background: var(--cta-hover);
     transform: translateY(-3px);
