@@ -62,10 +62,24 @@ async function handleApplicationSubmission(event) {
         // Upload pitch deck if provided
         const pitchDeckFile = formData.get('pitchDeck');
         if (pitchDeckFile && pitchDeckFile.size > 0) {
+            // Check file size (10MB limit)
+            const maxPitchSize = 10 * 1024 * 1024; // 10MB in bytes
+            if (pitchDeckFile.size > maxPitchSize) {
+                throw new Error('Pitch deck file is too large. Please keep it under 10MB.');
+            }
+            
+            console.log(`Uploading pitch deck: ${pitchDeckFile.name}, size: ${(pitchDeckFile.size / 1024 / 1024).toFixed(2)}MB`);
             uploadStatus.innerHTML = '<div class="status-message processing">Uploading pitch deck...</div>';
-            const pitchDeckRef = ref(storage, `applications/${user.uid}/pitch-deck-${Date.now()}`);
-            const pitchDeckSnapshot = await uploadBytes(pitchDeckRef, pitchDeckFile);
-            pitchDeckURL = await getDownloadURL(pitchDeckSnapshot.ref);
+            
+            try {
+                const pitchDeckRef = ref(storage, `applications/${user.uid}/pitch-deck-${Date.now()}-${pitchDeckFile.name}`);
+                const pitchDeckSnapshot = await uploadBytes(pitchDeckRef, pitchDeckFile);
+                pitchDeckURL = await getDownloadURL(pitchDeckSnapshot.ref);
+                console.log('Pitch deck uploaded successfully:', pitchDeckURL);
+            } catch (uploadError) {
+                console.error('Pitch deck upload failed:', uploadError);
+                throw new Error(`Pitch deck upload failed: ${uploadError.message}`);
+            }
         }
         
         // Upload video (required)
@@ -74,10 +88,24 @@ async function handleApplicationSubmission(event) {
             throw new Error('Video introduction is required');
         }
         
+        // Check file size (50MB limit)
+        const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+        if (videoFile.size > maxSize) {
+            throw new Error('Video file is too large. Please keep it under 50MB.');
+        }
+        
+        console.log(`Uploading video file: ${videoFile.name}, size: ${(videoFile.size / 1024 / 1024).toFixed(2)}MB`);
         uploadStatus.innerHTML = '<div class="status-message processing">Uploading video introduction...</div>';
-        const videoRef = ref(storage, `applications/${user.uid}/video-${Date.now()}`);
-        const videoSnapshot = await uploadBytes(videoRef, videoFile);
-        videoURL = await getDownloadURL(videoSnapshot.ref);
+        
+        try {
+            const videoRef = ref(storage, `applications/${user.uid}/video-${Date.now()}-${videoFile.name}`);
+            const videoSnapshot = await uploadBytes(videoRef, videoFile);
+            videoURL = await getDownloadURL(videoSnapshot.ref);
+            console.log('Video uploaded successfully:', videoURL);
+        } catch (uploadError) {
+            console.error('Video upload failed:', uploadError);
+            throw new Error(`Video upload failed: ${uploadError.message}`);
+        }
         
         uploadStatus.innerHTML = '<div class="status-message processing">Saving application...</div>';
         

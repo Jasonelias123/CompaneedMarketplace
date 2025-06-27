@@ -118,8 +118,12 @@
                         <div class="form-group">
                             <label for="videoSubmission">Video Introduction <span class="required">*</span></label>
                             <input type="file" id="videoSubmission" name="videoSubmission" 
-                                   accept="video/*" required>
-                            <small class="form-hint">Upload a 2-3 minute video introducing yourself and your AI expertise (Max 50MB)</small>
+                                   accept="video/mp4,video/mov,video/avi,video/webm" required>
+                            <small class="form-hint">Upload a 2-3 minute video introducing yourself and your AI expertise (MP4, MOV, AVI, WebM - Max 50MB)</small>
+                            <div id="videoPreview" style="display: none; margin-top: 10px;">
+                                <p>Selected file: <span id="videoFileName"></span></p>
+                                <p>Size: <span id="videoFileSize"></span></p>
+                            </div>
                         </div>
                     </div>
 
@@ -156,5 +160,36 @@
     <script type="module" src="firebase-config.js"></script>
     <script type="module" src="auth.js"></script>
     <script type="module" src="ai-talent-signup.js"></script>
+    
+    <script>
+        // File preview functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoInput = document.getElementById('videoSubmission');
+            const videoPreview = document.getElementById('videoPreview');
+            const videoFileName = document.getElementById('videoFileName');
+            const videoFileSize = document.getElementById('videoFileSize');
+            
+            if (videoInput) {
+                videoInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        videoFileName.textContent = file.name;
+                        videoFileSize.textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+                        videoPreview.style.display = 'block';
+                        
+                        // Check file size and show warning if too large
+                        if (file.size > 50 * 1024 * 1024) {
+                            videoFileSize.style.color = 'red';
+                            videoFileSize.textContent += ' (Too large - max 50MB)';
+                        } else {
+                            videoFileSize.style.color = 'green';
+                        }
+                    } else {
+                        videoPreview.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
