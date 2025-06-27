@@ -106,6 +106,11 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **June 27, 2025**: Fixed homepage UI consistency and AI consultant application flow
+  - Made "For AI Consultants" and "For Companies" cards identical in size using CSS grid layout
+  - Fixed "Apply as AI Consultant" button styling to match "Get Matched Now" button (same font size, padding, colors)
+  - Resolved white-on-white text visibility issue with proper button styling
+  - Both cards now have consistent purple borders, white backgrounds, and matching button appearances
 - **June 27, 2025**: Fixed AI consultant application flow and removed video upload requirement
   - Replaced video upload with simple "call availability" yes/no question to resolve persistent upload issues
   - Fixed routing from application submission to pending approval page
