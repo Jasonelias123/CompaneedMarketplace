@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companeeds - Connect Companies with AI Talent</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="Wed, 25 Jun 2025 03:55:00 GMT">
+    <link rel="stylesheet" href="styles-new.css?v=trust-clarity-results">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="homepage">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-name">Companeeds</span>
+            </div>
+            <div class="nav-links">
+                <a href="login.html" class="nav-link">Sign In</a>
+                <a href="admin.html" class="nav-link admin-link">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-brand">Companeeds</div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">AI talent</span> for your company
+                </h1>
+                <p class="hero-description">
+                    AI is reshaping every industry - fast. At Companeeds we connect you with trusted AI experts so your business doesn't just keep up, it leads the way.
+                </p>
+                <div class="hero-cta">
+                    <button class="cta-button primary" onclick="scrollToRoles()">
+                        Get Started
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Companeeds Works</h2>
+                <p>Simple, transparent, and results-driven</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">🧠</div>
+                    <div class="step-number">1</div>
+                    <h3>Post your AI need</h3>
+                    <p>Tell us what you need. We'll understand your requirements and goals.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">🧑‍⚖️</div>
+                    <div class="step-number">2</div>
+                    <h3>We match you with trusted experts</h3>
+                    <p>Our vetted AI professionals are hand-picked for your specific needs.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">🚀</div>
+                    <div class="step-number">3</div>
+                    <h3>You get results — or pay nothing</h3>
+                    <p>Real business impact guaranteed, or your money back.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Directory Preview -->
+    <section class="experts-preview-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our AI Experts</h2>
+                <p>Proven professionals ready to transform your business</p>
+            </div>
+            <div class="experts-grid">
+                <div class="expert-card">
+                    <div class="expert-avatar">👨‍💻</div>
+                    <h3>Alex</h3>
+                    <p class="expert-specialty">NLP Automation 🧠🚀</p>
+                    <div class="expert-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">5.0</span>
+                    </div>
+                    <button class="btn btn-outline">View Profile</button>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-avatar">🧑‍💼</div>
+                    <h3>Priya</h3>
+                    <p class="expert-specialty">Workflow Optimization 🛡️📈</p>
+                    <div class="expert-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.9</span>
+                    </div>
+                    <button class="btn btn-outline">View Profile</button>
+                </div>
+                <div class="expert-card">
+                    <div class="expert-avatar">👩‍🔬</div>
+                    <h3>Sarah</h3>
+                    <p class="expert-specialty">Machine Learning 🤖⚡</p>
+                    <div class="expert-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.8</span>
+                    </div>
+                    <button class="btn btn-outline">View Profile</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Role Selection Section -->
+    <section class="roles-section" id="roles">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Path</h2>
+                <p>Join thousands of companies and AI consultants already collaborating</p>
+            </div>
+            
+            <div class="roles-grid">
+                <div class="role-card company-role" onclick="goToRole('company')">
+                    <div class="role-header">
+                        <div class="role-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 21h18"/>
+                                <path d="M5 21V7l8-4v18"/>
+                                <path d="M19 21V11l-6-4"/>
+                            </svg>
+                        </div>
+                        <h3>For Companies</h3>
+                    </div>
+                    <div class="role-content">
+                        <p>Post AI projects and find talented AI consultants to bring your ideas to life.</p>
+                        <ul class="role-features">
+                            <li>Post unlimited projects</li>
+                            <li>Review AI talent proposals</li>
+                            <li>NDA protection available</li>
+                        </ul>
+                    </div>
+                    <div class="role-footer">
+                        <button class="role-button company-button" onclick="event.stopPropagation(); goToRole('company')">
+                            Get Started as Company
+                        </button>
+                    </div>
+                </div>
+
+                <div class="role-card developer-role" onclick="goToRole('developer')">
+                    <div class="role-header">
+                        <div class="role-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16,18 22,12 16,6"/>
+                                <polyline points="8,6 2,12 8,18"/>
+                            </svg>
+                        </div>
+                        <h3>For AI Talent</h3>
+                    </div>
+                    <div class="role-content">
+                        <p>Browse exciting AI projects and connect with companies that need your expertise.</p>
+                        <ul class="role-features">
+                            <li>Access to vetted projects</li>
+                            <li>Direct company contact</li>
+                            <li>Flexible project timelines</li>
+                        </ul>
+                    </div>
+                    <div class="role-footer">
+                        <button class="role-button developer-button" onclick="event.stopPropagation(); window.location.href='ai-talent-signup.html'">
+                            Apply as AI Talent
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Companeeds</h3>
+                    <p>Built by humans. Supercharged by AI.</p>
+                    <div class="trust-badges">
+                        <span class="badge">🔒 SSL Secured</span>
+                        <span class="badge">🛡️ AI Certified</span>
+                        <span class="badge">✅ Verified Experts</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#support">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="login.html">Sign In</a></li>
+                        <li><a href="admin.html">Admin Panel</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Companeeds. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function goToRole(role) {
+            console.log('Role selected:', role);
+            sessionStorage.setItem('selectedRole', role);
+            window.location.href = 'signup.html';
+        }
+
+        function scrollToRoles() {
+            console.log('Scrolling to roles section');
+            document.getElementById('roles').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Make functions globally accessible
+        window.goToRole = goToRole;
+        window.scrollToRoles = scrollToRoles;
+    </script>
+</body>
+</html>
