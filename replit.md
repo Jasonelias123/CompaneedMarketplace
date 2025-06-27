@@ -2,7 +2,7 @@
 
 ## Overview
 
-Companeeds is a web-based platform that connects companies with AI developers for project collaboration. The platform enables companies to post AI projects and developers to browse and apply for opportunities, with all communication happening within the secure platform environment.
+Companeeds is a premium AI talent matching platform positioned as "Toptal for AI" that directly connects companies with vetted AI consultants. Rather than a project marketplace, the platform uses intelligent matching to pair companies with the right AI experts based on their specific needs and consultant expertise.
 
 ## System Architecture
 
@@ -26,11 +26,11 @@ Companeeds is a web-based platform that connects companies with AI developers fo
 - **Session Management**: Firebase Auth handles authentication state
 - **Admin Access Control**: Special admin privileges for platform moderation
 
-### Project Management
-- **Project Posting**: Companies can create detailed project listings
-- **Project Browsing**: Developers can view and filter available projects
-- **Application System**: Developers can apply to projects with proposals
-- **Status Tracking**: Projects have lifecycle states (open, in progress, closed)
+### Direct Matching System
+- **Company Intake**: Companies provide detailed requirements through comprehensive intake forms
+- **AI Consultant Vetting**: Rigorous application and approval process for consultants
+- **Intelligent Matching**: Algorithm matches companies with suitable consultants based on needs/expertise
+- **Direct Introductions**: Platform facilitates direct connections between matched parties
 
 ### Messaging System
 - **In-platform Communication**: Secure messaging between companies and developers
@@ -50,19 +50,19 @@ Companeeds is a web-based platform that connects companies with AI developers fo
 3. User role and metadata stored in Firestore `users` collection
 4. Role-based redirect to appropriate dashboard
 
-### Project Lifecycle
-1. Company posts project through dashboard form
-2. Project data saved to Firestore `projects` collection
-3. Admin reviews project (pending → approved/rejected)
-4. Approved projects appear in developer project browser
-5. Developers submit applications through project modal
-6. Applications stored as subcollection under project document
+### Matching Lifecycle
+1. Company completes signup and detailed intake form
+2. Company requirements saved to Firestore `companies` collection
+3. Admin reviews suitable AI consultants based on company needs
+4. Direct introductions made between matched company and consultant(s)
+5. Communication facilitated through platform messaging system
+6. Project execution happens directly between matched parties
 
 ### Communication Flow
-1. Project applications initiate conversation threads
+1. Successful matches initiate conversation threads
 2. Messages stored in Firestore with real-time listeners
 3. Contact information automatically filtered from message content
-4. Both parties can communicate within platform boundaries
+4. Both parties can communicate within platform boundaries until project completion
 
 ## External Dependencies
 
@@ -98,13 +98,19 @@ Companeeds is a web-based platform that connects companies with AI developers fo
 The application uses Firebase Firestore with the following collections:
 
 - `users`: User profiles and role information
-- `projects`: Project listings with metadata and status
-- `applications`: Developer applications as subcollections under projects
-- `messages`: Communication threads between users
-- `adminProjects`: Administrative logging and moderation
+- `companies`: Company requirements and intake form data
+- `consultants`: AI consultant profiles and expertise data
+- `matches`: Successful company-consultant pairings
+- `messages`: Communication threads between matched parties
+- `adminActions`: Administrative logging and matching decisions
 
 ## Recent Changes
 
+- **June 27, 2025**: Platform model shift from project marketplace to direct matching service
+  - Changed from project posting/browsing to intelligent company-consultant matching
+  - Updated architecture to focus on intake forms and direct introductions
+  - Removed project management features in favor of matching algorithm
+  - Repositioned as premium talent matching service like Toptal
 - **June 26, 2025**: Complete UI transformation to "Toptal for AI" positioning with Beon.tech-inspired design
   - Created new index-new.html with side-by-side hero layout, clean white background, and modern typography
   - Redesigned 3-step value proposition: "Tell Us About Your Business", "Get Matched", "See Results"
