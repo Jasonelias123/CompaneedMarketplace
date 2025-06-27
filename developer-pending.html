@@ -26,22 +26,37 @@
                     <p>Thanks for applying to become an AI consultant on Companeeds! Our team is reviewing your application and will contact you within 3-5 business days.</p>
                 </div>
 
-                <div class="preview-section">
-                    <h2>How Our Matching Works</h2>
-                    <p class="preview-subtitle">While you wait, learn about our intelligent matching process. Once approved, we'll connect you directly with companies seeking your specific AI expertise.</p>
-                    
-                    <div class="projects-grid" id="projectsGrid">
-                        <div class="loading">Loading available projects...</div>
-                    </div>
-
-                    <div class="approval-notice">
-                        <div class="notice-content">
-                            <h3>🔒 Application Required</h3>
-                            <p>To be matched with companies, you need to be approved as a vetted AI consultant. We'll email you once your application is reviewed.</p>
-                            <div class="notice-actions">
-                                <span class="status-text">Status: <strong>Under Review</strong></span>
-                                <button class="btn btn-outline" onclick="refreshStatus()">Check Status</button>
+                <div class="info-section">
+                    <h2>What Happens Next</h2>
+                    <div class="process-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Application Review</h3>
+                                <p>Our team reviews your expertise, experience, and portfolio to ensure quality matches.</p>
                             </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Approval & Onboarding</h3>
+                                <p>Once approved, you'll receive access to our matching platform and guidelines.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Direct Matching</h3>
+                                <p>We'll personally introduce you to companies seeking your specific AI expertise.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-card">
+                        <div class="status-content">
+                            <h3>Current Status: <span class="status-badge">Under Review</span></h3>
+                            <p>We'll email you within 3-5 business days with our decision. Thank you for your patience!</p>
+                            <button class="btn btn-outline" onclick="refreshStatus()">Refresh Status</button>
                         </div>
                     </div>
                 </div>
@@ -79,8 +94,7 @@
                 // Check user status
                 await checkUserStatus(user);
                 
-                // Load projects
-                loadAvailableProjects();
+                // No longer loading projects for matching model
             } else {
                 console.log('No user found, redirecting to signup');
                 window.location.href = 'ai-talent-signup.html';
