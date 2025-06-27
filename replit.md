@@ -106,8 +106,9 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
-- **June 27, 2025**: Updated company signup flow and fixed homepage UI consistency
+- **June 27, 2025**: Updated both company and AI consultant signup flows
   - Changed company flow: Homepage → Company Intake → Company Signup → Thank You (intake form now comes first)
+  - Changed AI consultant flow: Homepage → AI Talent Intake → AI Talent Signup → Developer Pending
   - Made "For AI Consultants" and "For Companies" cards identical in size using CSS grid layout
   - Fixed "Apply as AI Consultant" button styling to match "Get Matched Now" button (same font size, padding, colors)
   - Resolved white-on-white text visibility issue with proper button styling
