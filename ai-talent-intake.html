@@ -116,14 +116,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="videoSubmission">Video Introduction <span class="required">*</span></label>
-                            <input type="file" id="videoSubmission" name="videoSubmission" 
-                                   accept="video/mp4,video/mov,video/avi,video/webm" required>
-                            <small class="form-hint">Upload a 2-3 minute video introducing yourself and your AI expertise (MP4, MOV, AVI, WebM - Max 10MB for reliable upload)</small>
-                            <div id="videoPreview" style="display: none; margin-top: 10px;">
-                                <p>Selected file: <span id="videoFileName"></span></p>
-                                <p>Size: <span id="videoFileSize"></span></p>
+                            <label>Are you available for a live introductory call? <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="callAvailability" value="yes" required>
+                                    <span class="radio-custom"></span>
+                                    Yes, I'm available for a call
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="callAvailability" value="no" required>
+                                    <span class="radio-custom"></span>
+                                    No, I prefer written communication
+                                </label>
                             </div>
+                            <small class="form-hint">We may schedule a brief introductory call to discuss your expertise and match you with suitable opportunities</small>
                         </div>
                     </div>
 
