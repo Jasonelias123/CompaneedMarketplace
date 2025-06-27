@@ -106,7 +106,8 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
-- **June 27, 2025**: Fixed homepage UI consistency and AI consultant application flow
+- **June 27, 2025**: Updated company signup flow and fixed homepage UI consistency
+  - Changed company flow: Homepage → Company Intake → Company Signup → Thank You (intake form now comes first)
   - Made "For AI Consultants" and "For Companies" cards identical in size using CSS grid layout
   - Fixed "Apply as AI Consultant" button styling to match "Get Matched Now" button (same font size, padding, colors)
   - Resolved white-on-white text visibility issue with proper button styling
@@ -132,7 +133,7 @@ The application uses Firebase Firestore with the following collections:
   - Updated messaging to emphasize "Companeeds = Toptal for AI" with 48-hour matching promise
   - Added fixed navigation with "Get Matched" CTA and beta pricing disclosure ($75/month after launch)
   - Created company-signup.html with username/password registration and terms checkboxes
-  - Updated navigation flow: Homepage → Company Signup → Company Intake → Thank You
+  - Updated navigation flow: Homepage → Company Intake → Company Signup → Thank You
   - Fixed role selection cards to properly route companies and AI consultants to respective forms
 - **June 25, 2025**: Comprehensive AI Talent rebranding and intake form redesign
   - Updated all UI references from "Developer" to "AI Talent" or "AI Consultant"
