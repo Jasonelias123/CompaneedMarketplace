@@ -100,48 +100,30 @@ async function handleApplicationSubmission(event) {
         const videoRef = ref(storage, `applications/${user.uid}/video-${Date.now()}-${videoFile.name}`);
         
         try {
-            uploadStatus.innerHTML = '<div class="status-message processing">Starting video upload...</div>';
+            uploadStatus.innerHTML = '<div class="status-message processing">Uploading video... Please wait</div>';
             
-            // Use uploadBytesResumable for progress tracking
-            const uploadTask = uploadBytesResumable(videoRef, videoFile);
-            
-            // Set up progress monitoring
-            await new Promise((resolve, reject) => {
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        uploadStatus.innerHTML = `<div class="status-message processing">Uploading video... ${Math.round(progress)}%</div>`;
-                        console.log('Upload progress:', Math.round(progress) + '%');
-                    },
-                    (error) => {
-                        console.error('Upload error:', error);
-                        reject(error);
-                    },
-                    () => {
-                        console.log('Video upload completed');
-                        resolve();
-                    }
-                );
-                
-                // Add timeout to prevent infinite hanging
-                setTimeout(() => {
-                    reject(new Error('Upload timeout - please try with a smaller file'));
-                }, 120000); // 2 minute timeout
-            });
-            
-            videoURL = await getDownloadURL(uploadTask.snapshot.ref);
+            // Use simple uploadBytes instead of resumable upload
+            console.log('Starting simple upload...');
+            const videoSnapshot = await uploadBytes(videoRef, videoFile);
+            videoURL = await getDownloadURL(videoSnapshot.ref);
             console.log('Video uploaded successfully:', videoURL);
             
         } catch (uploadError) {
             console.error('Video upload failed:', uploadError);
+            console.error('Upload error details:', {
+                code: uploadError.code,
+                message: uploadError.message,
+                serverResponse: uploadError.serverResponse
+            });
+            
             if (uploadError.code === 'storage/unauthorized') {
-                throw new Error('Upload failed: Storage access denied. Please try again or contact support.');
+                throw new Error('Upload failed: Storage access denied. Firebase Storage may not be properly configured.');
             } else if (uploadError.code === 'storage/canceled') {
                 throw new Error('Upload was canceled. Please try again.');
             } else if (uploadError.code === 'storage/unknown') {
                 throw new Error('Upload failed due to network issues. Please check your connection and try again.');
             } else {
-                throw new Error(`Video upload failed: ${uploadError.message}`);
+                throw new Error(`Video upload failed: ${uploadError.message || 'Unknown error'}`);
             }
         }
         
