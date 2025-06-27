@@ -88,10 +88,10 @@ async function handleApplicationSubmission(event) {
             throw new Error('Video introduction is required');
         }
         
-        // Check file size (25MB limit for better upload reliability)
-        const maxSize = 25 * 1024 * 1024; // 25MB in bytes
+        // Check file size (10MB limit for better upload reliability)
+        const maxSize = 10 * 1024 * 1024; // 10MB in bytes
         if (videoFile.size > maxSize) {
-            throw new Error('Video file is too large. Please compress it to under 25MB for reliable upload.');
+            throw new Error('Video file is too large. Please compress it to under 10MB for reliable upload.');
         }
         
         console.log(`Uploading video file: ${videoFile.name}, size: ${(videoFile.size / 1024 / 1024).toFixed(2)}MB`);
@@ -100,10 +100,9 @@ async function handleApplicationSubmission(event) {
         const videoRef = ref(storage, `applications/${user.uid}/video-${Date.now()}-${videoFile.name}`);
         
         try {
-            uploadStatus.innerHTML = '<div class="status-message processing">Starting video upload... 0%</div>';
+            uploadStatus.innerHTML = '<div class="status-message processing">Starting video upload...</div>';
             
             // Use uploadBytesResumable for progress tracking
-            const { uploadBytesResumable, getDownloadURL: getURL } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js');
             const uploadTask = uploadBytesResumable(videoRef, videoFile);
             
             // Set up progress monitoring
@@ -123,9 +122,14 @@ async function handleApplicationSubmission(event) {
                         resolve();
                     }
                 );
+                
+                // Add timeout to prevent infinite hanging
+                setTimeout(() => {
+                    reject(new Error('Upload timeout - please try with a smaller file'));
+                }, 120000); // 2 minute timeout
             });
             
-            videoURL = await getURL(uploadTask.snapshot.ref);
+            videoURL = await getDownloadURL(uploadTask.snapshot.ref);
             console.log('Video uploaded successfully:', videoURL);
             
         } catch (uploadError) {

@@ -119,7 +119,7 @@
                             <label for="videoSubmission">Video Introduction <span class="required">*</span></label>
                             <input type="file" id="videoSubmission" name="videoSubmission" 
                                    accept="video/mp4,video/mov,video/avi,video/webm" required>
-                            <small class="form-hint">Upload a 2-3 minute video introducing yourself and your AI expertise (MP4, MOV, AVI, WebM - Max 25MB for reliable upload)</small>
+                            <small class="form-hint">Upload a 2-3 minute video introducing yourself and your AI expertise (MP4, MOV, AVI, WebM - Max 10MB for reliable upload)</small>
                             <div id="videoPreview" style="display: none; margin-top: 10px;">
                                 <p>Selected file: <span id="videoFileName"></span></p>
                                 <p>Size: <span id="videoFileSize"></span></p>
@@ -178,10 +178,10 @@
                         videoPreview.style.display = 'block';
                         
                         // Check file size and show warning if too large
-                        if (file.size > 25 * 1024 * 1024) {
+                        if (file.size > 10 * 1024 * 1024) {
                             videoFileSize.style.color = 'red';
-                            videoFileSize.textContent += ' (Too large - max 25MB)';
-                        } else if (file.size > 10 * 1024 * 1024) {
+                            videoFileSize.textContent += ' (Too large - max 10MB)';
+                        } else if (file.size > 5 * 1024 * 1024) {
                             videoFileSize.style.color = 'orange';
                             videoFileSize.textContent += ' (Large file - may take time to upload)';
                         } else {
