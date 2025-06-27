@@ -106,6 +106,11 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **June 27, 2025**: Fixed AI consultant application flow and removed video upload requirement
+  - Replaced video upload with simple "call availability" yes/no question to resolve persistent upload issues
+  - Fixed routing from application submission to pending approval page
+  - Updated pending page messaging to reflect AI consultant focus and direct matching model
+  - Cleaned up all Firebase Storage references that were causing submission errors
 - **June 27, 2025**: Platform model shift from project marketplace to direct matching service
   - Changed from project posting/browsing to intelligent company-consultant matching
   - Updated architecture to focus on intake forms and direct introductions

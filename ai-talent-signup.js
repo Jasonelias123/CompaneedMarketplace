@@ -93,12 +93,15 @@ async function handleApplicationSubmission(event) {
             email: user.email
         }, { merge: true });
         
-        uploadStatus.innerHTML = '<div class="status-message success">Application submitted successfully! You will be redirected to your pending status page.</div>';
+        uploadStatus.innerHTML = '<div class="status-message success">Application submitted successfully! Redirecting to your status page...</div>';
+        
+        console.log('Application submitted successfully, redirecting to pending page');
         
         // Redirect to pending page after short delay
         setTimeout(() => {
+            console.log('Redirecting to developer-pending.html');
             window.location.href = 'developer-pending.html';
-        }, 2000);
+        }, 1500);
         
     } catch (error) {
         console.error('Application submission error:', error);
