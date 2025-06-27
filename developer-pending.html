@@ -23,12 +23,12 @@
                 <div class="status-banner">
                     <div class="status-icon">⏳</div>
                     <h1>Application Under Review</h1>
-                    <p>Thanks for applying to become a developer on Companeeds AI! Our team is reviewing your application and will contact you within 3-5 business days.</p>
+                    <p>Thanks for applying to become an AI consultant on Companeeds! Our team is reviewing your application and will contact you within 3-5 business days.</p>
                 </div>
 
                 <div class="preview-section">
-                    <h2>Browse Available Projects</h2>
-                    <p class="preview-subtitle">While you wait, explore the types of AI projects companies are posting on our platform. Once approved, you'll be able to submit proposals for these opportunities.</p>
+                    <h2>How Our Matching Works</h2>
+                    <p class="preview-subtitle">While you wait, learn about our intelligent matching process. Once approved, we'll connect you directly with companies seeking your specific AI expertise.</p>
                     
                     <div class="projects-grid" id="projectsGrid">
                         <div class="loading">Loading available projects...</div>
@@ -37,7 +37,7 @@
                     <div class="approval-notice">
                         <div class="notice-content">
                             <h3>🔒 Application Required</h3>
-                            <p>To submit proposals and contact companies, you need to be approved as a vetted developer. We'll email you once your application is reviewed.</p>
+                            <p>To be matched with companies, you need to be approved as a vetted AI consultant. We'll email you once your application is reviewed.</p>
                             <div class="notice-actions">
                                 <span class="status-text">Status: <strong>Under Review</strong></span>
                                 <button class="btn btn-outline" onclick="refreshStatus()">Check Status</button>
@@ -73,6 +73,7 @@
         onAuthStateChanged(auth, async (user) => {
             currentUser = user;
             if (user) {
+                console.log('User authenticated on pending page:', user.uid);
                 document.getElementById('userEmail').textContent = user.email;
                 
                 // Check user status
@@ -81,7 +82,8 @@
                 // Load projects
                 loadAvailableProjects();
             } else {
-                window.location.href = 'developer-signup.html';
+                console.log('No user found, redirecting to signup');
+                window.location.href = 'ai-talent-signup.html';
             }
         });
 
@@ -91,13 +93,17 @@
                 const userDoc = await getDoc(doc(db, 'users', user.uid));
                 const userData = userDoc.data();
                 
-                if (userData && userData.accountType === 'application_submitted') {
+                console.log('Checking user status:', userData);
+                
+                if (userData && userData.status === 'pending') {
                     // Still pending - stay on this page
+                    console.log('User status is pending, staying on page');
                     return;
-                } else if (userData && userData.accountType === 'approved') {
+                } else if (userData && userData.status === 'approved') {
                     // Approved - redirect to projects
+                    console.log('User approved, redirecting to projects');
                     window.location.href = 'projects-new.html';
-                } else if (userData && userData.accountType === 'rejected') {
+                } else if (userData && userData.status === 'rejected') {
                     // Rejected - show rejection message
                     showRejectionMessage();
                 } else {
