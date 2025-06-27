@@ -498,13 +498,16 @@ body {
     cursor: pointer;
 }
 
-.ai-consultant-btn:hover {
-    background: var(--surface-color);
-    transform: translateY(-2px);
+.cta-button.outline {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
 }
 
-.ai-consultant-btn:hover span {
-    transform: translateX(4px);
+.cta-button.outline:hover {
+    background: var(--surface-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-outline:hover {
