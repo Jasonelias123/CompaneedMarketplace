@@ -1,7 +1,7 @@
 import { auth, db } from './firebase-config.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 import { doc, setDoc, getDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
+import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('aiTalentApplicationForm');
@@ -88,23 +88,57 @@ async function handleApplicationSubmission(event) {
             throw new Error('Video introduction is required');
         }
         
-        // Check file size (50MB limit)
-        const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+        // Check file size (25MB limit for better upload reliability)
+        const maxSize = 25 * 1024 * 1024; // 25MB in bytes
         if (videoFile.size > maxSize) {
-            throw new Error('Video file is too large. Please keep it under 50MB.');
+            throw new Error('Video file is too large. Please compress it to under 25MB for reliable upload.');
         }
         
         console.log(`Uploading video file: ${videoFile.name}, size: ${(videoFile.size / 1024 / 1024).toFixed(2)}MB`);
-        uploadStatus.innerHTML = '<div class="status-message processing">Uploading video introduction...</div>';
+        
+        // Create upload task with progress tracking
+        const videoRef = ref(storage, `applications/${user.uid}/video-${Date.now()}-${videoFile.name}`);
         
         try {
-            const videoRef = ref(storage, `applications/${user.uid}/video-${Date.now()}-${videoFile.name}`);
-            const videoSnapshot = await uploadBytes(videoRef, videoFile);
-            videoURL = await getDownloadURL(videoSnapshot.ref);
+            uploadStatus.innerHTML = '<div class="status-message processing">Starting video upload... 0%</div>';
+            
+            // Use uploadBytesResumable for progress tracking
+            const { uploadBytesResumable, getDownloadURL: getURL } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js');
+            const uploadTask = uploadBytesResumable(videoRef, videoFile);
+            
+            // Set up progress monitoring
+            await new Promise((resolve, reject) => {
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        uploadStatus.innerHTML = `<div class="status-message processing">Uploading video... ${Math.round(progress)}%</div>`;
+                        console.log('Upload progress:', Math.round(progress) + '%');
+                    },
+                    (error) => {
+                        console.error('Upload error:', error);
+                        reject(error);
+                    },
+                    () => {
+                        console.log('Video upload completed');
+                        resolve();
+                    }
+                );
+            });
+            
+            videoURL = await getURL(uploadTask.snapshot.ref);
             console.log('Video uploaded successfully:', videoURL);
+            
         } catch (uploadError) {
             console.error('Video upload failed:', uploadError);
-            throw new Error(`Video upload failed: ${uploadError.message}`);
+            if (uploadError.code === 'storage/unauthorized') {
+                throw new Error('Upload failed: Storage access denied. Please try again or contact support.');
+            } else if (uploadError.code === 'storage/canceled') {
+                throw new Error('Upload was canceled. Please try again.');
+            } else if (uploadError.code === 'storage/unknown') {
+                throw new Error('Upload failed due to network issues. Please check your connection and try again.');
+            } else {
+                throw new Error(`Video upload failed: ${uploadError.message}`);
+            }
         }
         
         uploadStatus.innerHTML = '<div class="status-message processing">Saving application...</div>';
