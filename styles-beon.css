@@ -486,8 +486,8 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--primary-color);
-    color: white;
+    background: transparent;
+    color: var(--primary-color);
     border: 2px solid var(--primary-color);
     padding: 1rem 2rem;
     border-radius: var(--radius-lg);
@@ -496,6 +496,15 @@ body {
     transition: all 0.3s ease;
     font-family: inherit;
     cursor: pointer;
+}
+
+.ai-consultant-btn:hover {
+    background: var(--surface-color);
+    transform: translateY(-2px);
+}
+
+.ai-consultant-btn:hover span {
+    transform: translateX(4px);
 }
 
 .btn-outline:hover {
@@ -530,17 +539,14 @@ body {
 }
 
 .cta-buttons {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    flex-wrap: wrap;
     max-width: 800px;
     margin: 0 auto;
 }
 
 .role-card {
-    flex: 1;
-    min-width: 300px;
     transition: all 0.3s ease;
 }
 
@@ -716,8 +722,8 @@ body {
     }
     
     .cta-buttons {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
     
     .cta-content h2 {
