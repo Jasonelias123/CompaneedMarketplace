@@ -52,27 +52,7 @@ async function handleApplicationSubmission(event) {
             throw new Error('You must agree to the privacy policy regarding personal information sharing');
         }
         
-        // Collect work types
-        const workTypes = [];
-        const workTypeCheckboxes = document.querySelectorAll('input[name="workType"]:checked');
-        console.log('Found work type checkboxes:', workTypeCheckboxes.length);
-        
-        workTypeCheckboxes.forEach(checkbox => {
-            workTypes.push(checkbox.value);
-            console.log('Work type selected:', checkbox.value);
-        });
-        
-        // Debug: Check all workType checkboxes (checked and unchecked)
-        const allWorkTypeCheckboxes = document.querySelectorAll('input[name="workType"]');
-        console.log('Total work type checkboxes found:', allWorkTypeCheckboxes.length);
-        allWorkTypeCheckboxes.forEach(checkbox => {
-            console.log(`Checkbox ${checkbox.id}: checked=${checkbox.checked}, value=${checkbox.value}`);
-        });
-        
-        // Validate required fields
-        if (workTypes.length === 0) {
-            throw new Error('Please select at least one work type preference');
-        }
+        // Work type preferences removed - direct matching model
         
         // Upload files if provided
         const storage = getStorage();
@@ -110,7 +90,7 @@ async function handleApplicationSubmission(event) {
             projectTypes: formData.get('projectTypes'),
             shortBio: formData.get('shortBio'),
             portfolioURL: formData.get('portfolioURL'),
-            workType: workTypes,
+            // workType removed for direct matching model
             availability: formData.get('availability'),
             pitchDeckURL: pitchDeckURL,
             videoURL: videoURL,

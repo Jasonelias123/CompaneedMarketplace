@@ -111,6 +111,7 @@ The application uses Firebase Firestore with the following collections:
   - Updated architecture to focus on intake forms and direct introductions
   - Removed project management features in favor of matching algorithm
   - Repositioned as premium talent matching service like Toptal
+  - Removed work type preferences from consultant intake (no longer needed for direct matching)
 - **June 26, 2025**: Complete UI transformation to "Toptal for AI" positioning with Beon.tech-inspired design
   - Created new index-new.html with side-by-side hero layout, clean white background, and modern typography
   - Redesigned 3-step value proposition: "Tell Us About Your Business", "Get Matched", "See Results"
