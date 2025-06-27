@@ -55,8 +55,18 @@ async function handleApplicationSubmission(event) {
         // Collect work types
         const workTypes = [];
         const workTypeCheckboxes = document.querySelectorAll('input[name="workType"]:checked');
+        console.log('Found work type checkboxes:', workTypeCheckboxes.length);
+        
         workTypeCheckboxes.forEach(checkbox => {
             workTypes.push(checkbox.value);
+            console.log('Work type selected:', checkbox.value);
+        });
+        
+        // Debug: Check all workType checkboxes (checked and unchecked)
+        const allWorkTypeCheckboxes = document.querySelectorAll('input[name="workType"]');
+        console.log('Total work type checkboxes found:', allWorkTypeCheckboxes.length);
+        allWorkTypeCheckboxes.forEach(checkbox => {
+            console.log(`Checkbox ${checkbox.id}: checked=${checkbox.checked}, value=${checkbox.value}`);
         });
         
         // Validate required fields
@@ -138,7 +148,7 @@ async function handleApplicationSubmission(event) {
         console.error('Application submission error:', error);
         const uploadStatus = document.getElementById('uploadStatus');
         uploadStatus.style.display = 'block';
-        uploadStatus.innerHTML = `<div class="status-message error">Error: ${error.message}</div>`;
+        uploadStatus.innerHTML = `<div class="status-message error">✗ Failed to submit application<br/>Error: ${error.message}<br/>Please check your information and try again.</div>`;
     }
 }
 
