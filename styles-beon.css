@@ -550,8 +550,20 @@ body {
 }
 
 .role-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     transition: all 0.3s ease;
 }
+
+.role-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
 
 .role-card:hover {
     transform: translateY(-5px);
