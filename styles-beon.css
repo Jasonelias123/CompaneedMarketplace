@@ -818,41 +818,41 @@ body {
     }
     
     .ai-network {
-        width: 330px;
-        height: 260px;
-        transform: scale(0.8);
+        width: 320px;
+        height: 240px;
+        transform: scale(0.85);
         margin: 0 auto;
     }
     
     .network-node {
-        font-size: 0.65rem;
+        font-size: 0.7rem;
         padding: 0.5rem;
-        min-width: 55px;
-        max-width: 75px;
+        min-width: 60px;
+        max-width: 80px;
     }
     
     .node-icon {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
     
     .network-node.main {
-        top: 45%;
-        left: 8%;
+        top: 40%;
+        left: 15%;
     }
     
     .network-node.expert-1 {
-        top: 5%;
-        right: 8%;
+        top: 8%;
+        right: 15%;
     }
     
     .network-node.expert-2 {
-        top: 70%;
-        right: 5%;
+        top: 60%;
+        right: 10%;
     }
     
     .network-node.expert-3 {
-        bottom: 5%;
-        right: 40%;
+        bottom: 8%;
+        right: 32%;
     }
     
     .steps-container,
@@ -893,41 +893,41 @@ body {
     }
     
     .ai-network {
-        width: 350px;
-        height: 280px;
-        transform: scale(0.7);
+        width: 300px;
+        height: 220px;
+        transform: scale(0.8);
         margin: 0 auto;
     }
     
     .network-node {
-        font-size: 0.6rem;
-        padding: 0.3rem;
-        min-width: 45px;
-        max-width: 65px;
+        font-size: 0.65rem;
+        padding: 0.4rem;
+        min-width: 50px;
+        max-width: 70px;
     }
     
     .node-icon {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
     
     .network-node.main {
-        top: 50%;
-        left: 5%;
+        top: 45%;
+        left: 12%;
     }
     
     .network-node.expert-1 {
-        top: 2%;
-        right: 5%;
+        top: 10%;
+        right: 12%;
     }
     
     .network-node.expert-2 {
-        top: 75%;
-        right: 2%;
+        top: 65%;
+        right: 8%;
     }
     
     .network-node.expert-3 {
-        bottom: 2%;
-        right: 45%;
+        bottom: 10%;
+        right: 35%;
     }
 }
 
