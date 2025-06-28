@@ -859,39 +859,40 @@ body {
     }
     
     .ai-network {
-        width: 280px;
-        height: 200px;
-        transform: scale(0.8);
+        width: 320px;
+        height: 240px;
+        transform: scale(0.75);
         margin: 0 auto;
     }
     
     .network-node {
-        font-size: 0.7rem;
-        padding: 0.5rem;
+        font-size: 0.65rem;
+        padding: 0.4rem;
+        min-width: 60px;
     }
     
     .node-icon {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
     
     .network-node.main {
-        top: 40%;
-        left: 15%;
+        top: 45%;
+        left: 10%;
     }
     
     .network-node.expert-1 {
-        top: 10%;
-        right: 15%;
+        top: 5%;
+        right: 10%;
     }
     
     .network-node.expert-2 {
-        top: 70%;
-        right: 20%;
+        top: 50%;
+        right: 5%;
     }
     
     .network-node.expert-3 {
-        bottom: 10%;
-        right: 40%;
+        bottom: 5%;
+        right: 25%;
     }
 }
 
