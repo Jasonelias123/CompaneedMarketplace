@@ -770,7 +770,7 @@ body {
     
     .hero-content {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
         text-align: center;
         min-height: auto;
         padding: 1rem 0;
@@ -894,9 +894,9 @@ body {
     
     .ai-network {
         width: 300px;
-        height: 220px;
+        height: 200px;
         transform: scale(0.8);
-        margin: 0 auto;
+        margin: 0 auto 0.5rem auto;
     }
     
     .network-node {
