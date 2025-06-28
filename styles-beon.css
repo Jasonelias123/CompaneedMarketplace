@@ -770,10 +770,10 @@ body {
     
     .hero-content {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem;
         text-align: center;
         min-height: auto;
-        padding: 1rem 0;
+        padding: 0.5rem 0;
     }
     
     .hero-brand {
@@ -801,7 +801,7 @@ body {
     }
     
     .why-companeeds-section {
-        padding: 40px 0;
+        padding: 30px 0;
     }
     
     .why-companeeds-section .section-header h2 {
@@ -894,9 +894,9 @@ body {
     
     .ai-network {
         width: 300px;
-        height: 200px;
+        height: 180px;
         transform: scale(0.8);
-        margin: 0 auto 0.5rem auto;
+        margin: 0 auto;
     }
     
     .network-node {
