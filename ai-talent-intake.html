@@ -56,20 +56,36 @@
 
                     <!-- AI Expertise Section -->
                     <div class="form-section">
-                        <h3>AI Expertise</h3>
+                        <h3>AI Expertise & Experience</h3>
                         
                         <div class="form-group">
-                            <label for="aiToolsStacks">AI Tools / Stacks You Specialize In <span class="required">*</span></label>
-                            <textarea id="aiToolsStacks" name="aiToolsStacks" required rows="3" 
-                                      placeholder="GPT-4, LangChain, Pinecone, Midjourney, Claude, Zapier, AutoGPT, RAG pipelines"></textarea>
-                            <small class="form-hint">List the AI tools, frameworks, and technologies you work with regularly</small>
+                            <label for="valueProposition">What is your value proposition to clients? <span class="required">*</span></label>
+                            <textarea id="valueProposition" name="valueProposition" rows="4" placeholder="Describe the unique value you bring to clients and how you help them succeed with AI" required></textarea>
                         </div>
-
+                        
                         <div class="form-group">
-                            <label for="projectTypes">What types of projects do you prefer? <span class="required">*</span></label>
-                            <textarea id="projectTypes" name="projectTypes" required rows="3" 
-                                      placeholder="e.g., process automation, customer service bots, internal data agents, prompt engineering, AI training, etc."></textarea>
-                            <small class="form-hint">Describe the types of AI projects you enjoy working on most</small>
+                            <label for="sampleProjects">Sample projects <span class="required">*</span></label>
+                            <textarea id="sampleProjects" name="sampleProjects" rows="4" placeholder="Describe 2-3 sample projects you've completed, including outcomes and technologies used" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="aiSoftwares">What AI softwares do you utilize? <span class="required">*</span></label>
+                            <textarea id="aiSoftwares" name="aiSoftwares" rows="4" placeholder="List the AI tools, frameworks, and technologies you're proficient with (e.g., OpenAI GPT, Claude, LangChain, TensorFlow, PyTorch, etc.)" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="measurableValue">What is the greatest measurable value you added to an organization? <span class="required">*</span></label>
+                            <textarea id="measurableValue" name="measurableValue" rows="4" placeholder="Describe the most significant measurable impact you've had (e.g., cost savings, revenue increase, efficiency gains)" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="industries">What industries do you specialize in? <span class="required">*</span></label>
+                            <textarea id="industries" name="industries" rows="3" placeholder="List the industries where you have experience and expertise" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="companyRevenue">What are the typical size of revenue of your companies? <span class="required">*</span></label>
+                            <textarea id="companyRevenue" name="companyRevenue" rows="3" placeholder="Describe the typical revenue size of companies you work with (e.g., startups, SMBs, enterprise)" required></textarea>
                         </div>
 
                         <div class="form-group">
@@ -203,7 +219,7 @@
                     measurableValue: formData.get('measurableValue'),
                     industries: formData.get('industries'),
                     companyRevenue: formData.get('companyRevenue'),
-                    bio: formData.get('bio'),
+                    bio: formData.get('shortBio'),
                     portfolio: formData.get('portfolioURL'),
                     availability: formData.get('availability'),
                     submittedAt: serverTimestamp(),
