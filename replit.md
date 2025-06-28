@@ -112,6 +112,7 @@ The application uses Firebase Firestore with the following collections:
   - AI talent intake data (name, email, location) automatically pre-fills signup form
   - Fixed all navigation links to use correct routes (index.html instead of index-new.html)
   - Updated "Companies" and "AI Talent" nav links to route to respective intake forms
+  - Updated homepage title to emphasize "the most trusted AI talent for your company"
 - **June 27, 2025**: Updated both company and AI consultant signup flows
   - Changed company flow: Homepage → Company Intake → Company Signup → Thank You (intake form now comes first)
   - Changed AI consultant flow: Homepage → AI Talent Intake → AI Talent Signup → Developer Pending
