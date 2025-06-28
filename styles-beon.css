@@ -771,10 +771,49 @@ body {
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
+        min-height: auto;
+        padding: 1rem 0;
     }
     
-    .hero-title {
-        font-size: 2.5rem;
+    .hero-brand {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+    }
+    
+    .hero-tagline {
+        font-size: 1.1rem !important;
+        line-height: 1.4;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta-button {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    .why-companeeds-section {
+        padding: 40px 0;
+    }
+    
+    .why-companeeds-section .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .why-description {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
     }
     
     .ai-network {
@@ -793,7 +832,36 @@ body {
     }
     
     .cta-content h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    .hero-brand {
+        font-size: 2rem !important;
+    }
+    
+    .hero-tagline {
+        font-size: 1rem !important;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .why-description {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+    }
+    
+    .ai-network {
+        width: 240px;
+        height: 240px;
+        transform: scale(0.7);
     }
 }
 
