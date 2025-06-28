@@ -90,38 +90,31 @@
                             </div>
                             
                             <div class="form-group full-width">
-                                <label for="aiGoals">What result would you like to achieve with AI? *</label>
-                                <textarea id="aiGoals" name="aiGoals" rows="4" placeholder="Describe the specific outcomes you're hoping to achieve with AI implementation..." required></textarea>
+                                <label for="improvements">What would you like to improve in your company? *</label>
+                                <textarea id="improvements" name="improvements" rows="4" placeholder="Describe what aspects of your business you'd like to enhance or optimize" required></textarea>
                             </div>
                             
                             <div class="form-group full-width">
-                                <label for="businessAreas">Which areas of your business would benefit most from AI? *</label>
-                                <textarea id="businessAreas" name="businessAreas" rows="3" placeholder="e.g., sales, operations, customer support, marketing, data analysis..." required></textarea>
+                                <label for="businessDescription">What does your business do? *</label>
+                                <textarea id="businessDescription" name="businessDescription" rows="4" placeholder="Describe your business, products/services, and industry" required></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="aiAreas">Any specific areas where you would like to implement AI?</label>
+                                <textarea id="aiAreas" name="aiAreas" rows="3" placeholder="e.g., Customer service, sales, marketing, operations, data analysis, content creation..."></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="painPoints">What are your biggest pain points? *</label>
+                                <textarea id="painPoints" name="painPoints" rows="4" placeholder="Describe the main challenges or frustrations your business faces" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="website">Please provide a link to your website:</label>
+                                <input type="url" id="website" name="website" placeholder="https://yourcompany.com">
                             </div>
                             
-                            <div class="form-group">
-                                <label for="timeline">Project Timeline *</label>
-                                <select id="timeline" name="timeline" required>
-                                    <option value="">Select timeline</option>
-                                    <option value="asap">ASAP (within 2 weeks)</option>
-                                    <option value="1-month">Within 1 month</option>
-                                    <option value="2-3-months">2-3 months</option>
-                                    <option value="3-6-months">3-6 months</option>
-                                    <option value="6-months+">6+ months</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="budget">Estimated Budget *</label>
-                                <select id="budget" name="budget" required>
-                                    <option value="">Select budget range</option>
-                                    <option value="under-10k">Under $10,000</option>
-                                    <option value="10k-25k">$10,000 - $25,000</option>
-                                    <option value="25k-50k">$25,000 - $50,000</option>
-                                    <option value="50k-100k">$50,000 - $100,000</option>
-                                    <option value="100k+">$100,000+</option>
-                                </select>
-                            </div>
+
                             
                             <div class="form-group full-width">
                                 <label for="additionalInfo">Additional Information</label>
@@ -232,10 +225,11 @@
                     phone: formData.get('phone'),
                     industry: formData.get('industry'),
                     companySize: formData.get('companySize'),
-                    aiGoals: formData.get('aiGoals'),
-                    businessAreas: formData.get('businessAreas'),
-                    timeline: formData.get('timeline'),
-                    budget: formData.get('budget'),
+                    improvements: formData.get('improvements'),
+                    businessDescription: formData.get('businessDescription'),
+                    aiAreas: formData.get('aiAreas'),
+                    painPoints: formData.get('painPoints'),
+                    website: formData.get('website'),
                     additionalInfo: formData.get('additionalInfo'),
                     submittedAt: serverTimestamp(),
                     status: 'pending'
