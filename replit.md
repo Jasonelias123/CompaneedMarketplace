@@ -114,6 +114,8 @@ The application uses Firebase Firestore with the following collections:
   - Updated "Companies" and "AI Talent" nav links to route to respective intake forms
   - Updated homepage title to emphasize "the most trusted AI talent for your company"
   - Added "Why Companeeds?" section explaining AI tool vetting and cross-industry expertise
+  - Improved hero section typography with cleaner brand/tagline separation
+  - Added comprehensive mobile responsiveness for all sections and typography
 - **June 27, 2025**: Updated both company and AI consultant signup flows
   - Changed company flow: Homepage → Company Intake → Company Signup → Thank You (intake form now comes first)
   - Changed AI consultant flow: Homepage → AI Talent Intake → AI Talent Signup → Developer Pending
