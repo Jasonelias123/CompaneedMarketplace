@@ -417,6 +417,25 @@ body {
     font-size: 1rem;
 }
 
+.step-card-full-width {
+    grid-column: 1 / -1;
+    max-width: none;
+    text-align: center;
+    background: var(--primary-color);
+    color: white;
+    margin-top: 2rem;
+}
+
+.step-card-full-width h3,
+.step-card-full-width p {
+    color: white;
+}
+
+.step-card-full-width .step-number {
+    background: white;
+    color: var(--primary-color);
+}
+
 /* Talent Preview Section */
 .talent-preview-section {
     padding: 100px 0;
