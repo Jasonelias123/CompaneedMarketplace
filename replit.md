@@ -117,6 +117,7 @@ The application uses Firebase Firestore with the following collections:
   - Improved hero section typography with cleaner brand/tagline separation
   - Added comprehensive mobile responsiveness for all sections and typography
   - Updated floating AI network nodes to show business benefits: "Automate Lead Generation", "Reduce Staff Costs", "Eliminate Repetitive Tasks"
+  - Enhanced AI talent intake form with comprehensive business-focused questions: value proposition, sample projects, testimonials, measurable value, industries, and company revenue sizes
 - **June 27, 2025**: Updated both company and AI consultant signup flows
   - Changed company flow: Homepage → Company Intake → Company Signup → Thank You (intake form now comes first)
   - Changed AI consultant flow: Homepage → AI Talent Intake → AI Talent Signup → Developer Pending
