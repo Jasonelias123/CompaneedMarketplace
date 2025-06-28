@@ -859,9 +859,39 @@ body {
     }
     
     .ai-network {
-        width: 240px;
-        height: 240px;
-        transform: scale(0.7);
+        width: 280px;
+        height: 200px;
+        transform: scale(0.8);
+        margin: 0 auto;
+    }
+    
+    .network-node {
+        font-size: 0.7rem;
+        padding: 0.5rem;
+    }
+    
+    .node-icon {
+        font-size: 1.2rem;
+    }
+    
+    .network-node.main {
+        top: 40%;
+        left: 15%;
+    }
+    
+    .network-node.expert-1 {
+        top: 10%;
+        right: 15%;
+    }
+    
+    .network-node.expert-2 {
+        top: 70%;
+        right: 20%;
+    }
+    
+    .network-node.expert-3 {
+        bottom: 10%;
+        right: 40%;
     }
 }
 
