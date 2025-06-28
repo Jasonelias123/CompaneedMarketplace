@@ -124,6 +124,17 @@
             
             console.log('Form found, attaching event listener');
 
+            // Pre-fill form with intake data
+            const intakeData = localStorage.getItem('aiTalentIntakeData');
+            if (intakeData) {
+                const data = JSON.parse(intakeData);
+                const fullNameField = document.getElementById('fullName');
+                const emailField = document.getElementById('email');
+                
+                if (fullNameField) fullNameField.value = data.fullName || '';
+                if (emailField) emailField.value = data.email || '';
+            }
+
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 console.log('AI consultant signup form submitted');
@@ -164,10 +175,13 @@
                         createdAt: serverTimestamp()
                     });
 
-                    console.log('User profile saved, redirecting to intake...');
+                    console.log('User profile saved, redirecting to pending page...');
                     
-                    // Redirect to AI consultant intake page
-                    window.location.href = 'ai-talent-intake.html';
+                    // Clear stored intake data
+                    localStorage.removeItem('aiTalentIntakeData');
+                    
+                    // Redirect to pending approval page
+                    window.location.href = 'developer-pending.html';
                     
                 } catch (error) {
                     console.error('Signup error:', error);

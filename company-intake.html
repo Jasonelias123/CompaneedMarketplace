@@ -247,9 +247,16 @@
                 const docRef = await addDoc(collection(db, 'companyIntakes'), data);
                 console.log('Document written with ID: ', docRef.id);
                 
+                // Store intake data for signup form
+                localStorage.setItem('companyIntakeData', JSON.stringify({
+                    companyName: data.companyName,
+                    contactName: data.contactName,
+                    email: data.email
+                }));
+                
                 // Hide loading modal
                 loadingModal.style.display = 'none';
-                console.log('Success - redirecting to thank you page');
+                console.log('Success - redirecting to company signup page');
                 
                 // Redirect to company signup page
                 window.location.href = 'company-signup.html';

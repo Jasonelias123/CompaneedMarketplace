@@ -156,6 +156,15 @@
         
         console.log('Firebase initialized successfully');
 
+        // Pre-fill form with intake data
+        const intakeData = localStorage.getItem('companyIntakeData');
+        if (intakeData) {
+            const data = JSON.parse(intakeData);
+            document.getElementById('companyName').value = data.companyName || '';
+            document.getElementById('fullName').value = data.contactName || '';
+            document.getElementById('email').value = data.email || '';
+        }
+
         // Form submission handler
         document.getElementById('companySignupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -210,6 +219,9 @@
                 });
 
                 console.log('Company profile saved, redirecting to intake...');
+                
+                // Clear stored intake data
+                localStorage.removeItem('companyIntakeData');
                 
                 // Hide loading modal
                 loadingModal.style.display = 'none';
