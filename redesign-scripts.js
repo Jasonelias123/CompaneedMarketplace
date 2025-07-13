@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAnimations();
     initializeNavigation();
     initializeSmoothScrolling();
+    initializeAccessibility();
 });
 
 // Intersection Observer for slide-in animations
@@ -272,6 +273,72 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Tab') {
         document.body.classList.add('keyboard-navigation');
     }
+});
+
+// Accessibility enhancements
+function initializeAccessibility() {
+    // Mobile menu button accessibility
+    const mobileToggle = document.querySelector('.nav-mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            navLinks.classList.toggle('mobile-open');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                navLinks.classList.remove('mobile-open');
+            }
+        });
+    }
+    
+    // Announce page navigation to screen readers
+    const links = document.querySelectorAll('a[href^="/"]');
+    links.forEach(link => {
+        link.addEventListener('click', function() {
+            // Announce navigation intent
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = `Navigating to ${this.textContent}`;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        });
+    });
+    
+    // Enhanced focus management for skip link
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) {
+        skipLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.focus();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+    
+    // Ensure main content is focusable for skip link
+    const mainContent = document.querySelector('#main-content');
+    if (mainContent) {
+        mainContent.setAttribute('tabindex', '-1');
+    }
+    
+    // Remove mouse-specific styles when using keyboard
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('keyboard-navigation');
+    });
+}
 });
 
 // Remove keyboard navigation class on mouse use

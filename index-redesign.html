@@ -13,53 +13,58 @@
     <link rel="stylesheet" href="styles-redesign.css">
 </head>
 <body>
+    <!-- Skip to main content link for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Sticky Navigation -->
-    <nav class="nav-sticky">
+    <nav class="nav-sticky" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <h1>Companeeds</h1>
+                <h1><a href="/" aria-label="Companeeds homepage">Companeeds</a></h1>
             </div>
-            <div class="nav-links">
-                <a href="/company-intake.html" class="nav-link">Companies</a>
-                <a href="/ai-talent-intake.html" class="nav-link">AI Talent</a>
-                <a href="/login.html" class="nav-link">Login</a>
-                <a href="/company-intake.html" class="nav-cta">Get Matched</a>
+            <div class="nav-links" role="menubar">
+                <a href="/company-intake.html" class="nav-link" role="menuitem">Companies</a>
+                <a href="/ai-talent-intake.html" class="nav-link" role="menuitem">AI Talent</a>
+                <a href="/login.html" class="nav-link" role="menuitem">Login</a>
+                <a href="/company-intake.html" class="nav-cta" role="menuitem" aria-label="Get matched with AI talent">Get Matched</a>
             </div>
-            <div class="nav-mobile-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="nav-mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="brand-name">Companeeds</span>
-                        <span class="hero-subtitle">The most trusted AI talent for your company</span>
-                    </h1>
-                    <p class="hero-description">
-                        AI is reshaping every industry — fast. At Companeeds, we personally match you with trusted AI experts so your business doesn't just keep up, it leads.
-                    </p>
-                    <div class="hero-cta">
-                        <a href="/company-intake.html" class="cta-primary">
-                            Get Matched Now 
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <p class="cta-note">Free during Beta • $75/month after launch</p>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title" id="hero-heading">
+                            <span class="brand-name">Companeeds</span>
+                            <span class="hero-subtitle">The most trusted AI talent for your company</span>
+                        </h1>
+                        <p class="hero-description">
+                            AI is reshaping every industry — fast. At Companeeds, we personally match you with trusted AI experts so your business doesn't just keep up, it leads.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="/company-intake.html" class="cta-primary" aria-describedby="pricing-info">
+                                Get Matched Now 
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                                    <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <p class="cta-note" id="pricing-info">Free during Beta • $75/month after launch</p>
+                        </div>
                     </div>
-                </div>
                 
                 <div class="hero-visual">
-                    <div class="dashboard-mockup">
+                    <div class="dashboard-mockup" role="img" aria-label="AI talent matching dashboard showing flow from business requirements to AI matching to trusted expert, with metrics: 2 days average match time, 98% success rate, 500+ vetted experts">
                         <div class="dashboard-header">
-                            <div class="dashboard-controls">
+                            <div class="dashboard-controls" aria-hidden="true">
                                 <div class="control-dot red"></div>
                                 <div class="control-dot yellow"></div>
                                 <div class="control-dot green"></div>
@@ -67,9 +72,9 @@
                             <div class="dashboard-title">AI Talent Match</div>
                         </div>
                         <div class="dashboard-content">
-                            <div class="match-flow">
+                            <div class="match-flow" role="presentation">
                                 <div class="flow-step">
-                                    <div class="step-icon business">
+                                    <div class="step-icon business" aria-hidden="true">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
                                             <path d="M9 9h6v6H9z" fill="currentColor"/>
@@ -77,9 +82,9 @@
                                     </div>
                                     <span>Your Business</span>
                                 </div>
-                                <div class="flow-arrow">→</div>
+                                <div class="flow-arrow" aria-hidden="true">→</div>
                                 <div class="flow-step">
-                                    <div class="step-icon ai">
+                                    <div class="step-icon ai" aria-hidden="true">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
                                             <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" stroke-width="2"/>
@@ -87,9 +92,9 @@
                                     </div>
                                     <span>AI Matching</span>
                                 </div>
-                                <div class="flow-arrow">→</div>
+                                <div class="flow-arrow" aria-hidden="true">→</div>
                                 <div class="flow-step">
-                                    <div class="step-icon expert">
+                                    <div class="step-icon expert" aria-hidden="true">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
                                             <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
@@ -130,106 +135,114 @@
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2>How It Works</h2>
-                <p>From discovery to deployment in as little as 2 days</p>
-            </div>
-            
-            <div class="steps-grid">
-                <div class="step-card" data-step="1">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Tell Us About Your Business</h3>
-                        <p>We start by understanding what matters most to you — your industry, your challenges, and your biggest opportunities. Our team works closely with you to uncover where AI can create exponential efficiency, impact, and growth.</p>
-                    </div>
+        <!-- How It Works Section -->
+        <section class="how-it-works" aria-labelledby="how-it-works-heading">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="how-it-works-heading">How It Works</h2>
+                    <p>From discovery to deployment in as little as 2 days</p>
                 </div>
                 
-                <div class="step-card" data-step="2">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Get Matched with a Trusted AI Expert</h3>
-                        <p>In as little as 2 days, we connect you with a rigorously vetted expert who knows how to deliver results in your space. From expanding your sales pipeline, streamlining operations, automating workflows, or building a custom AI product — our experts help you unlock new levels of scale and growth fast.</p>
+                <div class="steps-grid" role="list">
+                    <div class="step-card" data-step="1" role="listitem">
+                        <div class="step-number" aria-hidden="true">1</div>
+                        <div class="step-content">
+                            <h3>Tell Us About Your Business</h3>
+                            <p>We start by understanding what matters most to you — your industry, your challenges, and your biggest opportunities. Our team works closely with you to uncover where AI can create exponential efficiency, impact, and growth.</p>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="step-card step-card-highlight" data-step="3">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>See Measurable Results — or You Don't Pay</h3>
-                        <p>We care about your results. If you're not seeing real, meaningful outcomes — you don't pay. Our model is built on trust, clarity, and delivering real value from day one.</p>
+                    
+                    <div class="step-card" data-step="2" role="listitem">
+                        <div class="step-number" aria-hidden="true">2</div>
+                        <div class="step-content">
+                            <h3>Get Matched with a Trusted AI Expert</h3>
+                            <p>In as little as 2 days, we connect you with a rigorously vetted expert who knows how to deliver results in your space. From expanding your sales pipeline, streamlining operations, automating workflows, or building a custom AI product — our experts help you unlock new levels of scale and growth fast.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card step-card-highlight" data-step="3" role="listitem">
+                        <div class="step-number" aria-hidden="true">3</div>
+                        <div class="step-content">
+                            <h3>See Measurable Results — or You Don't Pay</h3>
+                            <p>We care about your results. If you're not seeing real, meaningful outcomes — you don't pay. Our model is built on trust, clarity, and delivering real value from day one.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Why Companeeds Section -->
-    <section class="why-companeeds">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Companeeds?</h2>
-                <p>We've done the vetting for you</p>
-            </div>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                            <path d="M16 2L20.09 10.26L29 12L20.09 13.74L16 22L11.91 13.74L3 12L11.91 10.26L16 2Z" fill="currentColor"/>
-                            <path d="M26 8L27.5 11.5L31 13L27.5 14.5L26 18L24.5 14.5L21 13L24.5 11.5L26 8Z" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h3>Rigorously Vetted Experts</h3>
-                    <p>With new AI tools emerging daily, keeping up can be overwhelming. At Companeeds, we've done the vetting — carefully selecting only the most trusted AI experts who turn promises into proven results.</p>
+        <!-- Why Companeeds Section -->
+        <section class="why-companeeds" aria-labelledby="why-companeeds-heading">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="why-companeeds-heading">Why Companeeds?</h2>
+                    <p>We've done the vetting for you</p>
                 </div>
                 
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                            <rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 16L14 18L20 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <div class="benefits-grid" role="list">
+                    <div class="benefit-card" role="listitem">
+                        <div class="benefit-icon" aria-hidden="true">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <path d="M16 2L20.09 10.26L29 12L20.09 13.74L16 22L11.91 13.74L3 12L11.91 10.26L16 2Z" fill="currentColor"/>
+                                <path d="M26 8L27.5 11.5L31 13L27.5 14.5L26 18L24.5 14.5L21 13L24.5 11.5L26 8Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Rigorously Vetted Experts</h3>
+                        <p>With new AI tools emerging daily, keeping up can be overwhelming. At Companeeds, we've done the vetting — carefully selecting only the most trusted AI experts who turn promises into proven results.</p>
                     </div>
-                    <h3>Cross-Industry Expertise</h3>
-                    <p>Our network spans industries — from healthcare and finance to retail and manufacturing. We match you with experts who understand your sector's unique challenges and opportunities.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                            <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
-                            <path d="M16 8V16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
+                    
+                    <div class="benefit-card" role="listitem">
+                        <div class="benefit-icon" aria-hidden="true">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 16L14 18L20 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Cross-Industry Expertise</h3>
+                        <p>Our network spans industries — from healthcare and finance to retail and manufacturing. We match you with experts who understand your sector's unique challenges and opportunities.</p>
                     </div>
-                    <h3>48-Hour Matching</h3>
-                    <p>Speed matters in business. Our streamlined process connects you with the right AI expert in just 48 hours, so you can start seeing results immediately.</p>
+                    
+                    <div class="benefit-card" role="listitem">
+                        <div class="benefit-icon" aria-hidden="true">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
+                                <path d="M16 8V16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>48-Hour Matching</h3>
+                        <p>Speed matters in business. Our streamlined process connects you with the right AI expert in just 48 hours, so you can start seeing results immediately.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA Section -->
-    <section class="final-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to transform your business with AI?</h2>
-                <p>Join hundreds of companies already scaling with trusted AI experts</p>
-                <div class="cta-buttons">
-                    <a href="/company-intake.html" class="cta-primary large">
-                        Get Matched Now
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                    <a href="/ai-talent-intake.html" class="cta-secondary">Join as AI Expert</a>
+        <!-- CTA Section -->
+        <section class="final-cta" aria-labelledby="cta-heading">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 id="cta-heading">Ready to transform your business with AI?</h2>
+                    <p>Join hundreds of companies already scaling with trusted AI experts</p>
+                    <div class="cta-buttons">
+                        <a href="/company-intake.html" class="cta-primary large" aria-describedby="cta-terms">
+                            Get Matched Now
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="/ai-talent-intake.html" class="cta-secondary">Join as AI Expert</a>
+                    </div>
+                    <p class="cta-disclaimer" id="cta-terms">Free during Beta • $75/month after launch • No long-term contracts</p>
                 </div>
-                <p class="cta-disclaimer">Free during Beta • $75/month after launch • No long-term contracts</p>
             </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 Companeeds. All rights reserved.</p>
         </div>
-    </section>
+    </footer>
 
     <!-- Scripts -->
     <script src="redesign-scripts.js"></script>
