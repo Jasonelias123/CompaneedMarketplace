@@ -194,10 +194,12 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-16);
     align-items: center;
+    text-align: center;
 }
 
 .hero-text {
     max-width: 580px;
+    margin: 0 auto;
 }
 
 .hero-title {
