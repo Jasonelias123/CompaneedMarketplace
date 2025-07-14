@@ -104,21 +104,21 @@
             </div>
             
             <div class="steps-container">
-                <div class="step-card" data-step="1">
+                <div class="step-card animate-on-scroll" data-step="1">
                     <div class="step-number">1</div>
                     <div class="step-icon">🎯</div>
                     <h3>Tell Us About Your Business</h3>
                     <p>We start by understanding what matters most to you — your industry, your challenges, and your biggest opportunities. Our team works closely with you to uncover where AI can create exponential efficiency, impact, and growth.</p>
                 </div>
                 
-                <div class="step-card" data-step="2">
+                <div class="step-card animate-on-scroll" data-step="2">
                     <div class="step-number">2</div>
                     <div class="step-icon">🤝</div>
                     <h3>Get Matched with a Trusted AI Expert</h3>
                     <p>In as little as 2 days, we connect you with a rigorously vetted expert who knows how to deliver results in your space. From expanding your sales pipeline, streamlining operations, automating workflows, or building a custom AI product — our experts help you unlock new levels of scale and growth fast.</p>
                 </div>
                 
-                <div class="step-card step-card-full-width" data-step="3">
+                <div class="step-card step-card-full-width animate-on-scroll" data-step="3">
                     <div class="step-number">3</div>
                     <div class="step-icon">📈</div>
                     <h3>See Measurable Results — or You Don't Pay</h3>
@@ -137,7 +137,7 @@
             </div>
             
             <div class="talent-grid">
-                <div class="talent-card">
+                <div class="talent-card animate-on-scroll">
                     <div class="talent-avatar">👨‍💻</div>
                     <h3>Sarah Chen</h3>
                     <p class="talent-title">ML Engineering Lead</p>
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 
-                <div class="talent-card">
+                <div class="talent-card animate-on-scroll">
                     <div class="talent-avatar">👩‍💼</div>
                     <h3>Marcus Rodriguez</h3>
                     <p class="talent-title">AI Strategy Consultant</p>
@@ -167,9 +167,8 @@
                     </div>
                 </div>
                 
-                <div class="talent-card">
+                <div class="talent-card animate-on-scroll">
                     <div class="talent-avatar">👨‍🔬</div>
-                    <h3>Dr. Emily Watson</h3>
                     <p class="talent-title">AI Research Director</p>
                     <p class="talent-specialty">Deep Learning • Research • Innovation</p>
                     <div class="talent-results">
@@ -320,7 +319,7 @@
         }, observerOptions);
 
         // Observe all animated elements
-        document.querySelectorAll('.step-card, .talent-card').forEach(el => {
+        document.querySelectorAll('.step-card, .talent-card, .animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
     </script>
