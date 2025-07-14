@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeSmoothScrolling();
 });
 
-// Intersection Observer for slide-in animations
+// Intersection Observer for fade-in animations
 function initializeAnimations() {
     const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -80px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -21,56 +21,12 @@ function initializeAnimations() {
         });
     }, observerOptions);
 
-    // Dashboard mockup animation
-    const dashboard = document.querySelector('.dashboard-mockup');
-    if (dashboard) {
-        observer.observe(dashboard);
-    }
-
-    // Section headers slide up
-    const sectionHeaders = document.querySelectorAll('.section-header');
-    sectionHeaders.forEach((el, index) => {
-        el.classList.add('slide-in-up');
-        el.style.transitionDelay = `${index * 200}ms`;
+    // Add fade-in class to elements and observe them
+    const animateElements = document.querySelectorAll('.step-card, .benefit-card, .section-header');
+    animateElements.forEach((el, index) => {
+        el.classList.add('fade-in');
+        el.style.transitionDelay = `${index * 100}ms`;
         observer.observe(el);
-    });
-
-    // Step cards slide in alternating from left and right
-    const stepCards = document.querySelectorAll('.step-card');
-    stepCards.forEach((el, index) => {
-        if (index % 2 === 0) {
-            el.classList.add('slide-in-left');
-        } else {
-            el.classList.add('slide-in-right');
-        }
-        el.style.transitionDelay = `${index * 150}ms`;
-        observer.observe(el);
-    });
-
-    // Benefit cards slide up with staggered delay
-    const benefitCards = document.querySelectorAll('.benefit-card');
-    benefitCards.forEach((el, index) => {
-        el.classList.add('slide-in-up');
-        el.style.transitionDelay = `${index * 200}ms`;
-        observer.observe(el);
-    });
-
-    // Flow steps in dashboard animate in sequence
-    const flowSteps = document.querySelectorAll('.flow-step');
-    flowSteps.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        el.style.transitionDelay = `${index * 300}ms`;
-    });
-
-    // Dashboard metrics animate in
-    const metrics = document.querySelectorAll('.metric');
-    metrics.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(15px)';
-        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        el.style.transitionDelay = `${index * 100 + 800}ms`;
     });
 }
 
@@ -177,33 +133,11 @@ function animateDashboard() {
 const dashboardObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            // Animate flow steps
-            const flowSteps = entry.target.querySelectorAll('.flow-step');
-            flowSteps.forEach((step, index) => {
-                setTimeout(() => {
-                    step.style.opacity = '1';
-                    step.style.transform = 'translateY(0)';
-                }, index * 300);
-            });
-
-            // Animate metrics
-            const metrics = entry.target.querySelectorAll('.metric');
-            metrics.forEach((metric, index) => {
-                setTimeout(() => {
-                    metric.style.opacity = '1';
-                    metric.style.transform = 'translateY(0)';
-                }, index * 100 + 800);
-            });
-
-            // Animate metric values
-            setTimeout(() => {
-                animateDashboard();
-            }, 1200);
-            
+            animateDashboard();
             dashboardObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.3 });
+}, { threshold: 0.5 });
 
 const dashboard = document.querySelector('.dashboard-mockup');
 if (dashboard) {
