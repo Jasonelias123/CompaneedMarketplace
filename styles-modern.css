@@ -634,6 +634,31 @@ a:hover {
   }
 }
 
+/* Secondary Intro Section */
+.secondary-intro {
+  padding: var(--space-20) 0;
+  background: var(--color-gray-50);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.intro-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.intro-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-700);
+  line-height: 1.8;
+  margin-bottom: var(--space-6);
+  font-weight: var(--font-weight-medium);
+}
+
+.intro-text:last-child {
+  margin-bottom: 0;
+}
+
 /* Section Styling */
 .section-header {
   text-align: center;
