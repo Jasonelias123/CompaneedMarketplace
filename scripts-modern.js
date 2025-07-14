@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeNavigation();
     initializeAnimations();
     initializeIntersectionObserver();
+    initializeScrollAnimations();
     initializeSmoothScrolling();
 });
 
@@ -141,19 +142,20 @@ function initializeAnimations() {
     });
 }
 
-// Intersection Observer for scroll animations
+// Enhanced Intersection Observer for scroll animations
 function initializeIntersectionObserver() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
                 entry.target.classList.add('aos-animate');
                 
-                // Special handling for step cards
+                // Special handling for step cards with stagger effect
                 if (entry.target.classList.contains('step-card')) {
                     const stepNumber = entry.target.querySelector('.step-number');
                     if (stepNumber) {
@@ -165,19 +167,83 @@ function initializeIntersectionObserver() {
                         }, 300);
                     }
                 }
+
+                // Handle grid items with stagger
+                if (entry.target.parentElement?.classList.contains('steps-grid') || 
+                    entry.target.parentElement?.classList.contains('features-grid') ||
+                    entry.target.parentElement?.classList.contains('role-selection')) {
+                    
+                    const siblings = Array.from(entry.target.parentElement.children);
+                    const index = siblings.indexOf(entry.target);
+                    entry.target.style.transitionDelay = `${index * 0.1}s`;
+                }
             }
         });
     }, observerOptions);
 
-    // Observe all elements with data-aos attributes
-    document.querySelectorAll('[data-aos]').forEach(el => {
-        observer.observe(el);
+    // Elements to animate on scroll
+    const animatedElements = [
+        '.section-header',
+        '.step-card',
+        '.feature-card', 
+        '.role-card',
+        '.hero-text',
+        '.dashboard-preview',
+        '.footer',
+        '[data-aos]'
+    ];
+
+    animatedElements.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            observer.observe(el);
+        });
     });
 
-    // Also observe cards for enhanced animations
+    // Add scroll-animate class to all observable elements
     document.querySelectorAll('.step-card, .feature-card, .role-card').forEach(el => {
-        observer.observe(el);
+        el.classList.add('scroll-animate');
     });
+}
+
+// Initialize animations with enhanced effects
+function initializeScrollAnimations() {
+    // Trigger hero animations on load
+    setTimeout(() => {
+        const heroText = document.querySelector('.hero-text');
+        const dashboardPreview = document.querySelector('.dashboard-preview');
+        
+        if (heroText) heroText.classList.add('animate-in');
+        if (dashboardPreview) {
+            setTimeout(() => {
+                dashboardPreview.classList.add('animate-in');
+            }, 200);
+        }
+    }, 300);
+
+    // Enhanced scroll-triggered animations
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                
+                // Add progressive delay for grid items
+                const parent = entry.target.parentElement;
+                if (parent?.classList.contains('steps-grid') || 
+                    parent?.classList.contains('features-grid')) {
+                    
+                    const index = Array.from(parent.children).indexOf(entry.target);
+                    entry.target.style.transitionDelay = `${index * 0.15}s`;
+                }
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -80px 0px'
+    });
+
+    scrollElements.forEach(el => scrollObserver.observe(el));
 }
 
 // Smooth scrolling

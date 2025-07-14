@@ -1106,10 +1106,181 @@ a:hover {
   outline-offset: 2px;
 }
 
-/* AOS Animation Utilities */
+/* Scroll Animation System */
+.scroll-animate {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-animate.animate-in {
+  opacity: 1;
+}
+
+/* Slide Up Animation */
+.slide-up {
+  transform: translateY(60px);
+}
+
+.slide-up.animate-in {
+  transform: translateY(0);
+}
+
+/* Slide Left Animation */
+.slide-left {
+  transform: translateX(-60px);
+}
+
+.slide-left.animate-in {
+  transform: translateX(0);
+}
+
+/* Slide Right Animation */
+.slide-right {
+  transform: translateX(60px);
+}
+
+.slide-right.animate-in {
+  transform: translateX(0);
+}
+
+/* Scale Animation */
+.scale-in {
+  transform: scale(0.8);
+}
+
+.scale-in.animate-in {
+  transform: scale(1);
+}
+
+/* Fade Animation */
+.fade-in {
+  opacity: 0;
+}
+
+.fade-in.animate-in {
+  opacity: 1;
+}
+
+/* Stagger Animation Delays */
+.animate-delay-100 { transition-delay: 0.1s; }
+.animate-delay-200 { transition-delay: 0.2s; }
+.animate-delay-300 { transition-delay: 0.3s; }
+.animate-delay-400 { transition-delay: 0.4s; }
+.animate-delay-500 { transition-delay: 0.5s; }
+.animate-delay-600 { transition-delay: 0.6s; }
+
+/* Enhanced Section Animations */
+.section-header {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-header.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Step Cards Enhanced Animation */
+.step-card {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-card.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Feature Cards Enhanced Animation */
+.feature-card {
+  opacity: 0;
+  transform: translateY(50px) rotateX(10deg);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center bottom;
+}
+
+.feature-card.animate-in {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg);
+}
+
+/* Role Cards Enhanced Animation */
+.role-card {
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.role-card.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Dashboard Preview Animation */
+.dashboard-preview {
+  opacity: 0;
+  transform: translateX(80px) rotateY(-10deg);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left center;
+  perspective: 1000px;
+}
+
+.dashboard-preview.animate-in {
+  opacity: 1;
+  transform: translateX(0) rotateY(0deg);
+}
+
+/* Hero Text Animation */
+.hero-text {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-text.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Footer Animation */
+.footer {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced Floating Shapes Animation */
+.floating-shapes .shape {
+  opacity: 0;
+  animation: shapeEntrance 2s ease-out forwards, float 8s ease-in-out infinite 2s;
+}
+
+@keyframes shapeEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.5) rotate(90deg);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+/* AOS Animation Utilities (Legacy Support) */
 [data-aos] {
   opacity: 0;
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 [data-aos].aos-animate {
@@ -1117,9 +1288,33 @@ a:hover {
 }
 
 [data-aos="fade-up"] {
-  transform: translateY(30px);
+  transform: translateY(50px);
 }
 
 [data-aos="fade-up"].aos-animate {
   transform: translateY(0);
+}
+
+[data-aos="fade-left"] {
+  transform: translateX(-50px);
+}
+
+[data-aos="fade-left"].aos-animate {
+  transform: translateX(0);
+}
+
+[data-aos="fade-right"] {
+  transform: translateX(50px);
+}
+
+[data-aos="fade-right"].aos-animate {
+  transform: translateX(0);
+}
+
+[data-aos="zoom-in"] {
+  transform: scale(0.8);
+}
+
+[data-aos="zoom-in"].aos-animate {
+  transform: scale(1);
 }
