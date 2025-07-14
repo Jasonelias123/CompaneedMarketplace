@@ -701,7 +701,7 @@ a:hover {
 
 .trust-card h3 {
   font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   color: var(--color-gray-900);
   margin-bottom: var(--space-3);
 }
@@ -710,6 +710,7 @@ a:hover {
   color: var(--color-gray-600);
   line-height: 1.6;
   font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
 }
 
 /* Section Styling */
