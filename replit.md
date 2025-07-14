@@ -106,6 +106,15 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **July 14, 2025**: Modern landing page redesign with premium SaaS aesthetic inspired by Linear, Vercel, and Notion
+  - Completely rebuilt HTML structure with semantic sections and modern navigation
+  - Created new CSS system with comprehensive design tokens and responsive grid layouts
+  - Implemented sleek dashboard mockup visualization showing AI matching flow
+  - Added smooth animations, floating background shapes, and gradient effects
+  - Built sticky navigation with backdrop blur and mobile hamburger menu
+  - Updated typography to Inter font with proper weight hierarchy
+  - Enhanced accessibility with focus states, ARIA labels, and keyboard navigation
+  - Changed "Why Companeeds?" subtitle to "We've done the vetting for you" per user feedback
 - **July 13, 2025**: Complete landing page redesign with modern SaaS aesthetic
   - Created premium design inspired by Linear, Vercel, and Notion
   - Implemented sticky navigation with backdrop blur and smooth animations
