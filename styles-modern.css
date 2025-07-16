@@ -195,7 +195,7 @@ a:hover {
 .brand-text {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-gray-900);
+  color: #1877f2;
   letter-spacing: -0.025em;
 }
 
