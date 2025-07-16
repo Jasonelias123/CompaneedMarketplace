@@ -1136,26 +1136,33 @@ a:hover {
   
   .flow-step {
     flex: 1;
-    min-width: 80px;
+    min-width: 70px;
+    max-width: 90px;
   }
   
   .flow-arrow {
     transform: none;
     flex: 0 0 auto;
+    margin: 0 var(--space-1);
   }
   
   .flow-arrow svg {
-    width: 20px;
-    height: 12px;
+    width: 16px;
+    height: 10px;
   }
   
   .step-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto var(--space-2);
   }
   
   .step-label {
-    font-size: var(--font-size-xs);
+    font-size: 11px;
+    line-height: 1.2;
+    text-align: center;
+    word-break: break-word;
+    hyphens: auto;
   }
   
   .dashboard-metrics {
@@ -1198,7 +1205,8 @@ a:hover {
   }
   
   .dashboard-preview {
-    max-width: 320px;
+    max-width: 300px;
+    margin: 0 auto;
   }
   
   .hero-text {
@@ -1211,11 +1219,12 @@ a:hover {
   }
   
   .dashboard-content {
-    padding: var(--space-6) var(--space-4);
+    padding: var(--space-4) var(--space-3);
   }
   
   .matching-flow {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
+    padding: 0 var(--space-2);
   }
 }
 
