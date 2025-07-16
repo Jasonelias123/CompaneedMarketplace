@@ -338,7 +338,7 @@ a:hover {
   font-weight: var(--font-weight-black);
   line-height: 0.9;
   letter-spacing: -0.04em;
-  color: var(--color-gray-900);
+  color: #1877f2;
   margin-bottom: var(--space-2);
 }
 
