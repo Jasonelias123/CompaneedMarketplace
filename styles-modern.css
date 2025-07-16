@@ -882,7 +882,7 @@ a:hover {
 
 .step-card {
   background: var(--color-white);
-  border: 1px solid var(--color-gray-200);
+  border: 2px solid #1877f2;
   border-radius: var(--radius-2xl);
   padding: var(--space-8);
   transition: var(--transition-all);
@@ -897,8 +897,8 @@ a:hover {
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--gradient-primary);
-  opacity: 0;
+  background: linear-gradient(135deg, #1877f2 0%, #2b88f5 100%);
+  opacity: 1;
   transition: var(--transition-all);
 }
 
@@ -918,8 +918,8 @@ a:hover {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: var(--color-gray-100);
-  color: var(--color-gray-700);
+  background: #1877f2;
+  color: var(--color-white);
   border-radius: var(--radius-xl);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
@@ -928,8 +928,9 @@ a:hover {
 }
 
 .step-card:hover .step-number {
-  background: var(--color-primary-500);
+  background: #0d5fb8;
   color: var(--color-white);
+  transform: scale(1.05);
 }
 
 .step-content h3 {
