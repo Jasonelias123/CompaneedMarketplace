@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Messaging System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .messaging-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #6366f1;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .messaging-link:hover {
+            background: #4f46e5;
+        }
+        .feature-list {
+            background: #f3f4f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .ai-flow {
+            background: #ecfdf5;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+    <h1>Companeeds Messaging System</h1>
+    
+    <div class="feature-list">
+        <h3>🚀 New Messaging Features</h3>
+        <ul>
+            <li><strong>Direct Consultant Messaging:</strong> Real-time chat with approved AI consultants</li>
+            <li><strong>AI-Powered Intake:</strong> Intelligent chatbot conducts consultant interviews</li>
+            <li><strong>Two-Tab Interface:</strong> Switch between consultant chats and AI intake sessions</li>
+            <li><strong>Real-time Status:</strong> See consultant availability (online, away, offline)</li>
+            <li><strong>Mock Data Integration:</strong> Pre-loaded with sample consultants and conversations</li>
+        </ul>
+    </div>
+    
+    <div class="ai-flow">
+        <h3>🤖 AI Intake Flow</h3>
+        <p>The AI chatbot conducts comprehensive consultant interviews covering:</p>
+        <ul>
+            <li>Personal Information (Name, Email, Location)</li>
+            <li>Experience Level & Specialties</li>
+            <li>Tools & Frameworks</li>
+            <li>Industry Experience</li>
+            <li>Project Types & Portfolio</li>
+            <li>Rates & Availability</li>
+            <li>Motivation & Goals</li>
+        </ul>
+        <p><strong>Result:</strong> Structured consultant profile automatically saved for admin review</p>
+    </div>
+    
+    <h2>Test the System</h2>
+    <a href="messaging-dashboard.html" class="messaging-link">
+        Open Messaging Dashboard
+    </a>
+    
+    <h3>Sample Consultants Available:</h3>
+    <ul>
+        <li><strong>Sarah Chen</strong> - Machine Learning, NLP (Online)</li>
+        <li><strong>Marcus Rodriguez</strong> - Computer Vision, Deep Learning (Away)</li>
+        <li><strong>Dr. Priya Patel</strong> - AI Strategy, Ethics (Offline)</li>
+    </ul>
+    
+    <h3>How to Test:</h3>
+    <ol>
+        <li><strong>Direct Messaging:</strong> Click on any consultant to start a conversation</li>
+        <li><strong>AI Intake:</strong> Switch to "AI Intake" tab and click "Start New AI Intake"</li>
+        <li><strong>Real-time Chat:</strong> Send messages and get simulated responses</li>
+        <li><strong>Complete Intake:</strong> Answer all AI questions to see the full flow</li>
+    </ol>
+    
+    <div class="feature-list">
+        <h3>Technical Implementation</h3>
+        <ul>
+            <li><strong>messaging-dashboard.html:</strong> Main interface with sidebar and chat area</li>
+            <li><strong>messaging-dashboard.css:</strong> Modern styling with responsive design</li>
+            <li><strong>messaging-dashboard.js:</strong> Firebase integration + mock data for testing</li>
+            <li><strong>Authentication Bypass:</strong> Currently disabled for easy testing</li>
+        </ul>
+    </div>
+</body>
+</html>

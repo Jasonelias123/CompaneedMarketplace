@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companeeds Messaging</title>
+    <link rel="stylesheet" href="messaging-dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="messaging-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Messages</h2>
+                <button class="new-chat-btn" onclick="startNewChat()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                    New Chat
+                </button>
+            </div>
+            
+            <div class="chat-tabs">
+                <button class="tab-btn active" onclick="switchChatType('consultants')">Consultants</button>
+                <button class="tab-btn" onclick="switchChatType('ai-intake')">AI Intake</button>
+            </div>
+            
+            <div class="chat-list" id="consultantChats">
+                <!-- Consultant conversations will be loaded here -->
+            </div>
+            
+            <div class="chat-list hidden" id="aiIntakeChats">
+                <!-- AI intake conversations will be loaded here -->
+            </div>
+        </div>
+        
+        <!-- Main Chat Area -->
+        <div class="chat-main">
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-content">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <h3>Welcome to Companeeds Messaging</h3>
+                    <p>Connect directly with AI consultants or use our AI intake system to gather detailed requirements.</p>
+                    <div class="welcome-actions">
+                        <button class="primary-btn" onclick="switchChatType('consultants')">Message Consultants</button>
+                        <button class="secondary-btn" onclick="switchChatType('ai-intake')">Start AI Intake</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-interface hidden" id="chatInterface">
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <div class="chat-header-info">
+                        <div class="avatar" id="chatAvatar">SC</div>
+                        <div class="chat-details">
+                            <h3 id="chatTitle">Sarah Chen</h3>
+                            <span class="chat-status" id="chatStatus">AI Consultant • Online</span>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="action-btn" onclick="viewProfile()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </button>
+                        <button class="action-btn" onclick="closeChat()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Messages Area -->
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Messages will be loaded here -->
+                </div>
+                
+                <!-- Message Input -->
+                <div class="message-input-container">
+                    <div class="message-input">
+                        <input type="text" id="messageInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                        <button class="send-btn" onclick="sendMessage()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI Intake Modal -->
+    <div class="modal-overlay hidden" id="aiIntakeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>AI Consultant Intake</h3>
+                <button class="close-btn" onclick="closeAiIntake()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="ai-chat-container">
+                    <div class="ai-messages" id="aiMessages">
+                        <!-- AI conversation will appear here -->
+                    </div>
+                    <div class="ai-input-container">
+                        <input type="text" id="aiInput" placeholder="Type your response..." onkeypress="handleAiKeyPress(event)">
+                        <button class="send-btn" onclick="sendAiResponse()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="messaging-dashboard.js"></script>
+</body>
+</html>
