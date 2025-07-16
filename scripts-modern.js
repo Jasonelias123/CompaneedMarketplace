@@ -285,9 +285,9 @@ window.goToRole = function(role) {
     // Navigate after short delay for visual feedback
     setTimeout(() => {
         if (role === 'company') {
-            window.location.href = 'company-intake.html';
+            window.location.href = 'messaging-dashboard.html?type=company';
         } else if (role === 'talent') {
-            window.location.href = 'ai-talent-intake.html';
+            window.location.href = 'messaging-dashboard.html?type=consultant';
         }
     }, 300);
 };

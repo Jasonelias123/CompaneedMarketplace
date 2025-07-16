@@ -25,9 +25,10 @@ let currentChatType = 'consultants';
 let consultants = [];
 let conversations = [];
 let aiIntakeSession = null;
+let intakeType = 'consultant'; // 'consultant' or 'company'
 
-// AI Intake Questions Flow
-const aiIntakeQuestions = [
+// AI Intake Questions Flow for Consultants
+const consultantIntakeQuestions = [
     {
         id: 'welcome',
         text: "Hello! I'm the Companeeds AI assistant. I'll help gather some information about your AI consulting expertise. What's your full name?",
@@ -95,8 +96,104 @@ const aiIntakeQuestions = [
     }
 ];
 
+// AI Intake Questions Flow for Companies
+const companyIntakeQuestions = [
+    {
+        id: 'welcome',
+        text: "Hello! I'm the Companeeds AI assistant. I'll help you find the perfect AI consultant for your business needs. Let's start with your name - what should I call you?",
+        field: 'contactName'
+    },
+    {
+        id: 'company',
+        text: "Great to meet you! What's the name of your company?",
+        field: 'companyName'
+    },
+    {
+        id: 'email',
+        text: "What's the best email address to reach you?",
+        field: 'email'
+    },
+    {
+        id: 'role',
+        text: "What's your role at the company? (e.g., CEO, CTO, Product Manager, etc.)",
+        field: 'role'
+    },
+    {
+        id: 'companySize',
+        text: "How many employees does your company have?",
+        field: 'companySize'
+    },
+    {
+        id: 'industry',
+        text: "What industry is your company in? (e.g., E-commerce, Healthcare, Finance, etc.)",
+        field: 'industry'
+    },
+    {
+        id: 'aiGoals',
+        text: "What are your main goals with AI? What business problems are you looking to solve?",
+        field: 'aiGoals'
+    },
+    {
+        id: 'currentAI',
+        text: "Do you currently use any AI tools or have any AI initiatives in place?",
+        field: 'currentAI'
+    },
+    {
+        id: 'projectType',
+        text: "What type of AI project are you most interested in? (e.g., Chatbots, Data Analytics, Process Automation, etc.)",
+        field: 'projectType'
+    },
+    {
+        id: 'timeline',
+        text: "What's your ideal timeline for getting started? (e.g., ASAP, Within 1 month, 2-3 months, etc.)",
+        field: 'timeline'
+    },
+    {
+        id: 'budget',
+        text: "What's your approximate budget range for this AI project? (This helps us match you with the right consultant)",
+        field: 'budget'
+    },
+    {
+        id: 'success',
+        text: "How will you measure success for this AI project? What specific outcomes are you hoping to achieve?",
+        field: 'successMetrics'
+    },
+    {
+        id: 'challenges',
+        text: "What's the biggest challenge or pain point you're hoping AI will help solve?",
+        field: 'challenges'
+    },
+    {
+        id: 'complete',
+        text: "Excellent! I have all the information needed to match you with the perfect AI consultant. Our team will review your requirements and connect you with 2-3 ideal matches within 24 hours. You'll receive an email with consultant profiles and can schedule calls directly. Thank you for choosing Companeeds!",
+        field: null
+    }
+];
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
+    // Check for URL parameters to determine intake type
+    const urlParams = new URLSearchParams(window.location.search);
+    const type = urlParams.get('type');
+    
+    if (type === 'company') {
+        intakeType = 'company';
+        currentChatType = 'ai-intake';
+        // Auto-start company intake
+        setTimeout(() => {
+            switchChatType('ai-intake');
+            startNewAiIntake();
+        }, 500);
+    } else if (type === 'consultant') {
+        intakeType = 'consultant';
+        currentChatType = 'ai-intake';
+        // Auto-start consultant intake
+        setTimeout(() => {
+            switchChatType('ai-intake');
+            startNewAiIntake();
+        }, 500);
+    }
+    
     // Temporary bypass for testing
     console.log('TESTING MODE: Bypassing authentication');
     currentUser = {
@@ -397,19 +494,32 @@ function switchChatType(type) {
 function loadAiIntakeList() {
     const aiIntakeChats = document.getElementById('aiIntakeChats');
     aiIntakeChats.innerHTML = `
-        <div class="chat-item" onclick="startNewAiIntake()">
+        <div class="chat-item" onclick="startNewAiIntake('consultant')">
             <div class="chat-item-header">
-                <span class="chat-item-name">Start New AI Intake</span>
+                <span class="chat-item-name">Consultant Intake</span>
             </div>
-            <div class="chat-item-preview">Begin AI-powered consultant interview</div>
+            <div class="chat-item-preview">AI interview for AI consultants</div>
+        </div>
+        <div class="chat-item" onclick="startNewAiIntake('company')">
+            <div class="chat-item-header">
+                <span class="chat-item-name">Company Intake</span>
+            </div>
+            <div class="chat-item-preview">AI interview for companies seeking AI solutions</div>
         </div>
     `;
 }
 
 // Start new AI intake session
-function startNewAiIntake() {
+function startNewAiIntake(type = null) {
+    if (type) {
+        intakeType = type;
+    }
+    
+    const questions = intakeType === 'company' ? companyIntakeQuestions : consultantIntakeQuestions;
+    
     aiIntakeSession = {
         id: `intake-${Date.now()}`,
+        type: intakeType,
         currentQuestion: 0,
         responses: {},
         messages: []
@@ -418,8 +528,12 @@ function startNewAiIntake() {
     document.getElementById('aiIntakeModal').classList.remove('hidden');
     document.getElementById('aiMessages').innerHTML = '';
     
+    // Update modal title based on type
+    const modalTitle = document.querySelector('#aiIntakeModal .modal-header h3');
+    modalTitle.textContent = intakeType === 'company' ? 'Company AI Intake' : 'AI Consultant Intake';
+    
     // Start with welcome message
-    addAiMessage(aiIntakeQuestions[0].text, 'bot');
+    addAiMessage(questions[0].text, 'bot');
 }
 
 // Add AI message to intake chat
@@ -454,8 +568,11 @@ function sendAiResponse() {
     addAiMessage(responseText, 'user');
     aiInput.value = '';
     
+    // Get the appropriate question set
+    const questions = aiIntakeSession.type === 'company' ? companyIntakeQuestions : consultantIntakeQuestions;
+    
     // Store response
-    const currentQ = aiIntakeQuestions[aiIntakeSession.currentQuestion];
+    const currentQ = questions[aiIntakeSession.currentQuestion];
     if (currentQ.field) {
         aiIntakeSession.responses[currentQ.field] = responseText;
     }
@@ -464,15 +581,18 @@ function sendAiResponse() {
     aiIntakeSession.currentQuestion++;
     
     setTimeout(() => {
-        if (aiIntakeSession.currentQuestion < aiIntakeQuestions.length) {
-            const nextQuestion = aiIntakeQuestions[aiIntakeSession.currentQuestion];
+        if (aiIntakeSession.currentQuestion < questions.length) {
+            const nextQuestion = questions[aiIntakeSession.currentQuestion];
             addAiMessage(nextQuestion.text, 'bot');
         } else {
             // Intake complete
-            console.log('AI Intake Complete:', aiIntakeSession.responses);
+            console.log(`${aiIntakeSession.type} AI Intake Complete:`, aiIntakeSession.responses);
+            const completionMessage = aiIntakeSession.type === 'company' ? 
+                'Company intake completed! We\'ll match you with perfect AI consultants within 24 hours.' :
+                'Consultant profile completed! Your application has been saved for review.';
             setTimeout(() => {
                 closeAiIntake();
-                alert('AI intake completed! The consultant profile has been saved for review.');
+                alert(completionMessage);
             }, 2000);
         }
     }, 1000);

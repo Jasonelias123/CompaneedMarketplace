@@ -106,14 +106,18 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
-- **July 16, 2025**: Created comprehensive messaging system with AI-powered consultant intake
+- **July 16, 2025**: Created comprehensive messaging system with AI-powered dual intake flows
   - Built messaging-dashboard.html with dual-tab interface for consultant chats and AI intake sessions
   - Implemented real-time messaging system with consultant availability status (online, away, offline)
-  - Created AI chatbot that conducts structured consultant interviews replacing traditional forms
-  - AI intake covers: experience, specialties, tools, industries, rates, availability, motivation
+  - Created AI chatbot that conducts structured interviews for both companies AND consultants
+  - Company AI intake covers: business goals, industry, AI needs, budget, timeline, success metrics
+  - Consultant AI intake covers: experience, specialties, tools, industries, rates, availability, motivation
   - messaging-dashboard.css provides modern chat UI with responsive design and smooth animations
   - messaging-dashboard.js includes Firebase integration with mock data for comprehensive testing
   - Direct consultant messaging with simulated responses and conversation history
+  - Integrated with main landing page: all "Get Matched" and "Apply as AI Consultant" buttons now redirect to messaging system
+  - URL parameters automatically launch appropriate intake flow (type=company or type=consultant)
+  - Updated all navigation links across index.html to use messaging system instead of static forms
   - Created test-messaging-system.html for feature overview and testing instructions
 - **July 16, 2025**: Created comprehensive consultant dashboard for approved AI experts
   - Built consultant-dashboard.html with modern tabbed interface (Overview, Profile, Projects, Earnings)
