@@ -93,9 +93,9 @@
   --transition-transform: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-accent-purple) 100%);
+  --gradient-primary: linear-gradient(135deg, #1877f2 0%, rgba(255, 255, 255, 0.1) 100%);
   --gradient-secondary: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
-  --gradient-accent: linear-gradient(135deg, var(--color-accent-blue) 0%, var(--color-accent-purple) 100%);
+  --gradient-accent: linear-gradient(135deg, #1877f2 0%, rgba(255, 255, 255, 0.1) 100%);
 }
 
 /* Reset and Base Styles */
@@ -970,12 +970,17 @@ a:hover {
   gap: var(--space-2);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-primary-600);
-  transition: var(--transition-colors);
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-all);
+  box-shadow: var(--shadow-md);
 }
 
 .role-card:hover .role-cta {
-  color: var(--color-primary-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
 }
 
 .role-cta svg {
