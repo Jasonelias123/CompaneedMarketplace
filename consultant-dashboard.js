@@ -43,19 +43,112 @@ let projectsData = [];
 
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function() {
-    // Check authentication
+    // Temporary bypass for testing - skip authentication
+    console.log('TESTING MODE: Bypassing authentication');
+    
+    // Create mock user for testing
+    currentUser = {
+        uid: 'test-consultant-123',
+        email: 'test@consultant.com'
+    };
+    
+    // Initialize with mock data
+    initializeDashboardWithMockData();
+    
+    // Commented out for testing:
+    /*
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
             initializeDashboard();
         } else {
-            // Redirect to login if not authenticated
             window.location.href = 'login.html';
         }
     });
+    */
 });
 
-// Initialize dashboard data
+// Initialize dashboard with mock data for testing
+function initializeDashboardWithMockData() {
+    console.log('Loading mock data for testing...');
+    
+    // Mock consultant data
+    consultantData = {
+        fullName: "Sarah Chen",
+        email: "sarah.chen@email.com",
+        location: "San Francisco, CA",
+        aiTools: "Machine Learning, Natural Language Processing, Computer Vision",
+        bio: "Experienced AI consultant with 8+ years in machine learning and data science. Specialized in helping businesses implement practical AI solutions that drive measurable results.",
+        createdAt: { seconds: Date.now() / 1000 - (365 * 24 * 60 * 60) }, // 1 year ago
+        role: "developer",
+        status: "approved"
+    };
+    
+    // Mock projects data
+    projectsData = [
+        {
+            id: 'proj-1',
+            title: 'AI Customer Service Chatbot',
+            description: 'Implemented an intelligent chatbot system that reduced customer service response time by 80% and improved customer satisfaction scores.',
+            companyName: 'TechCorp Solutions',
+            status: 'completed',
+            consultantFee: 8500,
+            consultantRating: 4.9,
+            createdAt: { seconds: Date.now() / 1000 - (30 * 24 * 60 * 60) }, // 30 days ago
+            completedAt: { seconds: Date.now() / 1000 - (5 * 24 * 60 * 60) } // 5 days ago
+        },
+        {
+            id: 'proj-2',
+            title: 'Predictive Analytics Dashboard',
+            description: 'Built machine learning models to predict customer churn and created an executive dashboard showing key business metrics.',
+            companyName: 'RetailMax Inc',
+            status: 'active',
+            consultantFee: 12000,
+            createdAt: { seconds: Date.now() / 1000 - (15 * 24 * 60 * 60) } // 15 days ago
+        },
+        {
+            id: 'proj-3',
+            title: 'Document Processing Automation',
+            description: 'Developed OCR and NLP pipeline to automatically process and categorize legal documents, saving 40 hours per week.',
+            companyName: 'LegalEase Partners',
+            status: 'completed',
+            consultantFee: 6750,
+            consultantRating: 4.7,
+            createdAt: { seconds: Date.now() / 1000 - (60 * 24 * 60 * 60) }, // 60 days ago
+            completedAt: { seconds: Date.now() / 1000 - (45 * 24 * 60 * 60) } // 45 days ago
+        },
+        {
+            id: 'proj-4',
+            title: 'Inventory Optimization System',
+            description: 'Created AI-powered inventory management system that reduced overstock by 35% and prevented stockouts.',
+            companyName: 'SupplyChain Pro',
+            status: 'completed',
+            consultantFee: 9200,
+            consultantRating: 4.8,
+            createdAt: { seconds: Date.now() / 1000 - (90 * 24 * 60 * 60) }, // 90 days ago
+            completedAt: { seconds: Date.now() / 1000 - (75 * 24 * 60 * 60) } // 75 days ago
+        },
+        {
+            id: 'proj-5',
+            title: 'Sales Lead Scoring Model',
+            description: 'Implemented machine learning model to score and prioritize sales leads, increasing conversion rate by 45%.',
+            companyName: 'GrowthTech Ventures',
+            status: 'in-progress',
+            consultantFee: 7500,
+            createdAt: { seconds: Date.now() / 1000 - (7 * 24 * 60 * 60) } // 7 days ago
+        }
+    ];
+    
+    // Update UI with mock data
+    updateDashboardUI();
+    
+    // Load tab-specific content
+    loadTabContent(currentTab);
+    
+    console.log('Mock data loaded successfully');
+}
+
+// Initialize dashboard data (original function - commented out for testing)
 async function initializeDashboard() {
     try {
         // Load consultant profile
