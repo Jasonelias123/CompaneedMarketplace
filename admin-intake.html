@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intake Management - Companeeds Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            margin: 0;
+        }
+        
+        .admin-header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-nav {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            color: #64748b;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .nav-tab.active {
+            color: #8b5cf6;
+            border-bottom-color: #8b5cf6;
+        }
+        
+        .admin-main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .intake-section {
+            display: none;
+        }
+        
+        .intake-section.active {
+            display: block;
+        }
+        
+        .intake-list {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .intake-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .intake-item:last-child {
+            border-bottom: none;
+        }
+        
+        .intake-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .intake-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .meta-field {
+            font-size: 0.875rem;
+        }
+        
+        .meta-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .meta-value {
+            color: #1e293b;
+            margin-top: 0.25rem;
+        }
+        
+        .intake-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #8b5cf6;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+        
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-reviewed {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .status-matched {
+            background: #d1fae5;
+            color: #047857;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+        }
+        
+        .email-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .email-content {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <h1>Companeeds Admin - Intake Management</h1>
+        <div>
+            <button class="btn btn-secondary" onclick="window.location.href='admin.html'">Project Admin</button>
+            <button class="btn btn-secondary" onclick="handleLogout()">Logout</button>
+        </div>
+    </div>
+    
+    <div class="admin-nav">
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('companies')">Company Intakes</button>
+            <button class="nav-tab" onclick="switchTab('consultants')">Consultant Applications</button>
+            <button class="nav-tab" onclick="switchTab('matches')">Matching History</button>
+        </div>
+    </div>
+    
+    <div class="admin-main">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="pendingCompanies">0</div>
+                <div class="stat-label">Pending Company Reviews</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pendingConsultants">0</div>
+                <div class="stat-label">Pending Consultant Applications</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalMatches">0</div>
+                <div class="stat-label">Total Matches Made</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="successfulMatches">0</div>
+                <div class="stat-label">Successful Projects</div>
+            </div>
+        </div>
+        
+        <!-- Company Intakes Section -->
+        <div class="intake-section active" id="companiesSection">
+            <h2>Company Intakes</h2>
+            <div class="intake-list" id="companiesList">
+                <div class="loading">Loading company intakes...</div>
+            </div>
+        </div>
+        
+        <!-- Consultant Applications Section -->
+        <div class="intake-section" id="consultantsSection">
+            <h2>Consultant Applications</h2>
+            <div class="intake-list" id="consultantsList">
+                <div class="loading">Loading consultant applications...</div>
+            </div>
+        </div>
+        
+        <!-- Matching History Section -->
+        <div class="intake-section" id="matchesSection">
+            <h2>Matching History</h2>
+            <div class="intake-list" id="matchesList">
+                <div class="loading">Loading matches...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Email Modal -->
+    <div class="email-modal hidden" id="emailModal">
+        <div class="email-content">
+            <h3 id="emailModalTitle">Send Email</h3>
+            <form id="emailForm">
+                <div class="form-group">
+                    <label class="form-label">To:</label>
+                    <input type="email" class="form-input" id="emailTo" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Subject:</label>
+                    <input type="text" class="form-input" id="emailSubject">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message:</label>
+                    <textarea class="form-textarea" id="emailMessage"></textarea>
+                </div>
+                <div class="intake-actions">
+                    <button type="submit" class="btn btn-primary">Send Email</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEmailModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Firebase Configuration -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="env-config.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="admin-intake.js"></script>
+</body>
+</html>

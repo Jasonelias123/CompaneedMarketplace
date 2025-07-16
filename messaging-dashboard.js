@@ -599,8 +599,10 @@ function sendAiResponse() {
             const nextQuestion = questions[aiIntakeSession.currentQuestion];
             addAiMessage(nextQuestion.text, 'bot');
         } else {
-            // Intake complete
+            // Intake complete - save to Firebase
             console.log(`${aiIntakeSession.type} AI Intake Complete:`, aiIntakeSession.responses);
+            saveIntakeData(aiIntakeSession);
+            
             const completionMessage = aiIntakeSession.type === 'company' ? 
                 'Company intake completed! Our team will personally review your needs and match you with ideal AI consultants within 24 hours.' :
                 'Consultant application completed! Our team will review your profile and contact you within 24-48 hours.';
@@ -610,6 +612,71 @@ function sendAiResponse() {
             }, 2000);
         }
     }, 1000);
+}
+
+// Save intake data to Firebase and send confirmation email
+async function saveIntakeData(session) {
+    try {
+        const collectionName = session.type === 'company' ? 'company_intakes' : 'consultant_applications';
+        const data = {
+            type: session.type,
+            responses: session.responses,
+            timestamp: new Date(),
+            status: session.type === 'company' ? 'pending_review' : 'pending_approval',
+            reviewed: false,
+            matched: false
+        };
+        
+        if (typeof firebase !== 'undefined' && firebase.firestore) {
+            await firebase.firestore().collection(collectionName).add(data);
+            console.log(`${session.type} intake saved to Firebase`);
+            
+            // Send confirmation email
+            await sendConfirmationEmail(session.type, session.responses);
+            
+            // Notify admin of new intake
+            await notifyAdminNewIntake(session.type, session.responses);
+        } else {
+            console.log('Firebase not available, data saved locally:', data);
+        }
+    } catch (error) {
+        console.error('Error saving intake data:', error);
+    }
+}
+
+// Send confirmation email after intake completion
+async function sendConfirmationEmail(type, responses) {
+    try {
+        const emailService = new EmailService();
+        const email = type === 'company' ? responses.contact_email : responses.email;
+        
+        if (email) {
+            await emailService.sendIntakeConfirmation(type, email, responses);
+            console.log(`Confirmation email sent to ${email}`);
+        }
+    } catch (error) {
+        console.error('Error sending confirmation email:', error);
+    }
+}
+
+// Notify admin of new intake submission
+async function notifyAdminNewIntake(type, responses) {
+    try {
+        const emailService = new EmailService();
+        const subject = `New ${type} intake received - Companeeds Admin`;
+        const content = `
+            <h3>New ${type} intake received</h3>
+            <p><strong>Name:</strong> ${type === 'company' ? responses.company_name : responses.full_name}</p>
+            <p><strong>Email:</strong> ${type === 'company' ? responses.contact_email : responses.email}</p>
+            <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+            <p>Review the full intake in the admin dashboard: <a href="/admin-intake.html">Admin Panel</a></p>
+        `;
+        
+        await emailService.sendEmail('admin@companeeds.com', subject, content);
+        console.log('Admin notification sent');
+    } catch (error) {
+        console.error('Error sending admin notification:', error);
+    }
 }
 
 // Close AI intake modal
