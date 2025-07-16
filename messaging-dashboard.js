@@ -91,7 +91,7 @@ const consultantIntakeQuestions = [
     },
     {
         id: 'complete',
-        text: "Perfect! I've gathered all the information we need. Our team will review your profile and get back to you within 24-48 hours. Thank you for your interest in joining the Companeeds network!",
+        text: "Excellent! I've collected all the details about your AI expertise and experience. Our team will carefully review your application and get back to you within 24-48 hours regarding next steps. If approved, you'll be invited to join our exclusive network of vetted AI consultants. Thank you for your interest in Companeeds!",
         field: null
     }
 ];
@@ -165,7 +165,7 @@ const companyIntakeQuestions = [
     },
     {
         id: 'complete',
-        text: "Excellent! I have all the information needed to match you with the perfect AI consultant. Our team will review your requirements and connect you with 2-3 ideal matches within 24 hours. You'll receive an email with consultant profiles and can schedule calls directly. Thank you for choosing Companeeds!",
+        text: "Perfect! I've gathered all the information we need about your business and AI goals. Our team will personally review your requirements and hand-select 2-3 ideal AI consultants from our vetted network. You'll receive an email within 24 hours with consultant profiles matched specifically to your needs. Thank you for choosing Companeeds!",
         field: null
     }
 ];
@@ -179,17 +179,19 @@ document.addEventListener('DOMContentLoaded', function() {
     if (type === 'company') {
         intakeType = 'company';
         currentChatType = 'ai-intake';
-        // Auto-start company intake
+        // Hide consultant sidebar and auto-start company intake
+        document.querySelector('.sidebar').style.display = 'none';
+        document.querySelector('.chat-main').style.width = '100%';
         setTimeout(() => {
-            switchChatType('ai-intake');
             startNewAiIntake();
         }, 500);
     } else if (type === 'consultant') {
         intakeType = 'consultant';
         currentChatType = 'ai-intake';
-        // Auto-start consultant intake
+        // Hide consultant sidebar and auto-start consultant intake
+        document.querySelector('.sidebar').style.display = 'none';
+        document.querySelector('.chat-main').style.width = '100%';
         setTimeout(() => {
-            switchChatType('ai-intake');
             startNewAiIntake();
         }, 500);
     }
@@ -206,81 +208,93 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize with mock data for testing
 function initializeMessagingWithMockData() {
-    console.log('Loading mock messaging data...');
+    console.log('Loading messaging interface...');
     
-    // Mock consultants data
-    consultants = [
-        {
-            id: 'consultant-1',
-            name: 'Sarah Chen',
-            email: 'sarah.chen@email.com',
-            specialties: 'Machine Learning, NLP',
-            status: 'online',
-            lastMessage: 'Thanks for the project details. I can definitely help with this.',
-            lastMessageTime: new Date(Date.now() - 300000), // 5 minutes ago
-            avatar: 'SC'
-        },
-        {
-            id: 'consultant-2', 
-            name: 'Marcus Rodriguez',
-            email: 'marcus.r@email.com',
-            specialties: 'Computer Vision, Deep Learning',
-            status: 'away',
-            lastMessage: 'I have experience with similar projects. When can we schedule a call?',
-            lastMessageTime: new Date(Date.now() - 3600000), // 1 hour ago
-            avatar: 'MR'
-        },
-        {
-            id: 'consultant-3',
-            name: 'Dr. Priya Patel',
-            email: 'priya.patel@email.com',
-            specialties: 'AI Strategy, Ethics',
-            status: 'offline',
-            lastMessage: 'I\'d like to learn more about your company\'s AI goals.',
-            lastMessageTime: new Date(Date.now() - 86400000), // 1 day ago
-            avatar: 'PP'
-        }
-    ];
+    // Check if this is a direct intake session
+    const urlParams = new URLSearchParams(window.location.search);
+    const type = urlParams.get('type');
     
-    // Mock conversations data
-    conversations = [
-        {
-            id: 'conv-1',
-            consultantId: 'consultant-1',
-            messages: [
-                {
-                    id: 'msg-1',
-                    senderId: currentUser.uid,
-                    text: 'Hi Sarah, I saw your profile and I think you\'d be perfect for our customer service AI project.',
-                    timestamp: new Date(Date.now() - 900000), // 15 minutes ago
-                    senderType: 'admin'
-                },
-                {
-                    id: 'msg-2',
-                    senderId: 'consultant-1',
-                    text: 'Hi! Thank you for reaching out. I\'d love to learn more about the project. Could you share some details about the scope and requirements?',
-                    timestamp: new Date(Date.now() - 600000), // 10 minutes ago
-                    senderType: 'consultant'
-                },
-                {
-                    id: 'msg-3',
-                    senderId: currentUser.uid,
-                    text: 'Absolutely! We need to build an AI chatbot that can handle customer inquiries, integrate with our CRM, and provide 24/7 support. The project budget is around $15,000.',
-                    timestamp: new Date(Date.now() - 450000), // 7.5 minutes ago
-                    senderType: 'admin'
-                },
-                {
-                    id: 'msg-4',
-                    senderId: 'consultant-1',
-                    text: 'Thanks for the project details. I can definitely help with this. I have experience building similar chatbots using NLP and can integrate with most CRM systems. When would you like to start?',
-                    timestamp: new Date(Date.now() - 300000), // 5 minutes ago
-                    senderType: 'consultant'
-                }
-            ]
-        }
-    ];
+    if (type === 'company' || type === 'consultant') {
+        // For direct intake, don't load any consultant data or conversations
+        // Keep arrays empty for clean intake experience
+        consultants = [];
+        conversations = [];
+    } else {
+        // Only load mock data for admin/general messaging interface
+        consultants = [
+            {
+                id: 'consultant-1',
+                name: 'Sarah Chen',
+                email: 'sarah.chen@email.com',
+                specialties: 'Machine Learning, NLP',
+                status: 'online',
+                lastMessage: 'Thanks for the project details. I can definitely help with this.',
+                lastMessageTime: new Date(Date.now() - 300000), // 5 minutes ago
+                avatar: 'SC'
+            },
+            {
+                id: 'consultant-2', 
+                name: 'Marcus Rodriguez',
+                email: 'marcus.r@email.com',
+                specialties: 'Computer Vision, Deep Learning',
+                status: 'away',
+                lastMessage: 'I have experience with similar projects. When can we schedule a call?',
+                lastMessageTime: new Date(Date.now() - 3600000), // 1 hour ago
+                avatar: 'MR'
+            },
+            {
+                id: 'consultant-3',
+                name: 'Dr. Priya Patel',
+                email: 'priya.patel@email.com',
+                specialties: 'AI Strategy, Ethics',
+                status: 'offline',
+                lastMessage: 'I\'d like to learn more about your company\'s AI goals.',
+                lastMessageTime: new Date(Date.now() - 86400000), // 1 day ago
+                avatar: 'PP'
+            }
+        ];
+        
+        // Mock conversations data
+        conversations = [
+            {
+                id: 'conv-1',
+                consultantId: 'consultant-1',
+                messages: [
+                    {
+                        id: 'msg-1',
+                        senderId: currentUser.uid,
+                        text: 'Hi Sarah, I saw your profile and I think you\'d be perfect for our customer service AI project.',
+                        timestamp: new Date(Date.now() - 900000), // 15 minutes ago
+                        senderType: 'admin'
+                    },
+                    {
+                        id: 'msg-2',
+                        senderId: 'consultant-1',
+                        text: 'Hi! Thank you for reaching out. I\'d love to learn more about the project. Could you share some details about the scope and requirements?',
+                        timestamp: new Date(Date.now() - 600000), // 10 minutes ago
+                        senderType: 'consultant'
+                    },
+                    {
+                        id: 'msg-3',
+                        senderId: currentUser.uid,
+                        text: 'Absolutely! We need to build an AI chatbot that can handle customer inquiries, integrate with our CRM, and provide 24/7 support. The project budget is around $15,000.',
+                        timestamp: new Date(Date.now() - 450000), // 7.5 minutes ago
+                        senderType: 'admin'
+                    },
+                    {
+                        id: 'msg-4',
+                        senderId: 'consultant-1',
+                        text: 'Thanks for the project details. I can definitely help with this. I have experience building similar chatbots using NLP and can integrate with most CRM systems. When would you like to start?',
+                        timestamp: new Date(Date.now() - 300000), // 5 minutes ago
+                        senderType: 'consultant'
+                    }
+                ]
+            }
+        ];
+        
+        loadConsultantsList();
+    }
     
-    loadConsultantsList();
     setupEventListeners();
 }
 
@@ -588,8 +602,8 @@ function sendAiResponse() {
             // Intake complete
             console.log(`${aiIntakeSession.type} AI Intake Complete:`, aiIntakeSession.responses);
             const completionMessage = aiIntakeSession.type === 'company' ? 
-                'Company intake completed! We\'ll match you with perfect AI consultants within 24 hours.' :
-                'Consultant profile completed! Your application has been saved for review.';
+                'Company intake completed! Our team will personally review your needs and match you with ideal AI consultants within 24 hours.' :
+                'Consultant application completed! Our team will review your profile and contact you within 24-48 hours.';
             setTimeout(() => {
                 closeAiIntake();
                 alert(completionMessage);
