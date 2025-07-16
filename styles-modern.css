@@ -1128,17 +1128,49 @@ a:hover {
   }
   
   .matching-flow {
-    flex-direction: column;
-    gap: var(--space-4);
+    flex-direction: row;
+    gap: var(--space-2);
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .flow-step {
+    flex: 1;
+    min-width: 80px;
   }
   
   .flow-arrow {
-    transform: rotate(90deg);
+    transform: none;
+    flex: 0 0 auto;
+  }
+  
+  .flow-arrow svg {
+    width: 20px;
+    height: 12px;
+  }
+  
+  .step-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .step-label {
+    font-size: var(--font-size-xs);
   }
   
   .dashboard-metrics {
     grid-template-columns: 1fr;
     gap: var(--space-3);
+  }
+  
+  .hero-actions {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .btn-primary {
+    align-self: center;
+    margin: 0 auto;
   }
 }
 
@@ -1167,6 +1199,23 @@ a:hover {
   
   .dashboard-preview {
     max-width: 320px;
+  }
+  
+  .hero-text {
+    text-align: center;
+  }
+  
+  .hero-actions {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dashboard-content {
+    padding: var(--space-6) var(--space-4);
+  }
+  
+  .matching-flow {
+    margin-bottom: var(--space-6);
   }
 }
 
