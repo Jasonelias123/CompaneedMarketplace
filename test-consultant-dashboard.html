@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Consultant Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .dashboard-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #6366f1;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .dashboard-link:hover {
+            background: #4f46e5;
+        }
+        .note {
+            background: #f3f4f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Consultant Dashboard Test</h1>
+    
+    <div class="note">
+        <h3>Note about Firebase Authentication</h3>
+        <p>The consultant dashboard requires Firebase authentication to be properly configured. Currently, the dashboard expects:</p>
+        <ul>
+            <li>A logged-in user with role 'developer'</li>
+            <li>User status must be 'approved'</li>
+            <li>Firebase secrets to be configured in Replit</li>
+        </ul>
+        <p>If authentication isn't working, you'll be redirected to login.html</p>
+    </div>
+    
+    <h2>Dashboard Features</h2>
+    <ul>
+        <li><strong>Overview Tab:</strong> Recent projects, performance metrics, success rate</li>
+        <li><strong>Profile Tab:</strong> Consultant information, bio, specialties</li>
+        <li><strong>Projects Tab:</strong> Complete project history with filtering</li>
+        <li><strong>Earnings Tab:</strong> Monthly, yearly, and lifetime earnings tracking</li>
+    </ul>
+    
+    <h2>Data Structure Expected</h2>
+    <p>The dashboard expects the following Firestore collections:</p>
+    <ul>
+        <li><strong>users:</strong> Consultant profiles with role, status, and personal info</li>
+        <li><strong>projects:</strong> Project data with assignedConsultant field linking to user ID</li>
+    </ul>
+    
+    <a href="consultant-dashboard.html" class="dashboard-link">
+        Open Consultant Dashboard
+    </a>
+    
+    <div class="note">
+        <h3>Sample Project Data Structure</h3>
+        <pre style="background: #1f2937; color: #f3f4f6; padding: 12px; border-radius: 6px; overflow-x: auto;">
+{
+  title: "AI Customer Service Bot",
+  description: "Implement AI chatbot for customer support",
+  companyName: "TechCorp Inc",
+  assignedConsultant: "user-id-here",
+  status: "completed", // active, in-progress, completed, cancelled
+  consultantFee: 5000,
+  consultantRating: 4.8,
+  createdAt: timestamp,
+  completedAt: timestamp
+}
+        </pre>
+    </div>
+</body>
+</html>

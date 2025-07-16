@@ -106,6 +106,14 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **July 16, 2025**: Created comprehensive consultant dashboard for approved AI experts
+  - Built consultant-dashboard.html with modern tabbed interface (Overview, Profile, Projects, Earnings)
+  - Implemented consultant-dashboard.js with Firebase integration for data management
+  - Added consultant-dashboard.css with responsive design matching site aesthetic
+  - Dashboard features: project history tracking, earnings analytics, profile management, performance metrics
+  - Authentication required: only approved consultants (role: 'developer', status: 'approved') can access
+  - Real-time data loading from Firestore collections: users, projects with assignedConsultant field
+  - Created test-consultant-dashboard.html for development and testing documentation
 - **July 14, 2025**: Modern landing page redesign with premium SaaS aesthetic inspired by Linear, Vercel, and Notion
   - Completely rebuilt HTML structure with semantic sections and modern navigation
   - Created new CSS system with comprehensive design tokens and responsive grid layouts
