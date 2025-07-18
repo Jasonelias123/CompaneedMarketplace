@@ -753,6 +753,85 @@ a:hover {
   color: var(--color-gray-600);
 }
 
+/* Trusted Brands Section */
+.trusted-brands {
+  padding: var(--space-20) 0;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.trusted-brands-content {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trusted-brands-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-4);
+  line-height: 1.2;
+}
+
+.trusted-brands-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-600);
+  margin-bottom: var(--space-12);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.brands-carousel {
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+.brands-track {
+  display: flex;
+  animation: scroll 25s linear infinite;
+  width: fit-content;
+}
+
+.brand-item {
+  flex: 0 0 auto;
+  padding: 0 var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  height: 80px;
+}
+
+.brand-item img {
+  max-height: 40px;
+  max-width: 120px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  filter: grayscale(100%);
+}
+
+.brand-item:hover img {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover */
+.brands-carousel:hover .brands-track {
+  animation-play-state: paused;
+}
+
 /* White text for How It Works section on blue background */
 .how-it-works .section-header h2 {
   color: var(--color-white);
@@ -1320,6 +1399,24 @@ a:hover {
     justify-content: space-around;
   }
   
+  .trusted-brands {
+    padding: var(--space-16) 0;
+  }
+  
+  .trusted-brands-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .trusted-brands-subtitle {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-8);
+  }
+  
+  .brand-item {
+    min-width: 120px;
+    padding: 0 var(--space-4);
+  }
+  
   .flow-step {
     flex: 1;
     max-width: 80px;
@@ -1390,6 +1487,29 @@ a:hover {
   .flow-arrow svg {
     width: 12px;
     height: 10px;
+  }
+  
+  .trusted-brands {
+    padding: var(--space-12) 0;
+  }
+  
+  .trusted-brands-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .trusted-brands-subtitle {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-6);
+  }
+  
+  .brand-item {
+    min-width: 100px;
+    padding: 0 var(--space-2);
+  }
+  
+  .brand-item img {
+    max-width: 80px;
+    max-height: 32px;
   }
 }
 
