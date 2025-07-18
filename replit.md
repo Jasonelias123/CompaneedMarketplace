@@ -106,6 +106,12 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **July 18, 2025**: Updated hero section copy and removed specific metrics
+  - Changed hero title back to "The most trusted AI talent for your company"
+  - Updated hero description to emphasize AI industry transformation and leadership positioning
+  - Removed specific metrics (48h match time, 50+ experts, 98% success rate) from dashboard mockup and step descriptions
+  - Maintained focus on business AI matching and trusted expert positioning
+  - Enhanced blue section with sophisticated geometric patterns and royal blue styling
 - **July 16, 2025**: Implemented complete post-intake workflow system with Firebase integration and automated email notifications
   - Built Firebase data storage for company_intakes and consultant_applications collections
   - Created admin-intake.html dashboard for reviewing and managing all intake submissions
