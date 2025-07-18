@@ -1316,7 +1316,80 @@ a:hover {
   
   .matching-flow {
     margin-bottom: var(--space-4);
-    padding: 0 var(--space-2);
+    padding: 0 var(--space-1);
+    justify-content: space-around;
+  }
+  
+  .flow-step {
+    flex: 1;
+    max-width: 80px;
+    gap: var(--space-1);
+  }
+  
+  .step-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto var(--space-1);
+  }
+  
+  .step-label {
+    font-size: 10px;
+    line-height: 1.1;
+    text-align: center;
+    word-break: break-word;
+    hyphens: auto;
+    padding: 0 2px;
+  }
+  
+  .flow-arrow {
+    margin: 0 var(--space-1);
+    flex-shrink: 0;
+  }
+  
+  .flow-arrow svg {
+    width: 16px;
+    height: 12px;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 360px) {
+  .dashboard-preview {
+    max-width: 280px;
+  }
+  
+  .dashboard-content {
+    padding: var(--space-3) var(--space-2);
+  }
+  
+  .matching-flow {
+    padding: 0;
+    gap: var(--space-1);
+  }
+  
+  .flow-step {
+    max-width: 70px;
+    gap: 2px;
+  }
+  
+  .step-icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .step-label {
+    font-size: 9px;
+    line-height: 1.0;
+    padding: 0 1px;
+  }
+  
+  .flow-arrow {
+    margin: 0 2px;
+  }
+  
+  .flow-arrow svg {
+    width: 12px;
+    height: 10px;
   }
 }
 
