@@ -10,7 +10,7 @@
 .faq-hero-content h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: var(--font-weight-black);
-  color: #1877f2;
+  color: #6366f1;
   margin-bottom: var(--space-4);
   letter-spacing: -0.025em;
 }
@@ -41,7 +41,7 @@
   color: var(--color-gray-900);
   margin-bottom: var(--space-8);
   padding-bottom: var(--space-4);
-  border-bottom: 2px solid #1877f2;
+  border-bottom: 2px solid #6366f1;
 }
 
 .faq-item {
@@ -88,7 +88,7 @@
 }
 
 .faq-icon {
-  color: #1877f2;
+  color: #6366f1;
   transition: var(--transition-transform);
   flex-shrink: 0;
 }
@@ -150,8 +150,8 @@
   gap: var(--space-2);
   padding: var(--space-4) var(--space-8);
   background: var(--color-white);
-  color: #1877f2;
-  border: 2px solid #1877f2;
+  color: #6366f1;
+  border: 2px solid #6366f1;
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   border-radius: var(--radius-xl);
@@ -161,7 +161,7 @@
 }
 
 .btn-secondary:hover {
-  background: #1877f2;
+  background: #6366f1;
   color: var(--color-white);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
