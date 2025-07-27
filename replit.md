@@ -106,6 +106,14 @@ The application uses Firebase Firestore with the following collections:
 
 ## Recent Changes
 
+- **July 27, 2025**: Created Toptal-style intake forms with interactive button-based questions
+  - Built company-intake-toptal.html with multi-step wizard: industry, company size, AI areas, budget, timeline, goals, and contact info
+  - Built ai-talent-intake-toptal.html with consultant application flow: specialization, experience, industries, client size, availability, rates, value proposition, and sample projects
+  - Designed large clickable option cards with icons, titles, and descriptions exactly like Toptal's interface
+  - Implemented progressive form steps with visual progress bar and smooth transitions
+  - Updated all navigation links across index.html to point to new Toptal-style forms
+  - Enhanced user experience with hover effects, loading states, and form validation
+  - Maintained original purple/indigo theme (#6366f1) throughout new forms
 - **July 18, 2025**: Updated hero section copy and removed specific metrics
   - Changed hero title back to "The most trusted AI talent for your company"
   - Updated hero description to emphasize AI industry transformation and leadership positioning

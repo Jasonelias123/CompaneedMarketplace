@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your AI Expert - Companeeds</title>
+    <meta name="description" content="Get matched with trusted AI experts to automate tasks, generate leads, and reduce staff costs.">
+    
+    <!-- Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles-modern.css">
+    <style>
+        /* Toptal-style intake form */
+        .intake-form-container {
+            max-width: 800px;
+            margin: 80px auto 0;
+            padding: var(--space-8);
+            min-height: 100vh;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+
+        .form-header h1 {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-4);
+            line-height: 1.2;
+        }
+
+        .form-header p {
+            font-size: var(--font-size-lg);
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+
+        .question-container {
+            margin-bottom: var(--space-16);
+        }
+
+        .question-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-6);
+            line-height: 1.4;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+
+        .option-card {
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            cursor: pointer;
+            transition: var(--transition-all);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:hover {
+            border-color: var(--color-primary-300);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .option-card.selected {
+            border-color: var(--color-primary-600);
+            background: var(--color-primary-50);
+        }
+
+        .option-card .option-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-primary-100);
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-4);
+            font-size: 24px;
+        }
+
+        .option-card.selected .option-icon {
+            background: var(--color-primary-600);
+            color: var(--color-white);
+        }
+
+        .option-card .option-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .option-card .option-description {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        .text-input-container {
+            margin-bottom: var(--space-8);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: var(--space-4);
+            border: 2px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-base);
+            font-family: var(--font-family);
+            transition: var(--transition-colors);
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--color-primary-600);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .continue-button {
+            background: var(--color-primary-600);
+            color: var(--color-white);
+            border: none;
+            padding: var(--space-4) var(--space-8);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: var(--transition-all);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .continue-button:hover {
+            background: var(--color-primary-700);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .continue-button:disabled {
+            background: var(--color-gray-300);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--color-gray-200);
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-8);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-primary-600);
+            border-radius: var(--radius-full);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        @media (max-width: 768px) {
+            .option-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intake-form-container {
+                padding: var(--space-4);
+                margin-top: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-sticky">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1><a href="index.html" style="color: inherit; text-decoration: none;">Companeeds</a></h1>
+            </div>
+            <div class="nav-links">
+                <a href="company-intake-toptal.html" class="nav-link">Companies</a>
+                <a href="ai-talent-intake-toptal.html" class="nav-link">AI Talent</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="intake-form-container">
+        <div class="form-header">
+            <h1>Find Your Perfect AI Expert</h1>
+            <p>Answer a few questions and we'll match you with the right AI consultant in 48 hours</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <form id="companyIntakeForm">
+            <!-- Step 1: Industry -->
+            <div class="form-step active" id="step1">
+                <div class="question-container">
+                    <h2 class="question-title">What industry is your company in?</h2>
+                    <div class="option-grid">
+                        <div class="option-card" data-value="technology">
+                            <div class="option-icon">💻</div>
+                            <div class="option-title">Technology</div>
+                            <div class="option-description">Software, hardware, IT services, SaaS</div>
+                        </div>
+                        <div class="option-card" data-value="healthcare">
+                            <div class="option-icon">🏥</div>
+                            <div class="option-title">Healthcare</div>
+                            <div class="option-description">Medical services, biotech, pharmaceuticals</div>
+                        </div>
+                        <div class="option-card" data-value="finance">
+                            <div class="option-icon">🏦</div>
+                            <div class="option-title">Finance</div>
+                            <div class="option-description">Banking, fintech, insurance, investing</div>
+                        </div>
+                        <div class="option-card" data-value="retail">
+                            <div class="option-icon">🛍️</div>
+                            <div class="option-title">Retail & E-commerce</div>
+                            <div class="option-description">Online stores, physical retail, marketplaces</div>
+                        </div>
+                        <div class="option-card" data-value="manufacturing">
+                            <div class="option-icon">🏭</div>
+                            <div class="option-title">Manufacturing</div>
+                            <div class="option-description">Production, logistics, supply chain</div>
+                        </div>
+                        <div class="option-card" data-value="education">
+                            <div class="option-icon">🎓</div>
+                            <div class="option-title">Education</div>
+                            <div class="option-description">Schools, online learning, training</div>
+                        </div>
+                        <div class="option-card" data-value="real-estate">
+                            <div class="option-icon">🏠</div>
+                            <div class="option-title">Real Estate</div>
+                            <div class="option-description">Property management, construction, development</div>
+                        </div>
+                        <div class="option-card" data-value="other">
+                            <div class="option-icon">🔧</div>
+                            <div class="option-title">Other</div>
+                            <div class="option-description">Consulting, services, non-profit, government</div>
+                        </div>
+                    </div>
+                    <button type="button" class="continue-button" onclick="nextStep()" disabled>
+                        Continue →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Company Size -->
+            <div class="form-step" id="step2">
+                <div class="question-container">
+                    <h2 class="question-title">What's your company size?</h2>
+                    <div class="option-grid">
+                        <div class="option-card" data-value="1-10">
+                            <div class="option-icon">👤</div>
+                            <div class="option-title">1-10 employees</div>
+                            <div class="option-description">Startup or small business</div>
+                        </div>
+                        <div class="option-card" data-value="11-50">
+                            <div class="option-icon">👥</div>
+                            <div class="option-title">11-50 employees</div>
+                            <div class="option-description">Growing small business</div>
+                        </div>
+                        <div class="option-card" data-value="51-200">
+                            <div class="option-icon">🏢</div>
+                            <div class="option-title">51-200 employees</div>
+                            <div class="option-description">Mid-size company</div>
+                        </div>
+                        <div class="option-card" data-value="201-1000">
+                            <div class="option-icon">🏬</div>
+                            <div class="option-title">201-1000 employees</div>
+                            <div class="option-description">Large company</div>
+                        </div>
+                        <div class="option-card" data-value="1000+">
+                            <div class="option-icon">🏭</div>
+                            <div class="option-title">1000+ employees</div>
+                            <div class="option-description">Enterprise corporation</div>
+                        </div>
+                    </div>
+                    <button type="button" class="continue-button" onclick="nextStep()" disabled>
+                        Continue →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: AI Implementation Areas -->
+            <div class="form-step" id="step3">
+                <div class="question-container">
+                    <h2 class="question-title">Which areas would you like to implement AI in?</h2>
+                    <div class="option-grid">
+                        <div class="option-card" data-value="customer-service">
+                            <div class="option-icon">💬</div>
+                            <div class="option-title">Customer Service</div>
+                            <div class="option-description">Chatbots, support automation, ticket routing</div>
+                        </div>
+                        <div class="option-card" data-value="sales-marketing">
+                            <div class="option-icon">📈</div>
+                            <div class="option-title">Sales & Marketing</div>
+                            <div class="option-description">Lead generation, personalization, analytics</div>
+                        </div>
+                        <div class="option-card" data-value="operations">
+                            <div class="option-icon">⚙️</div>
+                            <div class="option-title">Operations</div>
+                            <div class="option-description">Process automation, workflow optimization</div>
+                        </div>
+                        <div class="option-card" data-value="data-analysis">
+                            <div class="option-icon">📊</div>
+                            <div class="option-title">Data Analysis</div>
+                            <div class="option-description">Business intelligence, predictive analytics</div>
+                        </div>
+                        <div class="option-card" data-value="content-creation">
+                            <div class="option-icon">✍️</div>
+                            <div class="option-title">Content Creation</div>
+                            <div class="option-description">Writing, design, video, social media</div>
+                        </div>
+                        <div class="option-card" data-value="hr-recruitment">
+                            <div class="option-icon">👔</div>
+                            <div class="option-title">HR & Recruitment</div>
+                            <div class="option-description">Resume screening, interview scheduling</div>
+                        </div>
+                        <div class="option-card" data-value="finance-accounting">
+                            <div class="option-icon">💰</div>
+                            <div class="option-title">Finance & Accounting</div>
+                            <div class="option-description">Invoice processing, expense management</div>
+                        </div>
+                        <div class="option-card" data-value="not-sure">
+                            <div class="option-icon">❓</div>
+                            <div class="option-title">Not Sure Yet</div>
+                            <div class="option-description">Let's discuss your options</div>
+                        </div>
+                    </div>
+                    <button type="button" class="continue-button" onclick="nextStep()" disabled>
+                        Continue →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Budget Range -->
+            <div class="form-step" id="step4">
+                <div class="question-container">
+                    <h2 class="question-title">What's your monthly budget for AI consulting?</h2>
+                    <div class="option-grid">
+                        <div class="option-card" data-value="5k-15k">
+                            <div class="option-icon">💵</div>
+                            <div class="option-title">$5,000 - $15,000</div>
+                            <div class="option-description">Part-time consultant, small projects</div>
+                        </div>
+                        <div class="option-card" data-value="15k-30k">
+                            <div class="option-icon">💰</div>
+                            <div class="option-title">$15,000 - $30,000</div>
+                            <div class="option-description">Full-time consultant, medium projects</div>
+                        </div>
+                        <div class="option-card" data-value="30k-50k">
+                            <div class="option-icon">💎</div>
+                            <div class="option-title">$30,000 - $50,000</div>
+                            <div class="option-description">Senior consultant, complex implementations</div>
+                        </div>
+                        <div class="option-card" data-value="50k+">
+                            <div class="option-icon">👑</div>
+                            <div class="option-title">$50,000+</div>
+                            <div class="option-description">Team of experts, enterprise solutions</div>
+                        </div>
+                        <div class="option-card" data-value="discuss">
+                            <div class="option-icon">💬</div>
+                            <div class="option-title">Let's Discuss</div>
+                            <div class="option-description">Need help determining the right budget</div>
+                        </div>
+                    </div>
+                    <button type="button" class="continue-button" onclick="nextStep()" disabled>
+                        Continue →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 5: Timeline -->
+            <div class="form-step" id="step5">
+                <div class="question-container">
+                    <h2 class="question-title">When do you need to get started?</h2>
+                    <div class="option-grid">
+                        <div class="option-card" data-value="immediately">
+                            <div class="option-icon">🚀</div>
+                            <div class="option-title">Immediately</div>
+                            <div class="option-description">Ready to start this week</div>
+                        </div>
+                        <div class="option-card" data-value="1-2-weeks">
+                            <div class="option-icon">📅</div>
+                            <div class="option-title">1-2 weeks</div>
+                            <div class="option-description">Need some preparation time</div>
+                        </div>
+                        <div class="option-card" data-value="1-month">
+                            <div class="option-icon">🗓️</div>
+                            <div class="option-title">Within a month</div>
+                            <div class="option-description">Planning and budgeting phase</div>
+                        </div>
+                        <div class="option-card" data-value="2-3-months">
+                            <div class="option-icon">⏰</div>
+                            <div class="option-title">2-3 months</div>
+                            <div class="option-description">Strategic planning phase</div>
+                        </div>
+                        <div class="option-card" data-value="exploring">
+                            <div class="option-icon">🔍</div>
+                            <div class="option-title">Just Exploring</div>
+                            <div class="option-description">Researching options and possibilities</div>
+                        </div>
+                    </div>
+                    <button type="button" class="continue-button" onclick="nextStep()" disabled>
+                        Continue →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 6: Business Goals -->
+            <div class="form-step" id="step6">
+                <div class="question-container">
+                    <h2 class="question-title">What's your main business goal with AI?</h2>
+                    <div class="text-input-container">
+                        <textarea 
+                            class="text-input" 
+                            name="businessGoals" 
+                            placeholder="Describe what you hope to achieve with AI implementation. For example: reduce costs by 30%, automate customer support, increase sales conversion, streamline operations..."
+                            required
+                        ></textarea>
+                    </div>
+                    <button type="button" class="continue-button" onclick="nextStep()" disabled>
+                        Continue →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 7: Contact Information -->
+            <div class="form-step" id="step7">
+                <div class="question-container">
+                    <h2 class="question-title">Finally, let's get your contact information</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-6);">
+                        <div>
+                            <input type="text" name="firstName" placeholder="First Name" class="text-input" style="min-height: 50px;" required>
+                        </div>
+                        <div>
+                            <input type="text" name="lastName" placeholder="Last Name" class="text-input" style="min-height: 50px;" required>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-6);">
+                        <div>
+                            <input type="email" name="email" placeholder="Email Address" class="text-input" style="min-height: 50px;" required>
+                        </div>
+                        <div>
+                            <input type="text" name="companyName" placeholder="Company Name" class="text-input" style="min-height: 50px;" required>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: var(--space-6);">
+                        <input type="tel" name="phone" placeholder="Phone Number (Optional)" class="text-input" style="min-height: 50px;">
+                    </div>
+                    <button type="submit" class="continue-button">
+                        Get Matched with AI Expert →
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 7;
+        const formData = {};
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function nextStep() {
+            // Save current step data
+            const currentStepEl = document.getElementById(`step${currentStep}`);
+            const selectedCard = currentStepEl.querySelector('.option-card.selected');
+            const textInput = currentStepEl.querySelector('.text-input');
+            
+            if (selectedCard) {
+                const fieldName = getFieldNameForStep(currentStep);
+                formData[fieldName] = selectedCard.dataset.value;
+            } else if (textInput && textInput.value.trim()) {
+                const fieldName = getFieldNameForStep(currentStep);
+                formData[fieldName] = textInput.value.trim();
+            }
+
+            // Hide current step
+            currentStepEl.classList.remove('active');
+            
+            // Show next step
+            currentStep++;
+            if (currentStep <= totalSteps) {
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                updateProgress();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function getFieldNameForStep(step) {
+            const fieldNames = {
+                1: 'industry',
+                2: 'companySize',
+                3: 'aiAreas',
+                4: 'budget',
+                5: 'timeline',
+                6: 'businessGoals'
+            };
+            return fieldNames[step];
+        }
+
+        // Option card selection
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.option-card')) {
+                const card = e.target.closest('.option-card');
+                const container = card.closest('.question-container');
+                
+                // Remove selection from other cards in the same container
+                container.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                
+                // Select this card
+                card.classList.add('selected');
+                
+                // Enable continue button
+                const continueBtn = container.querySelector('.continue-button');
+                continueBtn.disabled = false;
+            }
+        });
+
+        // Text input handling
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('text-input')) {
+                const container = e.target.closest('.question-container');
+                const continueBtn = container.querySelector('.continue-button');
+                const hasValue = e.target.value.trim().length > 0;
+                
+                continueBtn.disabled = !hasValue;
+            }
+        });
+
+        // Form submission
+        document.getElementById('companyIntakeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect final step data
+            const formElements = new FormData(this);
+            for (let [key, value] of formElements.entries()) {
+                formData[key] = value;
+            }
+            
+            console.log('Form Data:', formData);
+            
+            // Here you would normally send to Firebase
+            alert('Thank you! We\'ll match you with the perfect AI expert within 48 hours. Check your email for next steps.');
+            
+            // Redirect to thank you page
+            window.location.href = 'thank-you.html';
+        });
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
