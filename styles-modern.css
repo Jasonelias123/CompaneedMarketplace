@@ -14,21 +14,21 @@
   --color-gray-800: #262626;
   --color-gray-900: #171717;
   
-  /* Primary Colors - Royal Blue (Facebook/Indeed Style) */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #1877f2;
-  --color-primary-600: #1d4ed8;
-  --color-primary-700: #1e40af;
-  --color-primary-800: #1e3a8a;
-  --color-primary-900: #1e3a8a;
+  /* Primary Colors - Purple Theme */
+  --color-primary-50: #faf5ff;
+  --color-primary-100: #f3e8ff;
+  --color-primary-200: #e9d5ff;
+  --color-primary-300: #d8b4fe;
+  --color-primary-400: #c084fc;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
   
   /* Accent Colors */
-  --color-accent-purple: #1877f2;
-  --color-accent-blue: #1877f2;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-blue: #3b82f6;
   --color-accent-emerald: #10b981;
   --color-accent-orange: #f59e0b;
   
@@ -93,9 +93,9 @@
   --transition-transform: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #1877f2 0%, #3b8df2 70%, rgba(255, 255, 255, 0.05) 100%);
+  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 70%, rgba(255, 255, 255, 0.05) 100%);
   --gradient-secondary: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
-  --gradient-accent: linear-gradient(135deg, #1877f2 0%, #3b8df2 70%, rgba(255, 255, 255, 0.05) 100%);
+  --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #a855f7 70%, rgba(255, 255, 255, 0.05) 100%);
 }
 
 /* Reset and Base Styles */
@@ -195,7 +195,7 @@ a:hover {
 .brand-text {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: #1877f2;
+  color: #8b5cf6;
   letter-spacing: -0.025em;
 }
 
@@ -227,7 +227,7 @@ a:hover {
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-3) var(--space-5);
-  background: #1877f2;
+  background: #8b5cf6;
   color: var(--color-white);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
@@ -338,7 +338,7 @@ a:hover {
   font-weight: var(--font-weight-black);
   line-height: 0.9;
   letter-spacing: -0.04em;
-  color: #1877f2;
+  color: #8b5cf6;
   margin-bottom: var(--space-2);
 }
 
@@ -846,11 +846,11 @@ a:hover {
 /* How It Works Section */
 .how-it-works {
   padding: var(--space-24) 0;
-  background: linear-gradient(135deg, #0d5fb8 0%, #1877f2 25%, #2b88f5 50%, #4d9df7 75%, #6bb0f9 100%);
-  border-top: 1px solid #1877f2;
+  background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 25%, #6d28d9 50%, #7c3aed 75%, #8b5cf6 100%);
+  border-top: 1px solid #8b5cf6;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(24, 119, 242, 0.2);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
 }
 
 .how-it-works::before {
@@ -918,7 +918,7 @@ a:hover {
 
 .step-card {
   background: var(--color-white);
-  border: 2px solid #1877f2;
+  border: 2px solid #8b5cf6;
   border-radius: var(--radius-2xl);
   padding: var(--space-8);
   transition: var(--transition-all);
@@ -954,7 +954,7 @@ a:hover {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: #1877f2;
+  background: #8b5cf6;
   color: var(--color-white);
   border-radius: var(--radius-xl);
   font-size: var(--font-size-lg);
