@@ -26,11 +26,11 @@
             
             <div class="nav-menu">
                 <div class="nav-links">
-                    <a href="messaging-dashboard.html?type=company" class="nav-link">Companies</a>
+                    <a href="company-signup.html" class="nav-link">Companies</a>
                     <a href="messaging-dashboard.html?type=consultant" class="nav-link">AI Talent</a>
                     <a href="login.html" class="nav-link">Login</a>
                 </div>
-                <a href="messaging-dashboard.html?type=company" class="nav-cta">
+                <a href="company-signup.html" class="nav-cta">
                     Get Matched
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -49,10 +49,10 @@
         <!-- Mobile Menu -->
         <div class="mobile-menu">
             <div class="mobile-menu-links">
-                <a href="messaging-dashboard.html?type=company" class="mobile-nav-link">Companies</a>
+                <a href="company-signup.html" class="mobile-nav-link">Companies</a>
                 <a href="messaging-dashboard.html?type=consultant" class="mobile-nav-link">AI Talent</a>
                 <a href="login.html" class="mobile-nav-link">Login</a>
-                <a href="messaging-dashboard.html?type=company" class="mobile-nav-cta">Get Matched</a>
+                <a href="company-signup.html" class="mobile-nav-cta">Get Matched</a>
             </div>
         </div>
     </nav>
@@ -72,7 +72,7 @@
                     </p>
                     
                     <div class="hero-actions">
-                        <a href="messaging-dashboard.html?type=company" class="btn-primary">
+                        <a href="company-signup.html" class="btn-primary">
                             Get Matched Now
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -257,7 +257,7 @@
                 <p>Join the companies already growing with our network of verified experts.</p>
                 
                 <div class="role-selection">
-                    <div class="role-card company-card scroll-animate slide-left" onclick="goToRole('company')">
+                    <div class="role-card company-card scroll-animate slide-left" onclick="window.location.href='company-signup.html'">
                         <div class="role-icon">
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
                                 <path d="M6 42h36M10 42V14l16-8v36M38 42V22l-12-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -307,7 +307,7 @@
                     <div class="footer-section">
                         <h4>Platform</h4>
                         <ul>
-                            <li><a href="messaging-dashboard.html?type=company">For Companies</a></li>
+                            <li><a href="company-signup.html">For Companies</a></li>
                             <li><a href="messaging-dashboard.html?type=consultant">For AI Talent</a></li>
                             <li><a href="login.html">Login</a></li>
                         </ul>
@@ -330,5 +330,15 @@
     </footer>
 
     <script src="scripts-modern.js"></script>
+    
+    <script>
+        function goToRole(role) {
+            if (role === 'company') {
+                window.location.href = 'company-signup.html';
+            } else if (role === 'talent') {
+                window.location.href = 'messaging-dashboard.html?type=consultant';
+            }
+        }
+    </script>
 </body>
 </html>
