@@ -11,6 +11,9 @@ import {
     getDoc 
 } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
+// Import GoHighLevel integration
+import { integrateWithGoHighLevel, getGHLIntegrationStatus } from './ghl-webhook-integration.js';
+
 // Authentication state management
 let currentUser = null;
 let userRole = null;
@@ -57,9 +60,127 @@ function updateUIWithUser(user) {
     }
 }
 
-// Handle signup
+// Enhanced company signup with GoHighLevel integration
+export async function handleEnhancedCompanySignup(event) {
+    console.log('=== ENHANCED COMPANY SIGNUP PROCESS STARTED ===');
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
+    
+    const errorDiv = document.getElementById('error-message');
+    const loadingDiv = document.getElementById('loading');
+    
+    // Clear previous errors
+    if (errorDiv) errorDiv.style.display = 'none';
+    
+    // Validate passwords match
+    if (password !== confirmPassword) {
+        showError('Passwords do not match');
+        return;
+    }
+    
+    // Show loading
+    if (loadingDiv) loadingDiv.style.display = 'block';
+    
+    try {
+        console.log('Creating user account with email:', email);
+        // Create user account
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        console.log('Firebase user account created successfully:', user.uid);
+        
+        console.log('Processing company signup with business information...');
+        
+        // Integrate with GoHighLevel BEFORE saving to Firestore
+        let ghlIntegration = null;
+        try {
+            ghlIntegration = await integrateWithGoHighLevel(formData, email, user.uid);
+            console.log('GoHighLevel integration result:', ghlIntegration);
+        } catch (ghlError) {
+            console.error('GoHighLevel integration failed but continuing with signup:', ghlError);
+            ghlIntegration = {
+                integrated: false,
+                error: ghlError.message,
+                timestamp: new Date().toISOString()
+            };
+        }
+        
+        // Prepare enhanced user document
+        console.log('Saving enhanced user document to Firestore...');
+        const userDoc = {
+            email: user.email,
+            role: 'company',
+            status: 'active',
+            createdAt: new Date().toISOString(),
+            
+            // Enhanced business information
+            businessInfo: {
+                companyName: formData.get('companyName') || '',
+                fullName: formData.get('fullName') || '',
+                annualRevenue: formData.get('annualRevenue') || '',
+                employees: formData.get('employees') || '',
+                industry: formData.get('industry') || '',
+                aiGoals: formData.get('aiGoals') || '',
+                painPoints: formData.get('painPoints') || ''
+            },
+            
+            // GoHighLevel integration data
+            ghlIntegration: ghlIntegration,
+            ghlIntegrationStatus: ghlIntegration.integrated ? 'success' : 'failed',
+            
+            // Form metadata
+            formVersion: 'enhanced-v1',
+            signupSource: 'enhanced-company-form'
+        };
+        
+        await setDoc(doc(db, 'users', user.uid), userDoc);
+        console.log('Enhanced user document saved successfully');
+        
+        userRole = 'company';
+        
+        // Hide loading and redirect immediately
+        if (loadingDiv) loadingDiv.style.display = 'none';
+        
+        // Force immediate redirect without delay
+        console.log('=== EXECUTING IMMEDIATE REDIRECT ===');
+        console.log('Redirecting to dashboard...');
+        window.location.replace('dashboard.html');
+        
+    } catch (error) {
+        console.error('Enhanced company signup error:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        
+        let errorMessage = 'Failed to create account. Please try again.';
+        
+        if (error.code === 'auth/email-already-in-use') {
+            errorMessage = 'An account with this email already exists.';
+        } else if (error.code === 'auth/weak-password') {
+            errorMessage = 'Password is too weak. Please use at least 6 characters.';
+        } else if (error.code === 'auth/invalid-email') {
+            errorMessage = 'Please enter a valid email address.';
+        } else if (error.code === 'auth/invalid-api-key') {
+            errorMessage = 'Firebase project configuration issue. Please verify that Authentication is enabled in your Firebase console and that the API key is correct.';
+        } else if (error.code === 'auth/network-request-failed') {
+            errorMessage = 'Network error. Please check your internet connection.';
+        } else if (error.code === 'auth/project-not-found') {
+            errorMessage = 'Firebase project not found. Please check your project ID.';
+        } else {
+            errorMessage = `Error: ${error.message}`;
+        }
+        
+        showError(errorMessage);
+    } finally {
+        if (loadingDiv) loadingDiv.style.display = 'none';
+    }
+}
+
+// Handle standard signup (for backward compatibility)
 export async function handleSignup(event) {
-    console.log('=== SIGNUP PROCESS STARTED ===');
+    console.log('=== STANDARD SIGNUP PROCESS STARTED ===');
     event.preventDefault();
     
     const formData = new FormData(event.target);
@@ -72,7 +193,7 @@ export async function handleSignup(event) {
     const loadingDiv = document.getElementById('loading');
     
     // Clear previous errors
-    errorDiv.style.display = 'none';
+    if (errorDiv) errorDiv.style.display = 'none';
     
     // Validate passwords match
     if (password !== confirmPassword) {
@@ -81,7 +202,7 @@ export async function handleSignup(event) {
     }
     
     // Show loading
-    loadingDiv.style.display = 'block';
+    if (loadingDiv) loadingDiv.style.display = 'block';
     
     try {
         console.log('Creating user account with email:', email);
@@ -110,7 +231,7 @@ export async function handleSignup(event) {
         console.log('Setting userRole to:', userRole);
         
         // Hide loading and redirect immediately
-        loadingDiv.style.display = 'none';
+        if (loadingDiv) loadingDiv.style.display = 'none';
         
         // Force immediate redirect without delay
         console.log('=== EXECUTING IMMEDIATE REDIRECT ===');
@@ -150,7 +271,7 @@ export async function handleSignup(event) {
         
         showError(errorMessage);
     } finally {
-        loadingDiv.style.display = 'none';
+        if (loadingDiv) loadingDiv.style.display = 'none';
     }
 }
 
@@ -170,10 +291,10 @@ export async function handleLogin(event) {
     const loadingDiv = document.getElementById('loading');
     
     // Clear previous errors
-    errorDiv.style.display = 'none';
+    if (errorDiv) errorDiv.style.display = 'none';
     
     // Show loading
-    loadingDiv.style.display = 'block';
+    if (loadingDiv) loadingDiv.style.display = 'block';
     
     try {
         console.log('Attempting to sign in with Firebase...');
@@ -189,7 +310,7 @@ export async function handleLogin(event) {
             console.log('User role found:', userRole);
             
             // Hide loading before redirect
-            loadingDiv.style.display = 'none';
+            if (loadingDiv) loadingDiv.style.display = 'none';
             
             // Redirect immediately based on role
             console.log('Redirecting user based on role...');
@@ -206,7 +327,7 @@ export async function handleLogin(event) {
         } else {
             console.error('User document not found in Firestore');
             showError('User profile not found. Please contact support.');
-            loadingDiv.style.display = 'none';
+            if (loadingDiv) loadingDiv.style.display = 'none';
         }
         
     } catch (error) {
@@ -226,7 +347,7 @@ export async function handleLogin(event) {
         }
         
         showError(errorMessage);
-        loadingDiv.style.display = 'none';
+        if (loadingDiv) loadingDiv.style.display = 'none';
     }
 }
 
@@ -285,4 +406,11 @@ export function requireAuth() {
         return false;
     }
     return true;
+}
+
+// Export GoHighLevel integration status for debugging
+export function debugGHLIntegration() {
+    const status = getGHLIntegrationStatus();
+    console.log('GoHighLevel Integration Debug Info:', status);
+    return status;
 }
