@@ -673,15 +673,26 @@
             // Add user message
             addUserMessage(title);
             
-            // If voice is active, send selection to AI
+            // If voice is active, inform the AI about the selection
             if (isCallActive && vapi) {
                 vapi.send({
                     type: 'add-message',
                     message: {
                         role: 'user',
-                        content: `I selected "${title}" for my ${step.field}`
+                        content: `I selected "${title}"`
                     }
                 });
+                
+                // Also inform the AI to move to the next step
+                setTimeout(() => {
+                    vapi.send({
+                        type: 'add-message',
+                        message: {
+                            role: 'system',
+                            content: `The user has completed this step. Please acknowledge their selection briefly and let them proceed to the next step.`
+                        }
+                    });
+                }, 500);
             }
             
             // Move to next step
@@ -700,7 +711,7 @@
                 
                 addUserMessage(value);
                 
-                // If voice is active, send to AI
+                // If voice is active, inform the AI about the input
                 if (isCallActive && vapi) {
                     vapi.send({
                         type: 'add-message',
@@ -709,6 +720,17 @@
                             content: `My ${step.field} is: ${value}`
                         }
                     });
+                    
+                    // Tell AI to move to next step
+                    setTimeout(() => {
+                        vapi.send({
+                            type: 'add-message',
+                            message: {
+                                role: 'system',
+                                content: `The user has provided their ${step.field}. Please acknowledge briefly and let them proceed to the next step.`
+                            }
+                        });
+                    }, 500);
                 }
                 
                 setTimeout(() => {
@@ -727,15 +749,25 @@
                 
                 addUserMessage(`${fullName} - ${email}`);
                 
-                // If voice is active, send to AI
+                // If voice is active, inform the AI about contact info
                 if (isCallActive && vapi) {
                     vapi.send({
                         type: 'add-message',
                         message: {
                             role: 'user',
-                            content: `My contact information: ${fullName}, ${email}`
+                            content: `My name is ${fullName} and my email is ${email}`
                         }
                     });
+                    
+                    setTimeout(() => {
+                        vapi.send({
+                            type: 'add-message',
+                            message: {
+                                role: 'system',
+                                content: `The user has provided their contact information. Please acknowledge and let them proceed to the final step.`
+                            }
+                        });
+                    }, 500);
                 }
                 
                 setTimeout(() => {
@@ -758,6 +790,17 @@
                 setTimeout(() => {
                     addAIMessage(currentStepData.message);
                     renderCurrentStep();
+                    
+                    // If voice is active, update the assistant about the new step
+                    if (isCallActive && vapi) {
+                        vapi.send({
+                            type: 'add-message',
+                            message: {
+                                role: 'system',
+                                content: `The user has moved to the next step. Current step: "${currentStepData.message}". ${currentStepData.type === 'options' ? 'Please tell them to select from the options on screen.' : ''}`
+                            }
+                        });
+                    }
                     
                     // If this is the final step, send data to webhook
                     if (currentStep === conversationFlow.length - 1) {
@@ -823,10 +866,29 @@
             try {
                 updateVoiceStatus('Connecting...', 'connecting');
                 
-                // Start with just the assistant ID - no overrides for now
+                // Create dynamic assistant overrides based on current step
+                const assistantOverrides = {
+                    systemMessage: `You are an AI assistant for Companeeds helping users complete a structured signup form.
+
+CURRENT STEP: ${currentStepData.message}
+
+COLLECTED DATA SO FAR: ${JSON.stringify(conversationData, null, 2)}
+
+INSTRUCTIONS:
+- Focus ONLY on the current step: "${currentStepData.field || 'current question'}"
+- When asking about revenue, employees, AI goals, or pain points, say "Please select from the options on screen"
+- Keep responses conversational and under 20 seconds
+- Don't jump ahead to other questions
+- If user provides the current step's information, acknowledge it briefly
+
+Be helpful while staying focused on just this current step of the signup process.`,
+                    firstMessage: getVoicePromptForCurrentStep()
+                };
+                
+                // Start with just the assistant ID and overrides
                 if (vapi && vapi.start) {
                     console.log('Starting call with assistant:', VAPI_ASSISTANT_ID);
-                    await vapi.start(VAPI_ASSISTANT_ID);
+                    await vapi.start(VAPI_ASSISTANT_ID, assistantOverrides);
                 } else {
                     throw new Error('Vapi start method not available');
                 }
@@ -834,6 +896,23 @@
             } catch (error) {
                 console.error('Failed to start voice call:', error);
                 updateVoiceStatus('Failed to connect', 'error');
+            }
+        }
+
+        function getVoicePromptForCurrentStep() {
+            const step = conversationFlow[currentStep];
+            
+            switch(step.type) {
+                case 'text_input':
+                    return `I can help you with the current question. ${step.message}`;
+                case 'options':
+                    return `I can help you with the current question. ${step.message} Please select from the options on screen, or tell me your choice.`;
+                case 'contact_form':
+                    return `I can help you provide your contact information. What's your full name and email address?`;
+                case 'final_choice':
+                    return `We're almost done! ${step.message} You can select from the options on screen or tell me your preference.`;
+                default:
+                    return `How can I help you with the current step?`;
             }
         }
 
