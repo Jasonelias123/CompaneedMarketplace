@@ -823,17 +823,10 @@
             try {
                 updateVoiceStatus('Connecting...', 'connecting');
                 
-                // Assistant overrides to customize for current conversation context
-                const assistantOverrides = {
-                    variableValues: {
-                        conversationContext: JSON.stringify(conversationData),
-                        currentStep: currentStepData.message
-                    }
-                };
-                
-                // Start the call with your configured assistant ID and overrides
+                // Start with just the assistant ID - no overrides for now
                 if (vapi && vapi.start) {
-                    await vapi.start(VAPI_ASSISTANT_ID, assistantOverrides);
+                    console.log('Starting call with assistant:', VAPI_ASSISTANT_ID);
+                    await vapi.start(VAPI_ASSISTANT_ID);
                 } else {
                     throw new Error('Vapi start method not available');
                 }
