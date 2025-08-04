@@ -70,7 +70,7 @@
             <div class="connection-status" id="connectionStatus">Ready</div>
             <div class="ai-avatar" id="aiAvatar">🤖</div>
             <div class="chat-title">Companeeds AI Assistant</div>
-            <div class="chat-subtitle" id="chatSubtitle">Click or type to start voice chat</div>
+            <div class="chat-subtitle" id="chatSubtitle">Interact with the form to begin</div>
         </div>
         <div class="chat-messages" id="chatMessages"></div>
     </div>
@@ -82,18 +82,22 @@
         
         const conversationFlow = [ { id: 'welcome', message: "Hi! I'm your AI assistant at Companeeds. I'll help you get matched with the perfect AI expert for your business. What's your company name?", type: 'text_input', field: 'companyName', placeholder: 'Enter your company name' }, { id: 'revenue', message: "Great! Now, what's your current annual revenue? This helps us match you with experts who understand your business scale.", type: 'options', field: 'annualRevenue', options: [ { value: '$0 - $5M', title: '$0 - $5M', subtitle: 'Startup/Small business', icon: '🌱' }, { value: '$5M - $50M', title: '$5M - $50M', subtitle: 'Growing business', icon: '🚀' }, { value: '$50M - $200M', title: '$50M - $200M', subtitle: 'Established company', icon: '🏢' }, { value: '$200M+', title: '$200M+', subtitle: 'Enterprise level', icon: '🏛️' } ] }, { id: 'employees', message: "Perfect! How many employees do you have? This helps us recommend the right AI implementation approach.", type: 'options', field: 'employees', options: [ { value: '0-10', title: '0 - 10 employees', subtitle: 'Small team, close-knit operations', icon: '👤' }, { value: '11-50', title: '11 - 50 employees', subtitle: 'Medium-sized team with structured roles', icon: '👥' }, { value: '50-200', title: '50 - 200 employees', subtitle: 'Large organization with multiple departments', icon: '🏢' }, { value: '200+', title: '200+ employees', subtitle: 'Enterprise scale with complex operations', icon: '🏙️' } ] }, { id: 'industry', message: "Thanks! What industry is your company in? I'll match you with AI experts who have experience in your sector.", type: 'text_input', field: 'industry', placeholder: 'e.g., Technology, Healthcare, Finance' }, { id: 'goals', message: "Now for the important part - what would you like to achieve with AI? This helps me understand your primary objectives.", type: 'options', field: 'aiGoals', options: [ { value: 'Increase Lead Flow and Automate Sales Process', title: 'Boost Sales & Lead Generation', subtitle: 'Increase lead flow and automate sales process', icon: '📈' }, { value: 'Automate Manual Process', title: 'Process Automation', subtitle: 'Streamline and automate manual tasks', icon: '⚡' }, { value: 'Build custom AI products for my company', title: 'Custom AI Solutions', subtitle: 'Build custom AI products for your company', icon: '🔧' }, { value: 'All the above', title: 'Comprehensive AI Transformation', subtitle: 'Complete AI integration across business', icon: '🎯' }, { value: 'Im not sure, looking for your guidance', title: 'Need Expert Guidance', subtitle: 'Looking for expert advice on AI opportunities', icon: '🤔' } ] }, { id: 'problems', message: "This is crucial - what are your biggest pain points right now? Understanding your challenges helps me prioritize the AI solutions that will have the most impact.", type: 'options', field: 'painPoints', options: [ { value: 'Lack of standardization and organization', title: 'Lack of Organization', subtitle: 'Processes lack standardization', icon: '📋' }, { value: 'Too many manual tasks', title: 'Too Many Manual Tasks', subtitle: 'Time-consuming repetitive work', icon: '🔄' }, { value: 'Not enough lead flow', title: 'Insufficient Lead Generation', subtitle: 'Not generating enough quality leads', icon: '📉' }, { value: 'Other', title: 'Other Challenges', subtitle: 'Different pain points not covered above', icon: '💭' } ] }, { id: 'contact', message: "Excellent! I have a good understanding of your needs. To complete the matching process and potentially schedule a consultation call, I'll need your contact information.", type: 'contact_form', fields: ['fullName', 'email'] }, { id: 'complete', message: "Perfect! I've captured all your information. Based on what you've told me about your challenges, I'll have our team analyze your needs and match you with the best AI experts. Would you like to schedule a consultation call to discuss your AI strategy in detail?", type: 'final_choice', options: [ { value: 'yes', title: 'Yes, schedule a call', subtitle: 'Book a consultation with an AI expert' }, { value: 'no', title: 'Not right now', subtitle: 'Just send me the expert matches' } ] } ];
         
+        // --- State Variables ---
         let vapi = null;
         let currentStep = 0;
         let isCallActive = false;
         let conversationData = {};
         let currentStepData = conversationFlow[0];
         let isVapiReady = false;
+        let voiceCallHasStarted = false; // <<< NEW: Flag to ensure we only start the call once.
 
+        // --- DOM Elements ---
         const chatMessages = document.getElementById('chatMessages');
         const connectionStatus = document.getElementById('connectionStatus');
         const chatSubtitle = document.getElementById('chatSubtitle');
         const aiAvatar = document.getElementById('aiAvatar');
 
+        // --- Vapi Initialization ---
         (function (d, t) {
             var g = document.createElement(t), s = d.getElementsByTagName(t)[0];
             g.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
@@ -105,43 +109,36 @@
         function initVapi() {
             try {
                 if (!window.vapiSDK) throw new Error('Vapi SDK not loaded');
-
                 vapi = window.vapiSDK.run({
                     apiKey: VAPI_API_KEY,
                     assistant: VAPI_ASSISTANT_ID,
-                    config: { position: "bottom-right", width: "0px", height: "0px", idle: { color: "transparent" }, loading: { color: "transparent" }, active: { color: "transparent" } }
+                    config: { position: "bottom-right", width: "0px", height: "0px" }
                 });
-
                 vapi.on('call-start', handleCallStart);
                 vapi.on('call-end', handleCallEnd);
                 vapi.on('speech-start', handleSpeechStart);
                 vapi.on('speech-end', handleSpeechEnd);
                 vapi.on('message', handleMessage);
                 vapi.on('error', handleError);
-                
                 isVapiReady = true;
-                console.log('Vapi initialized. Waiting for user interaction to start call.');
-
-                // ***** CORE SOLUTION: ACTIVATE ON FIRST USER INTERACTION *****
-                // This respects browser security policies and provides a seamless experience.
-                const handleFirstInteraction = () => {
-                    if (isVapiReady && !isCallActive) {
-                        console.log('User interaction detected. Starting voice call.');
-                        startVoiceCall();
-                    }
-                };
-                
-                // The `{ once: true }` option ensures these listeners only fire once.
-                document.addEventListener('click', handleFirstInteraction, { once: true });
-                document.addEventListener('keydown', handleFirstInteraction, { once: true });
-
+                console.log('Vapi initialized. Ready for user interaction.');
             } catch (error) {
                 console.error('Failed to initialize Vapi:', error);
                 updateConnectionStatus('Voice AI Error', 'error');
                 chatSubtitle.textContent = "Voice AI is unavailable.";
             }
-            
-            startConversation(); // Start the text-based flow immediately
+            startConversation();
+        }
+
+        // ***** THE CORE FIX IS HERE *****
+        // This function will be called by our user interaction handlers.
+        function attemptToStartCall() {
+            // Only start if Vapi is ready and the call hasn't been started yet.
+            if (isVapiReady && !isCallActive && !voiceCallHasStarted) {
+                voiceCallHasStarted = true; // Set flag immediately to prevent multiple starts
+                console.log('User interaction detected. Starting voice call.');
+                startVoiceCall();
+            }
         }
 
         async function startVoiceCall() {
@@ -149,12 +146,13 @@
                 updateConnectionStatus('Connecting...', 'connecting');
                 chatSubtitle.textContent = "Talk to me or use the options below";
                 
+                // IMPORTANT: We do NOT send the systemMessage here. It's already configured
+                // in your Vapi dashboard. This was a likely source of the 400 error.
                 const assistantOverrides = {
-                    systemMessage: `You are an AI assistant for Companeeds...`, // Your system prompt
                     firstMessage: getVoicePromptForCurrentStep()
                 };
                 
-                // This is the correct call format, which works reliably after a user gesture.
+                // This call format works correctly after a user gesture.
                 await vapi.start(VAPI_ASSISTANT_ID, assistantOverrides);
                 
             } catch (error) {
@@ -165,21 +163,56 @@
             }
         }
         
-        // --- Event Handlers and other functions remain largely the same ---
+        // --- Event Handlers ---
         function handleCallStart() { isCallActive = true; updateConnectionStatus('Voice AI Active', 'connected'); aiAvatar.classList.add('speaking'); }
-        function handleCallEnd() { isCallActive = false; updateConnectionStatus('Disconnected', 'error'); aiAvatar.classList.remove('speaking'); chatSubtitle.textContent = 'Voice call ended. Refresh to restart.'; }
+        function handleCallEnd() { isCallActive = false; updateConnectionStatus('Disconnected', 'error'); aiAvatar.classList.remove('speaking'); chatSubtitle.textContent = 'Voice call ended.'; }
         function handleSpeechStart() { updateConnectionStatus('Listening...', 'listening'); }
         function handleSpeechEnd() { updateConnectionStatus('Processing...', 'processing'); }
         function handleError(error) { console.error('Vapi error:', error); updateConnectionStatus('Voice AI Error', 'error'); chatSubtitle.textContent = 'An error occurred with voice AI.'; }
         function handleMessage(message) { if (message.type === 'transcript' && message.transcriptType === 'final') { if (message.role === 'user') { addUserMessage(message.transcript); } else if (message.role === 'assistant') { addAIMessage(message.transcript); } } }
+        
+        // --- UI & Flow Functions (Now with voice activation) ---
+        function selectOption(value, title) {
+            attemptToStartCall(); // <<< MODIFIED: Try to start voice on first interaction.
+            const step = conversationFlow[currentStep];
+            conversationData[step.field] = value;
+            addUserMessage(title);
+            if (isCallActive && vapi) { vapi.send({ type: 'add-message', message: { role: 'user', content: `I selected "${title}"` } }); setTimeout(() => { vapi.send({ type: 'add-message', message: { role: 'system', content: `The user has completed this step. Please acknowledge their selection briefly and let them proceed to the next step.` } }); }, 500); }
+            setTimeout(() => { nextStep(); }, 500);
+        }
+
+        function submitTextInput() {
+            attemptToStartCall(); // <<< MODIFIED: Try to start voice on first interaction.
+            const input = document.getElementById('stepInput');
+            const value = input.value.trim();
+            if (value) {
+                const step = conversationFlow[currentStep];
+                conversationData[step.field] = value;
+                addUserMessage(value);
+                if (isCallActive && vapi) { vapi.send({ type: 'add-message', message: { role: 'user', content: `My ${step.field} is: ${value}` } }); setTimeout(() => { vapi.send({ type: 'add-message', message: { role: 'system', content: `The user has provided their ${step.field}. Please acknowledge briefly and let them proceed to the next step.` } }); }, 500); }
+                setTimeout(() => { nextStep(); }, 500);
+            }
+        }
+        
+        function submitContactForm() {
+            attemptToStartCall(); // <<< MODIFIED: Try to start voice on first interaction.
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            if (fullName && email) {
+                conversationData.fullName = fullName;
+                conversationData.email = email;
+                addUserMessage(`${fullName} - ${email}`);
+                if (isCallActive && vapi) { vapi.send({ type: 'add-message', message: { role: 'user', content: `My name is ${fullName} and my email is ${email}` } }); setTimeout(() => { vapi.send({ type: 'add-message', message: { role: 'system', content: `The user has provided their contact information. Please acknowledge and let them proceed to the final step.` } }); }, 500); }
+                setTimeout(() => { nextStep(); }, 500);
+            }
+        }
+
+        // --- Unchanged Helper Functions ---
         function startConversation() { addAIMessage(currentStepData.message); renderCurrentStep(); }
         function renderCurrentStep() { const step = conversationFlow[currentStep]; if (step.type === 'options') { renderOptions(step.options); } else if (step.type === 'text_input') { renderTextInput(step); } else if (step.type === 'contact_form') { renderContactForm(); } else if (step.type === 'final_choice') { renderOptions(step.options); } }
         function renderOptions(options) { const optionsHtml = options.map(option => `<div class="quick-option" onclick="selectOption('${option.value}', '${option.title}')"><div class="option-icon">${option.icon || '➡️'}</div><div class="option-title">${option.title}</div><div class="option-subtitle">${option.subtitle}</div></div>`).join(''); const optionsContainer = document.createElement('div'); optionsContainer.className = 'message ai'; optionsContainer.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content"><div class="quick-options">${optionsHtml}</div></div>`; chatMessages.appendChild(optionsContainer); scrollToBottom(); }
         function renderTextInput(step) { const inputHtml = `<div class="input-form"><div class="form-group"><input type="text" id="stepInput" placeholder="${step.placeholder}" onkeypress="handleInputKeypress(event)"></div><button class="submit-btn" onclick="submitTextInput()">Continue</button></div>`; const inputContainer = document.createElement('div'); inputContainer.className = 'message ai'; inputContainer.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content">${inputHtml}</div>`; chatMessages.appendChild(inputContainer); scrollToBottom(); setTimeout(() => { const input = document.getElementById('stepInput'); if (input) input.focus(); }, 100); }
         function renderContactForm() { const formHtml = `<div class="input-form"><div class="form-group"><label for="fullName">Your Full Name</label><input type="text" id="fullName" placeholder="Enter your full name"></div><div class="form-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="your.email@company.com"></div><button class="submit-btn" onclick="submitContactForm()">Complete Matching Process</button></div>`; const formContainer = document.createElement('div'); formContainer.className = 'message ai'; formContainer.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content">${formHtml}</div>`; chatMessages.appendChild(formContainer); scrollToBottom(); }
-        function selectOption(value, title) { const step = conversationFlow[currentStep]; conversationData[step.field] = value; addUserMessage(title); if (isCallActive && vapi) { vapi.send({ type: 'add-message', message: { role: 'user', content: `I selected "${title}"` } }); setTimeout(() => { vapi.send({ type: 'add-message', message: { role: 'system', content: `The user has completed this step. Please acknowledge their selection briefly and let them proceed to the next step.` } }); }, 500); } setTimeout(() => { nextStep(); }, 500); }
-        function submitTextInput() { const input = document.getElementById('stepInput'); const value = input.value.trim(); if (value) { const step = conversationFlow[currentStep]; conversationData[step.field] = value; addUserMessage(value); if (isCallActive && vapi) { vapi.send({ type: 'add-message', message: { role: 'user', content: `My ${step.field} is: ${value}` } }); setTimeout(() => { vapi.send({ type: 'add-message', message: { role: 'system', content: `The user has provided their ${step.field}. Please acknowledge briefly and let them proceed to the next step.` } }); }, 500); } setTimeout(() => { nextStep(); }, 500); } }
-        function submitContactForm() { const fullName = document.getElementById('fullName').value.trim(); const email = document.getElementById('email').value.trim(); if (fullName && email) { conversationData.fullName = fullName; conversationData.email = email; addUserMessage(`${fullName} - ${email}`); if (isCallActive && vapi) { vapi.send({ type: 'add-message', message: { role: 'user', content: `My name is ${fullName} and my email is ${email}` } }); setTimeout(() => { vapi.send({ type: 'add-message', message: { role: 'system', content: `The user has provided their contact information. Please acknowledge and let them proceed to the final step.` } }); }, 500); } setTimeout(() => { nextStep(); }, 500); } }
         function handleInputKeypress(event) { if (event.key === 'Enter') { submitTextInput(); } }
         function nextStep() { currentStep++; if (currentStep < conversationFlow.length) { currentStepData = conversationFlow[currentStep]; setTimeout(() => { addAIMessage(currentStepData.message); renderCurrentStep(); if (isCallActive && vapi) { vapi.send({ type: 'add-message', message: { role: 'system', content: `The user has moved to the next step. Current step: "${currentStepData.message}". ${currentStepData.type === 'options' ? 'Please tell them to select from the options on screen.' : ''}` } }); } if (currentStepData.id === 'complete') { sendToWebhook(); } }, 1500); } }
         function addAIMessage(text) { const messageElement = document.createElement('div'); messageElement.className = 'message ai'; messageElement.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content"><div class="message-text">${text}</div><div class="message-time">${getCurrentTime()}</div></div>`; chatMessages.appendChild(messageElement); scrollToBottom(); }
