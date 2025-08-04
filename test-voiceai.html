@@ -396,6 +396,7 @@
     <script>
         // Configuration
         const VAPI_API_KEY = '04b618c4-de75-4844-b9ef-d95761baf50c';
+        const VAPI_ASSISTANT_ID = '4cd3d9db-8b67-4404-bc51-07c7f7f88ba0'; // Your configured assistant
         const GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/FL2r5c4AyrqlNBuFs1oD/webhook-trigger/2cea896f-a6bc-4adf-8d90-44c740273e70';
         
         // Conversation flow
@@ -514,34 +515,6 @@
                     throw new Error('Vapi SDK not loaded');
                 }
 
-                // Assistant configuration
-                const assistant = {
-                    model: {
-                        provider: 'openai',
-                        model: 'gpt-4o',
-                        temperature: 0.7,
-                        systemMessage: `You are an AI assistant for Companeeds helping to gather information about companies looking for AI experts. 
-
-Your goals:
-1. Help users through the signup flow naturally
-2. When asking about revenue or other options, say "Please select from the options on screen" 
-3. Be conversational and understand their pain points
-4. Ask follow-up questions when appropriate
-
-The user can either speak to you or click the visual options. Work together with the interface.
-
-Keep responses conversational and under 30 seconds when spoken.`
-                    },
-                    voice: {
-                        provider: 'elevenlabs',
-                        voiceId: 'pNInz6obpgDQGcFmaJgB'
-                    },
-                    firstMessage: "I'm here to help! You can either speak to me or use the options on screen.",
-                    recordingEnabled: true,
-                    endCallFunctionEnabled: true,
-                    maxDurationSeconds: 600
-                };
-
                 // Button configuration (hidden since we have our own UI)
                 const buttonConfig = {
                     position: "bottom-right",
@@ -553,10 +526,10 @@ Keep responses conversational and under 30 seconds when spoken.`
                     active: { color: "transparent" }
                 };
 
-                // Initialize Vapi
+                // Initialize Vapi with your existing assistant
                 vapi = window.vapiSDK.run({
                     apiKey: VAPI_API_KEY,
-                    assistant: assistant,
+                    assistant: VAPI_ASSISTANT_ID, // Use your configured assistant ID
                     config: buttonConfig
                 });
 
@@ -850,10 +823,17 @@ Keep responses conversational and under 30 seconds when spoken.`
             try {
                 updateVoiceStatus('Connecting...', 'connecting');
                 
-                // The assistant is already configured in the initialization
-                // We can start the call using the Vapi widget's built-in functionality
+                // Assistant overrides to customize for current conversation context
+                const assistantOverrides = {
+                    variableValues: {
+                        conversationContext: JSON.stringify(conversationData),
+                        currentStep: currentStepData.message
+                    }
+                };
+                
+                // Start the call with your configured assistant ID and overrides
                 if (vapi && vapi.start) {
-                    await vapi.start();
+                    await vapi.start(VAPI_ASSISTANT_ID, assistantOverrides);
                 } else {
                     throw new Error('Vapi start method not available');
                 }
