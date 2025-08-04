@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Assistant - Companeeds</title>
-    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web-sdk@latest/dist/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/index.umd.js"></script>
     <style>
         :root {
             --primary-color: #0077FF;
@@ -524,7 +524,7 @@
 
         // Initialize
         function initVapi() {
-            vapi = new Vapi(VAPI_API_KEY);
+            vapi = new window.Vapi(VAPI_API_KEY);
             
             // Event listeners
             vapi.on('call-start', handleCallStart);
