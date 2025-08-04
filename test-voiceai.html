@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Assistant - Companeeds</title>
-    <!-- FIXED: Correct Vapi CDN URL -->
-    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.0/dist/index.js"></script>
     <style>
         :root {
             --primary-color: #0077FF;
@@ -350,49 +348,6 @@
             font-weight: 600;
         }
 
-        /* Typing Indicator */
-        .typing-indicator {
-            display: none;
-            padding: 1rem 1.25rem;
-            background: var(--surface);
-            border-radius: 1.25rem;
-            border-bottom-left-radius: 0.5rem;
-            border: 1px solid var(--border);
-            max-width: 70%;
-        }
-
-        .typing-dots {
-            display: flex;
-            gap: 0.25rem;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--text-secondary);
-            animation: typing 1.4s ease-in-out infinite;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typing {
-            0%, 60%, 100% {
-                transform: translateY(0);
-                opacity: 0.5;
-            }
-            30% {
-                transform: translateY(-10px);
-                opacity: 1;
-            }
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .chat-container {
@@ -407,6 +362,11 @@
             .message-content {
                 max-width: 85%;
             }
+        }
+
+        /* Hide the default Vapi widget since we have our own interface */
+        .vapi-widget-container {
+            display: none !important;
         }
     </style>
 </head>
@@ -432,6 +392,7 @@
         </div>
     </div>
 
+    <!-- CORRECT: Official Vapi HTML Script Tag SDK -->
     <script>
         // Configuration
         const VAPI_API_KEY = '04b618c4-de75-4844-b9ef-d95761baf50c';
@@ -534,45 +495,89 @@
         const connectionStatus = document.getElementById('connectionStatus');
         const aiAvatar = document.getElementById('aiAvatar');
 
-        // FIXED: Wait for Vapi to load then initialize
-        function waitForVapi() {
-            if (typeof Vapi !== 'undefined') {
+        // Official Vapi HTML Script Tag Integration
+        (function (d, t) {
+            var g = document.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+            g.defer = true;
+            g.async = true;
+            s.parentNode.insertBefore(g, s);
+            g.onload = function () {
                 initVapi();
-            } else if (typeof window.Vapi !== 'undefined') {
-                window.Vapi = window.Vapi;
-                initVapi();
-            } else {
-                // Wait a bit longer for the script to load
-                setTimeout(waitForVapi, 100);
-            }
-        }
+            };
+        })(document, "script");
 
-        // Initialize Vapi
+        // Initialize Vapi with the HTML Script Tag SDK
         function initVapi() {
             try {
-                // Try different ways Vapi might be available
-                const VapiConstructor = window.Vapi || Vapi;
-                
-                if (!VapiConstructor) {
-                    throw new Error('Vapi constructor not found');
+                if (!window.vapiSDK) {
+                    throw new Error('Vapi SDK not loaded');
                 }
-                
-                vapi = new VapiConstructor(VAPI_API_KEY);
-                
-                // Event listeners
-                vapi.on('call-start', handleCallStart);
-                vapi.on('call-end', handleCallEnd);
-                vapi.on('speech-start', handleSpeechStart);
-                vapi.on('speech-end', handleSpeechEnd);
-                vapi.on('message', handleMessage);
-                vapi.on('error', handleError);
-                
-                isVapiReady = true;
-                voiceButton.disabled = false;
-                
-                console.log('Vapi initialized successfully');
-                updateConnectionStatus('Ready', 'connected');
-                updateVoiceStatus('Click microphone to start voice chat', 'ready');
+
+                // Assistant configuration
+                const assistant = {
+                    model: {
+                        provider: 'openai',
+                        model: 'gpt-4o',
+                        temperature: 0.7,
+                        systemMessage: `You are an AI assistant for Companeeds helping to gather information about companies looking for AI experts. 
+
+Your goals:
+1. Help users through the signup flow naturally
+2. When asking about revenue or other options, say "Please select from the options on screen" 
+3. Be conversational and understand their pain points
+4. Ask follow-up questions when appropriate
+
+The user can either speak to you or click the visual options. Work together with the interface.
+
+Keep responses conversational and under 30 seconds when spoken.`
+                    },
+                    voice: {
+                        provider: 'elevenlabs',
+                        voiceId: 'pNInz6obpgDQGcFmaJgB'
+                    },
+                    firstMessage: "I'm here to help! You can either speak to me or use the options on screen.",
+                    recordingEnabled: true,
+                    endCallFunctionEnabled: true,
+                    maxDurationSeconds: 600
+                };
+
+                // Button configuration (hidden since we have our own UI)
+                const buttonConfig = {
+                    position: "bottom-right",
+                    offset: "40px", 
+                    width: "0px",    // Hide the widget
+                    height: "0px",   // Hide the widget
+                    idle: { color: "transparent" },
+                    loading: { color: "transparent" },
+                    active: { color: "transparent" }
+                };
+
+                // Initialize Vapi
+                vapi = window.vapiSDK.run({
+                    apiKey: VAPI_API_KEY,
+                    assistant: assistant,
+                    config: buttonConfig
+                });
+
+                if (vapi) {
+                    // Set up event listeners
+                    vapi.on('call-start', handleCallStart);
+                    vapi.on('call-end', handleCallEnd);
+                    vapi.on('speech-start', handleSpeechStart);
+                    vapi.on('speech-end', handleSpeechEnd);
+                    vapi.on('message', handleMessage);
+                    vapi.on('error', handleError);
+
+                    isVapiReady = true;
+                    voiceButton.disabled = false;
+                    
+                    console.log('Vapi initialized successfully');
+                    updateConnectionStatus('Ready', 'connected');
+                    updateVoiceStatus('Click microphone to start voice chat', 'ready');
+                } else {
+                    throw new Error('Failed to initialize Vapi instance');
+                }
                 
                 // Start the conversation
                 startConversation();
@@ -777,11 +782,7 @@
             if (currentStep < conversationFlow.length) {
                 currentStepData = conversationFlow[currentStep];
                 
-                // Show typing indicator
-                showTypingIndicator();
-                
                 setTimeout(() => {
-                    hideTypingIndicator();
                     addAIMessage(currentStepData.message);
                     renderCurrentStep();
                     
@@ -823,32 +824,6 @@
             scrollToBottom();
         }
 
-        function showTypingIndicator() {
-            const typingElement = document.createElement('div');
-            typingElement.className = 'message ai';
-            typingElement.id = 'typingIndicator';
-            typingElement.innerHTML = `
-                <div class="message-avatar">🤖</div>
-                <div class="typing-indicator">
-                    <div class="typing-dots">
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                    </div>
-                </div>
-            `;
-            
-            chatMessages.appendChild(typingElement);
-            scrollToBottom();
-        }
-
-        function hideTypingIndicator() {
-            const typingIndicator = document.getElementById('typingIndicator');
-            if (typingIndicator) {
-                typingIndicator.remove();
-            }
-        }
-
         function scrollToBottom() {
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -875,37 +850,13 @@
             try {
                 updateVoiceStatus('Connecting...', 'connecting');
                 
-                const assistant = {
-                    model: {
-                        provider: 'openai',
-                        model: 'gpt-4o',
-                        temperature: 0.7,
-                        systemMessage: `You are an AI assistant for Companeeds helping to gather information about companies looking for AI experts. 
-
-Current conversation context: ${JSON.stringify(conversationData)}
-Current step: ${currentStepData.message}
-
-Your goals:
-1. Help the user through the signup flow naturally
-2. When asking about revenue or other options, say "Please select from the options on screen" 
-3. Be conversational and understand their pain points
-4. Ask follow-up questions when appropriate
-
-The user can either speak to you or click the visual options. Work together with the interface.
-
-Keep responses conversational and under 30 seconds when spoken.`
-                    },
-                    voice: {
-                        provider: 'elevenlabs',
-                        voiceId: 'pNInz6obpgDQGcFmaJgB'
-                    },
-                    firstMessage: "I'm listening! You can either speak to me or use the options on screen.",
-                    recordingEnabled: true,
-                    endCallFunctionEnabled: true,
-                    maxDurationSeconds: 600
-                };
-                
-                await vapi.start(assistant);
+                // The assistant is already configured in the initialization
+                // We can start the call using the Vapi widget's built-in functionality
+                if (vapi && vapi.start) {
+                    await vapi.start();
+                } else {
+                    throw new Error('Vapi start method not available');
+                }
                 
             } catch (error) {
                 console.error('Failed to start voice call:', error);
@@ -914,7 +865,7 @@ Keep responses conversational and under 30 seconds when spoken.`
         }
 
         function endVoiceCall() {
-            if (vapi && isCallActive) {
+            if (vapi && vapi.stop && isCallActive) {
                 vapi.stop();
             }
         }
@@ -1027,12 +978,6 @@ Keep responses conversational and under 30 seconds when spoken.`
             
             return Math.min(score, 100);
         }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Wait for Vapi to load
-            setTimeout(waitForVapi, 500);
-        });
     </script>
 </body>
 </html>
