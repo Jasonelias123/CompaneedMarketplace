@@ -866,22 +866,20 @@
             try {
                 updateVoiceStatus('Connecting...', 'connecting');
                 
-                // FIXED: Simplified assistant overrides to prevent 400 error
-                const assistantOverrides = {
-                    systemMessage: `You are a Companeeds AI assistant helping with signup. Current step: ${currentStepData.message}. Keep responses under 20 seconds and focus only on the current step.`,
-                    firstMessage: getVoicePromptForCurrentStep()
-                };
-                
                 if (vapi && vapi.start) {
                     console.log('Starting call with assistant:', VAPI_ASSISTANT_ID);
-                    // Try with overrides first
-                    try {
-                        await vapi.start(VAPI_ASSISTANT_ID, assistantOverrides);
-                    } catch (overrideError) {
-                        console.log('Overrides failed, trying without overrides:', overrideError);
-                        // Fallback: try without overrides
-                        await vapi.start(VAPI_ASSISTANT_ID);
-                    }
+                    
+                    // CORRECT: Use proper AssistantOverrides format (optional)
+                    const assistantOverrides = {
+                        recordingEnabled: false,
+                        variableValues: {
+                            currentStep: currentStepData.message
+                        }
+                    };
+                    
+                    // Start with assistant ID and proper overrides
+                    await vapi.start(VAPI_ASSISTANT_ID, assistantOverrides);
+                    
                 } else {
                     throw new Error('Vapi start method not available');
                 }
