@@ -529,7 +529,7 @@
                 // Initialize Vapi with your existing assistant
                 vapi = window.vapiSDK.run({
                     apiKey: VAPI_API_KEY,
-                    assistant: VAPI_ASSISTANT_ID,
+                    assistant: VAPI_ASSISTANT_ID, // Use your configured assistant ID
                     config: buttonConfig
                 });
 
@@ -866,22 +866,29 @@
             try {
                 updateVoiceStatus('Connecting...', 'connecting');
                 
-                // FIXED: Simplified assistant overrides to prevent 400 error
+                // Create dynamic assistant overrides based on current step
                 const assistantOverrides = {
-                    systemMessage: `You are a Companeeds AI assistant helping with signup. Current step: ${currentStepData.message}. Keep responses under 20 seconds and focus only on the current step.`,
+                    systemMessage: `You are an AI assistant for Companeeds helping users complete a structured signup form.
+
+CURRENT STEP: ${currentStepData.message}
+
+COLLECTED DATA SO FAR: ${JSON.stringify(conversationData, null, 2)}
+
+INSTRUCTIONS:
+- Focus ONLY on the current step: "${currentStepData.field || 'current question'}"
+- When asking about revenue, employees, AI goals, or pain points, say "Please select from the options on screen"
+- Keep responses conversational and under 20 seconds
+- Don't jump ahead to other questions
+- If user provides the current step's information, acknowledge it briefly
+
+Be helpful while staying focused on just this current step of the signup process.`,
                     firstMessage: getVoicePromptForCurrentStep()
                 };
                 
+                // Start with just the assistant ID and overrides
                 if (vapi && vapi.start) {
                     console.log('Starting call with assistant:', VAPI_ASSISTANT_ID);
-                    // Try with overrides first
-                    try {
-                        await vapi.start(VAPI_ASSISTANT_ID, assistantOverrides);
-                    } catch (overrideError) {
-                        console.log('Overrides failed, trying without overrides:', overrideError);
-                        // Fallback: try without overrides
-                        await vapi.start(VAPI_ASSISTANT_ID);
-                    }
+                    await vapi.start(VAPI_ASSISTANT_ID, assistantOverrides);
                 } else {
                     throw new Error('Vapi start method not available');
                 }
