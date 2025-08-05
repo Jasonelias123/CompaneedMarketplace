@@ -111,6 +111,17 @@
             color: white;
         }
 
+        .connection-status.listening {
+            background: rgba(239, 68, 68, 0.3);
+            color: white;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .connection-status.processing {
+            background: rgba(16, 185, 129, 0.3);
+            color: white;
+        }
+
         /* Chat Messages */
         .chat-messages {
             flex: 1;
@@ -292,63 +303,58 @@
             cursor: not-allowed;
         }
 
-        /* Chat Controls */
-        .chat-controls {
-            padding: 1rem 1.5rem;
+        /* Voice Activation */
+        .voice-activation {
+            padding: 1.5rem;
             background: var(--surface);
             border-top: 1px solid var(--border);
-            display: flex;
-            gap: 1rem;
-            align-items: center;
+            text-align: center;
         }
 
-        .voice-button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            background: var(--primary-color);
+        .start-voice-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
-            font-size: 1.5rem;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-lg);
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
+            transition: all 0.3s ease;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: var(--shadow-md);
         }
 
-        .voice-button:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
+        .start-voice-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .voice-button.active {
-            background: var(--error);
-            animation: pulse 1s ease-in-out infinite;
-        }
-
-        .voice-button:disabled {
-            opacity: 0.5;
+        .start-voice-btn:disabled {
+            opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
         }
 
-        .voice-status {
-            flex: 1;
-            font-size: 0.9rem;
+        .start-voice-btn.active {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+
+        .start-voice-btn.active::before {
+            content: '🔴 ';
+        }
+
+        .voice-help {
+            margin: 0.75rem 0 0 0;
+            font-size: 0.875rem;
             color: var(--text-secondary);
         }
 
-        .voice-status.listening {
-            color: var(--error);
-            font-weight: 600;
+        .voice-activation.hidden {
+            display: none;
         }
-
-        .voice-status.speaking {
-            color: var(--success);
-            font-weight: 600;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .chat-container {
                 height: 100vh;
@@ -377,7 +383,7 @@
             <div class="connection-status" id="connectionStatus">Loading...</div>
             <div class="ai-avatar" id="aiAvatar">🤖</div>
             <div class="chat-title">Companeeds AI Assistant</div>
-            <div class="chat-subtitle">Let's find the perfect AI expert for your business</div>
+            <div class="chat-subtitle">Use the options below or start voice chat for a more interactive experience</div>
         </div>
 
         <!-- Messages -->
@@ -385,10 +391,12 @@
             <!-- Messages will be added here dynamically -->
         </div>
 
-        <!-- Chat Controls -->
-        <div class="chat-controls">
-            <button class="voice-button" id="voiceButton" onclick="toggleVoice()" disabled>🎤</button>
-            <div class="voice-status" id="voiceStatus">Loading AI assistant...</div>
+        <!-- Voice Activation -->
+        <div class="voice-activation" id="voiceActivation">
+            <button class="start-voice-btn" id="startVoiceBtn" onclick="startVoice()">
+                🎤 Start Voice Conversation
+            </button>
+            <p class="voice-help">Click to enable voice chat alongside the visual options</p>
         </div>
     </div>
 
@@ -491,10 +499,10 @@
 
         // Elements
         const chatMessages = document.getElementById('chatMessages');
-        const voiceButton = document.getElementById('voiceButton');
-        const voiceStatus = document.getElementById('voiceStatus');
         const connectionStatus = document.getElementById('connectionStatus');
         const aiAvatar = document.getElementById('aiAvatar');
+        const voiceActivation = document.getElementById('voiceActivation');
+        const startVoiceBtn = document.getElementById('startVoiceBtn');
 
         // Official Vapi HTML Script Tag Integration
         (function (d, t) {
@@ -543,11 +551,10 @@
                     vapi.on('error', handleError);
 
                     isVapiReady = true;
-                    voiceButton.disabled = false;
+                    startVoiceBtn.disabled = false;
                     
                     console.log('Vapi initialized successfully');
-                    updateConnectionStatus('Ready', 'connected');
-                    updateVoiceStatus('Click microphone to start voice chat', 'ready');
+                    updateConnectionStatus('Ready - Click to start voice', 'connected');
                 } else {
                     throw new Error('Failed to initialize Vapi instance');
                 }
@@ -557,8 +564,8 @@
                 
             } catch (error) {
                 console.error('Failed to initialize Vapi:', error);
-                updateConnectionStatus('SDK Error', 'error');
-                updateVoiceStatus('Voice AI unavailable - using text only', 'error');
+                updateConnectionStatus('Voice unavailable - text only', 'error');
+                startVoiceBtn.disabled = true;
                 
                 // Still start conversation in text-only mode
                 startConversation();
@@ -849,22 +856,25 @@
         }
 
         // Voice functionality
-        async function toggleVoice() {
+        function startVoice() {
             if (!isVapiReady || !vapi) {
-                updateVoiceStatus('Voice AI not available', 'error');
+                updateConnectionStatus('Voice AI not available', 'error');
                 return;
             }
 
             if (isCallActive) {
+                // Stop the call if active
                 endVoiceCall();
             } else {
+                // Start the call
                 startVoiceCall();
             }
         }
 
         async function startVoiceCall() {
             try {
-                updateVoiceStatus('Connecting...', 'connecting');
+                updateConnectionStatus('Starting Voice AI...', 'connecting');
+                startVoiceBtn.disabled = true;
                 
                 // Create dynamic assistant overrides based on current step
                 const assistantOverrides = {
@@ -895,7 +905,8 @@ Be helpful while staying focused on just this current step of the signup process
                 
             } catch (error) {
                 console.error('Failed to start voice call:', error);
-                updateVoiceStatus('Failed to connect', 'error');
+                updateConnectionStatus('Voice failed - text only', 'error');
+                startVoiceBtn.disabled = false;
             }
         }
 
@@ -918,6 +929,8 @@ Be helpful while staying focused on just this current step of the signup process
 
         function endVoiceCall() {
             if (vapi && vapi.stop && isCallActive) {
+                updateConnectionStatus('Stopping voice...', 'connecting');
+                startVoiceBtn.disabled = true;
                 vapi.stop();
             }
         }
@@ -925,26 +938,32 @@ Be helpful while staying focused on just this current step of the signup process
         // Vapi event handlers
         function handleCallStart() {
             isCallActive = true;
-            updateVoiceStatus('Connected - Speak now', 'connected');
-            voiceButton.innerHTML = '🔴';
-            voiceButton.classList.add('active');
+            updateConnectionStatus('Voice AI Active - Listening', 'connected');
             aiAvatar.classList.add('speaking');
+            
+            // Update button to show "Stop Voice" state
+            startVoiceBtn.innerHTML = '🔴 Stop Voice Chat';
+            startVoiceBtn.classList.add('active');
+            startVoiceBtn.disabled = false;
         }
 
         function handleCallEnd() {
             isCallActive = false;
-            updateVoiceStatus('Click to start voice chat', 'ready');
-            voiceButton.innerHTML = '🎤';
-            voiceButton.classList.remove('active');
+            updateConnectionStatus('Voice disconnected', 'error');
             aiAvatar.classList.remove('speaking');
+            
+            // Reset button to "Start Voice" state  
+            startVoiceBtn.innerHTML = '🎤 Start Voice Conversation';
+            startVoiceBtn.classList.remove('active');
+            startVoiceBtn.disabled = false;
         }
 
         function handleSpeechStart() {
-            updateVoiceStatus('Listening...', 'listening');
+            updateConnectionStatus('Voice AI Listening...', 'listening');
         }
 
         function handleSpeechEnd() {
-            updateVoiceStatus('Processing...', 'processing');
+            updateConnectionStatus('Voice AI Processing...', 'processing');
         }
 
         function handleMessage(message) {
@@ -961,12 +980,7 @@ Be helpful while staying focused on just this current step of the signup process
 
         function handleError(error) {
             console.error('Vapi error:', error);
-            updateVoiceStatus('Error occurred', 'error');
-        }
-
-        function updateVoiceStatus(text, status) {
-            voiceStatus.textContent = text;
-            voiceStatus.className = `voice-status ${status}`;
+            updateConnectionStatus('Voice AI Error', 'error');
         }
 
         function updateConnectionStatus(text, status) {
