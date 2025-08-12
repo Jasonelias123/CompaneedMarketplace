@@ -42,13 +42,14 @@ body {
 
 /* Brand Logo - positioned at top left of screen */
 .brand-logo {
-    position: absolute;
-    top: -40vh;
-    left: -2rem;
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
     color: #ffffff;
+    z-index: 100;
 }
 
 .brand-text {
@@ -125,8 +126,8 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .brand-logo {
-        top: -45vh;
-        left: -1rem;
+        top: 1.5rem;
+        left: 1.5rem;
     }
     
     .main-title {
@@ -154,8 +155,8 @@ body {
     }
     
     .brand-logo {
-        top: -42vh;
-        left: 0;
+        top: 1rem;
+        left: 1rem;
     }
     
     .main-title {
