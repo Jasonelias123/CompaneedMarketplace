@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="animations.js" defer></script>
 </head>
 <body>
     <header class="navbar">
@@ -42,6 +43,52 @@
                 </a>
             </div>
         </div>
+
+        <!-- Additional sections to demonstrate animations -->
+        <section class="features-section animate-on-scroll animate-fade-up">
+            <div class="features-container">
+                <h2 class="section-title animate-on-scroll animate-fade-up delay-200">Trusted by Leading Companies</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card animate-on-scroll animate-fade-left delay-300">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Get matched with AI experts in under 48 hours</p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll animate-fade-up delay-400">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Perfect Match</h3>
+                        <p>AI-powered matching ensures the right fit every time</p>
+                    </div>
+                    
+                    <div class="feature-card animate-on-scroll animate-fade-right delay-500">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Proven Results</h3>
+                        <p>98% client satisfaction with measurable business impact</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section animate-on-scroll animate-scale">
+            <div class="stats-container">
+                <div class="stat-item animate-on-scroll animate-fade-up delay-100">
+                    <div class="stat-number counter" data-target="500" data-duration="2000">0</div>
+                    <div class="stat-label">AI Experts</div>
+                </div>
+                
+                <div class="stat-item animate-on-scroll animate-fade-up delay-200">
+                    <div class="stat-number counter" data-target="98" data-duration="2000">0</div>
+                    <div class="stat-label">% Success Rate</div>
+                </div>
+                
+                <div class="stat-item animate-on-scroll animate-fade-up delay-300">
+                    <div class="stat-number counter" data-target="48" data-duration="1500">0</div>
+                    <div class="stat-label">Hour Matching</div>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>
