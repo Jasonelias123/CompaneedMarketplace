@@ -118,6 +118,13 @@ body {
     transform: translateX(3px);
 }
 
+/* Make rocket emoji white */
+.rocket-emoji {
+    filter: grayscale(1) brightness(0) invert(1);
+    display: inline-block;
+    font-size: 1.2em;
+}
+
 /* Hide navbar */
 .navbar {
     display: none;
