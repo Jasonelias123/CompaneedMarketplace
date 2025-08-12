@@ -268,24 +268,16 @@ body {
     font-size: 1.1em;
 }
 
-/* Smooth slide-in animations with alternating directions */
+/* Smooth slide-in animations */
 .fade-in {
     opacity: 0;
+    transform: translateY(50px);
     transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-in.visible {
     opacity: 1;
-    transform: translateX(0);
-}
-
-/* Alternating slide directions */
-.fade-in:nth-child(odd) {
-    transform: translateX(-50px);
-}
-
-.fade-in:nth-child(even) {
-    transform: translateX(50px);
+    transform: translateY(0);
 }
 
 /* Staggered animation delays */
