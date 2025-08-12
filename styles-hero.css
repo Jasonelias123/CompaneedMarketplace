@@ -10,45 +10,16 @@ html, body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
 }
 
 body {
     background: linear-gradient(135deg, #7c4dff 0%, #651fff 50%, #6366f1 100%);
     color: #ffffff;
     min-height: 100vh;
-}
-
-/* Navbar */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    padding: 1.5rem 0;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-/* Brand Logo */
-.brand-logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: #ffffff;
-}
-
-.brand-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ffffff;
+    justify-content: center;
+    padding: 2rem;
 }
 
 /* Main Container */
@@ -60,14 +31,35 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 2rem;
 }
 
 /* Hero Card */
 .hero-card {
+    background: linear-gradient(135deg, #6b46c1 0%, #7c3aed 50%, #8b5cf6 100%);
+    border-radius: 24px;
+    padding: 3rem;
     text-align: center;
-    max-width: 700px;
+    max-width: 600px;
     width: 100%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Brand Logo - positioned at top left of card */
+.brand-logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+}
+
+.brand-text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #ffffff;
 }
 
 /* Hero Content */
@@ -76,24 +68,27 @@ body {
     flex-direction: column;
     gap: 2rem;
     align-items: center;
+    padding-top: 2rem;
 }
 
 /* Main Title */
 .main-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
+    font-size: 2.75rem;
+    font-weight: 700;
     line-height: 1.1;
     color: #ffffff;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 /* Main Description */
 .main-description {
-    font-size: 1.25rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.9);
-    max-width: 500px;
-    margin-bottom: 1rem;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 /* Get Started Button */
@@ -101,25 +96,26 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.15);
+    padding: 0.875rem 1.75rem;
+    background: #8b5cf6;
     color: #ffffff;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    border-radius: 12px;
     transition: all 0.3s ease;
+    border: none;
 }
 
 .get-started-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: #7c3aed;
     transform: translateY(-2px);
 }
 
 /* Rocket Icon */
 .rocket-icon {
+    width: 16px;
+    height: 16px;
     transition: transform 0.3s ease;
 }
 
@@ -127,48 +123,65 @@ body {
     transform: translateX(2px);
 }
 
+/* Hide navbar for this design */
+.navbar {
+    display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 1rem 0;
-    }
-    
-    .nav-container {
-        padding: 0 1.5rem;
-    }
-    
-    .main-container {
+    body {
         padding: 1rem;
     }
     
     .hero-card {
-        padding: 2rem 1rem;
+        padding: 2rem;
+        border-radius: 20px;
+    }
+    
+    .brand-logo {
+        top: 1.5rem;
+        left: 1.5rem;
     }
     
     .main-title {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
     }
     
     .main-description {
-        font-size: 1.125rem;
+        font-size: 0.9rem;
     }
     
     .brand-text {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 480px) {
+    .hero-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .brand-logo {
+        top: 1rem;
+        left: 1rem;
+    }
+    
+    .hero-content {
+        padding-top: 1.5rem;
+    }
+    
     .main-title {
-        font-size: 2rem;
+        font-size: 1.875rem;
     }
     
     .main-description {
-        font-size: 1rem;
+        font-size: 0.85rem;
     }
     
     .get-started-btn {
-        padding: 0.875rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
     }
 }
