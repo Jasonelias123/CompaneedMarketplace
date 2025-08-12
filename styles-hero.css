@@ -293,6 +293,74 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Client Logos Section */
+.clients-section {
+    background: #6b46c1;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clients-container {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+.clients-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.clients-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.client-logo {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    min-height: 120px;
+}
+
+.client-logo:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-5px);
+}
+
+.logo-placeholder {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
 /* Proof & Credibility Section */
 .proof-section {
     background: #f8f9ff;
@@ -571,7 +639,7 @@ html {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .why-section, .proof-section, .how-it-works-section, .case-studies-section, .final-cta-section {
+    .why-section, .clients-section, .proof-section, .how-it-works-section, .case-studies-section, .final-cta-section {
         padding: 3rem 1rem;
     }
     
@@ -619,6 +687,28 @@ html {
     
     .stat-number {
         font-size: 2.5rem;
+    }
+    
+    .clients-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .client-logo {
+        padding: 1.5rem 1rem;
+        min-height: 100px;
+    }
+    
+    .logo-placeholder {
+        font-size: 1rem;
+    }
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .clients-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
     }
 }
 
