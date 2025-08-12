@@ -130,6 +130,147 @@ body {
     display: none;
 }
 
+/* Why Companeeds Section */
+.why-section {
+    background: #ffffff;
+    color: #6b46c1;
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.why-container {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+.why-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: #6b46c1;
+    margin-bottom: 3rem;
+    line-height: 1.2;
+}
+
+.why-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.why-intro {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #6b46c1;
+    margin-bottom: 1rem;
+}
+
+.why-question {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #6b46c1;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.why-answer {
+    font-size: 1.25rem;
+    color: #6b46c1;
+    margin-bottom: 2rem;
+}
+
+.why-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.why-point {
+    background: rgba(107, 70, 193, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #6b46c1;
+}
+
+.why-point p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #6b46c1;
+    margin: 0;
+}
+
+.guarantee-section {
+    background: rgba(107, 70, 193, 0.1);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 2px solid #6b46c1;
+}
+
+.guarantee-intro {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #6b46c1;
+    margin-bottom: 1rem;
+}
+
+.guarantee-offer {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #6b46c1;
+    margin-bottom: 0.5rem;
+}
+
+.guarantee-terms {
+    font-size: 1rem;
+    color: #6b46c1;
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .why-section {
+        padding: 3rem 1rem;
+    }
+    
+    .why-title {
+        margin-bottom: 2rem;
+    }
+    
+    .why-content {
+        gap: 1.5rem;
+    }
+    
+    .why-points {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .why-point {
+        padding: 1rem;
+    }
+    
+    .guarantee-section {
+        padding: 1.5rem;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .brand-logo {

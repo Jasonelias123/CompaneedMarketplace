@@ -37,5 +37,67 @@
             </div>
         </div>
     </main>
+
+    <!-- Second Section - Why Companeeds -->
+    <section class="why-section">
+        <div class="why-container">
+            <h2 class="why-title fade-in">Why Companeeds?</h2>
+            
+            <div class="why-content">
+                <p class="why-intro fade-in">You've heard AI can transform your business - boost revenue, free up your time, and help you focus on what you truly love.</p>
+                
+                <p class="why-question fade-in">But… Who do you talk to? Where do you go? And how can you get started?</p>
+                
+                <p class="why-answer fade-in">We've done the hard work and taken it upon ourselves to answer those questions for you.</p>
+                
+                <div class="why-points">
+                    <div class="why-point fade-in">
+                        <p>We've rigorously vetted the best AI tech in the world</p>
+                    </div>
+                    
+                    <div class="why-point fade-in">
+                        <p>Our focus is delivering proven, measurable results - fully customized for your business</p>
+                    </div>
+                    
+                    <div class="why-point fade-in">
+                        <p>We implement the tech for you - so you can relax and watch your business grow</p>
+                    </div>
+                    
+                    <div class="why-point fade-in">
+                        <p>We don't just provide tools. We genuinely care about your success - and we mean it.</p>
+                    </div>
+                </div>
+                
+                <div class="guarantee-section fade-in">
+                    <p class="guarantee-intro">We are so confident you will love it:</p>
+                    <p class="guarantee-offer">We'll integrate our best AI systems into your business for 30 days - free.</p>
+                    <p class="guarantee-terms">No commitment. No credit card. Just results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll animation on page load and scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
