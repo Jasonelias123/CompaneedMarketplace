@@ -14,20 +14,35 @@ html, body {
 body {
     background: linear-gradient(135deg, #7c4dff 0%, #651fff 50%, #6366f1 100%);
     color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     min-height: 100vh;
-    padding: 2rem;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 /* Main Container */
 .main-container {
     width: 100%;
     max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
     position: relative;
 }
 
@@ -54,12 +69,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     gap: 0.75rem;
-    margin-bottom: 4rem;
     color: rgba(255, 255, 255, 0.95);
-    text-align: left;
-    position: absolute;
-    top: 3rem;
-    left: 3rem;
 }
 
 .logo-icon {
@@ -159,20 +169,21 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    body {
+    .navbar {
+        padding: 1rem 0;
+    }
+    
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+    
+    .main-container {
         padding: 1rem;
     }
     
     .hero-card {
         padding: 2rem 1.5rem;
         min-height: 400px;
-    }
-    
-    .brand-logo {
-        position: static;
-        justify-content: flex-start;
-        margin-bottom: 3rem;
-        text-align: left;
     }
     
     .hero-content {
@@ -198,14 +209,16 @@ body {
 }
 
 @media (max-width: 480px) {
-    .hero-card {
-        padding: 1.5rem 1rem;
+    .nav-container {
+        padding: 0 1rem;
     }
     
-    .brand-logo {
-        position: static;
-        top: auto;
-        left: auto;
+    .main-container {
+        padding: 0.5rem;
+    }
+    
+    .hero-card {
+        padding: 1.5rem 1rem;
     }
     
     .hero-content {
