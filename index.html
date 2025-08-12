@@ -111,6 +111,31 @@
             // Start observing
             animateElements.forEach(el => observer.observe(el));
 
+            // Color change observer for navbar
+            const brandLogo = document.querySelector('.brand-logo');
+            const whySection = document.querySelector('.why-section');
+            
+            const colorObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // In white section - change to purple
+                        brandLogo.style.color = '#6b46c1';
+                        brandLogo.querySelector('.brand-text').style.color = '#6b46c1';
+                    } else {
+                        // Not in white section - keep white
+                        brandLogo.style.color = '#ffffff';
+                        brandLogo.querySelector('.brand-text').style.color = '#ffffff';
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '0px 0px -70% 0px'
+            });
+
+            if (whySection) {
+                colorObserver.observe(whySection);
+            }
+
             // Add smooth scrolling to any anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
