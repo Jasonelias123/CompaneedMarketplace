@@ -200,7 +200,7 @@ body {
     background: rgba(107, 70, 193, 0.05);
     padding: 1.5rem;
     border-radius: 12px;
-    border-left: 4px solid #6b46c1;
+    border: 2px solid #6b46c1;
 }
 
 .why-point p {
