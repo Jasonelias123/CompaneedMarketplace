@@ -13,7 +13,7 @@ html, body {
 }
 
 body {
-    background: linear-gradient(135deg, #6b46c1 0%, #7c3aed 50%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 35%, #8b5cf6 100%);
     color: #ffffff;
     min-height: 100vh;
     display: flex;
@@ -92,7 +92,7 @@ body {
     align-items: center;
     gap: 0.75rem;
     padding: 1.25rem 2.5rem;
-    background: #8b5cf6;
+    background: #7c3aed;
     color: #ffffff;
     font-size: 1.25rem;
     font-weight: 600;
@@ -103,7 +103,7 @@ body {
 }
 
 .get-started-btn:hover {
-    background: #7c3aed;
+    background: #6b21a8;
     transform: translateY(-2px);
 }
 
