@@ -13,8 +13,14 @@ html, body {
 }
 
 body {
-    background: linear-gradient(90deg, #4c1d95 0%, #6d28d9 50%, #7c3aed 100%);
     color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hero Section Wrapper */
+.hero-wrapper {
+    background: linear-gradient(90deg, #4c1d95 0%, #6d28d9 50%, #7c3aed 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -30,8 +36,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    height: 100vh;
     text-align: center;
+    position: relative;
 }
 
 /* Hero Card - now just a container with no background */
