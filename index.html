@@ -83,6 +83,117 @@
         </div>
     </section>
 
+    <!-- Proof & Credibility Section -->
+    <section class="proof-section">
+        <div class="proof-container">
+            <h2 class="proof-title fade-in">Trusted By Leaders in Growth</h2>
+            
+            <div class="stats-grid fade-in">
+                <div class="stat-item">
+                    <div class="stat-number">$2.4M+</div>
+                    <div class="stat-label">Revenue Generated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">340%</div>
+                    <div class="stat-label">Average Client ROI</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">72</div>
+                    <div class="stat-label">Hours Saved Per Week</div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <p class="testimonial-quote">"Working with Companeeds transformed our entire approach to customer acquisition. The AI systems they implemented increased our qualified leads by 300% in just 60 days."</p>
+                <div class="testimonial-author">
+                    <strong>Sarah Chen</strong> - CEO, GrowthTech Solutions
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section">
+        <div class="how-container">
+            <h2 class="how-title fade-in">Here's How We Transform Your Business with AI</h2>
+            
+            <div class="steps-grid">
+                <div class="step-card fade-in">
+                    <div class="step-icon">🔍</div>
+                    <h3 class="step-title">Audit & Discovery</h3>
+                    <p class="step-description">We assess where AI can have the biggest impact on your specific business model and goals.</p>
+                </div>
+                
+                <div class="step-card fade-in">
+                    <div class="step-icon">📋</div>
+                    <h3 class="step-title">Custom AI Blueprint</h3>
+                    <p class="step-description">Tailored strategy and implementation plan designed specifically for your business objectives.</p>
+                </div>
+                
+                <div class="step-card fade-in">
+                    <div class="step-icon">⚡</div>
+                    <h3 class="step-title">Implementation</h3>
+                    <p class="step-description">We install the AI systems and train your team to maximize results from day one.</p>
+                </div>
+                
+                <div class="step-card fade-in">
+                    <div class="step-icon">📈</div>
+                    <h3 class="step-title">Ongoing Optimization</h3>
+                    <p class="step-description">Continuous improvement and optimization to ensure maximum ROI and long-term success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Preview Section -->
+    <section class="case-studies-section">
+        <div class="case-container">
+            <h2 class="case-title fade-in">Real Results from Real Businesses</h2>
+            
+            <div class="case-studies-grid">
+                <div class="case-card fade-in">
+                    <div class="case-problem">Lead Generation Struggle</div>
+                    <div class="case-arrow">→</div>
+                    <div class="case-solution">AI-Powered Lead Scoring</div>
+                    <div class="case-arrow">→</div>
+                    <div class="case-result">300% More Qualified Leads</div>
+                </div>
+                
+                <div class="case-card fade-in">
+                    <div class="case-problem">Manual Data Processing</div>
+                    <div class="case-arrow">→</div>
+                    <div class="case-solution">Automated AI Workflows</div>
+                    <div class="case-arrow">→</div>
+                    <div class="case-result">$200K Annual Savings</div>
+                </div>
+                
+                <div class="case-card fade-in">
+                    <div class="case-problem">Poor Customer Support</div>
+                    <div class="case-arrow">→</div>
+                    <div class="case-solution">AI Chat & Automation</div>
+                    <div class="case-arrow">→</div>
+                    <div class="case-result">95% Customer Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta-section">
+        <div class="final-cta-container">
+            <h2 class="final-cta-title fade-in">Your Competitors Aren't Waiting. Why Should You?</h2>
+            <p class="final-cta-subtitle fade-in">Join the businesses already transforming their operations with AI</p>
+            
+            <div class="final-cta-content fade-in">
+                <a href="company-intake-toptal.html" class="final-cta-btn">
+                    <span class="rocket-emoji">🚀</span>
+                    Get Started Today
+                </a>
+                <p class="final-cta-guarantee">No credit card required • 30 days free • Real results guaranteed</p>
+            </div>
+        </div>
+    </section>
+
     <script>
         // Enhanced smooth scroll animations
         document.addEventListener('DOMContentLoaded', function() {
@@ -117,28 +228,34 @@
 
             // Color change observer for navbar
             const brandLogo = document.querySelector('.brand-logo');
-            const whySection = document.querySelector('.why-section');
+            const lightSections = document.querySelectorAll('.why-section, .proof-section, .how-it-works-section, .case-studies-section');
             
             const colorObserver = new IntersectionObserver(function(entries) {
+                let inLightSection = false;
+                
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // In white section - change to purple
-                        brandLogo.style.color = '#6b46c1';
-                        brandLogo.querySelector('.brand-text').style.color = '#6b46c1';
-                    } else {
-                        // Not in white section - keep white
-                        brandLogo.style.color = '#ffffff';
-                        brandLogo.querySelector('.brand-text').style.color = '#ffffff';
+                        inLightSection = true;
                     }
                 });
+                
+                if (inLightSection) {
+                    // In light section - change to purple
+                    brandLogo.style.color = '#6b46c1';
+                    brandLogo.querySelector('.brand-text').style.color = '#6b46c1';
+                } else {
+                    // In dark section - keep white
+                    brandLogo.style.color = '#ffffff';
+                    brandLogo.querySelector('.brand-text').style.color = '#ffffff';
+                }
             }, {
                 threshold: 0.3,
                 rootMargin: '0px 0px -70% 0px'
             });
 
-            if (whySection) {
-                colorObserver.observe(whySection);
-            }
+            lightSections.forEach(section => {
+                colorObserver.observe(section);
+            });
 
             // Add smooth scrolling to any anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
