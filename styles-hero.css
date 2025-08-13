@@ -377,6 +377,19 @@ html {
     transform: scale(1.05);
 }
 
+.logo-svg {
+    width: 120px;
+    height: 60px;
+    color: #ffffff;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.client-logo:hover .logo-svg {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
 /* Proof & Credibility Section */
 .proof-section {
     background: #f8f9ff;
@@ -722,6 +735,11 @@ html {
     .logo-img {
         max-width: 100px;
         max-height: 50px;
+    }
+    
+    .logo-svg {
+        width: 100px;
+        height: 50px;
     }
 }
 
