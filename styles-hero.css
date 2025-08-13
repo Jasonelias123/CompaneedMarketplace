@@ -629,8 +629,8 @@ html {
 
 /* How It Works Section */
 .how-it-works-section {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-    color: #ffffff;
+    background: #f8f9ff;
+    color: #6b46c1;
     min-height: 100vh;
     padding: 4rem 2rem;
     display: flex;
@@ -647,7 +647,7 @@ html {
 .how-title {
     font-size: clamp(2.5rem, 6vw, 3.5rem);
     font-weight: 700;
-    color: #ffffff;
+    color: #6b46c1;
     margin-bottom: 3rem;
     line-height: 1.2;
 }
@@ -659,14 +659,13 @@ html {
 }
 
 .step-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%);
     padding: 2.5rem;
     border-radius: 20px;
     border: 2px solid rgba(255, 255, 255, 0.3);
     text-align: center;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
 }
@@ -688,9 +687,9 @@ html {
 
 .step-card:hover {
     transform: translateY(-8px) scale(1.02);
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 50%, #7c3aed 100%);
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .step-icon {
