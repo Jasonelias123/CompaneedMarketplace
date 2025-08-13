@@ -377,6 +377,15 @@ html {
     transform: scale(1.05);
 }
 
+.logo-fallback {
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
 .logo-svg {
     width: 120px;
     height: 60px;
