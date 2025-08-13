@@ -319,6 +319,32 @@
             // Start observing
             animateElements.forEach(el => observer.observe(el));
 
+            // Logo Animation Observer
+            const logoObserverOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const logoObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const logos = entry.target.querySelectorAll('.client-logo');
+                        logos.forEach((logo, index) => {
+                            setTimeout(() => {
+                                logo.classList.add('animate-in');
+                            }, index * 100); // Stagger each logo by 100ms
+                        });
+                        logoObserver.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, logoObserverOptions);
+
+            // Observe the clients grid for logo animations
+            const clientsGrid = document.querySelector('.clients-grid');
+            if (clientsGrid) {
+                logoObserver.observe(clientsGrid);
+            }
+
             // Color change observer for navbar
             const brandLogo = document.querySelector('.brand-logo');
             const lightSections = document.querySelectorAll('.why-section, .proof-section, .how-it-works-section, .case-studies-section');
