@@ -590,6 +590,43 @@ html {
     font-size: 1.1rem;
 }
 
+/* Value Proposition Section */
+.value-proposition {
+    max-width: 800px;
+    margin: 4rem auto 0;
+    text-align: left;
+    padding: 2rem;
+    background: rgba(107, 70, 193, 0.1);
+    border: 1px solid rgba(107, 70, 193, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+}
+
+.value-main {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #6b46c1;
+}
+
+.value-contrast {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: #6b46c1;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.value-moment {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #6b46c1;
+    margin-bottom: 0;
+    opacity: 0.8;
+}
+
 /* How It Works Section */
 .how-it-works-section {
     background: #ffffff;
