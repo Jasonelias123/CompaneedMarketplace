@@ -659,7 +659,7 @@ html {
 }
 
 .step-card {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%);
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%) !important;
     padding: 2.5rem;
     border-radius: 20px;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -701,7 +701,7 @@ html {
 .step-title {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #ffffff !important;
     margin-bottom: 1.2rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: -0.01em;
@@ -710,7 +710,7 @@ html {
 .step-description {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 0.95) !important;
     font-weight: 400;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
