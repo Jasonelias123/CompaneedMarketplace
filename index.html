@@ -12,6 +12,7 @@
     <meta http-equiv="Expires" content="0">
     
     <link rel="stylesheet" href="styles-hero-new.css">
+    <link rel="stylesheet" href="purple-override.css">
     <style>
         /* Force purple styling with maximum specificity */
         .purple-card,
@@ -48,24 +49,34 @@
     <script>
         // Force purple styling with JavaScript
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.purple-card');
-            cards.forEach(card => {
-                card.style.cssText = `
-                    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%) !important;
-                    color: white !important;
-                    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-                `;
-                
-                const title = card.querySelector('.step-title');
-                const description = card.querySelector('.step-description');
-                
-                if (title) {
-                    title.style.cssText = 'color: white !important;';
-                }
-                if (description) {
-                    description.style.cssText = 'color: rgba(255, 255, 255, 0.95) !important;';
-                }
-            });
+            // Force deep royal purple styling
+            const cards = document.querySelectorAll('#card1, #card2, #card3, #card4, .purple-card');
+            
+            setTimeout(() => {
+                cards.forEach(card => {
+                    // Remove all existing background styles
+                    card.style.removeProperty('background');
+                    card.style.removeProperty('background-color');
+                    card.style.removeProperty('background-image');
+                    
+                    // Apply deep royal purple
+                    card.style.setProperty('background', 'linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%)', 'important');
+                    card.style.setProperty('color', '#ffffff', 'important');
+                    card.style.setProperty('box-shadow', '0 15px 35px rgba(123, 58, 237, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.15)', 'important');
+                    
+                    const title = card.querySelector('.step-title');
+                    const description = card.querySelector('.step-description');
+                    
+                    if (title) {
+                        title.style.setProperty('color', '#ffffff', 'important');
+                        title.style.setProperty('text-shadow', '0 1px 2px rgba(0, 0, 0, 0.2)', 'important');
+                    }
+                    if (description) {
+                        description.style.setProperty('color', 'rgba(255, 255, 255, 0.95)', 'important');
+                        description.style.setProperty('text-shadow', '0 1px 2px rgba(0, 0, 0, 0.1)', 'important');
+                    }
+                });
+            }, 100);
         });
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
