@@ -369,6 +369,9 @@ html {
     object-fit: contain;
     opacity: 0.9;
     transition: all 0.3s ease;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
 }
 
 .client-logo:hover .logo-img {
