@@ -11,16 +11,17 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
-    <link rel="stylesheet" href="force-purple.css">
+    <link rel="stylesheet" href="styles-hero-new.css">
+    <link rel="stylesheet" href="purple-override.css">
     <style>
-        /* Force royal purple styling with maximum specificity */
+        /* Force purple styling with maximum specificity */
         .purple-card,
         .step-card.purple-card,
         div.step-card.purple-card,
         #card1, #card2, #card3, #card4 {
-            background: linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%) !important;
-            color: #ffffff !important;
-            box-shadow: 0 15px 35px rgba(123, 58, 237, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.15) !important;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%) !important;
+            color: white !important;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
         }
         
         .purple-card .step-title,
@@ -41,60 +42,41 @@
         .step-card.purple-card:hover,
         div.step-card.purple-card:hover,
         #card1:hover, #card2:hover, #card3:hover, #card4:hover {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6b46c1 100%) !important;
-            color: #ffffff !important;
+            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 50%, #7c3aed 100%) !important;
+            color: white !important;
         }
     </style>
     <script>
-        // NUCLEAR OPTION - Force royal purple and disable all animations
+        // Force purple styling with JavaScript
         document.addEventListener('DOMContentLoaded', function() {
-            function forceRoyalPurple() {
-                const cards = document.querySelectorAll('#card1, #card2, #card3, #card4, .purple-card, .step-card');
-                
+            // Force deep royal purple styling
+            const cards = document.querySelectorAll('#card1, #card2, #card3, #card4, .purple-card');
+            
+            setTimeout(() => {
                 cards.forEach(card => {
-                    // Disable all transitions and animations
-                    card.style.setProperty('transition', 'none', 'important');
-                    card.style.setProperty('animation', 'none', 'important');
-                    
-                    // Force remove any existing styles
+                    // Remove all existing background styles
                     card.style.removeProperty('background');
                     card.style.removeProperty('background-color');
                     card.style.removeProperty('background-image');
                     
-                    // Apply royal purple with extreme force
-                    card.style.backgroundColor = '#6b46c1';
-                    card.style.backgroundImage = 'linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%)';
-                    card.style.color = '#ffffff';
-                    card.style.boxShadow = '0 15px 35px rgba(123, 58, 237, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.15)';
-                    
-                    // Override with cssText as last resort
-                    card.style.cssText += '; background: linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%) !important; color: #ffffff !important;';
+                    // Apply deep royal purple
+                    card.style.setProperty('background', 'linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%)', 'important');
+                    card.style.setProperty('color', '#ffffff', 'important');
+                    card.style.setProperty('box-shadow', '0 15px 35px rgba(123, 58, 237, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.15)', 'important');
                     
                     const title = card.querySelector('.step-title');
                     const description = card.querySelector('.step-description');
                     
                     if (title) {
-                        title.style.color = '#ffffff';
-                        title.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.2)';
+                        title.style.setProperty('color', '#ffffff', 'important');
+                        title.style.setProperty('text-shadow', '0 1px 2px rgba(0, 0, 0, 0.2)', 'important');
                     }
                     if (description) {
-                        description.style.color = 'rgba(255, 255, 255, 0.95)';
-                        description.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.1)';
+                        description.style.setProperty('color', 'rgba(255, 255, 255, 0.95)', 'important');
+                        description.style.setProperty('text-shadow', '0 1px 2px rgba(0, 0, 0, 0.1)', 'important');
                     }
                 });
-            }
-            
-            // Apply immediately and repeatedly
-            forceRoyalPurple();
-            setTimeout(forceRoyalPurple, 50);
-            setTimeout(forceRoyalPurple, 100);
-            setTimeout(forceRoyalPurple, 200);
-            setTimeout(forceRoyalPurple, 500);
-            setTimeout(forceRoyalPurple, 1000);
-            
-            // Watch for any changes and reapply
-            const observer = new MutationObserver(forceRoyalPurple);
-            observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+            }, 100);
         });
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
