@@ -12,6 +12,39 @@
     <meta http-equiv="Expires" content="0">
     
     <link rel="stylesheet" href="styles-hero-new.css">
+    <style>
+        /* Force purple styling with maximum specificity */
+        .step-card.fade-in,
+        .step-card,
+        div.step-card.fade-in,
+        div.step-card {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%) !important;
+            color: white !important;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        .step-card .step-title,
+        .step-card.fade-in .step-title,
+        div.step-card .step-title,
+        div.step-card.fade-in .step-title {
+            color: white !important;
+        }
+        
+        .step-card .step-description,
+        .step-card.fade-in .step-description,
+        div.step-card .step-description,
+        div.step-card.fade-in .step-description {
+            color: rgba(255, 255, 255, 0.95) !important;
+        }
+        
+        .step-card:hover,
+        .step-card.fade-in:hover,
+        div.step-card:hover,
+        div.step-card.fade-in:hover {
+            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 50%, #7c3aed 100%) !important;
+            color: white !important;
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
