@@ -659,15 +659,17 @@ html {
 }
 
 .step-card {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%) !important;
+    background: #6b46c1 !important;
+    background: linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%) !important;
     padding: 2.5rem;
     border-radius: 20px;
     border: 2px solid rgba(255, 255, 255, 0.3);
     text-align: center;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(123, 58, 237, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.15) !important;
     position: relative;
     overflow: hidden;
+    color: #ffffff !important;
 }
 
 .step-card::before {
@@ -687,9 +689,10 @@ html {
 
 .step-card:hover {
     transform: translateY(-8px) scale(1.02);
-    background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 50%, #7c3aed 100%);
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6b46c1 100%) !important;
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(123, 58, 237, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
 }
 
 .step-icon {
@@ -703,7 +706,7 @@ html {
     font-weight: 800;
     color: #ffffff !important;
     margin-bottom: 1.2rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
     letter-spacing: -0.01em;
 }
 
@@ -880,7 +883,8 @@ html {
     }
     
     .step-card {
-        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%) !important;
+        background: linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%) !important;
+        color: #ffffff !important;
     }
     
     .guarantee-section, .testimonial-card {
