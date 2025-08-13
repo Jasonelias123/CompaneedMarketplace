@@ -1,0 +1,71 @@
+/* NUCLEAR OPTION - FORCE ROYAL PURPLE */
+html body .how-it-works-section .how-container .steps-grid .step-card,
+html body .how-it-works-section .how-container .steps-grid .step-card.purple-card,
+html body .how-it-works-section .how-container .steps-grid div.step-card,
+html body .how-it-works-section .how-container .steps-grid div.step-card.purple-card,
+.step-card#card1,
+.step-card#card2,
+.step-card#card3,
+.step-card#card4,
+div.step-card#card1,
+div.step-card#card2,
+div.step-card#card3,
+div.step-card#card4 {
+    background-color: #6b46c1 !important;
+    background-image: linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%) !important;
+    background: #6b46c1 !important;
+    background: linear-gradient(135deg, #7c3aed 0%, #6b46c1 50%, #5b21b6 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 15px 35px rgba(123, 58, 237, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+html body .how-it-works-section .how-container .steps-grid .step-card .step-title,
+html body .how-it-works-section .how-container .steps-grid .step-card.purple-card .step-title,
+html body .how-it-works-section .how-container .steps-grid div.step-card .step-title,
+html body .how-it-works-section .how-container .steps-grid div.step-card.purple-card .step-title,
+.step-card#card1 .step-title,
+.step-card#card2 .step-title,
+.step-card#card3 .step-title,
+.step-card#card4 .step-title,
+div.step-card#card1 .step-title,
+div.step-card#card2 .step-title,
+div.step-card#card3 .step-title,
+div.step-card#card4 .step-title {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+html body .how-it-works-section .how-container .steps-grid .step-card .step-description,
+html body .how-it-works-section .how-container .steps-grid .step-card.purple-card .step-description,
+html body .how-it-works-section .how-container .steps-grid div.step-card .step-description,
+html body .how-it-works-section .how-container .steps-grid div.step-card.purple-card .step-description,
+.step-card#card1 .step-description,
+.step-card#card2 .step-description,
+.step-card#card3 .step-description,
+.step-card#card4 .step-description,
+div.step-card#card1 .step-description,
+div.step-card#card2 .step-description,
+div.step-card#card3 .step-description,
+div.step-card#card4 .step-description {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+html body .how-it-works-section .how-container .steps-grid .step-card:hover,
+html body .how-it-works-section .how-container .steps-grid .step-card.purple-card:hover,
+html body .how-it-works-section .how-container .steps-grid div.step-card:hover,
+html body .how-it-works-section .how-container .steps-grid div.step-card.purple-card:hover,
+.step-card#card1:hover,
+.step-card#card2:hover,
+.step-card#card3:hover,
+.step-card#card4:hover,
+div.step-card#card1:hover,
+div.step-card#card2:hover,
+div.step-card#card3:hover,
+div.step-card#card4:hover {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6b46c1 100%) !important;
+    background-color: #7c3aed !important;
+    background-image: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6b46c1 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 20px 40px rgba(123, 58, 237, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.2) !important;
+}
