@@ -7,6 +7,8 @@ Companeeds is a premium AI talent matching platform, positioned as "Toptal for A
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design preference: Perfect symmetry is mandatory - exact visual balance required in all sections.
+Royal purple styling: Four individual content boxes (Vetted AI Technologies, Proven Results, Done For You, Reality Reprogrammed) must have royal purple backgrounds with white text and glossy premium effects.
 
 ## System Architecture
 
