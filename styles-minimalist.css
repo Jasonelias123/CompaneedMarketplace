@@ -1,11 +1,11 @@
 /* Minimalist Cosmic Portal Design */
 
-/* Design System - Royal Purple Only */
+/* Design System */
 :root {
-    --primary-purple: #6C4CFF;
-    --deep-purple: #5B36FF;
-    --accent-depth: #3A1CCC;
-    --space-dark: #0A0420;
+    --cosmic-purple: #8b5cf6;
+    --cosmic-purple-dark: #7c3aed;
+    --cosmic-purple-light: #a78bfa;
+    --space-dark: #0a0a0f;
     --space-darker: #050508;
     --space-lighter: #1a1a2e;
     --white: #ffffff;
@@ -98,7 +98,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 16px rgba(108, 76, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
 }
 
 .rocket-icon {
@@ -120,7 +120,7 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 50%, rgba(108, 76, 255, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
 }
 
 .starfield-canvas {
@@ -132,59 +132,33 @@ body {
     z-index: 1;
 }
 
-/* Premium Halo Effect */
 .portal-ring {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
-    border: 1px solid transparent;
+    width: 600px;
+    height: 600px;
+    border: 2px solid rgba(139, 92, 246, 0.3);
     border-radius: 50%;
     z-index: 2;
-    background: linear-gradient(135deg, var(--primary-purple), var(--deep-purple));
-    background-clip: border-box;
-    animation: haloBreathing 7s ease-in-out infinite;
-    will-change: transform;
 }
 
 .portal-ring::before {
     content: '';
     position: absolute;
-    inset: -1px;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid rgba(139, 92, 246, 0.1);
     border-radius: 50%;
-    padding: 1px;
-    background: linear-gradient(135deg, var(--primary-purple), var(--deep-purple));
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
+    animation: rotate 20s linear infinite;
 }
 
-.portal-ring::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 520px;
-    height: 520px;
-    border-radius: 50%;
-    background: radial-gradient(circle, transparent 40%, rgba(108, 76, 255, 0.06) 70%, transparent 100%);
-    z-index: -1;
-    filter: blur(2px);
-}
-
-@keyframes haloBreathing {
-    0%, 100% { 
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: translate(-50%, -50%) scale(1.005);
-        opacity: 1;
-    }
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .hero-content {

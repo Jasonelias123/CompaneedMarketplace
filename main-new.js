@@ -48,12 +48,12 @@ class StarfieldRenderer {
         this.stars.forEach(star => {
             this.ctx.beginPath();
             this.ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-            this.ctx.fillStyle = `rgba(108, 76, 255, ${star.opacity})`;
+            this.ctx.fillStyle = `rgba(139, 92, 246, ${star.opacity})`;
             this.ctx.fill();
             
             // Add subtle glow effect
             this.ctx.shadowBlur = 10;
-            this.ctx.shadowColor = '#6C4CFF';
+            this.ctx.shadowColor = '#8b5cf6';
             this.ctx.fill();
             this.ctx.shadowBlur = 0;
         });
@@ -319,36 +319,14 @@ function initProgressComet() {
     observer.observe(processSection);
 }
 
-// Copy Lock Protection System
-function initCopyLock() {
-    document.querySelectorAll('[data-lock-copy="true"]').forEach(el => {
-        const originalText = el.textContent || el.innerText;
-        const observer = new MutationObserver(() => {
-            const currentText = el.textContent || el.innerText;
-            if (currentText !== originalText) {
-                el.textContent = originalText;
-                console.warn(`Blocked copy change on locked element:`, el);
-            }
-        });
-        observer.observe(el, { 
-            characterData: true, 
-            subtree: true, 
-            childList: true 
-        });
-    });
-}
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize copy lock protection first
-    initCopyLock();
-    
     // Initialize starfields
     new StarfieldRenderer('starfield');
     new StarfieldRenderer('final-starfield');
     
-    // Initialize portal ring (removed rotation)
-    // new PortalRing(); - Removed as halo effect is now pure CSS
+    // Initialize portal ring
+    new PortalRing();
     
     // Initialize voice agent modal
     new VoiceAgentModal();
@@ -365,5 +343,5 @@ document.addEventListener('DOMContentLoaded', () => {
         heroContent.classList.add('cosmic-breathing');
     }
     
-    console.log('🚀 Cosmic Portal initialized with copy protection');
+    console.log('🚀 Cosmic Portal initialized');
 });
