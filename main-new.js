@@ -344,4 +344,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     console.log('🚀 Cosmic Portal initialized');
+    
+    // Initialize enhanced animations and counters
+    initEnhancedAnimations();
+    initCounterAnimations();
 });
+
+// Enhanced scroll animations for all new sections
+function initEnhancedAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0) translateX(0) scale(1)';
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    // Animate stat cards with bounce effect
+    document.querySelectorAll('.stat-card').forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px) scale(0.9)';
+        card.style.transition = `all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) ${index * 0.1}s`;
+        observer.observe(card);
+    });
+
+    // Animate case study cards with slide effect
+    document.querySelectorAll('.case-study-card').forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(-50px)';
+        card.style.transition = `all 0.8s ease-out ${index * 0.15}s`;
+        observer.observe(card);
+    });
+
+    // Animate logo items with stagger
+    document.querySelectorAll('.logo-item').forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.8)';
+        item.style.transition = `all 0.4s ease-out ${index * 0.03}s`;
+        observer.observe(item);
+    });
+
+    // Add purple card glow effects
+    document.querySelectorAll('.purple-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.boxShadow = '0 25px 50px rgba(139, 92, 246, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.3)';
+            card.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.boxShadow = '0 15px 35px rgba(139, 92, 246, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.15)';
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
+
+// Counter animation for statistics
+function initCounterAnimations() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = counter.textContent;
+                let current = 0;
+                
+                // Extract number from text
+                const match = target.match(/(\d+)/);
+                if (match) {
+                    const targetNum = parseInt(match[1]);
+                    const increment = Math.max(targetNum / 50, 1);
+                    const suffix = target.replace(/\d+/, '');
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= targetNum) {
+                            counter.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(current) + suffix;
+                        }
+                    }, 30);
+                }
+                
+                counterObserver.unobserve(counter);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => {
+        counterObserver.observe(counter);
+    });
+}
