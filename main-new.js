@@ -385,6 +385,23 @@ function initEnhancedAnimations() {
         observer.observe(item);
     });
 
+    // Animate Why Companeeds section elements
+    document.querySelectorAll('.why-feature-card').forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px) scale(0.95)';
+        card.style.transition = `all 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.2}s`;
+        observer.observe(card);
+    });
+
+    // Animate guarantee section with special effect
+    const guaranteeSection = document.querySelector('.confidence-guarantee');
+    if (guaranteeSection) {
+        guaranteeSection.style.opacity = '0';
+        guaranteeSection.style.transform = 'scale(0.9)';
+        guaranteeSection.style.transition = 'all 1s cubic-bezier(0.22, 1, 0.36, 1)';
+        observer.observe(guaranteeSection);
+    }
+
     // Add purple card glow effects
     document.querySelectorAll('.purple-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
