@@ -1025,6 +1025,12 @@ body {
     color: var(--white) !important;
 }
 
+/* Black highlight styling */
+.black-highlight {
+    color: #000000 !important;
+    font-weight: 700;
+}
+
 .why-solution {
     font-size: 1.125rem;
     line-height: 1.7;
