@@ -104,6 +104,15 @@
     }
 }
 
+@keyframes movingGradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
 /* Enhanced Royal Purple Cards with Moving Gradients */
 .royal-purple-card {
     background: linear-gradient(-45deg, #663399, #4c1d95, #3c1361, #7c3aed, #8b5cf6) !important;
@@ -199,32 +208,32 @@
     transform: translateX(0) rotateY(0deg);
 }
 
-/* DIVINE OUTER SPACE PORTAL EFFECTS */
+/* DIVINE OUTER SPACE PORTAL EFFECTS - PURELY PURPLE */
 .hero-section {
-    background: linear-gradient(-45deg, #0f0f23, #1a0033, #2d1b69, #663399, #4c1d95, #7c3aed, #8b5cf6) !important;
+    background: linear-gradient(-45deg, #1a0033, #2d1b69, #663399, #4c1d95, #7c3aed, #8b5cf6, #a855f7) !important;
     background-size: 400% 400% !important;
-    animation: cosmicGradient 20s ease infinite !important;
+    animation: purpleCosmicGradient 20s ease infinite !important;
     position: relative !important;
     overflow: hidden !important;
 }
 
-/* Enhanced Cosmic Background Animation */
-@keyframes cosmicGradient {
+/* Enhanced Purple Cosmic Background Animation */
+@keyframes purpleCosmicGradient {
     0%, 100% {
         background-position: 0% 50%;
-        filter: hue-rotate(0deg) brightness(1);
+        brightness: 1;
     }
     25% {
         background-position: 100% 50%;
-        filter: hue-rotate(90deg) brightness(1.2);
+        brightness: 1.2;
     }
     50% {
         background-position: 100% 100%;
-        filter: hue-rotate(180deg) brightness(0.8);
+        brightness: 0.8;
     }
     75% {
         background-position: 0% 100%;
-        filter: hue-rotate(270deg) brightness(1.1);
+        brightness: 1.1;
     }
 }
 
@@ -256,7 +265,7 @@
     }
 }
 
-/* QUANTUM STAR FIELD - 10X ENHANCED */
+/* QUANTUM STAR FIELD - 10X ENHANCED PURELY PURPLE */
 .hero-section::after {
     content: '';
     position: absolute;
@@ -265,36 +274,36 @@
     width: 100%;
     height: 100%;
     background-image: 
-        /* Large pulsing stars */
+        /* Large pulsing purple stars */
         radial-gradient(3px 3px at 15px 25px, rgba(255, 255, 255, 0.9), transparent),
         radial-gradient(2px 2px at 45px 65px, rgba(139, 92, 246, 0.8), transparent),
         radial-gradient(4px 4px at 85px 35px, rgba(255, 255, 255, 0.7), transparent),
         radial-gradient(2px 2px at 125px 75px, rgba(123, 58, 237, 0.8), transparent),
-        radial-gradient(3px 3px at 165px 25px, rgba(255, 255, 255, 0.6), transparent),
-        radial-gradient(1px 1px at 185px 55px, rgba(199, 125, 255, 0.9), transparent),
+        radial-gradient(3px 3px at 165px 25px, rgba(168, 85, 247, 0.6), transparent),
+        radial-gradient(1px 1px at 185px 55px, rgba(147, 51, 234, 0.9), transparent),
         
-        /* Medium twinkling stars */
+        /* Medium twinkling purple stars */
         radial-gradient(2px 2px at 30px 15px, rgba(255, 255, 255, 0.5), transparent),
         radial-gradient(1px 1px at 70px 45px, rgba(255, 255, 255, 0.7), transparent),
         radial-gradient(2px 2px at 110px 15px, rgba(139, 92, 246, 0.6), transparent),
-        radial-gradient(1px 1px at 150px 55px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 150px 55px, rgba(196, 181, 253, 0.5), transparent),
         radial-gradient(2px 2px at 190px 85px, rgba(123, 58, 237, 0.7), transparent),
         
-        /* Small distant stars */
+        /* Small distant purple stars */
         radial-gradient(1px 1px at 25px 85px, rgba(255, 255, 255, 0.4), transparent),
-        radial-gradient(1px 1px at 65px 25px, rgba(255, 255, 255, 0.3), transparent),
-        radial-gradient(1px 1px at 105px 85px, rgba(199, 125, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 65px 25px, rgba(167, 139, 250, 0.3), transparent),
+        radial-gradient(1px 1px at 105px 85px, rgba(147, 51, 234, 0.5), transparent),
         radial-gradient(1px 1px at 145px 25px, rgba(255, 255, 255, 0.4), transparent),
         radial-gradient(1px 1px at 175px 65px, rgba(139, 92, 246, 0.5), transparent);
     
     background-repeat: repeat;
     background-size: 200px 100px;
-    animation: quantumStarField 25s linear infinite, starTwinkle 3s ease-in-out infinite alternate;
+    animation: purpleStarField 25s linear infinite, purpleStarTwinkle 3s ease-in-out infinite alternate;
     pointer-events: none;
     z-index: 2;
 }
 
-@keyframes quantumStarField {
+@keyframes purpleStarField {
     0% { 
         transform: translate(0, 0) rotate(0deg); 
         opacity: 0.8;
@@ -317,10 +326,16 @@
     }
 }
 
-@keyframes starTwinkle {
-    0% { filter: brightness(1) blur(0px); }
-    50% { filter: brightness(1.5) blur(0.5px); }
-    100% { filter: brightness(1) blur(0px); }
+@keyframes purpleStarTwinkle {
+    0% { 
+        filter: brightness(1) blur(0px) saturate(1);
+    }
+    50% { 
+        filter: brightness(1.5) blur(0.5px) saturate(1.2);
+    }
+    100% { 
+        filter: brightness(1) blur(0px) saturate(1);
+    }
 }
 
 /* DIVINE QUANTUM BREATHING EFFECT */
@@ -440,11 +455,11 @@
     }
 }
 
-/* Enhanced Button Animations */
+/* Enhanced Purple Button Animations */
 .cta-button, .btn-primary, .get-started-btn, .guarantee-btn {
-    background: linear-gradient(-45deg, #663399, #4c1d95, #7c3aed, #8b5cf6) !important;
+    background: linear-gradient(-45deg, #663399, #4c1d95, #7c3aed, #8b5cf6, #a855f7) !important;
     background-size: 400% 400% !important;
-    animation: movingGradient 6s ease infinite !important;
+    animation: purpleMovingGradient 6s ease infinite !important;
     position: relative !important;
     overflow: hidden !important;
     transform-style: preserve-3d !important;
@@ -555,14 +570,14 @@ html {
     scroll-behavior: smooth;
 }
 
-/* COSMIC TEXT EFFECTS */
+/* COSMIC TEXT EFFECTS - PURELY PURPLE */
 .cosmic-text {
-    background: linear-gradient(45deg, #ffffff, #c7ddff, #a5b4fc, #8b5cf6);
+    background: linear-gradient(45deg, #ffffff, #e9d5ff, #c4b5fd, #a78bfa, #8b5cf6);
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: cosmicTextGlow 8s ease-in-out infinite;
+    animation: purpleTextGlow 8s ease-in-out infinite;
     text-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
 }
 
@@ -572,7 +587,7 @@ html {
     animation: subtleGlow 6s ease-in-out infinite;
 }
 
-@keyframes cosmicTextGlow {
+@keyframes purpleTextGlow {
     0%, 100% { 
         background-position: 0% 50%;
         filter: brightness(1);
