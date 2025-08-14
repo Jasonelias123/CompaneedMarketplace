@@ -9,6 +9,8 @@ Companeeds is a premium AI talent matching platform, positioned as "Toptal for A
 Preferred communication style: Simple, everyday language.
 Design preference: Perfect symmetry is mandatory - exact visual balance required in all sections.
 Royal purple styling: Four individual content boxes (Vetted AI Technologies, Proven Results, Done For You, Reality Reprogrammed) must have royal purple backgrounds with white text and glossy premium effects.
+Content highlighting: Strategic purple bold highlighting applied to key value propositions throughout sections including "trust", "go", "actually work", "boost revenue", "save time", "focus", "effortless", "guaranteed", "most powerful", "rigorously", "customized", "measurable outcomes", "implementation", "transform", "business operates".
+Brand logos: Comprehensive trusted brands section featuring 20 specific logos from prestigious companies including Netflix, UPS, NBA, Headspace, Stryker, Equinox, and others using exact CDN URLs.
 
 ## System Architecture
 
