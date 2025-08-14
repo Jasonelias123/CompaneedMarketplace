@@ -1005,6 +1005,11 @@ body {
     font-weight: 700;
 }
 
+.why-main-description strong {
+    color: var(--cosmic-purple);
+    font-weight: 700;
+}
+
 /* Mobile responsive for logos */
 @media (max-width: 768px) {
     .logos-grid-large {
