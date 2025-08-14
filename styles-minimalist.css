@@ -984,11 +984,16 @@ body {
 .why-question {
     font-size: 1.125rem;
     line-height: 1.6;
-    color: var(--cosmic-purple);
+    color: var(--white);
     font-style: italic;
     max-width: 700px;
     margin: 0 auto 2rem;
     text-align: center;
+}
+
+.highlight-word {
+    color: var(--cosmic-purple);
+    font-weight: 700;
 }
 
 .why-solution {
