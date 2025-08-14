@@ -1,0 +1,113 @@
+REPLIT FULL FIX PROMPT — RESTORE + LOCK COPY, KEEP UPGRADES, CLEAN PORTAL RING
+
+Goal:
+
+Revert all site text copy to the version it had immediately before the last AI changed it.
+
+Lock that copy so no automated edits change it again.
+
+Preserve all design/motion upgrades already added.
+
+Replace the current messy portal ring with a clean, elegant, high-end halo.
+
+Keep colors, animations, and styling consistent across the entire site.
+
+1) Restore Original Copy
+
+Use Replit History/Checkpoints (or git log) to locate the checkpoint immediately before the copy was changed.
+
+In index.html (and any partials), replace only text content with the checkpoint version.
+
+Hero headline, subheadline, CTA, and microcopy.
+
+“Why Companeeds” section (card titles/descriptions).
+
+“Trusted By” heading and fine print.
+
+“The Process” step titles/descriptions.
+
+Final CTA heading, button text, and microcopy.
+
+Do not alter the current HTML structure, CSS classes, IDs, or animation hooks — only revert the text.
+
+2) Lock Copy
+
+Add data-lock-copy="true" to each text-bearing element that was restored.
+
+In main.js, add a safeguard:
+
+document.querySelectorAll('[data-lock-copy="true"]').forEach(el => {
+  const originalText = el.innerText;
+  const observer = new MutationObserver(() => {
+    if (el.innerText !== originalText) {
+      el.innerText = originalText;
+      console.warn(`Blocked copy change on locked element: ${el}`);
+    }
+  });
+  observer.observe(el, { characterData: true, subtree: true, childList: true });
+});
+
+
+This prevents future automated changes to the text.
+
+3) Replace Portal Ring
+
+Remove the current messy portal ring implementation.
+
+Replace with a premium halo effect:
+
+Thin (1–2px) circular stroke in royal-purple gradient (#6C4CFF → #5B36FF).
+
+Subtle outer glow via blur.
+
+Faint inner radial gradient (5–8% opacity).
+
+Smooth breathing animation: 0.5–1% scale change over 6–8s with ease-in-out.
+
+No rotation, wobble, or jagged edges.
+
+Perfectly centered around the hero headline + CTA; always fully visible on all screen sizes.
+
+On mobile, scale proportionally but maintain spacing from text.
+
+Performance-friendly (GPU-accelerated transform + minimal layers).
+
+4) Keep All Visual & Motion Upgrades
+
+Maintain:
+
+Starfield background (3 depth layers, subtle drift, occasional constellation lines).
+
+Navbar/logo behavior (sticky, transparent over hero, blurred purple background after scroll, white ↔ deep purple wordmark).
+
+Rocket twinkle every ~10s.
+
+GSAP section reveals, parallax, and smooth scroll.
+
+Glassmorphism process cards with SVG icons (no emojis).
+
+Final CTA identical in style to hero CTA.
+
+5) Color Discipline
+
+Only use royal-purple palette (#6C4CFF, #5B36FF, #3A1CCC) + space black (#0A0420).
+
+Remove all off-brand hues.
+
+Keep gradient + glow identical across hero and final CTA.
+
+6) Accessibility & Performance
+
+Keep all alt text, aria labels, and keyboard navigation.
+
+Respect prefers-reduced-motion: disable parallax/animations while keeping design intact.
+
+Optimize canvas rendering for 60fps.
+
+Execute now, and when done:
+
+Provide a side-by-side screenshot of the restored copy and current visuals for final approval.
+
+Confirm the halo effect is clean, centered, and minimal.
+
+Verify that no copy changes are possible without removing data-lock-copy.

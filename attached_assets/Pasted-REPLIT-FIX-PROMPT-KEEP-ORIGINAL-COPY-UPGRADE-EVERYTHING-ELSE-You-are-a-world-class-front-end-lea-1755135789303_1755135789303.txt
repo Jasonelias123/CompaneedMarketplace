@@ -1,0 +1,73 @@
+REPLIT FIX PROMPT — KEEP ORIGINAL COPY, UPGRADE EVERYTHING ELSE
+
+You are a world-class front-end lead. Do not change any copy — keep every headline, subheadline, button label, section text, and microcopy exactly as it was before the last AI changed it. Only upgrade design, motion, and polish.
+
+1) Hero / Page 1
+
+Replace messy thick circle with refined portal ring:
+
+Thin (1–2px) glowing stroke in royal-purple gradient (#6C4CFF → #5B36FF).
+
+Outer blur glow + subtle inner halo (radial gradient).
+
+Smooth, slow pulse (0.6–1% scale change) using GSAP — no wobble.
+
+Ensure perfectly centered and never cropped on any screen size.
+
+Starfield: keep original white-dot background, reduce density by ~25%, slow drift for calmer look.
+
+Maintain original hero copy exactly as written. Keep same CTA and subcopy.
+
+Keep original reassurance/microcopy exactly as before.
+
+Navbar + logo:
+
+Logo/wordmark back in navbar (top-left), sticky.
+
+Transparent over hero; after 120px scroll → blurred translucent background with slight darkening; wordmark shifts white ↔ deep purple depending on section tone.
+
+Subtle idle float on logo + rocket twinkle every ~10s.
+
+2) Color Discipline
+
+Only use royal-purple gradient family (#6C4CFF / #5B36FF / #3A1CCC) with black-to-space backgrounds (#0A0420).
+
+Remove all off-brand hues and color shifts.
+
+Final CTA must exactly match hero CTA in color, glow, and hover animation.
+
+3) Section Visuals (Copy Untouched)
+
+Why Companeeds: Keep all original text. Replace any emojis with small inline SVG line-icons in purple gradient. Maintain original card order and wording.
+
+Trusted By: Keep headline, fine print, and logos as before. Make logos grayscale with shimmer hover; maintain fine print placement.
+
+Process: Keep original copy. Replace Apple emojis with matching SVG line-icons (mic, diagram, boost). Glassmorphism cards with hover lift and tiny sparkle effects. Add subtle scroll-activated comet progress line across steps.
+
+Final CTA: Keep all text exactly as before. Make styling identical to hero CTA.
+
+4) Motion & Performance
+
+Use GSAP for: portal pulse, smooth section reveals, navbar transitions.
+
+Canvas for starfield; occasional subtle constellation lines.
+
+Smooth scroll between sections; fade-up + small translate reveal animations.
+
+Respect prefers-reduced-motion: disable parallax/pulse in reduced mode.
+
+Target 60fps; optimize particle rendering.
+
+5) Accessibility
+
+Keep all current alt text, aria labels, and keyboard accessibility intact.
+
+Voice Agent modal remains fully accessible, with focus trapping and ESC close.
+
+DO NOT change:
+
+Any section copy, headline, subheadline, CTA text, bullet points, or microcopy.
+
+Section order or structure (just refine visuals).
+
+Implement these upgrades now while preserving every word exactly as it currently exists.
