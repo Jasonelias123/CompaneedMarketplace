@@ -1,0 +1,155 @@
+PROMPT FOR REPLIT WEB ASSISTANT — EXECUTE
+
+You are a world-class front-end lead. Take the current Companeeds landing and make it a minimalist, conversion-maximal cosmic portal. Maintain purity (one clear path → “Get Started” voice agent), but elevate motion, polish, and consistency to god-tier. Keep the brand royal purple only—no multicolor gradients.
+
+0) Non-negotiables to restore/fix
+
+Navbar/Logo: Logo + “Companeeds” back inside the navbar (top-left), sticky, smooth color-change on scroll (transparent over hero → blurred, slightly darker translucent bar after 120px). Wordmark shifts white ↔ deep purple based on section tone. Re-enable subtle idle float and micro-parallax on the logo. Rocket icon twinkles every ~10s.
+
+Purple Integrity: All animated backgrounds remain royal purple family only (#6C4CFF / #5B36FF / #3A1CCC). No rainbow/other hues.
+
+Final CTA: Color, shadows, and glow match the hero CTA exactly (same gradient, same hover, same icon animation).
+
+Remove Apple emojis in the Process section. Replace with clean inline SVG line-icons (custom or lucide-style) in our purple palette.
+
+1) Information Architecture (single page)
+
+Hero / Portal Gate
+
+Headline (keep): “We’ve Got Exactly What You Need”
+
+Subheadline (tight, centered): “Tell us about your business — our AI will take it from there.”
+
+Big primary CTA (rocket): Get Started → opens Voice Agent modal.
+
+Background: layered starfield (3 depths), subtle parallax on mouse, portal ring behind headline (soft pulse/shimmer).
+
+Micro link under CTA: “How it works ↓” smooth-scrolls to Process.
+
+Why Companeeds (+ 30-day promise)
+
+3 minimal value cards:
+
+Cut Through the Noise — We’ve already vetted the best AI.
+
+Real Results, Fast — We install, measure, iterate.
+
+Scale or You Don’t Pay — 30-day prove-it pilot.
+
+Beneath cards: thin, elegant box with the 30-day message, small lock icon, and mini trust bullets:
+
+No credit card required · 30 days free · Real results guaranteed
+
+Trusted By (logos)
+
+Title: “AI systems trusted by teams our tech has served”
+
+Grayscale logos with soft hover shimmer; accessible alt text.
+
+Add a fine-print line below in 11–12px: “Logos represent teams served directly or via our implementation partners.”
+
+The Process (3 steps) — no emojis
+
+Step 1 — Speak to the Agent (mic SVG): Tell us goals, bottlenecks, stack.
+
+Step 2 — Map Your AI Stack (diagram SVG): Vetted tools + custom automations.
+
+Step 3 — Pilot → Scale (boost SVG): 30-day pilot; keep only what moves the needle.
+
+Each card: glassmorphism panel, soft lift on hover, tiny star-sparkles that appear + fade (subtle).
+
+Add a thin scroll-progress comet line that advances across the three steps while in view.
+
+Final CTA (mirror the hero)
+
+Dark purple galaxy background (same family as hero).
+
+Headline: “Ready to jump timelines?”
+
+CTA: Get Started (identical style/animation/behavior as hero).
+
+Beneath: “No pressure. No fluff. Just results.”
+
+2) Motion & Physics (tasteful, performant)
+
+Use GSAP (vanilla JS) for timelines + ScrollTrigger. Respect prefers-reduced-motion.
+
+Starfield: HTML <canvas> with 3 layers (different speed/blur/size). Occasional faint constellation lines connect nearby stars, then fade.
+
+Parallax: hero starfield + portal ring (1–2% translation), navbar logo micro-float.
+
+Section reveals: fade-up + 4–6px translate, 250–350ms, 30ms stagger.
+
+Color-adaptive navbar: compute section tone; switch wordmark color (white on dark, deep purple on light). No hard jumps.
+
+3) Design System (lock it in)
+
+Colors:
+
+Primary Purple #6C4CFF; Deep Purple #5B36FF; Space #0A0420; Accent depth #3A1CCC.
+
+Gradients stay within this family only.
+
+Typography: Sora or Inter for headings (800), Inter for body (17–18px). Tight hero LH, generous body spacing.
+
+Buttons: pill shape, soft outer glow, rocket thrust flicker on hover.
+
+Containers: max-width 1140–1200px; huge breathing room; plenty of negative space.
+
+4) Voice Agent (CTA behavior)
+
+Modal: glass panel with star drift behind; focus-trapped, ESC to close; keyboard accessible.
+
+Big mic button → request mic. If unavailable, simulate transcript.
+
+Guided prompts (short): company name, industry, biggest bottleneck, success metric, current tools.
+
+End state: “Thanks — we’re preparing your tailored plan” + scheduler link placeholder.
+
+All copy minimal and reassuring.
+
+5) Accessibility & Performance
+
+Respect prefers-reduced-motion; provide reduced-motion mode (no parallax; static star backdrop).
+
+Optimize canvas (requestAnimationFrame; throttle when offscreen).
+
+IntersectionObserver for reveals; no jQuery.
+
+Lighthouse desktop ≥ 90.
+
+6) Files to touch
+
+index.html (structure & modal)
+
+styles.css (tokens, layout, glass panels, navbar states)
+
+main.js (GSAP timelines, ScrollTrigger, starfield engine, navbar color sync, voice agent modal)
+
+/assets/icons/*.svg (mic, diagram, boost, lock, rocket)
+
+/assets/logos/* (client logo placeholders)
+
+7) Acceptance checklist (must pass)
+
+ Navbar/Logo restored inside navbar; sticky; idle float; color-change on scroll works on all sections.
+
+ Entire site stays in royal purple gradient family (no off-brand colors).
+
+ Final CTA visually identical to hero CTA (gradient, glow, hover).
+
+ Process icons are SVGs, not Apple emojis.
+
+ Hero portal ring pulse + layered starfield parallax at 60fps (desktop).
+
+ Voice Agent modal opens from both CTAs, accessible & focus-trapped.
+
+ Trusted-by row with grayscale logos, shimmer hover, alt text, and fine-print.
+
+ Reduced-motion mode removes parallax/constellations but keeps function.
+
+ Smooth scroll, tasteful reveals, constellation micro-lines appear occasionally.
+
+Implement now in the existing project and keep copy concise and premium.
+
+END PROMPT

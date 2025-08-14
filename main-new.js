@@ -1,0 +1,347 @@
+// Minimalist Cosmic Portal JavaScript
+// Handles starfield, portal ring animations, and voice agent modal
+
+class StarfieldRenderer {
+    constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) return;
+        
+        this.ctx = this.canvas.getContext('2d');
+        this.stars = [];
+        this.numStars = 200;
+        this.resizeCanvas();
+        this.createStars();
+        this.animate();
+        
+        window.addEventListener('resize', () => this.resizeCanvas());
+    }
+    
+    resizeCanvas() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+    
+    createStars() {
+        this.stars = [];
+        for (let i = 0; i < this.numStars; i++) {
+            this.stars.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                radius: Math.random() * 2 + 0.5,
+                opacity: Math.random() * 0.8 + 0.2,
+                twinkleSpeed: Math.random() * 0.02 + 0.01,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
+    }
+    
+    updateStars() {
+        this.stars.forEach(star => {
+            star.phase += star.twinkleSpeed;
+            star.opacity = 0.3 + Math.sin(star.phase) * 0.5;
+        });
+    }
+    
+    drawStars() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.stars.forEach(star => {
+            this.ctx.beginPath();
+            this.ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+            this.ctx.fillStyle = `rgba(139, 92, 246, ${star.opacity})`;
+            this.ctx.fill();
+            
+            // Add subtle glow effect
+            this.ctx.shadowBlur = 10;
+            this.ctx.shadowColor = '#8b5cf6';
+            this.ctx.fill();
+            this.ctx.shadowBlur = 0;
+        });
+    }
+    
+    animate() {
+        this.updateStars();
+        this.drawStars();
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+class VoiceAgentModal {
+    constructor() {
+        this.modal = document.getElementById('voice-modal');
+        this.closeBtn = document.getElementById('modal-close');
+        this.micButton = document.getElementById('mic-button');
+        this.nextButton = document.getElementById('next-button');
+        this.finishButton = document.getElementById('finish-button');
+        this.currentStep = 1;
+        this.maxSteps = 5;
+        this.isListening = false;
+        
+        this.setupEventListeners();
+    }
+    
+    setupEventListeners() {
+        // CTA buttons open modal
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.cta-button, #hero-cta, #final-cta')) {
+                e.preventDefault();
+                this.openModal();
+            }
+        });
+        
+        // Close modal
+        this.closeBtn?.addEventListener('click', () => this.closeModal());
+        this.modal?.addEventListener('click', (e) => {
+            if (e.target === this.modal) this.closeModal();
+        });
+        
+        // Next step
+        this.nextButton?.addEventListener('click', () => this.nextStep());
+        
+        // Finish setup
+        this.finishButton?.addEventListener('click', () => this.finishSetup());
+        
+        // Microphone toggle
+        this.micButton?.addEventListener('click', () => this.toggleMicrophone());
+        
+        // Auto-advance on input
+        this.setupAutoAdvance();
+    }
+    
+    setupAutoAdvance() {
+        const inputs = document.querySelectorAll('.question-step input, .question-step textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.value.trim().length > 0) {
+                    setTimeout(() => this.nextStep(), 1000);
+                }
+            });
+        });
+    }
+    
+    openModal() {
+        this.modal?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        this.createModalStars();
+    }
+    
+    closeModal() {
+        this.modal?.classList.remove('active');
+        document.body.style.overflow = '';
+        this.currentStep = 1;
+        this.updateStep();
+    }
+    
+    createModalStars() {
+        const starsContainer = document.querySelector('.modal-stars');
+        if (!starsContainer) return;
+        
+        starsContainer.innerHTML = '';
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'modal-star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+    
+    nextStep() {
+        if (this.currentStep < this.maxSteps) {
+            this.currentStep++;
+            this.updateStep();
+        }
+    }
+    
+    updateStep() {
+        // Hide all steps
+        document.querySelectorAll('.question-step').forEach(step => {
+            step.classList.remove('active');
+        });
+        
+        // Show current step
+        const currentStepEl = document.querySelector(`[data-step="${this.currentStep}"]`);
+        currentStepEl?.classList.add('active');
+        
+        // Update button visibility
+        if (this.currentStep === this.maxSteps) {
+            this.nextButton.style.display = 'none';
+            this.finishButton.style.display = 'block';
+        } else {
+            this.nextButton.style.display = 'block';
+            this.finishButton.style.display = 'none';
+        }
+        
+        // Focus on input
+        const input = currentStepEl?.querySelector('input, textarea');
+        input?.focus();
+    }
+    
+    toggleMicrophone() {
+        this.isListening = !this.isListening;
+        const micStatus = document.querySelector('.mic-status');
+        
+        if (this.isListening) {
+            this.micButton.classList.add('listening');
+            micStatus.textContent = 'Listening...';
+            this.startSpeechRecognition();
+        } else {
+            this.micButton.classList.remove('listening');
+            micStatus.textContent = 'Click to speak';
+            this.stopSpeechRecognition();
+        }
+    }
+    
+    startSpeechRecognition() {
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            this.recognition = new SpeechRecognition();
+            this.recognition.continuous = true;
+            this.recognition.interimResults = true;
+            
+            this.recognition.onresult = (event) => {
+                const result = event.results[event.results.length - 1];
+                if (result.isFinal) {
+                    const activeInput = document.querySelector('.question-step.active input, .question-step.active textarea');
+                    if (activeInput) {
+                        activeInput.value = result[0].transcript;
+                        setTimeout(() => this.nextStep(), 1500);
+                    }
+                }
+            };
+            
+            this.recognition.onerror = () => {
+                this.isListening = false;
+                this.micButton.classList.remove('listening');
+                document.querySelector('.mic-status').textContent = 'Click to speak';
+            };
+            
+            this.recognition.start();
+        } else {
+            alert('Speech recognition not supported in your browser');
+            this.isListening = false;
+            this.micButton.classList.remove('listening');
+        }
+    }
+    
+    stopSpeechRecognition() {
+        if (this.recognition) {
+            this.recognition.stop();
+        }
+    }
+    
+    finishSetup() {
+        // Collect all form data
+        const formData = {};
+        document.querySelectorAll('.question-step').forEach((step, index) => {
+            const input = step.querySelector('input, textarea');
+            if (input) {
+                const label = step.querySelector('label').textContent.replace(':', '');
+                formData[label] = input.value;
+            }
+        });
+        
+        console.log('Form data collected:', formData);
+        
+        // Show success message
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.innerHTML = `
+            <div class="modal-success">
+                <div class="success-icon">🚀</div>
+                <h3>Setup Complete!</h3>
+                <p>We're analyzing your requirements and will be in touch within 24 hours.</p>
+                <button class="close-success-btn" onclick="document.getElementById('voice-modal').classList.remove('active'); document.body.style.overflow = '';">
+                    Close
+                </button>
+            </div>
+        `;
+        
+        // Simulate redirect to intake form after delay
+        setTimeout(() => {
+            window.location.href = 'company-intake-toptal.html';
+        }, 3000);
+    }
+}
+
+// Portal ring animation
+class PortalRing {
+    constructor() {
+        this.ring = document.querySelector('.portal-ring');
+        if (!this.ring) return;
+        
+        this.animateRing();
+    }
+    
+    animateRing() {
+        let rotation = 0;
+        const animate = () => {
+            rotation += 0.5;
+            this.ring.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+            requestAnimationFrame(animate);
+        };
+        animate();
+    }
+}
+
+// Smooth scroll for navigation links
+function initSmoothScroll() {
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (link) {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    });
+}
+
+// Progress comet animation
+function initProgressComet() {
+    const comet = document.querySelector('.progress-comet');
+    if (!comet) return;
+    
+    const processSection = document.querySelector('.process-section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                comet.classList.add('animate');
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    observer.observe(processSection);
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize starfields
+    new StarfieldRenderer('starfield');
+    new StarfieldRenderer('final-starfield');
+    
+    // Initialize portal ring
+    new PortalRing();
+    
+    // Initialize voice agent modal
+    new VoiceAgentModal();
+    
+    // Initialize smooth scrolling
+    initSmoothScroll();
+    
+    // Initialize progress comet
+    initProgressComet();
+    
+    // Add cosmic breathing effect to hero
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.classList.add('cosmic-breathing');
+    }
+    
+    console.log('🚀 Cosmic Portal initialized');
+});
