@@ -1005,6 +1005,21 @@ body {
     filter: grayscale(0%) brightness(1.1) !important;
 }
 
+/* Logo image styling for trusted brands section */
+.logo-img {
+    max-width: 120px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    filter: grayscale(0%) brightness(1) !important;
+    transition: all 0.3s ease;
+}
+
+.logo-img:hover {
+    filter: grayscale(0%) brightness(1.1) !important;
+    transform: scale(1.05);
+}
+
 .why-solution {
     font-size: 1.125rem;
     line-height: 1.7;
