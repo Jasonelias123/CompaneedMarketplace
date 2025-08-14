@@ -922,6 +922,82 @@ body {
     background: #f8fafc;
 }
 
+/* Trusted By Section */
+.trusted-by-section {
+    padding: 6rem 0;
+    background: 
+        radial-gradient(circle at 70% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 30% 70%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+    position: relative;
+}
+
+.trusted-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--white-muted);
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.trusted-logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 3rem;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 3rem;
+}
+
+.trusted-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s var(--ease-out-cubic);
+    backdrop-filter: blur(10px);
+    min-height: 80px;
+}
+
+.trusted-logo-item:hover {
+    transform: translateY(-4px) scale(1.05);
+    border-color: rgba(139, 92, 246, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 15px 30px rgba(139, 92, 246, 0.2),
+        0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+.trusted-logo {
+    max-width: 120px;
+    max-height: 50px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    filter: brightness(1) saturate(1);
+}
+
+.trusted-logo-item:hover .trusted-logo {
+    filter: brightness(1.1) saturate(1.1);
+}
+
+.trusted-disclaimer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.4;
+}
+
 .logo-item {
     display: flex;
     align-items: center;
@@ -1395,6 +1471,16 @@ body {
     .why-features-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
+    }
+    
+    .trusted-logos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .trusted-logo {
+        max-width: 100px;
+        max-height: 40px;
     }
     
     .modal-content {

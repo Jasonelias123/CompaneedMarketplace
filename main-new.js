@@ -385,6 +385,14 @@ function initEnhancedAnimations() {
         observer.observe(item);
     });
 
+    // Animate trusted logo items with stagger
+    document.querySelectorAll('.trusted-logo-item').forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px) scale(0.9)';
+        item.style.transition = `all 0.5s ease-out ${index * 0.08}s`;
+        observer.observe(item);
+    });
+
     // Animate Why Companeeds section elements
     document.querySelectorAll('.why-feature-card').forEach((card, index) => {
         card.style.opacity = '0';
