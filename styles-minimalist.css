@@ -1020,6 +1020,11 @@ body {
     transform: scale(1.05);
 }
 
+/* White text styling */
+.white-text {
+    color: var(--white) !important;
+}
+
 .why-solution {
     font-size: 1.125rem;
     line-height: 1.7;
