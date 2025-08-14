@@ -996,6 +996,15 @@ body {
     font-weight: 700;
 }
 
+/* Override client-logo styling to show full colors */
+.client-logo {
+    filter: grayscale(0%) brightness(1) !important;
+}
+
+.client-logo:hover {
+    filter: grayscale(0%) brightness(1.1) !important;
+}
+
 .why-solution {
     font-size: 1.125rem;
     line-height: 1.7;
