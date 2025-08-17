@@ -1205,6 +1205,52 @@ body {
     font-size: 1rem;
 }
 
+/* Bridge Section */
+.bridge-section {
+    padding: var(--section-padding);
+    position: relative;
+    text-align: center;
+    background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bridge-headline {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--white), var(--cosmic-purple-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.bridge-subline {
+    color: var(--white-muted);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.bridge-supporting {
+    color: var(--cosmic-purple-light);
+    font-size: 1.125rem;
+    font-style: italic;
+    font-weight: 600;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 3px rgba(139, 92, 246, 0.3);
+}
+
 /* Final CTA Section */
 .final-cta-section {
     padding: var(--section-padding);

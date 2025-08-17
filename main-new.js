@@ -320,6 +320,7 @@ function initProgressComet() {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize starfields
     new StarfieldRenderer('starfield');
+    new StarfieldRenderer('bridge-starfield');
     new StarfieldRenderer('final-starfield');
     
     // Initialize portal ring
