@@ -58,35 +58,19 @@ body {
     padding: 0 2rem;
 }
 
-/* Navbar */
-.navbar {
+/* Floating Brand */
+.floating-brand {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 2rem;
+    left: 2rem;
     z-index: 1000;
-    background: rgba(10, 10, 15, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--glass-border);
-    transition: all 0.3s var(--ease-out-cubic);
-}
-
-.nav-container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-}
-
-.brand-logo {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     transition: transform 0.3s ease;
 }
 
-.brand-logo:hover {
+.floating-brand:hover {
     transform: scale(1.05);
 }
 
