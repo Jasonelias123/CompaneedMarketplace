@@ -83,7 +83,9 @@ class VoiceAgentModal {
     setupEventListeners() {
         // CTA buttons open modal
         document.addEventListener('click', (e) => {
-            if (e.target.closest('.cta-button, #hero-cta, #final-cta')) {
+            const clickedElement = e.target.closest('.cta-button, #hero-cta, #final-cta');
+            if (clickedElement) {
+                console.log('Button clicked:', clickedElement.id || clickedElement.className);
                 e.preventDefault();
                 this.openModal();
             }
@@ -120,9 +122,14 @@ class VoiceAgentModal {
     }
     
     openModal() {
-        this.modal?.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        this.createModalStars();
+        console.log('Opening modal, modal element:', this.modal);
+        if (this.modal) {
+            this.modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            this.createModalStars();
+        } else {
+            console.error('Modal element not found!');
+        }
     }
     
     closeModal() {
