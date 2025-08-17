@@ -232,7 +232,7 @@ body {
 .rocket-emoji {
     font-size: 1.25rem;
     animation: bounce 2s ease-in-out infinite;
-    color: white;
+    filter: brightness(0) invert(1);
 }
 
 @keyframes bounce {
