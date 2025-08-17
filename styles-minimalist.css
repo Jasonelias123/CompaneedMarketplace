@@ -1230,7 +1230,7 @@ body {
 }
 
 .bridge-subline {
-    color: var(--white-muted);
+    color: var(--white);
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     max-width: 800px;
