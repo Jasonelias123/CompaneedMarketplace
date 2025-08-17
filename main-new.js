@@ -257,10 +257,7 @@ class VoiceAgentModal {
             </div>
         `;
         
-        // Simulate redirect to intake form after delay
-        setTimeout(() => {
-            window.location.href = 'company-intake-toptal.html';
-        }, 3000);
+        // Form completed successfully - no redirect needed
     }
 }
 
@@ -456,3 +453,18 @@ function initCounterAnimations() {
         counterObserver.observe(counter);
     });
 }
+
+// Initialize all components when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Cosmic Portal initialized');
+    
+    // Initialize all components
+    new VoiceAgentModal();
+    new PortalRing();
+    new StarField('hero-starfield', { density: 0.8, speed: 0.3 });
+    new StarField('final-starfield', { density: 1.2, speed: 0.5 });
+    
+    // Initialize animations
+    initScrollAnimations();
+    initCounterAnimations();
+});

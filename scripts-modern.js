@@ -285,7 +285,12 @@ window.goToRole = function(role) {
     // Navigate after short delay for visual feedback
     setTimeout(() => {
         if (role === 'company') {
-            window.location.href = 'company-intake-toptal.html';
+            // Open the voice modal instead of redirecting
+            const modal = document.getElementById('voice-modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         } else if (role === 'talent') {
             window.location.href = 'ai-talent-intake-toptal.html';
         }
