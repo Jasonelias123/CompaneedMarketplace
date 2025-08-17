@@ -989,6 +989,12 @@ body {
 }
 
 .highlight-word {
+    color: var(--cosmic-purple);
+    font-weight: 700;
+}
+
+/* Special highlighting for text inside purple cards */
+.why-feature-card .highlight-word {
     color: #ffffff;
     font-weight: 700;
     text-shadow: 
