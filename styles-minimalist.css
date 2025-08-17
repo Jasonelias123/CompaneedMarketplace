@@ -232,6 +232,7 @@ body {
 .rocket-emoji {
     font-size: 1.25rem;
     animation: bounce 2s ease-in-out infinite;
+    filter: grayscale(1) brightness(0) invert(1);
 }
 
 @keyframes bounce {
@@ -240,18 +241,7 @@ body {
     60% { transform: translateY(-2px); }
 }
 
-.how-it-works-link {
-    display: block;
-    margin-top: 2rem;
-    color: var(--white-muted);
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
 
-.how-it-works-link:hover {
-    color: var(--cosmic-purple-light);
-}
 
 .cosmic-breathing {
     animation: cosmicBreathe 4s ease-in-out infinite;
