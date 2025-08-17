@@ -94,15 +94,18 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-purple-dark));
+    background: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
 }
 
-.rocket-icon {
+.logo-letter {
     font-size: 18px;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--cosmic-purple);
 }
 
 .brand-text {
