@@ -390,6 +390,18 @@ body {
     margin-right: auto;
 }
 
+.partner-network-text {
+    text-align: center;
+    color: var(--white-muted);
+    font-size: 1.125rem;
+    margin-top: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    font-style: italic;
+}
+
 .why-content {
     margin-top: 4rem;
     text-align: center;
