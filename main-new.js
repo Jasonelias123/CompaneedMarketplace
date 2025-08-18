@@ -81,11 +81,11 @@ class VoiceAgentModal {
     }
     
     setupEventListeners() {
-        // CTA buttons open modal
+        // CTA buttons - hero opens modal, final redirects
         document.addEventListener('click', (e) => {
-            const clickedElement = e.target.closest('.cta-button, #hero-cta, #final-cta');
-            if (clickedElement) {
-                console.log('Button clicked:', clickedElement.id || clickedElement.className);
+            const clickedElement = e.target.closest('.cta-button, #hero-cta');
+            if (clickedElement && clickedElement.id !== 'final-cta') {
+                console.log('Hero button clicked:', clickedElement.id || clickedElement.className);
                 e.preventDefault();
                 this.openModal();
             }
@@ -353,28 +353,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (finalCtaButton) {
         console.log('Final CTA button found, adding multiple listeners');
         
-        // Method 1: Direct click
+        // Method 1: Direct click - redirect to signup
         finalCtaButton.onclick = function(e) {
-            console.log('ONCLICK TRIGGERED!');
+            console.log('FINAL CTA - Redirecting to signup');
             e.preventDefault();
             e.stopPropagation();
-            const modal = document.getElementById('voice-modal');
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            window.location.href = 'company-signup.html';
         };
         
-        // Method 2: Event listener
+        // Method 2: Event listener - redirect to signup  
         finalCtaButton.addEventListener('click', function(e) {
-            console.log('CLICK EVENT TRIGGERED!');
+            console.log('FINAL CTA - Redirecting to signup');
             e.preventDefault();
             e.stopPropagation();
-            const modal = document.getElementById('voice-modal');
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            window.location.href = 'company-signup.html';
         }, true);
         
         // Method 3: Force style cursor
