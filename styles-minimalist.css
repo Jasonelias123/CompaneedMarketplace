@@ -1260,8 +1260,9 @@ body {
 
 .final-cta-section .cta-button {
     position: relative;
-    z-index: 15;
-    pointer-events: auto;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
 }
 
 .final-headline {

@@ -348,19 +348,40 @@ document.addEventListener('DOMContentLoaded', () => {
         heroContent.classList.add('cosmic-breathing');
     }
     
-    // Debug: Add explicit event listener for bottom button
+    // FORCE FIX: Multiple event listeners for bottom button
     const finalCtaButton = document.getElementById('final-cta');
     if (finalCtaButton) {
-        console.log('Final CTA button found, adding explicit listener');
-        finalCtaButton.addEventListener('click', (e) => {
-            console.log('Final CTA clicked directly!');
+        console.log('Final CTA button found, adding multiple listeners');
+        
+        // Method 1: Direct click
+        finalCtaButton.onclick = function(e) {
+            console.log('ONCLICK TRIGGERED!');
             e.preventDefault();
+            e.stopPropagation();
             const modal = document.getElementById('voice-modal');
             if (modal) {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
-        });
+        };
+        
+        // Method 2: Event listener
+        finalCtaButton.addEventListener('click', function(e) {
+            console.log('CLICK EVENT TRIGGERED!');
+            e.preventDefault();
+            e.stopPropagation();
+            const modal = document.getElementById('voice-modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }, true);
+        
+        // Method 3: Force style cursor
+        finalCtaButton.style.cursor = 'pointer';
+        finalCtaButton.style.pointerEvents = 'auto';
+        finalCtaButton.style.zIndex = '9999';
+        
     } else {
         console.error('Final CTA button NOT found!');
     }
