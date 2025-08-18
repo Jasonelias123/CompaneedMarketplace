@@ -1253,6 +1253,17 @@ body {
     justify-content: center;
 }
 
+.final-cta-section .container {
+    position: relative;
+    z-index: 10;
+}
+
+.final-cta-section .cta-button {
+    position: relative;
+    z-index: 15;
+    pointer-events: auto;
+}
+
 .final-headline {
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 6vw, 4rem);
@@ -1262,12 +1273,16 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    position: relative;
+    z-index: 10;
 }
 
 .final-subtext {
     color: var(--white-muted);
     font-size: 1.125rem;
     margin-top: 1.5rem;
+    position: relative;
+    z-index: 10;
 }
 
 /* Voice Agent Modal */
