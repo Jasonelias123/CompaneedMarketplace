@@ -148,6 +148,27 @@ body {
     to { transform: rotate(360deg); }
 }
 
+/* Mobile responsive for portal ring */
+@media (max-width: 768px) {
+    .portal-ring {
+        width: 400px !important;
+        height: 400px !important;
+        border-width: 1px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .portal-ring {
+        width: 280px !important;
+        height: 280px !important;
+        border-width: 1px !important;
+    }
+    
+    .portal-ring::before {
+        border-width: 1px !important;
+    }
+}
+
 .hero-content {
     position: relative;
     z-index: 3;
@@ -1127,6 +1148,15 @@ body {
     
     .logos-section {
         padding: 3rem 0 !important;
+    }
+    
+    .hero-section {
+        min-height: 70vh !important;
+    }
+    
+    .hero-headline {
+        font-size: 2.5rem !important;
+        line-height: 1.1 !important;
     }
 }
 
