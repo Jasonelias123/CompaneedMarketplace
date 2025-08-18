@@ -81,11 +81,11 @@ class VoiceAgentModal {
     }
     
     setupEventListeners() {
-        // CTA buttons - hero opens modal, final redirects
+        // CTA buttons open modal
         document.addEventListener('click', (e) => {
-            const clickedElement = e.target.closest('.cta-button, #hero-cta');
-            if (clickedElement && clickedElement.id !== 'final-cta') {
-                console.log('Hero button clicked:', clickedElement.id || clickedElement.className);
+            const clickedElement = e.target.closest('.cta-button, #hero-cta, #final-cta');
+            if (clickedElement) {
+                console.log('Button clicked:', clickedElement.id || clickedElement.className);
                 e.preventDefault();
                 this.openModal();
             }
@@ -353,20 +353,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (finalCtaButton) {
         console.log('Final CTA button found, adding multiple listeners');
         
-        // Method 1: Direct click - redirect to signup
+        // Method 1: Direct click
         finalCtaButton.onclick = function(e) {
-            console.log('FINAL CTA - Redirecting to signup');
+            console.log('ONCLICK TRIGGERED!');
             e.preventDefault();
             e.stopPropagation();
-            window.location.href = 'company-signup.html';
+            const modal = document.getElementById('voice-modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         };
         
-        // Method 2: Event listener - redirect to signup  
+        // Method 2: Event listener
         finalCtaButton.addEventListener('click', function(e) {
-            console.log('FINAL CTA - Redirecting to signup');
+            console.log('CLICK EVENT TRIGGERED!');
             e.preventDefault();
             e.stopPropagation();
-            window.location.href = 'company-signup.html';
+            const modal = document.getElementById('voice-modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }, true);
         
         // Method 3: Force style cursor
