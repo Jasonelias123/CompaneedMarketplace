@@ -981,7 +981,7 @@ body {
 
 /* Why Companeeds Section Styling */
 .why-question {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     line-height: 1.6;
     color: var(--white);
     font-style: italic;
@@ -1052,7 +1052,7 @@ body {
 }
 
 .why-solution {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     line-height: 1.7;
     color: var(--white);
     max-width: 800px;
