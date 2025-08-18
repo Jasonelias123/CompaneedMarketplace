@@ -1286,6 +1286,33 @@ body {
     z-index: 10;
 }
 
+/* Purple Next Button */
+.purple-next-btn {
+    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-purple-dark)) !important;
+    color: white !important;
+    border: none !important;
+    padding: 15px 40px !important;
+    border-radius: 25px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4) !important;
+    margin-top: 30px !important;
+    width: auto !important;
+    display: inline-block !important;
+}
+
+.purple-next-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6) !important;
+}
+
+.modal-actions {
+    text-align: center !important;
+    margin-top: 2rem !important;
+}
+
 /* Voice Agent Modal */
 .modal-overlay {
     position: fixed;
