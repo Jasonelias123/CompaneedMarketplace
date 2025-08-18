@@ -348,6 +348,23 @@ document.addEventListener('DOMContentLoaded', () => {
         heroContent.classList.add('cosmic-breathing');
     }
     
+    // Debug: Add explicit event listener for bottom button
+    const finalCtaButton = document.getElementById('final-cta');
+    if (finalCtaButton) {
+        console.log('Final CTA button found, adding explicit listener');
+        finalCtaButton.addEventListener('click', (e) => {
+            console.log('Final CTA clicked directly!');
+            e.preventDefault();
+            const modal = document.getElementById('voice-modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    } else {
+        console.error('Final CTA button NOT found!');
+    }
+    
     console.log('🚀 Cosmic Portal initialized');
     
     // Initialize enhanced animations and counters
