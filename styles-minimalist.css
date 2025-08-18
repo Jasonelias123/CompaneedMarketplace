@@ -513,7 +513,7 @@ body {
 }
 
 .results-description, .opportunity-text, .moment-text {
-    font-size: 1.25rem;
+    font-size: 1.625rem;
     line-height: 1.7;
     color: var(--white-muted);
     margin-bottom: 2rem;
