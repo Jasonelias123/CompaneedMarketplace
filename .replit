@@ -15,6 +15,10 @@ author = "agent"
 task = "workflow.run"
 args = "Server"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Flask HVAC"
+
 [[workflows.workflow]]
 name = "Server"
 author = "agent"
@@ -24,12 +28,21 @@ task = "shell.exec"
 args = "python -m http.server 5000 --bind 0.0.0.0"
 waitForPort = 5000
 
+[[workflows.workflow]]
+name = "Flask HVAC"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
+waitForPort = 8080
+
 [workflows.workflow.metadata]
 outputType = "webview"
 
 [deployment]
 deploymentTarget = "static"
-publicDir = "/"
+publicDir = "hvac-deploy"
 
 [[ports]]
 localPort = 5000

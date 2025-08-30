@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="More HVAC Jobs. Less Stress. Guaranteed. - AI-powered solutions for HVAC companies to book more jobs, reduce costs, and scale profits.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://companeeds.ai/">
+    <meta property="og:title" content="Companeeds AI - More HVAC Jobs. Less Stress. Guaranteed.">
+    <meta property="og:description" content="AI-powered solutions for HVAC companies to book more jobs, reduce costs, and scale profits.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://companeeds.ai/">
+    <meta property="twitter:title" content="Companeeds AI - More HVAC Jobs. Less Stress. Guaranteed.">
+    <meta property="twitter:description" content="AI-powered solutions for HVAC companies to book more jobs, reduce costs, and scale profits.">
+    
+    <link rel="canonical" href="https://companeeds.ai/">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <title>Companeeds AI - More HVAC Jobs. Less Stress. Guaranteed.</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS with custom config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        accent: '#22D3EE',
+                        glow: '#A78BFA'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Manrope', 'Inter', 'system-ui', 'sans-serif']
+                    },
+                    container: {
+                        center: true,
+                        padding: '1rem',
+                        screens: {
+                            'sm': '640px',
+                            'md': '768px',
+                            'lg': '1024px',
+                            'xl': '1280px'
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 10px 30px rgba(0,0,0,0.15)',
+                        'glow': '0 0 20px rgba(167, 139, 250, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Theme Detection Script -->
+    <script>
+        // Initialize theme before page load to prevent flash
+        (function() {
+            const stored = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = stored || (prefersDark ? 'dark' : 'light');
+            document.documentElement.className = theme === 'dark' ? 'dark' : '';
+        })();
+    </script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Companeeds AI",
+        "description": "More HVAC Jobs. Less Stress. Guaranteed.",
+        "url": "https://companeeds.ai",
+        "telephone": "(305) 555-0123",
+        "email": "info@yourcompany.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Miami, FL"
+        },
+        "serviceArea": {
+            "@type": "Place",
+            "name": "Miami, South Florida, Nationwide"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "HVAC AI Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "24/7 AI Answering & Booking"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Lead Reactivation AI"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/10 dark:bg-white/5 border-b-2 border-gradient-to-r from-primary via-accent to-glow shadow-glass">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">C</span>
+                    </div>
+                    <span class="text-xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        Companeeds AI
+                    </span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                        How it Works
+                    </a>
+                    <a href="#results" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                        Results
+                    </a>
+                    <a href="#process" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                        Process
+                    </a>
+                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                        Contact
+                    </a>
+                </div>
+                
+                <!-- Right Side Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Dark Mode Toggle -->
+                    <button id="theme-toggle" 
+                            class="p-2 rounded-xl bg-white/10 dark:bg-white/5 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-200"
+                            aria-label="Toggle dark mode">
+                        <!-- Sun Icon (shown in dark mode) -->
+                        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <!-- Moon Icon (shown in light mode) -->
+                        <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Primary CTA Button -->
+                    <a href="#contact" 
+                       class="px-6 py-2 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-2xl shadow-glass hover:shadow-glow transform hover:-translate-y-0.5 transition-all duration-200">
+                        Book Demo
+                    </a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-toggle" 
+                            class="md:hidden p-2 rounded-xl bg-white/10 dark:bg-white/5 backdrop-blur-sm"
+                            aria-label="Toggle mobile menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-white/10">
+                <div class="flex flex-col space-y-4 pt-4">
+                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                        How it Works
+                    </a>
+                    <a href="#results" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                        Results
+                    </a>
+                    <a href="#process" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                        Process
+                    </a>
+                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-600 via-violet-600 to-cyan-500">
+            <!-- Background Orbs -->
+            <div class="absolute inset-0">
+                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-violet-400/30 to-cyan-400/30 rounded-full filter blur-3xl animate-pulse"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-indigo-400/20 to-violet-400/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+                <div class="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-cyan-400/25 to-indigo-400/25 rounded-full filter blur-2xl animate-pulse delay-2000"></div>
+            </div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h1 class="text-5xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight" data-reveal>
+                        More HVAC Jobs. Less Stress. Guaranteed.
+                    </h1>
+                    
+                    <p class="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto" data-reveal>
+                        Stop losing calls, leads, and installs. Our AI system helps HVAC companies book more jobs, keep techs busy year-round, and scale profits on autopilot.
+                    </p>
+                    
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" data-reveal>
+                        <a href="#contact" class="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-2xl shadow-glass hover:shadow-glow transform hover:-translate-y-1 transition-all duration-300">
+                            Book My Free Demo
+                        </a>
+                        <a href="#how-it-works" class="px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-2xl backdrop-blur-sm hover:bg-white/10 transform hover:-translate-y-1 transition-all duration-300">
+                            See How It Works
+                        </a>
+                    </div>
+                    
+                    <!-- Badge Row -->
+                    <div class="flex flex-wrap justify-center gap-3" data-reveal>
+                        <span class="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium backdrop-blur-sm">
+                            HVAC Focused
+                        </span>
+                        <span class="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium backdrop-blur-sm">
+                            24/7 AI
+                        </span>
+                        <span class="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium backdrop-blur-sm">
+                            Fast Setup
+                        </span>
+                        <span class="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium backdrop-blur-sm">
+                            Measurable ROI
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    <!-- Why Companeeds Section -->
+    <section class="why-companeeds-section">
+        <div class="container">
+            <div class="why-content-wrapper">
+                <h2 class="why-main-title">Why Companeeds?</h2>
+                <p class="why-main-description">Because we <strong>genuinely care.</strong></p>
+                <p class="why-main-description">You know AI can transform your business - <strong class="highlight-word">boost revenue</strong>, <strong class="highlight-word">save time</strong>, and let you <strong class="highlight-word">focus</strong> on what matters most.</p>
+                
+                <p class="why-question">But who do you <strong class="highlight-word">trust</strong>? Where do you <strong class="highlight-word">go</strong>? How do you know it will <strong class="highlight-word">actually work</strong>?</p>
+                
+                <p class="why-solution">We've taken it upon ourselves to answer those questions for you. Our mission is to <strong>reprogram your reality</strong> by making AI transformation <strong class="highlight-word">effortless</strong> and <strong class="highlight-word">guaranteed</strong>.</p>
+                
+                <div class="why-features-grid">
+                    <div class="why-feature-card">
+                        <h4>Reality Reprogrammed:</h4>
+                        <p>We collapse years of progress into months - reprogramming your reality with AI systems that accelerate revenue, efficiency, and expansion. We don't upgrade your business. We accelerate it into its future state.</p>
+                    </div>
+                    
+                    <div class="why-feature-card">
+                        <h4>Future-Proven AI Systems:</h4>
+                        <p>We handpick the most powerful AI systems on the planet - tested, proven, ready to quantum leap your business into an accelerated path of growth and efficiency.</p>
+                    </div>
+                    
+                    <div class="why-feature-card">
+                        <h4>Done For You:</h4>
+                        <p>We handle the implementation so you can relax and watch your business grow</p>
+                    </div>
+                    
+                    <div class="why-feature-card">
+                        <h4>Reality-Backed Evidence:</h4>
+                        <p>Every solution is customized for your business and delivers measurable outcomes</p>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="logos-section">
+        <div class="container">
+            <h2 class="logos-headline">AI Systems Trusted by the World's Most Recognized Brands</h2>
+            <p class="section-subtitle">The AI systems we deliver have already powered measurable results for companies ranging from fast-scaling startups to Fortune 500 leaders, including:</p>
+            
+            <div class="logos-grid-large">
+                <!-- Row 1 -->
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2c5c725d1d08ab9a44_4.png" alt="Headspace" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2c94a50b37c5abd584_5.png" alt="Stryker" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c308377302f4db57d86_6.png" alt="Equinox" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2f4fd0686b09fdf7b3_7.png" alt="OMD" class="logo-img">
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2f14c333f4715d6dba_8.png" alt="Pandora" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c30e7d9da81020165ba_9.png" alt="TriNet" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c307a3fb4504cade8e7_10.png" alt="Flo" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2c503e05ef7f767c23_11.png" alt="Snapchat" class="logo-img">
+                </div>
+                
+                <!-- Row 3 -->
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c3d7a6827450a936852_20.png" alt="Fox Entertainment" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c339f648840e95b6910_12.png" alt="Ramp" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c339d41f6dfbe9f2ca1_13.png" alt="UPS" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c360f491e256e4aad41_14.png" alt="Netflix" class="logo-img">
+                </div>
+                
+                <!-- Row 4 -->
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c363b0fec203b0a9e8e_15.png" alt="Slack" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/6883db9f6143995a32460ae1_2.png" alt="NBA" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c3a0e41d94fb14d9351_17.png" alt="Morgan Stanley" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c3db764a2da0e594339_18.png" alt="MySpace" class="logo-img">
+                </div>
+                
+                <!-- Row 5 -->
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c3d346de7101ea93d6e_19.png" alt="Bose" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c409d41f6dfbe9f2e93_1.png" alt="Salesforce" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/6883dd230d8dde242f9b083a_Artboard%201.png" alt="Bain & Company" class="logo-img">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2c6d91d2cff1b1154e_2.png" alt="General Electric" class="logo-img">
+                </div>
+                
+
+            </div>
+            
+            <p class="partner-network-text">Through our vetted partner network, Companeeds makes these Enterprise-grade AI systems available to you — fully managed, implemented, and customized for your business.</p>
+        </div>
+    </section>
+
+    <!-- We Don't Just Sell AI Section -->
+    <section class="results-section">
+        <div class="container">
+            <h2 class="results-headline">We Don't Just Sell AI. We Deliver Real Results. Every Time.</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 class="stat-number">$100M+</h3>
+                    <p class="stat-label">Revenue Generated</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-number">150%</h3>
+                    <p class="stat-label">Average ROI</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="stat-number">10,000+</h3>
+                    <p class="stat-label">Hours Saved</p>
+                </div>
+            </div>
+            
+            <div class="results-content">
+                <p class="results-description white-text">The AI systems we deliver have already powered measurable results - driving 30-50% growth and reducing founder involvement by up to 80% across more than 100 businesses worldwide.</p>
+                
+                <p class="opportunity-text white-text">While once-thriving businesses are slowly <em>dissolving</em> due to failure to <em>evolve</em>, you have an opportunity to become the leader who <em>resolved</em> the issue of how to scale with confidence and operational accuracy.</p>
+                
+                <p class="moment-text white-text">This is your moment. For the first time in history, the sophisticated revenue strategies that were previously only accessible to Fortune 500 companies can finally be implemented into your growing business with ease.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Enterprise AI Bridge Section -->
+    <section class="bridge-section">
+        <canvas id="bridge-starfield" class="starfield-canvas"></canvas>
+        <div class="container">
+            <h2 class="bridge-headline">We are the bridge that transforms Enterprise AI into your business's secret weapon.</h2>
+            <p class="bridge-subline">The <em>future</em> belongs to those who wield the power of <em>Enterprise AI today</em> - we've arrived upon the <em>Event Horizon</em> where today's decision becomes <em>tomorrow's destiny</em>.</p>
+            <p class="bridge-supporting">Enterprise AI is the engine behind tomorrow's unicorns - and today, we place the keys in your hands</p>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta-section">
+        <canvas id="final-starfield" class="starfield-canvas"></canvas>
+        <div class="container">
+            <h2 class="final-headline">Ready to jump timelines?</h2>
+            <button class="cta-button" id="final-cta">
+                <span class="rocket-emoji">🚀</span>
+                Get Started
+            </button>
+            <p class="final-subtext">No pressure. No fluff. Just results.</p>
+        </div>
+    </section>
+
+    <!-- Voice Agent Modal -->
+    <div class="modal-overlay" id="voice-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="modal-stars"></div>
+            
+            <div class="modal-header">
+                <h3>Tell us about your business</h3>
+                <p>Speak or type your responses</p>
+            </div>
+            
+            <div class="voice-interface">
+                <button class="mic-button" id="mic-button">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1C10.3431 1 9 2.34315 9 4V12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12V4C15 2.34315 13.6569 1 12 1Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M19 10V12C19 16.4183 15.4183 20 11 20H10C5.58172 20 2 16.4183 2 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 20V23M8 23H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <p class="mic-status">Click to speak</p>
+            </div>
+            
+            <div class="conversation-flow">
+                <div class="question-step active" data-step="1">
+                    <label>Company name:</label>
+                    <input type="text" placeholder="Your company name">
+                </div>
+                <div class="question-step" data-step="2">
+                    <label>Industry:</label>
+                    <input type="text" placeholder="What industry are you in?">
+                </div>
+                <div class="question-step" data-step="3">
+                    <label>Biggest bottleneck:</label>
+                    <textarea placeholder="What's slowing your business down?"></textarea>
+                </div>
+                <div class="question-step" data-step="4">
+                    <label>Success metric:</label>
+                    <input type="text" placeholder="How do you measure success?">
+                </div>
+                <div class="question-step" data-step="5">
+                    <label>Current tools:</label>
+                    <textarea placeholder="What tools are you currently using?"></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="next-button purple-next-btn" id="next-button">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="main-new.js"></script>
+</body>
+</html>
