@@ -1217,10 +1217,18 @@
                     
                     let isOnColoredSection = false;
                     
+                    // Always start with purple when at the very top (over navbar area)
+                    if (scrollTop < 50) {
+                        logoText.style.color = '#7c3aed'; // purple-600
+                        header.style.background = 'rgba(255, 255, 255, 0.9)';
+                        return;
+                    }
+                    
                     // Check if we're in the hero section
                     if (heroSection) {
-                        const heroHeight = heroSection.offsetHeight;
-                        if (scrollTop < heroHeight - 100) {
+                        const heroTop = heroSection.offsetTop - 100;
+                        const heroBottom = heroTop + heroSection.offsetHeight;
+                        if (scrollTop >= heroTop && scrollTop <= heroBottom) {
                             isOnColoredSection = true;
                         }
                     }
