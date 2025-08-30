@@ -1,555 +1,219 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="More HVAC Jobs. Less Stress. Guaranteed. - AI-powered solutions for HVAC companies to book more jobs, reduce costs, and scale profits.">
+    <title>Companeeds — We've Got Exactly What You Need</title>
+    <meta name="description" content="Tell us about your business — our AI will take it from there.">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hvac.companeeds.ai/">
-    <meta property="og:title" content="Companeeds AI - More HVAC Jobs. Less Stress. Guaranteed.">
-    <meta property="og:description" content="AI-powered solutions for HVAC companies to book more jobs, reduce costs, and scale profits.">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://hvac.companeeds.ai/">
-    <meta property="twitter:title" content="Companeeds AI - More HVAC Jobs. Less Stress. Guaranteed.">
-    <meta property="twitter:description" content="AI-powered solutions for HVAC companies to book more jobs, reduce costs, and scale profits.">
-    
-    <link rel="canonical" href="https://hvac.companeeds.ai/">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <title>Companeeds AI - More HVAC Jobs. Less Stress. Guaranteed.</title>
-    
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS with custom config -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4F46E5',
-                        accent: '#22D3EE',
-                        glow: '#A78BFA'
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'display': ['Manrope', 'Inter', 'system-ui', 'sans-serif']
-                    },
-                    container: {
-                        center: true,
-                        padding: '1rem',
-                        screens: {
-                            'sm': '640px',
-                            'md': '768px',
-                            'lg': '1024px',
-                            'xl': '1280px'
-                        }
-                    },
-                    boxShadow: {
-                        'glass': '0 10px 30px rgba(0,0,0,0.15)',
-                        'glow': '0 0 20px rgba(167, 139, 250, 0.3)'
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- GSAP for Premium Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
-    <!-- Theme Detection Script -->
-    <script>
-        // Initialize theme before page load to prevent flash
-        (function() {
-            const stored = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = stored || (prefersDark ? 'dark' : 'light');
-            document.documentElement.className = theme === 'dark' ? 'dark' : '';
-        })();
-    </script>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
     
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Companeeds AI",
-        "description": "More HVAC Jobs. Less Stress. Guaranteed.",
-        "url": "https://hvac.companeeds.ai",
-        "telephone": "(305) 555-0123",
-        "email": "info@yourcompany.com",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Miami, FL"
-        },
-        "serviceArea": {
-            "@type": "Place",
-            "name": "Miami, South Florida, Nationwide"
-        },
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "HVAC AI Services",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "24/7 AI Answering & Booking"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Lead Reactivation AI"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
-    <!-- Header -->
-    <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/10 dark:bg-white/5 border-b-2 border-gradient-to-r from-primary via-accent to-glow shadow-glass">
-        <nav class="container mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <!-- Brand Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-sm">C</span>
-                    </div>
-                    <span class="text-xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                        Companeeds AI
-                    </span>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <span class="rocket-icon">🚀</span>
                 </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        How it Works
-                    </a>
-                    <a href="#results" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        Results
-                    </a>
-                    <a href="#process" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        Process
-                    </a>
-                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        Contact
-                    </a>
-                </div>
-                
-                <!-- Right Side Actions -->
-                <div class="flex items-center space-x-4">
-                    <!-- Dark Mode Toggle -->
-                    <button id="theme-toggle" 
-                            class="p-2 rounded-xl bg-white/10 dark:bg-white/5 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-200"
-                            aria-label="Toggle dark mode">
-                        <!-- Sun Icon (shown in dark mode) -->
-                        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                            </path>
-                        </svg>
-                        <!-- Moon Icon (shown in light mode) -->
-                        <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
-                            </path>
-                        </svg>
-                    </button>
-                    
-                    <!-- Primary CTA Button -->
-                    <a href="#contact" 
-                       class="px-6 py-2 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-2xl shadow-glass hover:shadow-glow transform hover:-translate-y-0.5 transition-all duration-200">
-                        Book Demo
-                    </a>
-                    
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-toggle" 
-                            class="md:hidden p-2 rounded-xl bg-white/10 dark:bg-white/5 backdrop-blur-sm"
-                            aria-label="Toggle mobile menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-white/10">
-                <div class="flex flex-col space-y-4 pt-4">
-                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        How it Works
-                    </a>
-                    <a href="#results" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        Results
-                    </a>
-                    <a href="#process" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        Process
-                    </a>
-                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        Contact
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-600 via-violet-600 to-cyan-500">
-            <!-- Background Orbs -->
-            <div class="absolute inset-0">
-                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-violet-400/30 to-cyan-400/30 rounded-full filter blur-3xl animate-pulse"></div>
-                <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-indigo-400/20 to-violet-400/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-                <div class="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-cyan-400/25 to-indigo-400/25 rounded-full filter blur-2xl animate-pulse delay-2000"></div>
-            </div>
-            
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="text-center max-w-4xl mx-auto">
-                    <h1 class="text-5xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight" data-reveal>
-                        More HVAC Jobs. Less Stress. Guaranteed.
-                    </h1>
-                    
-                    <p class="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto" data-reveal>
-                        Stop losing calls, leads, and installs. Our AI system helps HVAC companies book more jobs, keep techs busy year-round, and scale profits on autopilot.
-                    </p>
-                    
-                    <!-- CTAs -->
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" data-reveal>
-                        <a href="#contact" class="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-2xl shadow-glass hover:shadow-glow transform hover:-translate-y-1 transition-all duration-300">
-                            Book My Free Demo
-                        </a>
-                        <a href="#how-it-works" class="px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-2xl backdrop-blur-sm hover:bg-white/10 transform hover:-translate-y-1 transition-all duration-300">
-                            See How It Works
-                        </a>
-                    </div>
-                    
-                    <!-- Badge Row -->
-                    <div class="flex flex-wrap justify-center gap-3" data-reveal>
-                        <span class="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium backdrop-blur-sm">
-                            HVAC Focused
-                        </span>
-                        <span class="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium backdrop-blur-sm">
-                            24/7 AI
-                        </span>
-                        <span class="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium backdrop-blur-sm">
-                            Fast Setup
-                        </span>
-                        <span class="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm font-medium backdrop-blur-sm">
-                            Measurable ROI
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Problem Section -->
-        <section id="problems" class="py-20 bg-white dark:bg-gray-900">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-4xl lg:text-5xl font-display font-bold mb-12 bg-gradient-to-r from-primary via-accent to-glow bg-clip-text text-transparent" data-reveal>
-                        Every Missed Call Costs You Thousands.
-                    </h2>
-                    
-                    <!-- Problem Grid -->
-                    <div class="grid md:grid-cols-2 gap-6 mb-8">
-                        <!-- Problem 1 -->
-                        <div class="p-6 backdrop-blur-xl bg-white/10 dark:bg-white/5 border-2 border-gradient-to-r from-primary/30 to-accent/30 rounded-2xl shadow-glass hover:transform hover:-translate-y-2 transition-all duration-300" data-reveal>
-                            <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">24/7 Response Expected</h3>
-                            <p class="text-gray-600 dark:text-gray-300">Homeowners expect 24/7 instant response—your office can't keep up.</p>
-                        </div>
-                        
-                        <!-- Problem 2 -->
-                        <div class="p-6 backdrop-blur-xl bg-white/10 dark:bg-white/5 border-2 border-gradient-to-r from-primary/30 to-accent/30 rounded-2xl shadow-glass hover:transform hover:-translate-y-2 transition-all duration-300" data-reveal>
-                            <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Expensive CSRs</h3>
-                            <p class="text-gray-600 dark:text-gray-300">CSRs cost $40–60K a year and still miss calls after hours.</p>
-                        </div>
-                        
-                        <!-- Problem 3 -->
-                        <div class="p-6 backdrop-blur-xl bg-white/10 dark:bg-white/5 border-2 border-gradient-to-r from-primary/30 to-accent/30 rounded-2xl shadow-glass hover:transform hover:-translate-y-2 transition-all duration-300" data-reveal>
-                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Lost Follow-ups</h3>
-                            <p class="text-gray-600 dark:text-gray-300">70% of leads never get followed up with.</p>
-                        </div>
-                        
-                        <!-- Problem 4 -->
-                        <div class="p-6 backdrop-blur-xl bg-white/10 dark:bg-white/5 border-2 border-gradient-to-r from-primary/30 to-accent/30 rounded-2xl shadow-glass hover:transform hover:-translate-y-2 transition-all duration-300" data-reveal>
-                            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">Seasonal Struggles</h3>
-                            <p class="text-gray-600 dark:text-gray-300">Seasonal slumps leave techs without steady work.</p>
-                        </div>
-                    </div>
-                    
-                    <p class="text-2xl font-semibold text-red-600 dark:text-red-400" data-reveal>
-                        Every lost call could have been a $10K install.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Form -->
-        <section id="contact" class="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-            <div class="container mx-auto px-4">
-                <div class="max-w-6xl mx-auto">
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <!-- Left: Persuasive Copy -->
-                        <div class="space-y-6" data-reveal>
-                            <h2 class="text-4xl lg:text-5xl font-display font-bold bg-gradient-to-r from-primary via-accent to-glow bg-clip-text text-transparent">
-                                Ready to Transform Your HVAC Business?
-                            </h2>
-                            <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                                Join hundreds of HVAC companies already using AI to stay fully booked, cut costs, and dominate their markets.
-                            </p>
-                        </div>
-                        
-                        <!-- Right: Glass Card Form -->
-                        <div class="backdrop-blur-xl bg-white/10 dark:bg-white/5 border border-white/20 rounded-2xl shadow-glass p-8" data-reveal>
-                            <form id="lead-form" action="https://formspree.io/f/your-id-here" method="POST" class="space-y-6">
-                                <!-- TODO: Replace with actual Formspree ID -->
-                                <input type="hidden" name="source" value="website">
-                                
-                                <div class="space-y-1">
-                                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        Full Name *
-                                    </label>
-                                    <input type="text" 
-                                           id="name" 
-                                           name="name" 
-                                           required
-                                           class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
-                                           placeholder="Your full name">
-                                </div>
-                                
-                                <div class="space-y-1">
-                                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        Email Address *
-                                    </label>
-                                    <input type="email" 
-                                           id="email" 
-                                           name="email" 
-                                           required
-                                           class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
-                                           placeholder="your.email@company.com">
-                                </div>
-                                
-                                <div class="space-y-1">
-                                    <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        Phone Number *
-                                    </label>
-                                    <input type="tel" 
-                                           id="phone" 
-                                           name="phone" 
-                                           required
-                                           class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
-                                           placeholder="(305) 555-0123">
-                                </div>
-                                
-                                <button type="submit" 
-                                        class="w-full py-4 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-2xl shadow-glass hover:shadow-glow transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900">
-                                    Book My Free Demo
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-950 dark:to-gray-900 border-t-2 border-gradient-to-r from-primary via-accent to-glow">
-        <div class="container mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Brand Column -->
-                <div class="md:col-span-1">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-sm">C</span>
-                        </div>
-                        <span class="text-xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                            Companeeds AI
-                        </span>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4">More HVAC Jobs. Less Stress. Guaranteed.</p>
-                </div>
-                
-                <!-- Contact Info -->
-                <div>
-                    <h4 class="font-semibold text-white mb-4">Contact</h4>
-                    <div class="space-y-2 text-gray-400">
-                        <p class="text-sm">(305) 555-0123</p>
-                        <p class="text-sm">info@yourcompany.com</p>
-                        <p class="text-sm">Miami, FL</p>
-                    </div>
-                </div>
-                
-                <!-- Service Areas -->
-                <div>
-                    <h4 class="font-semibold text-white mb-4">Service Areas</h4>
-                    <div class="space-y-2 text-gray-400 text-sm">
-                        <p>Miami, FL</p>
-                        <p>South Florida</p>
-                        <p>Nationwide</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bottom Bar -->
-            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm">
-                    © 2025 Companeeds AI. All rights reserved.
-                </p>
+                <span class="brand-text">Companeeds</span>
             </div>
         </div>
-    </footer>
-    
-    <!-- JavaScript -->
-    <script>
-        // Theme toggle functionality
-        (function() {
-            'use strict';
+    </nav>
+
+    <!-- Hero / Portal Gate -->
+    <section class="hero-section">
+        <canvas id="starfield" class="starfield-canvas"></canvas>
+        <div class="portal-ring"></div>
+        <div class="hero-content">
+            <h1 class="hero-headline">We've Got Exactly<br>What You Need</h1>
+            <p class="hero-subheadline">Tell us about your business — our AI will take it from there.</p>
+            <button class="cta-button" id="hero-cta">
+                <span class="rocket-emoji">🚀</span>
+                Get Started
+            </button>
+            <a href="#process" class="how-it-works-link">How it works ↓</a>
+        </div>
+    </section>
+
+    <!-- Why Companeeds -->
+    <section class="why-section" id="why">
+        <div class="container">
+            <div class="value-cards">
+                <div class="value-card">
+                    <h3>Cut Through the Noise</h3>
+                    <p>We've already vetted the best AI.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Real Results, Fast</h3>
+                    <p>We install, measure, iterate.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Scale or You Don't Pay</h3>
+                    <p>30-day prove-it pilot.</p>
+                </div>
+            </div>
             
-            function getStoredTheme() {
-                return localStorage.getItem('theme');
-            }
+            <div class="guarantee-box">
+                <div class="lock-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 7V5C12 2.79086 10.2091 1 8 1C5.79086 1 4 2.79086 4 5V7M3 7H13C13.5523 7 14 7.44772 14 8V13C14 13.5523 13.5523 14 13 14H3C2.44772 14 2 13.5523 2 13V8C2 7.44772 2.44772 7 3 7Z" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <p class="guarantee-text">No credit card required · 30 days free · Real results guaranteed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By -->
+    <section class="trusted-section">
+        <div class="container">
+            <h2 class="trusted-title">AI systems trusted by teams our tech has served</h2>
+            <div class="logos-grid">
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c360f491e256e4aad41_14.png" alt="Netflix" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c339d41f6dfbe9f2ca1_13.png" alt="UPS" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/6883db9f6143995a32460ae1_2.png" alt="NBA" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2c5c725d1d08ab9a44_4.png" alt="Headspace" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2c94a50b37c5abd584_5.png" alt="Stryker" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c308377302f4db57d86_6.png" alt="Equinox" class="client-logo">
+                </div>
+            </div>
+            <p class="logos-disclaimer">Logos represent teams served directly or via our implementation partners.</p>
+        </div>
+    </section>
+
+    <!-- The Process -->
+    <section class="process-section" id="process">
+        <div class="container">
+            <div class="progress-comet"></div>
+            <div class="process-steps">
+                <div class="process-step" data-step="1">
+                    <div class="step-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1C12 1 15 4 15 8C15 10.2091 13.2091 12 11 12H9C6.79086 12 5 10.2091 5 8C5 4 8 1 8 1M8 12V23M12 12V23M8 17H12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Speak to the Agent</h3>
+                    <p>Tell us goals, bottlenecks, stack.</p>
+                </div>
+                
+                <div class="process-step" data-step="2">
+                    <div class="step-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 16V8C20.9996 7.64928 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64928 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.27 6.96L12 12.01L20.73 6.96M12 22.08V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Map Your AI Stack</h3>
+                    <p>Vetted tools + custom automations.</p>
+                </div>
+                
+                <div class="process-step" data-step="3">
+                    <div class="step-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Pilot → Scale</h3>
+                    <p>30-day pilot; keep only what moves the needle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta-section">
+        <canvas id="final-starfield" class="starfield-canvas"></canvas>
+        <div class="container">
+            <h2 class="final-headline">Ready to jump timelines?</h2>
+            <button class="cta-button" id="final-cta">
+                <span class="rocket-emoji">🚀</span>
+                Get Started
+            </button>
+            <p class="final-subtext">No pressure. No fluff. Just results.</p>
+        </div>
+    </section>
+
+    <!-- Voice Agent Modal -->
+    <div class="modal-overlay" id="voice-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="modal-stars"></div>
             
-            function setStoredTheme(theme) {
-                localStorage.setItem('theme', theme);
-            }
+            <div class="modal-header">
+                <h3>Tell us about your business</h3>
+                <p>Speak or type your responses</p>
+            </div>
             
-            function getPreferredTheme() {
-                const storedTheme = getStoredTheme();
-                if (storedTheme) {
-                    return storedTheme;
-                }
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            }
+            <div class="voice-interface">
+                <button class="mic-button" id="mic-button">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1C10.3431 1 9 2.34315 9 4V12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12V4C15 2.34315 13.6569 1 12 1Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M19 10V12C19 16.4183 15.4183 20 11 20H10C5.58172 20 2 16.4183 2 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 20V23M8 23H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <p class="mic-status">Click to speak</p>
+            </div>
             
-            function setTheme(theme) {
-                if (theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            }
+            <div class="conversation-flow">
+                <div class="question-step active" data-step="1">
+                    <label>Company name:</label>
+                    <input type="text" placeholder="Your company name">
+                </div>
+                <div class="question-step" data-step="2">
+                    <label>Industry:</label>
+                    <input type="text" placeholder="What industry are you in?">
+                </div>
+                <div class="question-step" data-step="3">
+                    <label>Biggest bottleneck:</label>
+                    <textarea placeholder="What's slowing your business down?"></textarea>
+                </div>
+                <div class="question-step" data-step="4">
+                    <label>Success metric:</label>
+                    <input type="text" placeholder="How do you measure success?">
+                </div>
+                <div class="question-step" data-step="5">
+                    <label>Current tools:</label>
+                    <textarea placeholder="What tools are you currently using?"></textarea>
+                </div>
+            </div>
             
-            function showActiveTheme(theme) {
-                const themeSwitcher = document.querySelector('#theme-toggle');
-                if (!themeSwitcher) return;
-                
-                const sunIcon = themeSwitcher.querySelector('svg:first-child');
-                const moonIcon = themeSwitcher.querySelector('svg:last-child');
-                
-                if (theme === 'dark') {
-                    sunIcon?.classList.remove('hidden');
-                    moonIcon?.classList.add('hidden');
-                } else {
-                    sunIcon?.classList.add('hidden');
-                    moonIcon?.classList.remove('hidden');
-                }
-            }
-            
-            function toggleTheme() {
-                const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                setTheme(newTheme);
-                setStoredTheme(newTheme);
-                showActiveTheme(newTheme);
-            }
-            
-            // Initialize on page load
-            document.addEventListener('DOMContentLoaded', function() {
-                const theme = getPreferredTheme();
-                setTheme(theme);
-                showActiveTheme(theme);
-                
-                // Add click event listener to theme toggle button
-                const themeSwitcher = document.querySelector('#theme-toggle');
-                if (themeSwitcher) {
-                    themeSwitcher.addEventListener('click', toggleTheme);
-                }
-                
-                // Mobile menu toggle
-                const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-                const mobileMenu = document.getElementById('mobile-menu');
-                
-                if (mobileMenuToggle && mobileMenu) {
-                    mobileMenuToggle.addEventListener('click', function() {
-                        mobileMenu.classList.toggle('hidden');
-                    });
-                    
-                    // Close mobile menu when clicking navigation links
-                    mobileMenu.querySelectorAll('a').forEach(link => {
-                        link.addEventListener('click', () => {
-                            mobileMenu.classList.add('hidden');
-                        });
-                    });
-                }
-                
-                // Smooth anchor scrolling
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-                    });
-                });
-                
-                // Reveal on scroll animation
-                const observerOptions = {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                };
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('opacity-100', 'translate-y-0');
-                            entry.target.classList.remove('opacity-0', 'translate-y-8');
-                        }
-                    });
-                }, observerOptions);
-                
-                // Observe all elements with data-reveal attribute
-                document.querySelectorAll('[data-reveal]').forEach(el => {
-                    el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700');
-                    observer.observe(el);
-                });
-            });
-        })();
-    </script>
+            <div class="modal-actions">
+                <button class="next-button" id="next-button">Next</button>
+                <button class="finish-button" id="finish-button" style="display: none;">Complete Setup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
 </body>
 </html>
