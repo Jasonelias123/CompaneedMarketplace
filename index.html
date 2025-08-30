@@ -122,7 +122,7 @@
             <div class="flex items-center justify-between">
                 <!-- Brand Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg flex items-center justify-center">
+                    <div id="logo-icon" class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center transition-colors duration-300">
                         <span class="text-white font-bold text-sm">C</span>
                     </div>
                     <span id="logo-text" class="text-xl font-display font-bold text-purple-600 transition-colors duration-300">
@@ -1207,6 +1207,7 @@
 
                 // Dynamic logo color based on scroll position
                 const logoText = document.getElementById('logo-text');
+                const logoIcon = document.getElementById('logo-icon');
                 const header = document.querySelector('header');
                 
                 function updateLogoColor() {
@@ -1219,10 +1220,12 @@
                         // If we're in the colored hero section, make logo white
                         if (scrollTop < heroHeight - 100) {
                             logoText.style.color = 'white';
+                            logoIcon.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
                             header.style.background = 'rgba(255, 255, 255, 0.1)';
                         } else {
-                            // If we're past the hero on white background, make logo purple
-                            logoText.style.color = '#7c3aed'; // purple-600
+                            // If we're past the hero on white background, make logo royal purple
+                            logoText.style.color = '#7c3aed'; // purple-600 (royal purple)
+                            logoIcon.style.backgroundColor = '#7c3aed'; // purple-600 (royal purple)
                             header.style.background = 'rgba(255, 255, 255, 0.9)';
                         }
                     }
