@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companeeds — We've Got Exactly What You Need</title>
+    <meta name="description" content="Tell us about your business — our AI will take it from there.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP for Premium Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <span class="rocket-icon">🚀</span>
+                </div>
+                <span class="brand-text">Companeeds</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Portal Gate -->
+    <section class="hero-section">
+        <canvas id="starfield" class="starfield-canvas"></canvas>
+        <div class="portal-ring"></div>
+        <div class="hero-content">
+            <h1 class="hero-headline">We've Got Exactly<br>What You Need</h1>
+            <p class="hero-subheadline">Tell us about your business — our AI will take it from there.</p>
+            <button class="cta-button" id="hero-cta">
+                <span class="rocket-emoji">🚀</span>
+                Get Started
+            </button>
+            <a href="#process" class="how-it-works-link">How it works ↓</a>
+        </div>
+    </section>
+
+    <!-- Why Companeeds -->
+    <section class="why-section" id="why">
+        <div class="container">
+            <div class="value-cards">
+                <div class="value-card">
+                    <h3>Cut Through the Noise</h3>
+                    <p>We've already vetted the best AI.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Real Results, Fast</h3>
+                    <p>We install, measure, iterate.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Scale or You Don't Pay</h3>
+                    <p>30-day prove-it pilot.</p>
+                </div>
+            </div>
+            
+            <div class="guarantee-box">
+                <div class="lock-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 7V5C12 2.79086 10.2091 1 8 1C5.79086 1 4 2.79086 4 5V7M3 7H13C13.5523 7 14 7.44772 14 8V13C14 13.5523 13.5523 14 13 14H3C2.44772 14 2 13.5523 2 13V8C2 7.44772 2.44772 7 3 7Z" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <p class="guarantee-text">No credit card required · 30 days free · Real results guaranteed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By -->
+    <section class="trusted-section">
+        <div class="container">
+            <h2 class="trusted-title">AI systems trusted by teams our tech has served</h2>
+            <div class="logos-grid">
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c360f491e256e4aad41_14.png" alt="Netflix" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c339d41f6dfbe9f2ca1_13.png" alt="UPS" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/6883db9f6143995a32460ae1_2.png" alt="NBA" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2c5c725d1d08ab9a44_4.png" alt="Headspace" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c2c94a50b37c5abd584_5.png" alt="Stryker" class="client-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="https://cdn.prod.website-files.com/67f011218009305d43ab5d63/687a9c308377302f4db57d86_6.png" alt="Equinox" class="client-logo">
+                </div>
+            </div>
+            <p class="logos-disclaimer">Logos represent teams served directly or via our implementation partners.</p>
+        </div>
+    </section>
+
+    <!-- The Process -->
+    <section class="process-section" id="process">
+        <div class="container">
+            <div class="progress-comet"></div>
+            <div class="process-steps">
+                <div class="process-step" data-step="1">
+                    <div class="step-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1C12 1 15 4 15 8C15 10.2091 13.2091 12 11 12H9C6.79086 12 5 10.2091 5 8C5 4 8 1 8 1M8 12V23M12 12V23M8 17H12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Speak to the Agent</h3>
+                    <p>Tell us goals, bottlenecks, stack.</p>
+                </div>
+                
+                <div class="process-step" data-step="2">
+                    <div class="step-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 16V8C20.9996 7.64928 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64928 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.27 6.96L12 12.01L20.73 6.96M12 22.08V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Map Your AI Stack</h3>
+                    <p>Vetted tools + custom automations.</p>
+                </div>
+                
+                <div class="process-step" data-step="3">
+                    <div class="step-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Pilot → Scale</h3>
+                    <p>30-day pilot; keep only what moves the needle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta-section">
+        <canvas id="final-starfield" class="starfield-canvas"></canvas>
+        <div class="container">
+            <h2 class="final-headline">Ready to jump timelines?</h2>
+            <button class="cta-button" id="final-cta">
+                <span class="rocket-emoji">🚀</span>
+                Get Started
+            </button>
+            <p class="final-subtext">No pressure. No fluff. Just results.</p>
+        </div>
+    </section>
+
+    <!-- Voice Agent Modal -->
+    <div class="modal-overlay" id="voice-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="modal-stars"></div>
+            
+            <div class="modal-header">
+                <h3>Tell us about your business</h3>
+                <p>Speak or type your responses</p>
+            </div>
+            
+            <div class="voice-interface">
+                <button class="mic-button" id="mic-button">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1C10.3431 1 9 2.34315 9 4V12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12V4C15 2.34315 13.6569 1 12 1Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M19 10V12C19 16.4183 15.4183 20 11 20H10C5.58172 20 2 16.4183 2 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 20V23M8 23H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <p class="mic-status">Click to speak</p>
+            </div>
+            
+            <div class="conversation-flow">
+                <div class="question-step active" data-step="1">
+                    <label>Company name:</label>
+                    <input type="text" placeholder="Your company name">
+                </div>
+                <div class="question-step" data-step="2">
+                    <label>Industry:</label>
+                    <input type="text" placeholder="What industry are you in?">
+                </div>
+                <div class="question-step" data-step="3">
+                    <label>Biggest bottleneck:</label>
+                    <textarea placeholder="What's slowing your business down?"></textarea>
+                </div>
+                <div class="question-step" data-step="4">
+                    <label>Success metric:</label>
+                    <input type="text" placeholder="How do you measure success?">
+                </div>
+                <div class="question-step" data-step="5">
+                    <label>Current tools:</label>
+                    <textarea placeholder="What tools are you currently using?"></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="next-button" id="next-button">Next</button>
+                <button class="finish-button" id="finish-button" style="display: none;">Complete Setup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+</body>
+</html>
