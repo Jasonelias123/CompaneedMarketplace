@@ -126,7 +126,7 @@
                         <span class="text-white font-bold text-sm">C</span>
                     </div>
                     <span id="logo-text" class="text-xl font-display font-bold text-purple-600 transition-colors duration-300">
-                        Companeeds
+                        Companeeds AI
                     </span>
                 </div>
                 
@@ -1212,52 +1212,19 @@
                 function updateLogoColor() {
                     const scrollTop = window.scrollY;
                     const heroSection = document.querySelector('section.relative.min-h-screen');
-                    const howItWorksSection = document.querySelector('#how-it-works');
-                    const contactSection = document.querySelector('#contact');
                     
-                    let isOnColoredSection = false;
-                    
-                    // Always start with purple when at the very top (over navbar area)
-                    if (scrollTop < 50) {
-                        logoText.style.color = '#7c3aed'; // purple-600
-                        header.style.background = 'rgba(255, 255, 255, 0.9)';
-                        return;
-                    }
-                    
-                    // Check if we're in the hero section
                     if (heroSection) {
-                        const heroTop = heroSection.offsetTop - 100;
-                        const heroBottom = heroTop + heroSection.offsetHeight;
-                        if (scrollTop >= heroTop && scrollTop <= heroBottom) {
-                            isOnColoredSection = true;
+                        const heroHeight = heroSection.offsetHeight;
+                        
+                        // If we're in the colored hero section, make logo white
+                        if (scrollTop < heroHeight - 100) {
+                            logoText.style.color = 'white';
+                            header.style.background = 'rgba(255, 255, 255, 0.1)';
+                        } else {
+                            // If we're past the hero on white background, make logo purple
+                            logoText.style.color = '#7c3aed'; // purple-600
+                            header.style.background = 'rgba(255, 255, 255, 0.9)';
                         }
-                    }
-                    
-                    // Check if we're in the purple "How It Works" section
-                    if (howItWorksSection) {
-                        const sectionTop = howItWorksSection.offsetTop - 100;
-                        const sectionBottom = sectionTop + howItWorksSection.offsetHeight;
-                        if (scrollTop >= sectionTop && scrollTop <= sectionBottom) {
-                            isOnColoredSection = true;
-                        }
-                    }
-                    
-                    // Check if we're in the dark contact section
-                    if (contactSection) {
-                        const sectionTop = contactSection.offsetTop - 100;
-                        const sectionBottom = sectionTop + contactSection.offsetHeight;
-                        if (scrollTop >= sectionTop && scrollTop <= sectionBottom) {
-                            isOnColoredSection = true;
-                        }
-                    }
-                    
-                    // Update logo color based on section background
-                    if (isOnColoredSection) {
-                        logoText.style.color = 'white';
-                        header.style.background = 'rgba(255, 255, 255, 0.1)';
-                    } else {
-                        logoText.style.color = '#7c3aed'; // purple-600
-                        header.style.background = 'rgba(255, 255, 255, 0.9)';
                     }
                 }
                 
