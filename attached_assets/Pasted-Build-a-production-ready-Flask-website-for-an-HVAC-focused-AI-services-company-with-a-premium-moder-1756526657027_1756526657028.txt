@@ -1,0 +1,160 @@
+Build a production-ready Flask website for an HVAC-focused AI services company with a premium, modern aesthetic. Use Tailwind via CDN, Inter + Manrope Google Fonts, subtle Framer-motion–style microinteractions implemented in lightweight JS (no external libs), and dark mode via prefers-color-scheme plus a manual toggle. Keep it fast, accessible, and mobile-first.
+Objectives
+Laser-target HVAC owners/operators.
+Hero that immediately communicates outcomes with an elevated, trustworthy look.
+Visual system: soft gradients, glassmorphism cards, gradient borders, subtle blurs, tasteful shadows, rounded-2xl radii.
+Microinteractions: hover-lift on cards, smooth anchor scrolling, reveal-on-scroll fade/slide.
+Dark mode + manual toggle.
+One-page scroll + stubs for other trades.
+Form via Formspree placeholder (clearly marked TODO).
+Tech & Files
+Flask, Tailwind via CDN (no Node), Google Fonts.
+Project tree:
+.
+├─ main.py
+├─ requirements.txt
+├─ static/
+│  ├─ favicon.ico
+│  ├─ logo.svg
+│  └─ theme-toggle.js
+└─ templates/
+   ├─ base.html
+   ├─ index.html
+   ├─ thank_you.html
+   └─ partials/
+      ├─ header.html
+      ├─ footer.html
+      └─ lead_form.html
+Routes
+/ homepage (HVAC-first)
+/thank-you confirmation
+/plumbing, /roofing, /electrical → elegant “Coming Soon” placeholder pages that reuse the hero shell + CTA to contact.
+Brand Tokens (centralized in base.html)
+brand_name = "Companeeds AI"
+brand_tagline = "More HVAC Jobs. Less Stress. Guaranteed."
+brand_email = "info@yourcompany.com"
+brand_phone = "(305) 555-0123"
+brand_city = "Miami, FL"
+Colors (Tailwind via CDN config):
+primary: #4F46E5 (indigo-600 base)
+accent: #22D3EE (cyan-400)
+glow: #A78BFA (violet-400)
+Gradients:
+bg-gradient-to-br from-indigo-600 via-violet-600 to-cyan-500
+Glass surfaces: backdrop-blur-xl bg-white/10 dark:bg-white/5
+Radii: rounded-2xl
+Shadows: shadow-[0_10px_30px_rgba(0,0,0,0.15)]
+Design System & Components
+Header (sticky, glass):
+Left: logo.svg + brand_name
+Right: nav anchors to sections + primary CTA button (Book Demo)
+Manual dark mode toggle (stores preference in localStorage, falls back to prefers-color-scheme).
+Hero (premium):
+Full-width gradient background with soft blurred orbs (absolutely positioned).
+Headline (xl in desktop), confident subheadline.
+Two CTAs: “Book My Free Demo” (scrolls to form), “See How It Works” (scrolls to features).
+Badge row under CTAs: “HVAC Focused • 24/7 AI • Fast Setup • Measurable ROI” in pill chips with gradient borders.
+Problem section (impact):
+Centered title + 2x2 bullet grid.
+Each bullet in a subtle card with gradient border + glass.
+Solution section (feature grid):
+2x2 grid of glassmorphism cards with icon SVGs (inline simple stroke icons), title, brief line, hover-lift, glow ring on focus/hover.
+Proof section (social trust):
+Stat cards with gradient rings; optional testimonial cards with avatar placeholders (neutral silhouettes).
+Process section (3 steps):
+Horizontal on desktop, vertical on mobile; each step in a gradient-outline card with step number in a glowing chip.
+CTA section (bottom):
+Minimal gradient panel with strong ask + two CTAs.
+Lead form (side-by-side on desktop):
+Left: short persuasive copy.
+Right: glass card form with floating labels look (via Tailwind utility classes).
+Fields: name, company (optional), phone (pattern), email, city, message. Hidden source=website.
+Action: Formspree placeholder; JS success redirect to /thank-you.
+Footer:
+Brand, contact, quick nav, service areas, small legal links.
+Dark mode: invert glass backgrounds, maintain contrast; ensure focus rings visible.
+Copy (use verbatim)
+Hero
+Headline: “More HVAC Jobs. Less Stress. Guaranteed.”
+Sub-headline: “Stop losing calls, leads, and installs. Our AI system helps HVAC companies book more jobs, keep techs busy year-round, and scale profits on autopilot.”
+CTAs: “Book My Free Demo”, “See How It Works”
+Problem
+Title: “Every Missed Call Costs You Thousands.”
+Bullets:
+Homeowners expect 24/7 instant response—your office can’t keep up.
+CSRs cost $40–60K a year and still miss calls after hours.
+70% of leads never get followed up with.
+Seasonal slumps leave techs without steady work.
+Pain line under grid: “Every lost call could have been a $10K install.”
+Solution
+Title: “AI Built for HVAC Growth”
+Features:
+24/7 Answering & Booking — Never miss a call again.
+Reactivates Old Leads — Turn cold lists into fresh installs.
+5–10x ROI on Ads — Boost conversions and track every dollar.
+Cuts CSR Costs — Replace $45K/year staff with AI that never takes a break.
+Proof
+Title: “HVAC Companies See Real Results”
+Stats:
+“Re-engaged 10,000 cold leads → $1.2M installs in 90 days.”
+“Clients cut customer service costs by 70%.”
+“Booked 3–5x more jobs during peak season.”
+Process
+Title: “Get Started in 3 Simple Steps”
+Free HVAC Growth Audit — We identify leaks in your lead flow.
+Custom AI Setup — We install, integrate, and optimize for your company.
+Jobs on Autopilot — Leads get answered, booked, and followed up with automatically.
+CTA button: “Schedule My Free HVAC Audit”
+Final CTA
+Headline: “Ready to Dominate Your Market?”
+Sub-copy: “We’ll show you exactly how HVAC companies are using AI to stay fully booked, slash costs, and grow faster than ever.”
+CTAs: “Book My Free Demo” and “Talk to an Expert”
+Footer
+Contact info, service areas (Miami, South Florida, Nationwide), “HVAC Growth Guarantee” badge.
+base.html (requirements)
+Include Tailwind CDN with inline config to extend colors (primary/accent), font families, container settings.
+Link Google Fonts: Inter + Manrope.
+Meta: viewport, description, OG/Twitter, canonical, favicon.
+JSON-LD (LocalBusiness, HVAC) with brand variables.
+Theme init script: detects stored theme or system preference and sets class="dark" on <html> accordingly.
+Blocks: head_extra, content, scripts.
+header.html (requirements)
+Sticky, glass nav with shadow and gradient bottom border (2px).
+Brand lockup (logo.svg + name).
+Nav anchors: How it Works, Results, Process, Contact.
+Right-aligned CTA button + dark mode toggle (sun/moon icon SVGs).
+Mobile menu: simple disclosure (no heavy libs).
+index.html (requirements)
+Hero with gradient background, softly blurred orb divs behind content.
+Problem grid with gradient borders.
+Solution grid with glass cards, icons inline (SVG).
+Proof stats with gradient rings; testimonial placeholders (name, role, short quote).
+Process steps with glowing step chips.
+CTA panel.
+Lead form (include partial).
+Reveal-on-scroll classes; in base.html or index.html add a small IntersectionObserver that adds opacity-100 translate-y-0 to elements with data-reveal.
+lead_form.html (requirements)
+Formspree placeholder action https://formspree.io/f/your-id-here (TODO).
+Client-side validation: required attributes + phone pattern.
+On success, JS redirects to /thank-you.
+Accessible labels + descriptions; visible focus rings.
+Submit button with gradient fill + glow ring on hover.
+footer.html (requirements)
+Gradient top border, compact grid with brand, quick links, contact, service areas.
+Fine print line with © year and brand_name.
+thank_you.html (requirements)
+Clean confirmation with icon, short copy, button back to home.
+Coming Soon pages (plumbing/roofing/electrical)
+Reuse hero shell with text: “Coming Soon: AI for [Trade]”
+CTA back to contact form.
+JS (theme-toggle.js and inline)
+theme-toggle.js: adds click handler to toggle dark on <html>, store preference, update icon.
+Inline script: smooth anchor scroll; IntersectionObserver for reveal; form success redirect.
+Flask specifics
+main.py with standard Flask app, routes, and render_template.
+Add simple helper to pass brand variables to all templates via context_processor.
+Host 0.0.0.0, port 8080.
+requirements.txt
+Flask
+README (top of main.py as comments)
+How to run, where to change brand info, how to switch colors, how to add Formspree ID, how to add testimonials/logos, and how to add more trades.

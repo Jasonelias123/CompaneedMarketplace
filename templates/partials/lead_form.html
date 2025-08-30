@@ -1,0 +1,175 @@
+<section id="contact" class="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Persuasive Copy -->
+                <div class="space-y-6" data-reveal>
+                    <h2 class="text-4xl lg:text-5xl font-display font-bold bg-gradient-to-r from-primary via-accent to-glow bg-clip-text text-transparent">
+                        Ready to Transform Your HVAC Business?
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Join hundreds of HVAC companies already using AI to stay fully booked, cut costs, and dominate their markets.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300">Free HVAC growth audit ($500 value)</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300">Custom AI implementation plan</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300">No obligation consultation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Glass Card Form -->
+                <div class="backdrop-blur-xl bg-white/10 dark:bg-white/5 border border-white/20 rounded-2xl shadow-glass p-8" data-reveal>
+                    <form id="lead-form" action="https://formspree.io/f/your-id-here" method="POST" class="space-y-6">
+                        <!-- TODO: Replace with actual Formspree ID -->
+                        <input type="hidden" name="source" value="website">
+                        
+                        <div class="space-y-1">
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Full Name *
+                            </label>
+                            <input type="text" 
+                                   id="name" 
+                                   name="name" 
+                                   required
+                                   class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
+                                   placeholder="Your full name">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">We'll use this to personalize your consultation</span>
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Company Name
+                            </label>
+                            <input type="text" 
+                                   id="company" 
+                                   name="company"
+                                   class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
+                                   placeholder="Your HVAC company">
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Phone Number *
+                            </label>
+                            <input type="tel" 
+                                   id="phone" 
+                                   name="phone" 
+                                   required
+                                   pattern="[0-9\s\-\+\(\)]*"
+                                   class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
+                                   placeholder="(305) 555-0123">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">We'll call you within 24 hours</span>
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Email Address *
+                            </label>
+                            <input type="email" 
+                                   id="email" 
+                                   name="email" 
+                                   required
+                                   class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
+                                   placeholder="your.email@company.com">
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                City/State *
+                            </label>
+                            <input type="text" 
+                                   id="city" 
+                                   name="city" 
+                                   required
+                                   class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400"
+                                   placeholder="Miami, FL">
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                Tell us about your biggest challenge
+                            </label>
+                            <textarea id="message" 
+                                      name="message" 
+                                      rows="4"
+                                      class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-gray-500 dark:placeholder-gray-400 resize-none"
+                                      placeholder="e.g., We're missing calls after hours, struggling with lead follow-up, seasonal slowdowns..."></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full py-4 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-2xl shadow-glass hover:shadow-glow transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+                            Schedule My Free HVAC Audit
+                        </button>
+                        
+                        <p class="text-xs text-center text-gray-500 dark:text-gray-400">
+                            No spam. We respect your privacy and will only contact you about your HVAC business growth.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Form submission handling
+    document.getElementById('lead-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(this);
+        
+        // Submit to Formspree (or your preferred service)
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Redirect to thank you page on success
+                window.location.href = '/thank-you';
+            } else {
+                throw new Error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your form. Please try again or call us directly at {{ brand_phone }}.');
+        });
+    });
+    
+    // Phone number formatting
+    document.getElementById('phone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 6) {
+            value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+        } else if (value.length >= 3) {
+            value = value.replace(/(\d{3})(\d{3})/, '($1) $2');
+        }
+        e.target.value = value;
+    });
+</script>
