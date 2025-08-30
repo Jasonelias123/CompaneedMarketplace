@@ -41,8 +41,7 @@ waitForPort = 8080
 outputType = "webview"
 
 [deployment]
-deploymentTarget = "static"
-publicDir = "hvac-deploy"
+run = ["sh", "-c", "python -m http.server 5000 --bind 0.0.0.0"]
 
 [[ports]]
 localPort = 5000
