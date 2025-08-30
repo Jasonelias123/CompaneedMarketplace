@@ -1,4 +1,0 @@
-[deployment]
-run = ["sh", "-c", "echo 'Static HVAC site ready for deployment'"]
-deploymentTarget = "static"
-publicDir = "."
