@@ -122,26 +122,26 @@
             <div class="flex items-center justify-between">
                 <!-- Brand Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-sm">C</span>
                     </div>
-                    <span class="text-xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <span id="logo-text" class="text-xl font-display font-bold text-purple-600 transition-colors duration-300">
                         Companeeds AI
                     </span>
                 </div>
                 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200 nav-link">
                         How it Works
                     </a>
-                    <a href="#results" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        Results
+                    <a href="#problems" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200 nav-link">
+                        Problems
                     </a>
-                    <a href="#process" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200 nav-link">
                         Process
                     </a>
-                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200 nav-link">
                         Contact
                     </a>
                 </div>
@@ -186,16 +186,16 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-white/10">
                 <div class="flex flex-col space-y-4 pt-4">
-                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200 nav-link">
                         How it Works
                     </a>
-                    <a href="#results" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
-                        Results
+                    <a href="#problems" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200 nav-link">
+                        Problems
                     </a>
-                    <a href="#process" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                    <a href="#how-it-works" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200 nav-link">
                         Process
                     </a>
-                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200">
+                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors duration-200 nav-link">
                         Contact
                     </a>
                 </div>
@@ -1204,6 +1204,33 @@
                         }
                     });
                 });
+
+                // Dynamic logo color based on scroll position
+                const logoText = document.getElementById('logo-text');
+                const header = document.querySelector('header');
+                
+                function updateLogoColor() {
+                    const scrollTop = window.scrollY;
+                    const heroSection = document.querySelector('section.relative.min-h-screen');
+                    
+                    if (heroSection) {
+                        const heroHeight = heroSection.offsetHeight;
+                        
+                        // If we're in the colored hero section, make logo white
+                        if (scrollTop < heroHeight - 100) {
+                            logoText.style.color = 'white';
+                            header.style.background = 'rgba(255, 255, 255, 0.1)';
+                        } else {
+                            // If we're past the hero on white background, make logo purple
+                            logoText.style.color = '#7c3aed'; // purple-600
+                            header.style.background = 'rgba(255, 255, 255, 0.9)';
+                        }
+                    }
+                }
+                
+                // Update logo color on scroll
+                window.addEventListener('scroll', updateLogoColor);
+                updateLogoColor(); // Initial call
                 
                 // Initialize all animation systems
                 addRippleStyles();
