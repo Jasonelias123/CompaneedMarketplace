@@ -122,11 +122,11 @@
             <div class="flex items-center justify-between">
                 <!-- Brand Logo -->
                 <div class="flex items-center space-x-3">
-                    <div id="logo-icon" class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center transition-colors duration-300">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-sm">C</span>
                     </div>
                     <span id="logo-text" class="text-xl font-display font-bold text-purple-600 transition-colors duration-300">
-                        Companeeds AI
+                        Companeeds
                     </span>
                 </div>
                 
@@ -1207,27 +1207,57 @@
 
                 // Dynamic logo color based on scroll position
                 const logoText = document.getElementById('logo-text');
-                const logoIcon = document.getElementById('logo-icon');
                 const header = document.querySelector('header');
                 
                 function updateLogoColor() {
                     const scrollTop = window.scrollY;
                     const heroSection = document.querySelector('section.relative.min-h-screen');
+                    const howItWorksSection = document.querySelector('#how-it-works');
+                    const contactSection = document.querySelector('#contact');
                     
+                    let isOnColoredSection = false;
+                    
+                    // Always start with purple when at the very top (over navbar area)
+                    if (scrollTop < 50) {
+                        logoText.style.color = '#7c3aed'; // purple-600
+                        header.style.background = 'rgba(255, 255, 255, 0.9)';
+                        return;
+                    }
+                    
+                    // Check if we're in the hero section
                     if (heroSection) {
-                        const heroHeight = heroSection.offsetHeight;
-                        
-                        // If we're in the colored hero section, make logo white
-                        if (scrollTop < heroHeight - 100) {
-                            logoText.style.color = 'white';
-                            logoIcon.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                            header.style.background = 'rgba(255, 255, 255, 0.1)';
-                        } else {
-                            // If we're past the hero on white background, make logo royal purple
-                            logoText.style.color = '#7c3aed'; // purple-600 (royal purple)
-                            logoIcon.style.backgroundColor = '#7c3aed'; // purple-600 (royal purple)
-                            header.style.background = 'rgba(255, 255, 255, 0.9)';
+                        const heroTop = heroSection.offsetTop - 100;
+                        const heroBottom = heroTop + heroSection.offsetHeight;
+                        if (scrollTop >= heroTop && scrollTop <= heroBottom) {
+                            isOnColoredSection = true;
                         }
+                    }
+                    
+                    // Check if we're in the purple "How It Works" section
+                    if (howItWorksSection) {
+                        const sectionTop = howItWorksSection.offsetTop - 100;
+                        const sectionBottom = sectionTop + howItWorksSection.offsetHeight;
+                        if (scrollTop >= sectionTop && scrollTop <= sectionBottom) {
+                            isOnColoredSection = true;
+                        }
+                    }
+                    
+                    // Check if we're in the dark contact section
+                    if (contactSection) {
+                        const sectionTop = contactSection.offsetTop - 100;
+                        const sectionBottom = sectionTop + contactSection.offsetHeight;
+                        if (scrollTop >= sectionTop && scrollTop <= sectionBottom) {
+                            isOnColoredSection = true;
+                        }
+                    }
+                    
+                    // Update logo color based on section background
+                    if (isOnColoredSection) {
+                        logoText.style.color = 'white';
+                        header.style.background = 'rgba(255, 255, 255, 0.1)';
+                    } else {
+                        logoText.style.color = '#7c3aed'; // purple-600
+                        header.style.background = 'rgba(255, 255, 255, 0.9)';
                     }
                 }
                 
